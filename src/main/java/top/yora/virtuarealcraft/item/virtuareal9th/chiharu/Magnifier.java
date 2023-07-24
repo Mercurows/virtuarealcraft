@@ -83,7 +83,7 @@ public class Magnifier extends SwordItem {
                     } else if (rand < .25) {
                         stack = new ItemStack(Items.EMERALD);
                     } else if (rand < .3) {
-                        stack = new ItemStack(Items.NETHERITE_SCRAP);
+                        stack = new ItemStack(Items.ANCIENT_DEBRIS);
                     } else {
                         stack = new ItemStack(Items.COAL);
                     }
