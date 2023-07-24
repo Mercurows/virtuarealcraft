@@ -1,5 +1,13 @@
 {
   "itemGroup.VirtuaRealCraft Items": "VirtuaRealCraft",
   "item.virtuarealcraft.ice_cream_black_tea": "Ice Cream Black Tea",
-  "item.virtuarealcraft.vrc_logo": "VirtuaRealCraft"
+  "item.virtuarealcraft.vrc_logo": "VirtuaRealCraft",
+  "item.virtuarealcraft.magnifier": "Chiharu's Magnifier",
+  "liver.virtuarealcraft.liver": "From:",
+  "liver.virtuarealcraft.nanami": "Nanami",
+  "liver.virtuarealcraft.chiharu": "Wakatsuki Chiharu",
+  "liver.virtuarealcraft.sui": "Sui",
+  "liver.virtuarealcraft.ameki": "Ameki",
+  "des.virtuarealcraft.group.2nd": "===VirtuaReal 2nd Gen Item===",
+  "des.virtuarealcraft.group.9th": "===VirtuaReal 9th Gen Item==="
 }

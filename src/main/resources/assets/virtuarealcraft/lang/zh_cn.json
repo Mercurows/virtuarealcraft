@@ -1,5 +1,13 @@
 {
   "itemGroup.VirtuaRealCraft Items": "VirtuaReal乐园",
   "item.virtuarealcraft.ice_cream_black_tea": "冰淇淋红茶",
-  "item.virtuarealcraft.vrc_logo": "VirtuaRealCraft"
+  "item.virtuarealcraft.vrc_logo": "VirtuaRealCraft",
+  "item.virtuarealcraft.magnifier": "千春的放大镜",
+  "liver.virtuarealcraft.liver": "所属Liver:",
+  "liver.virtuarealcraft.nanami": "七海Nanami",
+  "liver.virtuarealcraft.chiharu": "若月千春",
+  "liver.virtuarealcraft.sui": "岁己Sui",
+  "liver.virtuarealcraft.ameki": "雨纪Ameki",
+  "des.virtuarealcraft.group.2nd": "===VirtuaReal 二期生物品===",
+  "des.virtuarealcraft.group.9th": "===VirtuaReal 九期生物品==="
 }

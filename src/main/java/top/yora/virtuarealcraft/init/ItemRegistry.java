@@ -7,6 +7,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.item.others.VrcLogo;
 import top.yora.virtuarealcraft.item.virtuareal2nd.nanami.IceCreamBlackTea;
+import top.yora.virtuarealcraft.item.virtuareal9th.chiharu.Magnifier;
 
 public class ItemRegistry {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Utils.MOD_ID);
@@ -18,4 +19,21 @@ public class ItemRegistry {
      */
     //nanami
     public static final RegistryObject<Item> ICE_CREAM_BLACK_TEA = ITEMS.register("ice_cream_black_tea", IceCreamBlackTea::new);
+
+
+    /**
+     * 5th
+     */
+    //miki
+
+
+    /**
+     * 9th
+     */
+    //chiharu
+    public static final RegistryObject<Item> MAGNIFIER = ITEMS.register("magnifier", Magnifier::new);
+
+
+
+
 }
