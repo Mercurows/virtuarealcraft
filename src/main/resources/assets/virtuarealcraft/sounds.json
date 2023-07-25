@@ -1,0 +1,10 @@
+{
+  "nncb": {
+    "subtitle": "subtitle.virtuarealcraft.nncb",
+    "sounds": [
+      {
+        "name": "virtuarealcraft:nncb"
+      }
+    ]
+  }
+}
