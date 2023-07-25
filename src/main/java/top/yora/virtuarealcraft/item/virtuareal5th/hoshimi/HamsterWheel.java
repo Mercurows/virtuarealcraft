@@ -51,6 +51,7 @@ public class HamsterWheel extends ArmorItem {
     }
 
     @SuppressWarnings("unchecked")
+    @OnlyIn(Dist.CLIENT)
     @Nullable
     @Override
     public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default) {
