@@ -53,13 +53,18 @@ public class Magnifier extends SwordItem {
         ItemStack stack = playerIn.getHeldItem(handIn);
 
         if(!worldIn.isRemote){
-            if(!playerIn.isSneaking() && playerIn.getFoodStats().getFoodLevel() >= 4){
-                playerIn.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 1200, 0));
+            if(!playerIn.isSneaking()){
+                if(playerIn.abilities.isCreativeMode || playerIn.getFoodStats().getFoodLevel() >= 4) {
+                    if(!playerIn.abilities.isCreativeMode) {
+                        playerIn.getFoodStats().addStats(-4, 0);
+                    }
 
-                playerIn.getFoodStats().addStats(-4, 0);
-                playerIn.getCooldownTracker().setCooldown(stack.getItem(), 2400);
-                stack.damageItem(5, playerIn, (player -> player.sendBreakAnimation(handIn)));
-                return new ActionResult<>(ActionResultType.SUCCESS, stack);
+                    playerIn.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 1200, 0));
+
+                    playerIn.getCooldownTracker().setCooldown(stack.getItem(), 2400);
+                    stack.damageItem(5, playerIn, (player -> player.sendBreakAnimation(handIn)));
+                    return new ActionResult<>(ActionResultType.SUCCESS, stack);
+                }
             }
         }
         return new ActionResult<>(ActionResultType.FAIL, stack);
@@ -74,25 +79,32 @@ public class Magnifier extends SwordItem {
         Hand hand = context.getHand();
 
         if(!(world.getBlockState(pos).getBlock() instanceof AirBlock) && player != null){
-            if(player.isSneaking() && player.getFoodStats().getFoodLevel() >= 2) {
-                if (!world.isRemote) {
-                    double rand = new Random().nextDouble();
-                    ItemStack stack;
-                    if (rand < .15) {
-                        stack = new ItemStack(Items.DIAMOND);
-                    } else if (rand < .25) {
-                        stack = new ItemStack(Items.EMERALD);
-                    } else if (rand < .3) {
-                        stack = new ItemStack(Items.ANCIENT_DEBRIS);
-                    } else {
-                        stack = new ItemStack(Items.COAL);
+            if(player.isSneaking()) {
+                if(player.abilities.isCreativeMode || player.getFoodStats().getFoodLevel() >= 2) {
+                    if(!player.abilities.isCreativeMode) {
+                        player.getFoodStats().addStats(-2, 0);
                     }
-                    ItemEntity entity = new ItemEntity(world, pos.getX(), pos.getY() + 0.5f, pos.getZ(), stack);
-                    world.addEntity(entity);
 
-                    player.getFoodStats().addStats(-2, 0);
-                    player.getCooldownTracker().setCooldown(mag.getItem(), 2400);
-                    mag.damageItem(20, player, (player1 -> player1.sendBreakAnimation(hand)));
+                    if (!world.isRemote) {
+                        double rand = new Random().nextDouble();
+                        ItemStack stack;
+                        if (rand < .15) {
+                            stack = new ItemStack(Items.DIAMOND);
+                        } else if (rand < .25) {
+                            stack = new ItemStack(Items.EMERALD);
+                        } else if (rand < .3) {
+                            stack = new ItemStack(Items.ANCIENT_DEBRIS);
+                        } else {
+                            stack = new ItemStack(Items.COAL);
+                        }
+                        ItemEntity entity = new ItemEntity(world, pos.getX(), pos.getY() + 0.5f, pos.getZ(), stack);
+                        world.addEntity(entity);
+
+
+                        player.getCooldownTracker().setCooldown(mag.getItem(), 2400);
+                        mag.damageItem(25, player, (player1 -> player1.sendBreakAnimation(hand)));
+                    }
+                    return ActionResultType.SUCCESS;
                 }
             }
         }
