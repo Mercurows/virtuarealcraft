@@ -10,13 +10,11 @@ import net.minecraft.entity.passive.SnowGolemEntity;
 import net.minecraft.entity.passive.StriderEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
-import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
@@ -93,6 +91,7 @@ public class TorrentGem extends Item {
                 return ActionResultType.SUCCESS;
             }
 
+            //这段没有Codeium我就死了
             if(state.getBlock() instanceof ConcretePowderBlock){
                 if(state.getBlock() == Blocks.WHITE_CONCRETE_POWDER){
                     world.setBlockState(pos, Blocks.WHITE_CONCRETE.getDefaultState());
@@ -132,17 +131,16 @@ public class TorrentGem extends Item {
 
                 return ActionResultType.SUCCESS;
             }else if(state.getBlock() instanceof CauldronBlock){
+                if(world.getBlockState(pos).get(LEVEL) == 3){
+                    return ActionResultType.FAIL;
+                }
+
                 world.setBlockState(pos, state.with(LEVEL, 3), 2);
                 stack.damageItem(1, player, p -> p.sendBreakAnimation(hand));
 
                 return ActionResultType.SUCCESS;
             }
-
-
-
         }
-
-
         return super.onItemUse(context);
     }
 }
