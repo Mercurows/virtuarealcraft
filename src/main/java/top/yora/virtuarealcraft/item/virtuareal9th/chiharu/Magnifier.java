@@ -58,7 +58,7 @@ public class Magnifier extends SwordItem {
 
                 playerIn.getFoodStats().addStats(-4, 0);
                 playerIn.getCooldownTracker().setCooldown(stack.getItem(), 2400);
-                stack.damageItem(1, playerIn, (player -> player.sendBreakAnimation(handIn)));
+                stack.damageItem(5, playerIn, (player -> player.sendBreakAnimation(handIn)));
                 return new ActionResult<>(ActionResultType.SUCCESS, stack);
             }
         }
@@ -92,7 +92,7 @@ public class Magnifier extends SwordItem {
 
                     player.getFoodStats().addStats(-2, 0);
                     player.getCooldownTracker().setCooldown(mag.getItem(), 2400);
-                    mag.damageItem(1, player, (player1 -> player1.sendBreakAnimation(hand)));
+                    mag.damageItem(20, player, (player1 -> player1.sendBreakAnimation(hand)));
                 }
             }
         }

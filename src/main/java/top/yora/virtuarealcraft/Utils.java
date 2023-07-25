@@ -10,6 +10,8 @@ import top.yora.virtuarealcraft.init.ItemRegistry;
 public class Utils {
     public static final String MOD_ID = "virtuarealcraft";
 
+    public static final String ATTRIBUTE_MODIFIER = "vrc_modifier";
+
     public Utils() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
