@@ -7,6 +7,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.item.others.VrcLogo;
 import top.yora.virtuarealcraft.item.virtuareal2nd.nanami.IceCreamBlackTea;
+import top.yora.virtuarealcraft.item.virtuareal4th.waku.WeatherGem;
 import top.yora.virtuarealcraft.item.virtuareal5th.hoshimi.GreenSunflowerSeeds;
 import top.yora.virtuarealcraft.item.virtuareal5th.hoshimi.HamsterWheel;
 import top.yora.virtuarealcraft.item.virtuareal5th.hoshimi.RedSunflowerSeeds;
@@ -22,6 +23,14 @@ public class ItemRegistry {
      */
     //nanami
     public static final RegistryObject<Item> ICE_CREAM_BLACK_TEA = ITEMS.register("ice_cream_black_tea", IceCreamBlackTea::new);
+
+
+    /**
+     * 4th
+     */
+    //waku
+    public static final RegistryObject<Item> WEATHER_GEM = ITEMS.register("weather_gem", WeatherGem::new);
+
 
 
     /**
