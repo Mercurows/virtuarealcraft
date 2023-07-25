@@ -11,6 +11,7 @@ import top.yora.virtuarealcraft.item.virtuareal4th.waku.WeatherGem;
 import top.yora.virtuarealcraft.item.virtuareal5th.hoshimi.GreenSunflowerSeeds;
 import top.yora.virtuarealcraft.item.virtuareal5th.hoshimi.HamsterWheel;
 import top.yora.virtuarealcraft.item.virtuareal5th.hoshimi.RedSunflowerSeeds;
+import top.yora.virtuarealcraft.item.virtuareal6th.ReverseCard;
 import top.yora.virtuarealcraft.item.virtuareal9th.chiharu.Magnifier;
 
 public class ItemRegistry {
@@ -43,6 +44,24 @@ public class ItemRegistry {
     public static final RegistryObject<Item> HAMSTER_WHEEL = ITEMS.register("hamster_wheel", HamsterWheel::new);
     public static final RegistryObject<Item> RED_SUNFLOWER_SEEDS = ITEMS.register("red_sunflower_seeds", RedSunflowerSeeds::new);
     public static final RegistryObject<Item> GREEN_SUNFLOWER_SEEDS = ITEMS.register("green_sunflower_seeds", GreenSunflowerSeeds::new);
+
+
+    /**
+     * 6th
+     */
+    //aza
+
+
+    //yagi
+
+
+    //tabibito
+    public static final RegistryObject<Item> REVERSE_CARD = ITEMS.register("reverse_card", ReverseCard::new);
+
+
+    //roi
+
+
 
 
     /**

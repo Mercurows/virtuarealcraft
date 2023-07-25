@@ -28,7 +28,7 @@ import java.util.Random;
 
 public class Magnifier extends SwordItem {
     public Magnifier() {
-        super(ItemTier.IRON, 2, -3.0f, new Properties().group(ModGroup.itemgroup).defaultMaxDamage(114));
+        super(ItemTier.GOLD, 4, -3.0f, new Properties().group(ModGroup.itemgroup).defaultMaxDamage(114));
     }
 
     @OnlyIn(Dist.CLIENT)

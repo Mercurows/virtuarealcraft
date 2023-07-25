@@ -8,6 +8,7 @@ public enum Livers {
     MIKI("miki","5th","#BF90F0",true),
     HOSHIMI("hoshimi","5th","#FCE6EA",false),
     MAHIRU("mahiru","5th","#F97169",false),
+    TABIBITO("tabibito","6th","#354B55",true),
     YUKIE("yukie","7th","#FFECC7",true),
     CHIHARU("chiharu", "9th", "#8C6250", true),
     SHAUN("shaun","10th","#DFD6D3",true),
