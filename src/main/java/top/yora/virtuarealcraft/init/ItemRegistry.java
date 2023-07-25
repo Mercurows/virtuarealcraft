@@ -7,6 +7,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.item.others.VrcLogo;
 import top.yora.virtuarealcraft.item.virtuareal2nd.nanami.IceCreamBlackTea;
+import top.yora.virtuarealcraft.item.virtuareal5th.hoshimi.HamsterWheel;
 import top.yora.virtuarealcraft.item.virtuareal9th.chiharu.Magnifier;
 
 public class ItemRegistry {
@@ -25,6 +26,10 @@ public class ItemRegistry {
      * 5th
      */
     //miki
+
+
+    //hoshimi
+    public static final RegistryObject<Item> HAMSTER_WHEEL = ITEMS.register("hamster_wheel", HamsterWheel::new);
 
 
     /**
