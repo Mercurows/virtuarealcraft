@@ -6,6 +6,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.item.others.VrcLogo;
+import top.yora.virtuarealcraft.item.virtuareal19th.ameki.ButterflyStaff;
 import top.yora.virtuarealcraft.item.virtuareal2nd.nanami.IceCreamBlackTea;
 import top.yora.virtuarealcraft.item.virtuareal4th.nyatsuki.TorrentGem;
 import top.yora.virtuarealcraft.item.virtuareal4th.waku.WeatherGem;
@@ -74,6 +75,14 @@ public class ItemRegistry {
      */
     //chiharu
     public static final RegistryObject<Item> MAGNIFIER = ITEMS.register("magnifier", Magnifier::new);
+
+
+    /**
+     * 19th
+     */
+    //ameki
+    public static final RegistryObject<Item> BUTTERFLY_STAFF = ITEMS.register("butterfly_staff", ButterflyStaff::new);
+
 
 
 
