@@ -5,6 +5,8 @@ import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.UseAction;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.ITextComponent;
@@ -21,10 +23,12 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class IceCreamBlackTea extends Item {
-    private static final Food food = new Food.Builder().setAlwaysEdible().hunger(5).saturation(0.5f).build();
+    private static final Food food = new Food.Builder().setAlwaysEdible().hunger(6).saturation(0.5f)
+            .effect(() -> new EffectInstance(Effects.REGENERATION, 200, 0), 1.0f)
+            .effect(() -> new EffectInstance(Effects.NIGHT_VISION, 1000, 0), 1.0f).build();
 
     public IceCreamBlackTea() {
-        super(new Properties().group(ModGroup.itemgroup).food(food));
+        super(new Properties().group(ModGroup.itemgroup).food(food).maxStackSize(1));
     }
 
 
