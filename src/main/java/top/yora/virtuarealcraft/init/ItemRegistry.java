@@ -8,6 +8,7 @@ import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.item.others.VrcLogo;
 import top.yora.virtuarealcraft.item.virtuareal19th.ameki.ButterflyStaff;
 import top.yora.virtuarealcraft.item.virtuareal2nd.nanami.IceCreamBlackTea;
+import top.yora.virtuarealcraft.item.virtuareal3rd.muri.AdventBadge;
 import top.yora.virtuarealcraft.item.virtuareal4th.nyatsuki.TorrentGem;
 import top.yora.virtuarealcraft.item.virtuareal4th.waku.WeatherGem;
 import top.yora.virtuarealcraft.item.virtuareal5th.hoshimi.GreenSunflowerSeeds;
@@ -26,6 +27,14 @@ public class ItemRegistry {
      */
     //nanami
     public static final RegistryObject<Item> ICE_CREAM_BLACK_TEA = ITEMS.register("ice_cream_black_tea", IceCreamBlackTea::new);
+
+
+    /**
+     * 3rd
+     */
+    //muri
+    public static final RegistryObject<Item> ADVENT_BADGE = ITEMS.register("advent_badge", AdventBadge::new);
+
 
 
     /**
