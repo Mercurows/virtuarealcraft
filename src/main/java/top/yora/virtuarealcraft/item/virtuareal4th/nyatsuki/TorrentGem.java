@@ -13,6 +13,7 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
+import net.minecraft.item.Items;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.ActionResultType;
@@ -45,6 +46,11 @@ public class TorrentGem extends Item {
         tooltip.add(new TranslationTextComponent("des.virtuarealcraft.torrent_gem").mergeStyle(TextFormatting.GRAY));
 
         TooltipTool.addLiverInfo(tooltip, Livers.NYATSUKI);
+    }
+
+    @Override
+    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+        return repair.getItem() == Items.DIAMOND;
     }
 
     @Override
