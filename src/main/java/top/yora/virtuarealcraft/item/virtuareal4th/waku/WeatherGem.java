@@ -39,6 +39,11 @@ public class WeatherGem extends Item {
     }
 
     @Override
+    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+        return repair.getItem() == Items.HONEYCOMB;
+    }
+
+    @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         boolean flag = false;
 

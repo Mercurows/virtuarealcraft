@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "gHg",
+    "GEG",
+    "gHg"
+  ],
+  "key": {
+    "g": {
+      "item": "minecraft:gold_ingot"
+    },
+    "H": {
+      "item": "minecraft:honey_block"
+    },
+    "G": {
+      "item": "minecraft:honeycomb"
+    },
+    "E": {
+      "item": "minecraft:emerald"
+    }
+  },
+  "result": {
+    "item": "virtuarealcraft:weather_gem",
+    "count": 1
+  }
+}
