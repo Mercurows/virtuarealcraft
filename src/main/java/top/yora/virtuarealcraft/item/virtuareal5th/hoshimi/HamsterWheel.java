@@ -41,7 +41,6 @@ public class HamsterWheel extends ArmorItem {
         super(ArmorMaterial.IRON, EquipmentSlotType.CHEST, new Properties().group(ModGroup.itemgroup).maxDamage(515));
     }
 
-
     @OnlyIn(Dist.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
@@ -78,14 +77,14 @@ public class HamsterWheel extends ArmorItem {
 
     @Override
     public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-        if(!world.isRemote){
+        if (!world.isRemote) {
             player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 20, 1, false, false));
             player.addPotionEffect(new EffectInstance(Effects.SLOW_FALLING, 20, 0, false, false));
 
-            if(player.isSprinting()){
+            if (player.isSprinting()) {
                 ItemNBTTool.setInt(stack, TAG_SPIRIT, Math.min(100, ItemNBTTool.getInt(stack, TAG_SPIRIT, 0) + 1));
 
-                if(ItemNBTTool.getInt(stack, TAG_SPIRIT, 0) >= 100){
+                if (ItemNBTTool.getInt(stack, TAG_SPIRIT, 0) >= 100) {
                     ItemNBTTool.setInt(stack, TAG_SPIRIT, 0);
 
                     player.addItemStackToInventory(new ItemStack(ItemRegistry.RED_SUNFLOWER_SEEDS.get()));

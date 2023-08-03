@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iIi",
+    "USU",
+    "iIi"
+  ],
+  "key": {
+    "i": {
+      "item": "minecraft:iron_ingot"
+    },
+    "I": {
+      "item": "minecraft:iron_bars"
+    },
+    "U": {
+      "item": "minecraft:iron_block"
+    },
+    "S": {
+      "item": "minecraft:sunflower"
+    }
+  },
+  "result": {
+    "item": "virtuarealcraft:hamster_wheel",
+    "count": 1
+  }
+}
