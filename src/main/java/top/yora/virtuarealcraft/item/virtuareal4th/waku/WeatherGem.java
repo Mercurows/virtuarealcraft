@@ -6,6 +6,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.item.Rarity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
@@ -26,7 +27,7 @@ import java.util.List;
 
 public class WeatherGem extends Item {
     public WeatherGem() {
-        super(new Properties().group(ModGroup.itemgroup).maxDamage(10));
+        super(new Properties().group(ModGroup.itemgroup).maxDamage(10).rarity(Rarity.RARE));
     }
 
     @OnlyIn(Dist.CLIENT)

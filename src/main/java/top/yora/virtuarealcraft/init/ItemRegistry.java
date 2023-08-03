@@ -15,7 +15,7 @@ import top.yora.virtuarealcraft.item.virtuareal4th.waku.WeatherGem;
 import top.yora.virtuarealcraft.item.virtuareal5th.hoshimi.GreenSunflowerSeeds;
 import top.yora.virtuarealcraft.item.virtuareal5th.hoshimi.HamsterWheel;
 import top.yora.virtuarealcraft.item.virtuareal5th.hoshimi.RedSunflowerSeeds;
-import top.yora.virtuarealcraft.item.virtuareal6th.ReverseCard;
+import top.yora.virtuarealcraft.item.virtuareal6th.tabibito.ReverseCard;
 import top.yora.virtuarealcraft.item.virtuareal9th.chiharu.Magnifier;
 
 public class ItemRegistry {

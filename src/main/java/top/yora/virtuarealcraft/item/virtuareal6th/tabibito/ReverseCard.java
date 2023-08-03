@@ -1,4 +1,4 @@
-package top.yora.virtuarealcraft.item.virtuareal6th;
+package top.yora.virtuarealcraft.item.virtuareal6th.tabibito;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
