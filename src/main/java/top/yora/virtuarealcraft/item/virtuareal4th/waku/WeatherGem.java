@@ -27,7 +27,7 @@ import java.util.List;
 
 public class WeatherGem extends Item {
     public WeatherGem() {
-        super(new Properties().group(ModGroup.itemgroup).maxDamage(10).rarity(Rarity.RARE));
+        super(new Properties().group(ModGroup.itemgroup).maxDamage(10).rarity(Rarity.UNCOMMON));
     }
 
     @OnlyIn(Dist.CLIENT)
