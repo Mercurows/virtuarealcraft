@@ -24,7 +24,7 @@ import java.util.List;
 
 public class GhostCloak extends Item {
     public GhostCloak() {
-        super(new Properties().maxDamage(21).group(ModGroup.itemgroup).maxStackSize(1));
+        super(new Properties().maxDamage(21).group(ModGroup.itemgroup));
     }
 
     @OnlyIn(Dist.CLIENT)
