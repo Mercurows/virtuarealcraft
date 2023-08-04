@@ -6,6 +6,9 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.item.others.VrcLogo;
+import top.yora.virtuarealcraft.item.virtuareal11th.chiyuu.GhostCloak;
+import top.yora.virtuarealcraft.item.virtuareal11th.imi.MagicFeather;
+import top.yora.virtuarealcraft.item.virtuareal11th.mari.BloodPearl;
 import top.yora.virtuarealcraft.item.virtuareal19th.ameki.ButterflyStaff;
 import top.yora.virtuarealcraft.item.virtuareal2nd.nanami.IceCreamBlackTea;
 import top.yora.virtuarealcraft.item.virtuareal3rd.muri.AdventBadge;
@@ -86,6 +89,20 @@ public class ItemRegistry {
      */
     //chiharu
     public static final RegistryObject<Item> MAGNIFIER = ITEMS.register("magnifier", Magnifier::new);
+
+
+    /**
+     * 11th
+     */
+    //imi
+    public static final RegistryObject<Item> MAGIC_FEATHER = ITEMS.register("magic_feather", MagicFeather::new);
+
+    //chiyuu
+    public static final RegistryObject<Item> GHOST_CLOAK = ITEMS.register("ghost_cloak", GhostCloak::new);
+
+    //mari
+    public static final RegistryObject<Item> BLOOD_PEARL = ITEMS.register("blood_pearl", BloodPearl::new);
+
 
 
     /**
