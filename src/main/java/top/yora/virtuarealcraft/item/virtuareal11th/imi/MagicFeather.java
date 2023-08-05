@@ -36,9 +36,15 @@ public class MagicFeather extends Item {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(new TranslationTextComponent("des.virtuarealcraft.magic_feather").mergeStyle(TextFormatting.GRAY));
+        tooltip.add(new TranslationTextComponent("des.virtuarealcraft.magic_feather_1").mergeStyle(TextFormatting.GRAY));
+        tooltip.add(new TranslationTextComponent("des.virtuarealcraft.magic_feather_2").mergeStyle(TextFormatting.GRAY).mergeStyle(TextFormatting.ITALIC));
 
         TooltipTool.addLiverInfo(tooltip, Livers.IMI);
+    }
+
+    @Override
+    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+        return repair.getItem() == Items.LAPIS_LAZULI;
     }
 
     @Override
