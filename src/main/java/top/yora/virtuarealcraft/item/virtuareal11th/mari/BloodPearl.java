@@ -18,7 +18,7 @@ import java.util.List;
 
 public class BloodPearl extends Item {
     public BloodPearl() {
-        super(new Properties().group(ModGroup.itemgroup));
+        super(new Properties().group(ModGroup.itemgroup).maxStackSize(1));
     }
 
     @OnlyIn(Dist.CLIENT)
