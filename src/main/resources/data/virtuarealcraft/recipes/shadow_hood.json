@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "gGg",
+    "GLG",
+    "G G"
+  ],
+  "key": {
+    "g": {
+      "item": "minecraft:gold_ingot"
+    },
+    "G": {
+      "item": "minecraft:gray_wool"
+    },
+    "L": {
+      "item": "minecraft:leather_helmet"
+    }
+  },
+  "result": {
+    "item": "virtuarealcraft:shadow_hood",
+    "count": 1
+  }
+}
