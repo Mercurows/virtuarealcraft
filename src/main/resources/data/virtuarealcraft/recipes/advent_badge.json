@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#D#",
+    "PYP"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:quartz_block"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "P": {
+      "item": "minecraft:prismarine_crystals"
+    },
+    "Y": {
+      "item": "minecraft:prismarine_shard"
+    }
+  },
+  "result": {
+    "item": "virtuarealcraft:advent_badge",
+    "count": 1
+  }
+}

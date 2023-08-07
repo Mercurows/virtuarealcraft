@@ -4,7 +4,9 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -23,7 +25,7 @@ import java.util.List;
 
 public class AdventBadge extends Item {
     public AdventBadge() {
-        super(new Properties().maxStackSize(1).group(ModGroup.itemgroup));
+        super(new Properties().maxDamage(62).group(ModGroup.itemgroup));
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -42,6 +44,7 @@ public class AdventBadge extends Item {
             ((ServerWorld) worldIn).setDayTime(13000);
 
             playerIn.getCooldownTracker().setCooldown(stack.getItem(), 12000);
+            stack.damageItem(1, playerIn, p -> p.sendBreakAnimation(handIn));
 
             for(PlayerEntity player : worldIn.getPlayers()){
                 if(player != playerIn){
@@ -52,6 +55,12 @@ public class AdventBadge extends Item {
             }
         }
 
-        return super.onItemRightClick(worldIn, playerIn, handIn);
+        return ActionResult.func_233538_a_(stack, worldIn.isRemote);
     }
+
+    @Override
+    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+        return repair.getItem() == Items.PRISMARINE_SHARD;
+    }
+
 }
