@@ -57,6 +57,10 @@ public class TorrentGem extends Item {
             if(isSelected){
                 player.addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 40, 0, false, false));
             }
+
+            if(player.ticksExisted % 20 == 0 && worldIn.isRaining()) {
+                stack.damageItem(-1, player, player1 -> player1.sendBreakAnimation(player1.getActiveHand()));
+            }
         }
 
         super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
