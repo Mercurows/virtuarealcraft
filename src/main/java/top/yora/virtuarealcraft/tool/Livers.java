@@ -13,6 +13,7 @@ public enum Livers {
     TABIBITO("tabibito","6th","#354B55",true),
     YUKIE("yukie","7th","#FFECC7",true),
     CHIHARU("chiharu", "9th", "#8C6250", true),
+    YUA("yua","10th","#8AB0CC",true),
     SHAUN("shaun","10th","#DFD6D3",true),
     MARI("mari","11th","#C70039", true),
     CHIYUU("chiyuu","11th","#CC225F",true),

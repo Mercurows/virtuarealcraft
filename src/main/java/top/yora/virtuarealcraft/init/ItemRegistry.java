@@ -6,9 +6,12 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.item.others.VrcLogo;
+import top.yora.virtuarealcraft.item.virtuareal10th.shaun.AngelHalo;
+import top.yora.virtuarealcraft.item.virtuareal10th.yua.FrozenBoots;
 import top.yora.virtuarealcraft.item.virtuareal11th.chiyuu.GhostCloak;
 import top.yora.virtuarealcraft.item.virtuareal11th.imi.MagicFeather;
 import top.yora.virtuarealcraft.item.virtuareal11th.mari.BloodPearl;
+import top.yora.virtuarealcraft.item.virtuareal16th.girimi.ShadowHood;
 import top.yora.virtuarealcraft.item.virtuareal19th.ameki.ButterflyStaff;
 import top.yora.virtuarealcraft.item.virtuareal2nd.nanami.IceCreamBlackTea;
 import top.yora.virtuarealcraft.item.virtuareal3rd.muri.AdventBadge;
@@ -92,6 +95,16 @@ public class ItemRegistry {
 
 
     /**
+     * 10th
+     */
+    //shaun
+    public static final RegistryObject<Item> ANGEL_HALO = ITEMS.register("angel_halo", AngelHalo::new);
+
+    //yua
+    public static final RegistryObject<Item> FROZEN_BOOTS = ITEMS.register("frozen_boots", FrozenBoots::new);
+
+
+    /**
      * 11th
      */
     //imi
@@ -102,6 +115,13 @@ public class ItemRegistry {
 
     //mari
     public static final RegistryObject<Item> BLOOD_PEARL = ITEMS.register("blood_pearl", BloodPearl::new);
+
+
+    /**
+     * 16th
+     */
+    //girimi
+    public static final RegistryObject<Item> SHADOW_HOOD = ITEMS.register("shadow_hood", ShadowHood::new);
 
 
 
