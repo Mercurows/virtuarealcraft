@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "#P#",
+    "I I"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:leather"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    },
+    "I": {
+      "item": "minecraft:iron_bars"
+    }
+  },
+  "result": {
+    "item": "virtuarealcraft:frozen_boots",
+    "count": 1
+  }
+}
