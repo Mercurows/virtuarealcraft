@@ -29,7 +29,7 @@ import java.util.List;
 
 public class SharkTail extends ArmorItem {
     public SharkTail() {
-        super(ArmorMaterial.IRON, EquipmentSlotType.LEGS, new Properties().group(ModGroup.itemgroup).rarity(Rarity.UNCOMMON));
+        super(ArmorMaterial.IRON, EquipmentSlotType.LEGS, new Properties().group(ModGroup.itemgroup).rarity(Rarity.UNCOMMON).maxDamage(517));
     }
 
     @OnlyIn(Dist.CLIENT)
