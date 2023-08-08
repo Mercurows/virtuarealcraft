@@ -14,6 +14,7 @@ import top.yora.virtuarealcraft.item.virtuareal11th.mari.BloodPearl;
 import top.yora.virtuarealcraft.item.virtuareal16th.girimi.ShadowHood;
 import top.yora.virtuarealcraft.item.virtuareal19th.ameki.ButterflyStaff;
 import top.yora.virtuarealcraft.item.virtuareal2nd.nanami.IceCreamBlackTea;
+import top.yora.virtuarealcraft.item.virtuareal2nd.nanami.SharkTail;
 import top.yora.virtuarealcraft.item.virtuareal3rd.muri.AdventBadge;
 import top.yora.virtuarealcraft.item.virtuareal3rd.muri.MuriDice;
 import top.yora.virtuarealcraft.item.virtuareal4th.nyatsuki.TorrentGem;
@@ -24,6 +25,7 @@ import top.yora.virtuarealcraft.item.virtuareal5th.hoshimi.RedSunflowerSeeds;
 import top.yora.virtuarealcraft.item.virtuareal6th.tabibito.ReverseCard;
 import top.yora.virtuarealcraft.item.virtuareal9th.chiharu.Magnifier;
 
+@SuppressWarnings("unused")
 public class ItemRegistry {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Utils.MOD_ID);
 
@@ -34,6 +36,7 @@ public class ItemRegistry {
      */
     //nanami
     public static final RegistryObject<Item> ICE_CREAM_BLACK_TEA = ITEMS.register("ice_cream_black_tea", IceCreamBlackTea::new);
+    public static final RegistryObject<Item> SHARK_TAIL = ITEMS.register("shark_tail", SharkTail::new);
 
 
     /**
