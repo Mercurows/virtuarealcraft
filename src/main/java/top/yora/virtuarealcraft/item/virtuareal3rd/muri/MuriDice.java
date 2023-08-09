@@ -45,11 +45,11 @@ public class MuriDice extends Item {
 
             if(ItemNBTTool.getInt(stack, "time", 0) >= 60){
                 if(!worldIn.isRemote) {
-                    int rand = (int)(Math.random() * 100 + 1);
+                    int rand = (int)(Math.random() * 6 + 1);
 
-                    player.sendStatusMessage(new StringTextComponent("1D100 = " + rand).mergeStyle(TextFormatting.BOLD), true);
+                    player.sendStatusMessage(new StringTextComponent("1D6 = " + rand).mergeStyle(TextFormatting.BOLD), true);
 
-                    if (rand > 50) {
+                    if (rand > 3) {
                         player.addPotionEffect(new EffectInstance(Effects.NAUSEA, 200, 0));
                         player.addPotionEffect(new EffectInstance(Effects.WITHER, 200, 0));
                         player.addPotionEffect(new EffectInstance(Effects.HUNGER, 200, 0));

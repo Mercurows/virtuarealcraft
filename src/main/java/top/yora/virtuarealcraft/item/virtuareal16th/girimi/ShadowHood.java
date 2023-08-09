@@ -56,7 +56,7 @@ public class ShadowHood extends ArmorItem {
     @Override
     public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
         if(!world.isRemote){
-            if(!world.isDaytime() || !world.canSeeSky(player.getPosition())){
+            if(!world.isDaytime() || !world.canSeeSky(player.getPosition()) || world.isRaining()){
                 player.addPotionEffect(new EffectInstance(Effects.SPEED, 40, 1, false, false));
                 player.addPotionEffect(new EffectInstance(Effects.STRENGTH, 40, 1, false, false));
                 player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 40, 0, false, false));

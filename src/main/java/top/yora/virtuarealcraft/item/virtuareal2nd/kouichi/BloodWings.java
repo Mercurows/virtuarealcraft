@@ -1,7 +1,9 @@
-package top.yora.virtuarealcraft.item.virtuareal11th.mari;
+package top.yora.virtuarealcraft.item.virtuareal2nd.kouichi;
 
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.Item;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -16,9 +18,9 @@ import top.yora.virtuarealcraft.tool.TooltipTool;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class BloodPearl extends Item {
-    public BloodPearl() {
-        super(new Properties().group(ModGroup.itemgroup).maxStackSize(1));
+public class BloodWings extends ArmorItem {
+    public BloodWings() {
+        super(ArmorMaterial.IRON, EquipmentSlotType.CHEST, new Properties().group(ModGroup.itemgroup));
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -26,10 +28,8 @@ public class BloodPearl extends Item {
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         TooltipTool.addDevelopingText(tooltip);
 
-        tooltip.add(new TranslationTextComponent("des.virtuarealcraft.blood_pearl").mergeStyle(TextFormatting.GRAY));
+        tooltip.add(new TranslationTextComponent("des.virtuarealcraft.blood_wings").mergeStyle(TextFormatting.GRAY));
 
-        TooltipTool.addLiverInfo(tooltip, Livers.MARI);
+        TooltipTool.addLiverInfo(tooltip, Livers.KOUICHI);
     }
-
-    
 }
