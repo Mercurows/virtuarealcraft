@@ -11,6 +11,7 @@ import top.yora.virtuarealcraft.item.virtuareal10th.yua.FrozenBoots;
 import top.yora.virtuarealcraft.item.virtuareal11th.chiyuu.GhostCloak;
 import top.yora.virtuarealcraft.item.virtuareal11th.imi.MagicFeather;
 import top.yora.virtuarealcraft.item.virtuareal11th.mari.BloodPearl;
+import top.yora.virtuarealcraft.item.virtuareal13th.joi.OrangeGrenade;
 import top.yora.virtuarealcraft.item.virtuareal14th.koxia.Kuya;
 import top.yora.virtuarealcraft.item.virtuareal16th.girimi.ShadowHood;
 import top.yora.virtuarealcraft.item.virtuareal17th.sui.SuimashedCookie;
@@ -123,6 +124,13 @@ public class ItemRegistry {
 
     //mari
     public static final RegistryObject<Item> BLOOD_PEARL = ITEMS.register("blood_pearl", BloodPearl::new);
+
+
+    /**
+     * 13th
+     */
+    //joi
+    public static final RegistryObject<Item> ORANGE_GRENADE = ITEMS.register("orange_grenade", OrangeGrenade::new);
 
 
     /**
