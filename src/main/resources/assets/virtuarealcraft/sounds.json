@@ -6,5 +6,13 @@
         "name": "virtuarealcraft:nncb"
       }
     ]
+  },
+  "heal": {
+    "subtitle": "subtitle.virtuarealcraft.heal",
+    "sounds": [
+      {
+        "name": "virtuarealcraft:heal"
+      }
+    ]
   }
 }

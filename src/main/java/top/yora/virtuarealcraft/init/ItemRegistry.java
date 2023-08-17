@@ -11,6 +11,7 @@ import top.yora.virtuarealcraft.item.virtuareal10th.yua.FrozenBoots;
 import top.yora.virtuarealcraft.item.virtuareal11th.chiyuu.GhostCloak;
 import top.yora.virtuarealcraft.item.virtuareal11th.imi.MagicFeather;
 import top.yora.virtuarealcraft.item.virtuareal11th.mari.BloodPearl;
+import top.yora.virtuarealcraft.item.virtuareal14th.koxia.Kuya;
 import top.yora.virtuarealcraft.item.virtuareal16th.girimi.ShadowHood;
 import top.yora.virtuarealcraft.item.virtuareal17th.sui.SuimashedCookie;
 import top.yora.virtuarealcraft.item.virtuareal19th.ameki.ButterflyStaff;
@@ -25,6 +26,7 @@ import top.yora.virtuarealcraft.item.virtuareal5th.hoshimi.GreenSunflowerSeeds;
 import top.yora.virtuarealcraft.item.virtuareal5th.hoshimi.HamsterWheel;
 import top.yora.virtuarealcraft.item.virtuareal5th.hoshimi.RedSunflowerSeeds;
 import top.yora.virtuarealcraft.item.virtuareal6th.tabibito.ReverseCard;
+import top.yora.virtuarealcraft.item.virtuareal9th.chiharu.LittleSpringRoll;
 import top.yora.virtuarealcraft.item.virtuareal9th.chiharu.Magnifier;
 
 @SuppressWarnings("unused")
@@ -97,6 +99,7 @@ public class ItemRegistry {
      */
     //chiharu
     public static final RegistryObject<Item> MAGNIFIER = ITEMS.register("magnifier", Magnifier::new);
+    public static final RegistryObject<Item> LITTLE_SPRING_ROLL = ITEMS.register("little_spring_roll", LittleSpringRoll::new);
 
 
     /**
@@ -120,6 +123,13 @@ public class ItemRegistry {
 
     //mari
     public static final RegistryObject<Item> BLOOD_PEARL = ITEMS.register("blood_pearl", BloodPearl::new);
+
+
+    /**
+     * 14th
+     */
+    //koxia
+    public static final RegistryObject<Item> KUYA = ITEMS.register("kuya", Kuya::new);
 
 
     /**
