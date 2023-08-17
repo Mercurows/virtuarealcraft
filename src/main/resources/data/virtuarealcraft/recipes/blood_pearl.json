@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#R#",
+    "RDR",
+    "#R#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:apple"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "item": "virtuarealcraft:blood_pearl",
+    "count": 1
+  }
+}

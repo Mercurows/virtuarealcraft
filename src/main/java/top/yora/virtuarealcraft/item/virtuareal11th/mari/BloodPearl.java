@@ -80,9 +80,9 @@ public class BloodPearl extends Item {
                 float damage = event.getAmount();
 
                 if(player.getHealth() < player.getMaxHealth() / 2){
-                    player.heal(damage * 0.22f);
+                    player.heal(damage * 0.4f);
                 }else {
-                    player.heal(damage * 0.11f);
+                    player.heal(damage * 0.2f);
                 }
             }
         }

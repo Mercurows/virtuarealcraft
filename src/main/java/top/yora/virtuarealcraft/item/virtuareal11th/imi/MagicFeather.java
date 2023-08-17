@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 
 public class MagicFeather extends Item {
     public MagicFeather() {
-        super(new Properties().group(ModGroup.itemgroup).maxDamage(126));
+        super(new Properties().group(ModGroup.itemgroup));
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -40,11 +40,6 @@ public class MagicFeather extends Item {
         tooltip.add(new TranslationTextComponent("des.virtuarealcraft.magic_feather_2").mergeStyle(TextFormatting.GRAY).mergeStyle(TextFormatting.ITALIC));
 
         TooltipTool.addLiverInfo(tooltip, Livers.IMI);
-    }
-
-    @Override
-    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-        return repair.getItem() == Items.LAPIS_LAZULI;
     }
 
     @Override
@@ -76,7 +71,7 @@ public class MagicFeather extends Item {
                     }
 
                     playerIn.setItemStackToSlot(EquipmentSlotType.OFFHAND, new ItemStack(Items.BOOK));
-                    stack.damageItem(1, playerIn, player -> player.sendBreakAnimation(handIn));
+                    stack.shrink(1);
 
                     return new ActionResult<>(ActionResultType.SUCCESS, stack);
                 }else {
@@ -93,7 +88,7 @@ public class MagicFeather extends Item {
                         playerIn.addExperienceLevel(-1 * curseMap.size());
 
                         playerIn.setItemStackToSlot(EquipmentSlotType.OFFHAND, enchantedBook);
-                        stack.damageItem(1, playerIn, player -> player.sendBreakAnimation(handIn));
+                        stack.shrink(1);
 
                         return new ActionResult<>(ActionResultType.SUCCESS, stack);
                     }
