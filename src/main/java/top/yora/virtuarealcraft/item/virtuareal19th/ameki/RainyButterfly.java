@@ -11,10 +11,7 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.item.ArmorStandEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemModelsProperties;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTier;
-import net.minecraft.item.SwordItem;
+import net.minecraft.item.*;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.*;
@@ -48,7 +45,7 @@ public class RainyButterfly extends SwordItem {
     public static final String TAG_RAINY_BUTTERFLY_RAIN = "rainy_butterfly_rain";
 
     public RainyButterfly(){
-        super(ItemTier.IRON, -2, -2.1f, new Properties().group(ModGroup.itemgroup).maxDamage(1206));
+        super(ItemTier.IRON, -2, -2.1f, new Properties().group(ModGroup.itemgroup).maxDamage(1206).rarity(Rarity.EPIC));
     }
 
     @OnlyIn(Dist.CLIENT)

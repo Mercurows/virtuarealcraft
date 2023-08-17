@@ -12,6 +12,7 @@ import top.yora.virtuarealcraft.item.virtuareal11th.chiyuu.GhostCloak;
 import top.yora.virtuarealcraft.item.virtuareal11th.imi.MagicFeather;
 import top.yora.virtuarealcraft.item.virtuareal11th.mari.BloodPearl;
 import top.yora.virtuarealcraft.item.virtuareal16th.girimi.ShadowHood;
+import top.yora.virtuarealcraft.item.virtuareal17th.sui.SuimashedCookie;
 import top.yora.virtuarealcraft.item.virtuareal19th.ameki.ButterflyStaff;
 import top.yora.virtuarealcraft.item.virtuareal19th.ameki.RainyButterfly;
 import top.yora.virtuarealcraft.item.virtuareal2nd.nanami.IceCreamBlackTea;
@@ -127,6 +128,12 @@ public class ItemRegistry {
     //girimi
     public static final RegistryObject<Item> SHADOW_HOOD = ITEMS.register("shadow_hood", ShadowHood::new);
 
+
+    /**
+     * 17th
+     */
+    //sui
+    public static final RegistryObject<Item> SUIMASHED_COOKIE = ITEMS.register("suimashed_cookie", SuimashedCookie::new);
 
 
     /**

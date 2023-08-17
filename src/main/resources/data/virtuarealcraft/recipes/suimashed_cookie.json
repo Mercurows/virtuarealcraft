@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "SSS",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:cookie"
+    },
+    "S": {
+      "item": "minecraft:sweet_berries"
+    }
+  },
+  "result": {
+    "item": "virtuarealcraft:suimashed_cookie",
+    "count": 8
+  }
+}
