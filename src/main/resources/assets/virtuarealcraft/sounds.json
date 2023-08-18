@@ -14,5 +14,13 @@
         "name": "virtuarealcraft:heal"
       }
     ]
+  },
+  "hoshimi_mua": {
+    "subtitle": "subtitle.virtuarealcraft.hoshimi_mua",
+    "sounds": [
+      {
+        "name": "virtuarealcraft:hoshimi_mua"
+      }
+    ]
   }
 }

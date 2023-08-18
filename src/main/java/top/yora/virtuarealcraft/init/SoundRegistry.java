@@ -12,5 +12,6 @@ public class SoundRegistry {
 
     public static final RegistryObject<SoundEvent> NNCB = SOUNDS.register("nncb", () -> new SoundEvent(new ResourceLocation(Utils.MOD_ID, "nncb")));
     public static final RegistryObject<SoundEvent> HEAL = SOUNDS.register("heal", () -> new SoundEvent(new ResourceLocation(Utils.MOD_ID, "heal")));
+    public static final RegistryObject<SoundEvent> HOSHIMI_MUA = SOUNDS.register("hoshimi_mua", () -> new SoundEvent(new ResourceLocation(Utils.MOD_ID, "hoshimi_mua")));
 
 }
