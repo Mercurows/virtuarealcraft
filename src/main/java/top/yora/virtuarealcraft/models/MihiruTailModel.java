@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 
 @SuppressWarnings("FieldCanBeLocal")
-public class MahiruMikiTailModel<T extends LivingEntity> extends BipedModel<T> {
+public class MihiruTailModel<T extends LivingEntity> extends BipedModel<T> {
 	private final ModelRenderer main;
 	private final ModelRenderer bone2;
 	private final ModelRenderer bone;
@@ -21,7 +21,7 @@ public class MahiruMikiTailModel<T extends LivingEntity> extends BipedModel<T> {
 	private final ModelRenderer cube_r5;
 	private final ModelRenderer cube_r6;
 
-	public MahiruMikiTailModel() {
+	public MihiruTailModel() {
 		super(1.0f);
 		textureWidth = 32;
 		textureHeight = 32;
@@ -45,13 +45,13 @@ public class MahiruMikiTailModel<T extends LivingEntity> extends BipedModel<T> {
 		cube_r1 = new ModelRenderer(this);
 		cube_r1.setRotationPoint(-0.025F, -1.7855F, 1.0226F);
 		bb_main.addChild(cube_r1);
-		setRotationAngle(cube_r1, 2.7222F, 0.7401F, 2.8495F);
+		setRotationAngle(cube_r1, 2.7222F, 0.7405F, 2.8495F);
 		cube_r1.setTextureOffset(11, 29).addBox(-4.8776F, 18.8983F, -4.8523F, 1.0F, 1.0F, 2.0F, 0.0F, false);
 
 		cube_r2 = new ModelRenderer(this);
 		cube_r2.setRotationPoint(-0.025F, -1.7855F, 1.0226F);
 		bb_main.addChild(cube_r2);
-		setRotationAngle(cube_r2, 2.7222F, -0.7401F, -2.8495F);
+		setRotationAngle(cube_r2, 2.7222F, -0.7405F, -2.8495F);
 		cube_r2.setTextureOffset(22, 19).addBox(3.8599F, 18.8983F, -4.8699F, 1.0F, 1.0F, 2.0F, 0.0F, false);
 
 		cube_r3 = new ModelRenderer(this);
