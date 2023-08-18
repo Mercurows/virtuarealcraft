@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 
 @SuppressWarnings("FieldCanBeLocal")
-public class MahiruTailModel<T extends LivingEntity> extends BipedModel<T> {
+public class MahiruMikiTailModel<T extends LivingEntity> extends BipedModel<T> {
 	private final ModelRenderer main;
 	private final ModelRenderer bone2;
 	private final ModelRenderer bone;
@@ -21,7 +21,7 @@ public class MahiruTailModel<T extends LivingEntity> extends BipedModel<T> {
 	private final ModelRenderer cube_r5;
 	private final ModelRenderer cube_r6;
 
-	public MahiruTailModel() {
+	public MahiruMikiTailModel() {
 		super(1.0f);
 		textureWidth = 32;
 		textureHeight = 32;

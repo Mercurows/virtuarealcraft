@@ -16,7 +16,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.group.ModGroup;
-import top.yora.virtuarealcraft.models.MahiruTailModel;
+import top.yora.virtuarealcraft.models.MahiruMikiTailModel;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 
@@ -42,7 +42,7 @@ public class MahiruTail extends ArmorItem {
     @Nullable
     @Override
     public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default) {
-        return (A) new MahiruTailModel<>();
+        return (A) new MahiruMikiTailModel<>();
     }
 
     @Nullable
