@@ -27,6 +27,8 @@ import top.yora.virtuarealcraft.item.virtuareal4th.waku.WeatherGem;
 import top.yora.virtuarealcraft.item.virtuareal5th.hoshimi.GreenSunflowerSeeds;
 import top.yora.virtuarealcraft.item.virtuareal5th.hoshimi.HamsterWheel;
 import top.yora.virtuarealcraft.item.virtuareal5th.hoshimi.RedSunflowerSeeds;
+import top.yora.virtuarealcraft.item.virtuareal5th.mahiru.MahiruTail;
+import top.yora.virtuarealcraft.item.virtuareal5th.miki.MikiTail;
 import top.yora.virtuarealcraft.item.virtuareal6th.tabibito.ReverseCard;
 import top.yora.virtuarealcraft.item.virtuareal9th.chiharu.LittleSpringRoll;
 import top.yora.virtuarealcraft.item.virtuareal9th.chiharu.Magnifier;
@@ -70,13 +72,15 @@ public class ItemRegistry {
      * 5th
      */
     //miki
-
+    public static final RegistryObject<Item> MIKI_TAIL = ITEMS.register("miki_tail", MikiTail::new);
 
     //hoshimi
     public static final RegistryObject<Item> HAMSTER_WHEEL = ITEMS.register("hamster_wheel", HamsterWheel::new);
     public static final RegistryObject<Item> RED_SUNFLOWER_SEEDS = ITEMS.register("red_sunflower_seeds", RedSunflowerSeeds::new);
     public static final RegistryObject<Item> GREEN_SUNFLOWER_SEEDS = ITEMS.register("green_sunflower_seeds", GreenSunflowerSeeds::new);
 
+    //mahiru
+    public static final RegistryObject<Item> MAHIRU_TAIL = ITEMS.register("mahiru_tail", MahiruTail::new);
 
     /**
      * 6th
