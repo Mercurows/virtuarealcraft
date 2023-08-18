@@ -24,7 +24,10 @@ public enum Livers {
     GIRIMI("girimi","16th","#1E377F",true),
     KIYUU("kiyuu","16th","#FF91AE",true),
     SUI("sui","17th","#87EAFF", true),
-    AMEKI("ameki","19th","#9EEEFF",true);
+    AMEKI("ameki","19th","#9EEEFF",true),
+    MICHIYA("michiya","19th","#EBE4D7",true),
+    AWU("awu","19th","#F9A699",true),
+    HATSUNE("hatsune","19th","#BA66F6",true);
 
     private final String name;
     private final String gen;

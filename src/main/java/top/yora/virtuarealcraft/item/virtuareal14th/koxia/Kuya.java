@@ -5,6 +5,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Rarity;
 import net.minecraft.item.UseAction;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -24,7 +25,7 @@ import java.util.List;
 
 public class Kuya extends Item {
     public Kuya(){
-        super(new Properties().group(ModGroup.itemgroup));
+        super(new Properties().group(ModGroup.itemgroup).rarity(Rarity.UNCOMMON));
     }
 
     @OnlyIn(Dist.CLIENT)
