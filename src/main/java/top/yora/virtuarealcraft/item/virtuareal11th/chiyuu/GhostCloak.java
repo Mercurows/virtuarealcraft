@@ -1,18 +1,18 @@
 package top.yora.virtuarealcraft.item.virtuareal11th.chiyuu;
 
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import top.yora.virtuarealcraft.group.ModGroup;
@@ -24,12 +24,12 @@ import java.util.List;
 
 public class GhostCloak extends Item {
     public GhostCloak() {
-        super(new Properties().maxDamage(21).group(ModGroup.itemgroup));
+        super(new Properties().durability(21).group(ModGroup.itemgroup));
     }
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
         tooltip.add(new TranslationTextComponent("des.virtuarealcraft.ghost_cloak_1").mergeStyle(TextFormatting.GRAY));
         tooltip.add(new TranslationTextComponent("des.virtuarealcraft.ghost_cloak_2").mergeStyle(TextFormatting.GRAY).mergeStyle(TextFormatting.ITALIC));
 
@@ -37,20 +37,20 @@ public class GhostCloak extends Item {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        ItemStack stack = playerIn.getHeldItem(handIn);
+    public ActionResult<ItemStack> onItemRightClick(Level worldIn, Player playerIn, InteractionHand handIn) {
+        ItemStack stack = playerIn.getItemInHand(handIn);
 
-        if(!worldIn.isRemote){
-            playerIn.addPotionEffect(new EffectInstance(Effects.INVISIBILITY, 200, 0, false, false));
-            playerIn.addPotionEffect(new EffectInstance(Effects.STRENGTH, 200, 1, false, false));
-            playerIn.addPotionEffect(new EffectInstance(Effects.SPEED, 200, 1, false, false));
+        if (!worldIn.isClientSide) {
+            playerIn.addPotionEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 200, 0, false, false));
+            playerIn.addPotionEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 200, 1, false, false));
+            playerIn.addPotionEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200, 1, false, false));
 
-            playerIn.getCooldownTracker().setCooldown(stack.getItem(), 400);
+            playerIn.getCooldowns().addCooldown(stack.getItem(), 400);
 
             stack.damageItem(1, playerIn, player -> player.sendBreakAnimation(handIn));
         }
 
-        return ActionResult.func_233538_a_(stack, worldIn.isRemote);
+        return ActionResult.func_233538_a_(stack, worldIn.isClientSide);
     }
 
     @Override

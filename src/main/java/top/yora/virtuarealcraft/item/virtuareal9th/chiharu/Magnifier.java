@@ -1,21 +1,23 @@
 package top.yora.virtuarealcraft.item.virtuareal9th.chiharu;
 
-import net.minecraft.block.AirBlock;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.*;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.AirBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import top.yora.virtuarealcraft.group.ModGroup;
@@ -33,7 +35,7 @@ public class Magnifier extends SwordItem {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
         tooltip.add(new TranslationTextComponent("des.virtuarealcraft.magnifier_1").mergeStyle(TextFormatting.GRAY));
         tooltip.add(new TranslationTextComponent("des.virtuarealcraft.magnifier_2").mergeStyle(TextFormatting.GRAY).mergeStyle(TextFormatting.ITALIC));
 
@@ -42,26 +44,26 @@ public class Magnifier extends SwordItem {
 
     @Override
     public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        target.addPotionEffect(new EffectInstance(Effects.GLOWING, 100, 0));
-        target.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 100, 4));
+        target.addEffect(new MobEffectInstance(MobEffects.GLOWING, 100, 0));
+        target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 4));
 
         return super.hitEntity(stack, target, attacker);
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        ItemStack stack = playerIn.getHeldItem(handIn);
+    public ActionResult<ItemStack> onItemRightClick(Level worldIn, Player playerIn, InteractionHand handIn) {
+        ItemStack stack = playerIn.getItemInHand(handIn);
 
-        if(!worldIn.isRemote){
-            if(!playerIn.isSneaking()){
-                if(playerIn.abilities.isCreativeMode || playerIn.getFoodStats().getFoodLevel() >= 4) {
-                    if(!playerIn.abilities.isCreativeMode) {
-                        playerIn.getFoodStats().addStats(-4, 0);
+        if (!worldIn.isClientSide) {
+            if (!playerIn.isShiftKeyDown()) {
+                if (playerIn.getAbilities().isCreativeMode || playerIn.getFoodData().getFoodLevel() >= 4) {
+                    if (!playerIn.getAbilities().isCreativeMode) {
+                        playerIn.getFoodData().addStats(-4, 0);
                     }
 
-                    playerIn.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 1200, 0));
+                    playerIn.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 1200, 0));
 
-                    playerIn.getCooldownTracker().setCooldown(stack.getItem(), 2400);
+                    playerIn.getCooldowns().addCooldown(stack.getItem(), 2400);
                     stack.damageItem(5, playerIn, (player -> player.sendBreakAnimation(handIn)));
                     return new ActionResult<>(ActionResultType.SUCCESS, stack);
                 }
@@ -72,20 +74,20 @@ public class Magnifier extends SwordItem {
 
     @Override
     public ActionResultType onItemUse(ItemUseContext context) {
-        World world = context.getWorld();
+        Level world = context.getWorld();
         BlockPos pos = context.getPos();
-        PlayerEntity player = context.getPlayer();
+        Player player = context.getPlayer();
         ItemStack mag = context.getItem();
         Hand hand = context.getHand();
 
         if(!(world.getBlockState(pos).getBlock() instanceof AirBlock) && player != null){
-            if(player.isSneaking()) {
-                if(player.abilities.isCreativeMode || player.getFoodStats().getFoodLevel() >= 2) {
-                    if(!player.abilities.isCreativeMode) {
-                        player.getFoodStats().addStats(-2, 0);
+            if (player.isShiftKeyDown()) {
+                if (player.getAbilities().isCreativeMode || player.getFoodData().getFoodLevel() >= 2) {
+                    if (!player.getAbilities().isCreativeMode) {
+                        player.getFoodData().addStats(-2, 0);
                     }
 
-                    if (!world.isRemote) {
+                    if (!world.isClientSide) {
                         double rand = new Random().nextDouble();
                         ItemStack stack;
                         if (rand < .15) {
@@ -98,10 +100,10 @@ public class Magnifier extends SwordItem {
                             stack = new ItemStack(Items.COAL);
                         }
                         ItemEntity entity = new ItemEntity(world, pos.getX(), pos.getY() + 0.5f, pos.getZ(), stack);
-                        world.addEntity(entity);
+                        world.addFreshEntity(entity);
 
 
-                        player.getCooldownTracker().setCooldown(mag.getItem(), 2400);
+                        player.getCooldowns().addCooldown(mag.getItem(), 2400);
                         mag.damageItem(25, player, (player1 -> player1.sendBreakAnimation(hand)));
                     }
                     return ActionResultType.SUCCESS;

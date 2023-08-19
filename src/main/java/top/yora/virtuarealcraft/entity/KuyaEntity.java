@@ -1,41 +1,41 @@
 package top.yora.virtuarealcraft.entity;
 
 import io.netty.buffer.Unpooled;
-import net.minecraft.entity.AreaEffectCloudEntity;
-import net.minecraft.entity.Entity;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.projectile.ProjectileItemEntity;
-import net.minecraft.item.Item;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.AreaEffectCloud;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.network.NetworkHooks;
 import top.yora.virtuarealcraft.init.EntityRegistry;
 import top.yora.virtuarealcraft.init.ItemRegistry;
 import top.yora.virtuarealcraft.init.SoundRegistry;
 
-public class KuyaEntity extends ProjectileItemEntity {
+public class KuyaEntity extends Projectile {
     private static final DataParameter<Integer> FUSE = EntityDataManager.createKey(KuyaEntity.class, DataSerializers.VARINT);
     private int fuse = 100;
 
-    public KuyaEntity(EntityType<? extends KuyaEntity> type, World world){
+    public KuyaEntity(EntityType<? extends KuyaEntity> type, Level world) {
         super(type, world);
     }
 
-    public KuyaEntity(World world, LivingEntity entity){
+    public KuyaEntity(Level world, LivingEntity entity) {
         super(EntityRegistry.KUYA_ENTITY.get(), entity, world);
     }
 
@@ -60,12 +60,12 @@ public class KuyaEntity extends ProjectileItemEntity {
         --this.fuse;
         if (this.fuse <= 0) {
             this.remove();
-            if (!this.world.isRemote) {
+            if (!this.level().isClientSide) {
                 explode(this);
             }
         } else {
-            if (this.world.isRemote) {
-                this.world.addParticle(ParticleTypes.FIREWORK, this.getPosX(), this.getPosY() + 0.5D, this.getPosZ(), 0.0D, 0.0D, 0.0D);
+            if (this.level().isClientSide) {
+                this.level().addParticle(ParticleTypes.FIREWORK, this.getX(), this.getY() + 0.5D, this.getZ(), 0.0D, 0.0D, 0.0D);
             }
         }
 
@@ -73,7 +73,7 @@ public class KuyaEntity extends ProjectileItemEntity {
 
     @Override
     protected void onImpact(RayTraceResult result) {
-        if(!world.isRemote) {
+        if (!level().isClientSide) {
             if (result.getType() == RayTraceResult.Type.BLOCK) {
                 BlockRayTraceResult blockResult = (BlockRayTraceResult) result;
 
@@ -107,7 +107,7 @@ public class KuyaEntity extends ProjectileItemEntity {
 
     @Override
     public void writeAdditional(CompoundNBT compound) {
-        compound.putShort("Fuse", (short)this.getFuse());
+        compound.putShort("Fuse", (short) this.getFuse());
     }
 
     @Override
@@ -136,25 +136,25 @@ public class KuyaEntity extends ProjectileItemEntity {
     }
 
     public static void explode(Entity entity) {
-        World world = entity.world;
-        if(world.isRemote()) {
+        Level world = entity.world;
+        if (world.isClientSide()) {
             return;
         }
 
-        ((ServerWorld) world).spawnParticle(ParticleTypes.EXPLOSION, entity.getPosX(), entity.getPosY(), entity.getPosZ(), 10, 1.0D, 0.0D, 0.0D, 0.1);
-        ((ServerWorld) world).spawnParticle(ParticleTypes.HEART, entity.getPosX(), entity.getPosY(), entity.getPosZ(), 30,3.0D, 3.0D, 3.0D, 0.2);
+        ((ServerLevel) world).addParticle(ParticleTypes.EXPLOSION, entity.getX(), entity.getY(), entity.getZ(), 10, 1.0D, 0.0D, 0.0D, 0.1);
+        ((ServerLevel) world).addParticle(ParticleTypes.HEART, entity.getX(), entity.getY(), entity.getZ(), 30, 3.0D, 3.0D, 3.0D, 0.2);
 
         entity.playSound(SoundRegistry.HEAL.get(), 4.0F, 1.0f);
 
-        AreaEffectCloudEntity areaEffectCloud = new AreaEffectCloudEntity(world, entity.getPosX(), entity.getPosY(), entity.getPosZ());
-        areaEffectCloud.addEffect(new EffectInstance(Effects.SPEED, 100, 0));
-        areaEffectCloud.addEffect(new EffectInstance(Effects.REGENERATION, 100, 2));
-        areaEffectCloud.addEffect(new EffectInstance(Effects.INSTANT_HEALTH, 100, 1));
+        AreaEffectCloud areaEffectCloud = new AreaEffectCloud(world, entity.getX(), entity.getY(), entity.getZ());
+        areaEffectCloud.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 100, 0));
+        areaEffectCloud.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 100, 2));
+        areaEffectCloud.addEffect(new MobEffectInstance(MobEffects.INSTANT_HEALTH, 100, 1));
 
         areaEffectCloud.setRadius(10.0f);
         areaEffectCloud.setDuration(180);
         areaEffectCloud.setRadiusPerTick(-0.05f);
 
-        world.addEntity(areaEffectCloud);
+        world.addFreshEntity(areaEffectCloud);
     }
 }

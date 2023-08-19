@@ -1,6 +1,6 @@
 package top.yora.virtuarealcraft.item.others;
 
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
 
 public class VrcLogo extends Item {
     public VrcLogo() {

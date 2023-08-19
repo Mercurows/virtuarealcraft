@@ -1,7 +1,7 @@
 package top.yora.virtuarealcraft.group;
 
-import net.minecraft.item.ItemGroup;
+import net.minecraft.world.item.CreativeModeTab;
 
 public class ModGroup {
-    public static final ItemGroup itemgroup = new VirtuaRealCraftGroup();
+    public static final CreativeModeTab itemgroup = new VirtuaRealCraftGroup();
 }

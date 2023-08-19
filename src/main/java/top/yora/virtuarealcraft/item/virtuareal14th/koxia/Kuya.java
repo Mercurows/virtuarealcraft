@@ -1,18 +1,17 @@
 package top.yora.virtuarealcraft.item.virtuareal14th.koxia;
 
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Rarity;
 import net.minecraft.item.UseAction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import top.yora.virtuarealcraft.entity.KuyaEntity;
@@ -30,7 +29,7 @@ public class Kuya extends Item {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
         tooltip.add((new TranslationTextComponent("des.virtuarealcraft.kuya_1")).mergeStyle(TextFormatting.GRAY));
         tooltip.add((new TranslationTextComponent("des.virtuarealcraft.kuya_2")).mergeStyle(TextFormatting.GRAY));
 
@@ -38,8 +37,8 @@ public class Kuya extends Item {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        ItemStack stack = playerIn.getHeldItem(handIn);
+    public ActionResult<ItemStack> onItemRightClick(Level worldIn, Player playerIn, InteractionHand handIn) {
+        ItemStack stack = playerIn.getItemInHand(handIn);
         playerIn.setActiveHand(handIn);
         return ActionResult.resultConsume(stack);
     }
@@ -50,10 +49,10 @@ public class Kuya extends Item {
     }
 
     @Override
-    public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
-        if(!worldIn.isRemote) {
-            if (entityLiving instanceof PlayerEntity) {
-                PlayerEntity player = (PlayerEntity) entityLiving;
+    public void onPlayerStoppedUsing(ItemStack stack, Level worldIn, LivingEntity entityLiving, int timeLeft) {
+        if (!worldIn.isClientSide) {
+            if (entityLiving instanceof Player) {
+                Player player = (Player) entityLiving;
 
                 KuyaEntity kuyaEntity = new KuyaEntity(worldIn, player);
                 int usingTime = this.getUseDuration(stack) - timeLeft;
@@ -61,13 +60,13 @@ public class Kuya extends Item {
                 float power = Math.min(usingTime / 30.0f, 3.5f);
 
                 kuyaEntity.func_234612_a_(player, player.rotationPitch, player.rotationYaw, 0.0f, power, 0.0f);
-                worldIn.addEntity(kuyaEntity);
+                worldIn.addFreshEntity(kuyaEntity);
 
                 if(!player.isCreative()) {
                     stack.shrink(1);
                 }
 
-                player.getCooldownTracker().setCooldown(stack.getItem(), 100);
+                player.getCooldowns().addCooldown(stack.getItem(), 100);
             }
         }
     }

@@ -3,23 +3,23 @@ package top.yora.virtuarealcraft.item.virtuareal5th.hoshimi;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.Attribute;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import top.yora.virtuarealcraft.Utils;
@@ -38,12 +38,12 @@ public class HamsterWheel extends ArmorItem {
     public static final String TAG_SPIRIT = "spiriting";
 
     public HamsterWheel() {
-        super(ArmorMaterial.IRON, EquipmentSlotType.CHEST, new Properties().group(ModGroup.itemgroup).maxDamage(515));
+        super(ArmorMaterial.IRON, EquipmentSlot.CHEST, new Item.Properties().group(ModGroup.itemgroup).durability(515));
     }
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
         tooltip.add(new TranslationTextComponent("des.virtuarealcraft.hamster_wheel").mergeStyle(TextFormatting.GRAY));
 
         TooltipTool.addLiverInfo(tooltip, Livers.HOSHIMI);
@@ -53,19 +53,19 @@ public class HamsterWheel extends ArmorItem {
     @OnlyIn(Dist.CLIENT)
     @Nullable
     @Override
-    public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default) {
+    public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, A _default) {
         return (A) new HamsterWheelModel<>();
     }
 
     @Nullable
     @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
+    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
         return Utils.MOD_ID + ":textures/models/armor/hamster_wheel.png";
     }
 
     @Override
-    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType equipmentSlot, ItemStack stack) {
-        Multimap<Attribute, AttributeModifier> map = super.getAttributeModifiers(equipmentSlot);
+    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot equipmentSlot, ItemStack stack) {
+        Multimap<Attribute, AttributeModifier> map = super.getAttributeModifiers(equipmentSlot, stack);
         UUID uuid = new UUID(ItemRegistry.HAMSTER_WHEEL.hashCode() + equipmentSlot.toString().hashCode(), 0);
         if (equipmentSlot == getEquipmentSlot()) {
             map = HashMultimap.create(map);
@@ -76,10 +76,10 @@ public class HamsterWheel extends ArmorItem {
     }
 
     @Override
-    public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-        if (!world.isRemote) {
-            player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 20, 1, false, false));
-            player.addPotionEffect(new EffectInstance(Effects.SLOW_FALLING, 20, 0, false, false));
+    public void onArmorTick(ItemStack stack, Level world, Player player) {
+        if (!world.isClientSide) {
+            player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 20, 1, false, false));
+            player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 20, 0, false, false));
 
             if (player.isSprinting()) {
                 ItemNBTTool.setInt(stack, TAG_SPIRIT, Math.min(100, ItemNBTTool.getInt(stack, TAG_SPIRIT, 0) + 1));
@@ -87,8 +87,8 @@ public class HamsterWheel extends ArmorItem {
                 if (ItemNBTTool.getInt(stack, TAG_SPIRIT, 0) >= 100) {
                     ItemNBTTool.setInt(stack, TAG_SPIRIT, 0);
 
-                    player.addItemStackToInventory(new ItemStack(ItemRegistry.RED_SUNFLOWER_SEEDS.get()));
-                    player.addItemStackToInventory(new ItemStack(ItemRegistry.GREEN_SUNFLOWER_SEEDS.get()));
+                    player.addItem(new ItemStack(ItemRegistry.RED_SUNFLOWER_SEEDS.get()));
+                    player.addItem(new ItemStack(ItemRegistry.GREEN_SUNFLOWER_SEEDS.get()));
                 }
             }
         }

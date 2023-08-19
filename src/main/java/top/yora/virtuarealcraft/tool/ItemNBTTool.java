@@ -1,6 +1,6 @@
 package top.yora.virtuarealcraft.tool;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 
 //from Botania
 public final class ItemNBTTool {

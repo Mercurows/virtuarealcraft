@@ -1,20 +1,16 @@
 package top.yora.virtuarealcraft.item.virtuareal4th.waku;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.Rarity;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.*;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import top.yora.virtuarealcraft.group.ModGroup;
@@ -27,12 +23,12 @@ import java.util.List;
 
 public class WeatherGem extends Item {
     public WeatherGem() {
-        super(new Properties().group(ModGroup.itemgroup).maxDamage(10).rarity(Rarity.UNCOMMON));
+        super(new Properties().group(ModGroup.itemgroup).durability(10).rarity(Rarity.UNCOMMON));
     }
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
         tooltip.add(new TranslationTextComponent("des.virtuarealcraft.weather_gem.func").mergeStyle(TextFormatting.AQUA));
         tooltip.add(new TranslationTextComponent("des.virtuarealcraft.weather_gem").mergeStyle(TextFormatting.GRAY));
 
@@ -45,38 +41,38 @@ public class WeatherGem extends Item {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+    public ActionResult<ItemStack> onItemRightClick(Level worldIn, Player playerIn, InteractionHand handIn) {
         boolean flag = false;
 
-        ItemStack itemStack = playerIn.getHeldItem(handIn);
-        if(handIn == Hand.MAIN_HAND){
-            if(!worldIn.isRemote) {
-                ItemStack off = playerIn.getHeldItemOffhand();
+        ItemStack itemStack = playerIn.getItemInHand(handIn);
+        if (handIn == InteractionHand.MAIN_HAND) {
+            if (!worldIn.isClientSide) {
+                ItemStack off = playerIn.getMainHandItem();
                 if (off.isEmpty()) {
                     return new ActionResult<>(ActionResultType.FAIL, itemStack);
                 } else {
                     if (off.getItem() == Items.TORCH) {
                         off.shrink(1);
 
-                        ((ServerWorld) worldIn).func_241113_a_(12000, 0, false, false);
+                        ((ServerLevel) worldIn).func_241113_a_(12000, 0, false, false);
                         itemStack.damageItem(1, playerIn, p -> p.sendBreakAnimation(handIn));
-                        playerIn.getCooldownTracker().setCooldown(itemStack.getItem(), 6000);
+                        playerIn.getCooldowns().addCooldown(itemStack.getItem(), 6000);
 
                         flag = true;
                     } else if (off.getItem() == Items.WHEAT_SEEDS) {
                         off.shrink(1);
 
-                        ((ServerWorld) worldIn).func_241113_a_(0, 12000, true, false);
+                        ((ServerLevel) worldIn).func_241113_a_(0, 12000, true, false);
                         itemStack.damageItem(1, playerIn, p -> p.sendBreakAnimation(handIn));
-                        playerIn.getCooldownTracker().setCooldown(itemStack.getItem(), 6000);
+                        playerIn.getCooldowns().addCooldown(itemStack.getItem(), 6000);
 
                         flag = true;
                     } else if (off.getItem() == Items.GUNPOWDER) {
                         off.shrink(1);
 
-                        ((ServerWorld) worldIn).func_241113_a_(0, 12000, true, true);
+                        ((ServerLevel) worldIn).func_241113_a_(0, 12000, true, true);
                         itemStack.damageItem(1, playerIn, p -> p.sendBreakAnimation(handIn));
-                        playerIn.getCooldownTracker().setCooldown(itemStack.getItem(), 6000);
+                        playerIn.getCooldowns().addCooldown(itemStack.getItem(), 6000);
 
                         flag = true;
                     }
@@ -87,8 +83,8 @@ public class WeatherGem extends Item {
                 }
             }
 
-            if(worldIn.isRemote) {
-                ItemStack off = playerIn.getHeldItemOffhand();
+            if (worldIn.isClientSide) {
+                ItemStack off = playerIn.getMainHandItem();
                 if (off.getItem() == Items.TORCH || off.getItem() == Items.WHEAT_SEEDS || off.getItem() == Items.GUNPOWDER) {
                     flag = true;
                 }

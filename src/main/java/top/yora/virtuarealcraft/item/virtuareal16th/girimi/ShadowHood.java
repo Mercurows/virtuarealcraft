@@ -1,20 +1,20 @@
 package top.yora.virtuarealcraft.item.virtuareal16th.girimi;
 
 import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import top.yora.virtuarealcraft.Utils;
@@ -28,12 +28,12 @@ import java.util.List;
 
 public class ShadowHood extends ArmorItem {
     public ShadowHood() {
-        super(ArmorMaterial.LEATHER, EquipmentSlotType.HEAD, new Properties().maxDamage(147).group(ModGroup.itemgroup));
+        super(ArmorMaterial.LEATHER, EquipmentSlot.HEAD, new Properties().durability(147).group(ModGroup.itemgroup));
     }
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
         tooltip.add(new TranslationTextComponent("des.virtuarealcraft.shadow_hood").mergeStyle(TextFormatting.GRAY).mergeStyle(TextFormatting.ITALIC));
 
         TooltipTool.addLiverInfo(tooltip, Livers.GIRIMI);
@@ -43,31 +43,31 @@ public class ShadowHood extends ArmorItem {
     @OnlyIn(Dist.CLIENT)
     @Nullable
     @Override
-    public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default) {
+    public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, A _default) {
         return (A) new ShadowHoodModel<>();
     }
 
     @Nullable
     @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
+    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
         return Utils.MOD_ID + ":textures/models/armor/shadow_hood.png";
     }
 
     @Override
-    public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-        if(!world.isRemote){
-            if(!world.isDaytime() || !world.canSeeSky(player.getPosition()) || world.isRaining()){
-                player.addPotionEffect(new EffectInstance(Effects.SPEED, 40, 1, false, false));
-                player.addPotionEffect(new EffectInstance(Effects.STRENGTH, 40, 1, false, false));
-                player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 40, 0, false, false));
-                player.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 300, 0, false, false));
-                player.addPotionEffect(new EffectInstance(Effects.HASTE, 40, 1, false, false));
+    public void onArmorTick(ItemStack stack, Level world, Player player) {
+        if (!world.isClientSide) {
+            if (!world.isDay() || !world.canSeeSky(player.getPosition()) || world.isRaining()) {
+                player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 40, 1, false, false));
+                player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 40, 1, false, false));
+                player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 40, 0, false, false));
+                player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 300, 0, false, false));
+                player.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 40, 1, false, false));
             }else {
-                player.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 40, 1, false, false));
-                player.addPotionEffect(new EffectInstance(Effects.WEAKNESS, 40, 1, false, false));
-                player.addPotionEffect(new EffectInstance(Effects.BLINDNESS, 300, 0, false, false));
-                player.addPotionEffect(new EffectInstance(Effects.MINING_FATIGUE, 40, 1, false, false));
-                player.setFire(1);
+                player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 1, false, false));
+                player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 40, 1, false, false));
+                player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 300, 0, false, false));
+                player.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 40, 1, false, false));
+                player.setRemainingFireTicks(1);
             }
         }
     }

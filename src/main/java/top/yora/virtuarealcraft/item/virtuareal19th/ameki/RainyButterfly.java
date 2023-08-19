@@ -2,25 +2,29 @@ package top.yora.virtuarealcraft.item.virtuareal19th.ameki;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.Attribute;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.item.ArmorStandEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.*;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.*;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.decoration.ArmorStand;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -45,12 +49,12 @@ public class RainyButterfly extends SwordItem {
     public static final String TAG_RAINY_BUTTERFLY_RAIN = "rainy_butterfly_rain";
 
     public RainyButterfly(){
-        super(ItemTier.IRON, -2, -2.1f, new Properties().group(ModGroup.itemgroup).maxDamage(1206).rarity(Rarity.EPIC));
+        super(ItemTier.IRON, -2, -2.1f, new Properties().group(ModGroup.itemgroup).durability(1206).rarity(Rarity.EPIC));
     }
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
         tooltip.add((new TranslationTextComponent("des.virtuarealcraft.rainy_butterfly_1")).mergeStyle(TextFormatting.GRAY));
         tooltip.add((new TranslationTextComponent("des.virtuarealcraft.rainy_butterfly_2")).mergeStyle(TextFormatting.GRAY));
         tooltip.add((new TranslationTextComponent("des.virtuarealcraft.rainy_butterfly_3")).mergeStyle(TextFormatting.GRAY));
@@ -60,8 +64,8 @@ public class RainyButterfly extends SwordItem {
 
     @Override
     public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        World world = attacker.getEntityWorld();
-        if(!world.isRemote){
+        Level world = attacker.level();
+        if (!world.isClientSide) {
             if(!ItemNBTTool.getBoolean(stack, TAG_RAINY_BUTTERFLY_OPEN, false)) {
                 int count = ItemNBTTool.getInt(stack, TAG_RAINY_BUTTERFLY_COUNT, 0);
                 if (count > 0) {
@@ -78,7 +82,7 @@ public class RainyButterfly extends SwordItem {
     }
 
     @Override
-    public void onCreated(ItemStack stack, World worldIn, PlayerEntity playerIn) {
+    public void onCreated(ItemStack stack, Level worldIn, Player playerIn) {
         ItemNBTTool.setInt(stack, TAG_RAINY_BUTTERFLY_COUNT, 0);
         ItemNBTTool.setInt(stack, TAG_RAINY_BUTTERFLY_TIME, 0);
         ItemNBTTool.setBoolean(stack, TAG_RAINY_BUTTERFLY_OPEN, false);
@@ -86,18 +90,18 @@ public class RainyButterfly extends SwordItem {
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-        if(!worldIn.isRemote){
-            if(entityIn instanceof PlayerEntity) {
-                PlayerEntity player = (PlayerEntity) entityIn;
+    public void inventoryTick(ItemStack stack, Level worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+        if (!worldIn.isClientSide) {
+            if (entityIn instanceof Player) {
+                Player player = (Player) entityIn;
 
-                boolean isMainhand = player.getHeldItemMainhand() == stack;
-                boolean isOffHand = player.getHeldItemOffhand() == stack;
+                boolean isMainhand = player.getMainHandItem() == stack;
+                boolean isOffHand = player.getMainHandItem() == stack;
 
                 if(isMainhand || isOffHand) {
                     boolean open = ItemNBTTool.getBoolean(stack, TAG_RAINY_BUTTERFLY_OPEN, false);
                     if (open) {
-                        if (player.ticksExisted % 20 == 0 && getRainyButterflyTime(stack) < 20
+                        if (player.tickCount % 20 == 0 && getRainyButterflyTime(stack) < 20
                                 && getRainyButterflyCount(stack) < (worldIn.isRaining() ? 9 : 3)) {
                             setRainyButterflyTime(stack, Math.min(20, getRainyButterflyTime(stack) + 1));
                         }
@@ -118,10 +122,10 @@ public class RainyButterfly extends SwordItem {
             }
         }
         if(worldIn.isRaining()){
-            if(stack.getDamage() < stack.getMaxDamage()){
-                PlayerEntity player = (PlayerEntity) entityIn;
-                if (player.ticksExisted % 20 == 0) {
-                    stack.damageItem(-1, player, (playerEntity) -> playerEntity.sendBreakAnimation(player.getActiveHand()));
+            if (stack.getDamageValue() < stack.getMaxDamage()) {
+                Player player = (Player) entityIn;
+                if (player.tickCount % 20 == 0) {
+                    stack.hurtAndBreak(-1, player, (Player) -> Player.sendBreakAnimation(player.getUsedItemHand()));
                 }
             }
             ItemNBTTool.setBoolean(stack, TAG_RAINY_BUTTERFLY_RAIN, true);
@@ -131,48 +135,48 @@ public class RainyButterfly extends SwordItem {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        ItemStack stack = playerIn.getHeldItem(handIn);
+    public ActionResult<ItemStack> onItemRightClick(Level worldIn, Player playerIn, InteractionHand handIn) {
+        ItemStack stack = playerIn.getItemInHand(handIn);
 
         boolean open = ItemNBTTool.getBoolean(stack, TAG_RAINY_BUTTERFLY_OPEN, false);
         if(open){
-            if(playerIn.isSneaking()) {
+            if (playerIn.isShiftKeyDown()) {
                 ItemNBTTool.setBoolean(stack, TAG_RAINY_BUTTERFLY_OPEN, false);
-                playerIn.getCooldownTracker().setCooldown(stack.getItem(), 40);
-                playerIn.playSound(SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.0f, 1.0f);
+                playerIn.getCooldowns().addCooldown(stack.getItem(), 40);
+                playerIn.playSound(SoundEvents.ARMOR_EQUIP_LEATHER, 1.0f, 1.0f);
             }
         }else {
             int level = getRainyButterflyCount(stack);
             if(level > 0){
-                if(playerIn.isSneaking()){
-                    playerIn.addPotionEffect(new EffectInstance(Effects.ABSORPTION, 800, level - 1, false, false));
-                    
-                    Vector3d look = playerIn.getLookVec();
-                    Vector3d position = playerIn.getPositionVec().add(0, playerIn.getEyeHeight(), 0);
-                    Vector3d endPos = position.add(look.scale(4.0));
+                if (playerIn.isShiftKeyDown()) {
+                    playerIn.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 800, level - 1, false, false));
 
-                    AxisAlignedBB box = new AxisAlignedBB(position, endPos);
+                    Vec3 look = playerIn.getLookAngle();
+                    Vec3 position = playerIn.position().add(0, playerIn.getEyeHeight(), 0);
+                    Vec3 endPos = position.add(look.scale(4.0));
+
+                    AABB box = new AABB(position, endPos);
                     List<Entity> entities = worldIn.getEntitiesWithinAABB(Entity.class, box);
 
                     for (Entity entity : entities) {
-                        if (entity != playerIn && entity.canBePushed()) {
-                            if (entity instanceof LivingEntity && !(entity instanceof ArmorStandEntity)) {
+                        if (entity != playerIn && entity.isPushable()) {
+                            if (entity instanceof LivingEntity && !(entity instanceof ArmorStand)) {
                                 float strength = (float) Math.ceil(getRainyButterflyCount(stack) / 3.0f);
-                                ((LivingEntity) entity).applyKnockback(strength * 1.5f, playerIn.getPosX() - entity.getPosX(), playerIn.getPosZ() - entity.getPosZ());
+                                ((LivingEntity) entity).knockback(strength * 1.5f, playerIn.getX() - entity.getX(), playerIn.getZ() - entity.getZ());
                             }
                         }
                     }
 
                     setRainyButterflyCount(stack, 0);
                 }else {
-                    playerIn.addPotionEffect(new EffectInstance(Effects.ABSORPTION, 1200, 0, false, false));
+                    playerIn.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 1200, 0, false, false));
                     setRainyButterflyCount(stack, level - 1);
                 }
             }
 
             ItemNBTTool.setBoolean(stack, TAG_RAINY_BUTTERFLY_OPEN, true);
-            playerIn.getCooldownTracker().setCooldown(stack.getItem(), 10);
-            playerIn.playSound(SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.0f, 1.0f);
+            playerIn.getCooldowns().addCooldown(stack.getItem(), 10);
+            playerIn.playSound(SoundEvents.ARMOR_EQUIP_LEATHER, 1.0f, 1.0f);
         }
         return new ActionResult<>(ActionResultType.FAIL, stack);
     }
@@ -186,11 +190,11 @@ public class RainyButterfly extends SwordItem {
     }
 
     @Override
-    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType equipmentSlot, ItemStack stack) {
+    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot equipmentSlot, ItemStack stack) {
         Multimap<Attribute, AttributeModifier> map = super.getAttributeModifiers(equipmentSlot, stack);
         UUID uuid = new UUID(ItemRegistry.RAINY_BUTTERFLY.hashCode() + equipmentSlot.toString().hashCode(), 0);
         UUID uuid2 = new UUID(ItemRegistry.RAINY_BUTTERFLY.hashCode(), 0);
-        if (equipmentSlot == EquipmentSlotType.MAINHAND || equipmentSlot == EquipmentSlotType.OFFHAND) {
+        if (equipmentSlot == EquipmentSlot.MAINHAND || equipmentSlot == EquipmentSlot.OFFHAND) {
             map = HashMultimap.create(map);
             boolean flag = ItemNBTTool.getBoolean(stack, TAG_RAINY_BUTTERFLY_OPEN, false);
             int count = ItemNBTTool.getInt(stack, TAG_RAINY_BUTTERFLY_COUNT, 0);

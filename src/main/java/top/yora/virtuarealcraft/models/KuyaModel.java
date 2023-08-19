@@ -3,8 +3,8 @@ package top.yora.virtuarealcraft.models;// Made with Blockbench 4.8.1
 // Paste this class into your mod and generate all required imports
 
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.vertex.MultiBufferSource;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import top.yora.virtuarealcraft.entity.KuyaEntity;
@@ -163,7 +163,7 @@ public class KuyaModel extends EntityModel<KuyaEntity> {
 	}
 
 	@Override
-	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
+	public void render(PoseStack matrixStack, MultiBufferSource buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
 		main.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
 

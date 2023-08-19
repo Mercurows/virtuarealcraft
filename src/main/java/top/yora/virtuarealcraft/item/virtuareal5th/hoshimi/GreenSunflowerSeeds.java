@@ -1,21 +1,21 @@
 package top.yora.virtuarealcraft.item.virtuareal5th.hoshimi;
 
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Food;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.play.server.SExplosionPacket;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.Explosion;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import top.yora.virtuarealcraft.group.ModGroup;
@@ -35,30 +35,29 @@ public class GreenSunflowerSeeds extends Item {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
         tooltip.add(new TranslationTextComponent("des.virtuarealcraft.green_sunflower_seeds").mergeStyle(TextFormatting.GRAY));
 
         TooltipTool.addLiverInfo(tooltip, Livers.HOSHIMI);
     }
 
     @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        if (entityLiving instanceof PlayerEntity) {
-            PlayerEntity player = (PlayerEntity) entityLiving;
+    public ItemStack onItemUseFinish(ItemStack stack, Level worldIn, LivingEntity entityLiving) {
+        if (entityLiving instanceof Player player) {
 
-            if (worldIn.isRemote) {
+            if (worldIn.isClientSide) {
                 worldIn.playSound(player, player.getPosition(), SoundRegistry.NNCB.get(), SoundCategory.AMBIENT, 1.0f, 1.0f);
             } else {
                 Explosion explosion = new Explosion(worldIn, player, DamageSource.causeExplosionDamage(player),
-                        null, player.getPosX(), player.getPosY(), player.getPosZ(), 1, false, Explosion.Mode.NONE);
+                        null, player.getX(), player.getY(), player.getZ(), 1, false, Explosion.Mode.NONE);
                 explosion.doExplosionA();
                 explosion.doExplosionB(true);
 
                 explosion.clearAffectedBlockPositions();
 
-                for (ServerPlayerEntity serverPlayer : ((ServerWorld) worldIn).getPlayers()) {
-                    if (serverPlayer.getDistanceSq(player.getPosX(), player.getPosY(), player.getPosZ()) < 100) {
-                        serverPlayer.connection.sendPacket(new SExplosionPacket(player.getPosX(), player.getPosY(), player.getPosZ(), 2, explosion.getAffectedBlockPositions(), explosion.getPlayerKnockbackMap().get(player)));
+                for (ServerPlayer serverPlayer : ((ServerLevel) worldIn).getPlayers()) {
+                    if (serverPlayer.getDistanceSq(player.getX(), player.getY(), player.getZ()) < 100) {
+                        serverPlayer.connection.send(new SExplosionPacket(player.getX(), player.getY(), player.getZ(), 2, explosion.getAffectedBlockPositions(), explosion.getPlayerKnockbackMap().get(player)));
                     }
                 }
             }
