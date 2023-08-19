@@ -32,7 +32,8 @@ public class MahiruTail extends ArmorItem {
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         TooltipTool.addDevelopingText(tooltip);
-        tooltip.add(new TranslationTextComponent("des.virtuarealcraft.mahiru_tail").mergeStyle(TextFormatting.GRAY));
+        tooltip.add(new TranslationTextComponent("des.virtuarealcraft.mahiru_tail_1").mergeStyle(TextFormatting.GRAY).mergeStyle(TextFormatting.ITALIC));
+        tooltip.add(new TranslationTextComponent("des.virtuarealcraft.mahiru_tail_2").mergeStyle(TextFormatting.GRAY));
 
         TooltipTool.addLiverInfo(tooltip, Livers.MAHIRU);
     }
