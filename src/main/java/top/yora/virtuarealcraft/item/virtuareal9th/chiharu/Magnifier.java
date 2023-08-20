@@ -1,23 +1,23 @@
 package top.yora.virtuarealcraft.item.virtuareal9th.chiharu;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AirBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 
@@ -27,7 +27,7 @@ import java.util.Random;
 
 public class Magnifier extends SwordItem {
     public Magnifier() {
-        super(Tiers.GOLD, 4, -3.0f, new Properties().group(GroupRegistry.itemgroup).defaultMaxDamage(114));
+        super(Tiers.GOLD, 4, -3.0f, new Properties().durability(114));
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -40,48 +40,49 @@ public class Magnifier extends SwordItem {
     }
 
     @Override
-    public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         target.addEffect(new MobEffectInstance(MobEffects.GLOWING, 100, 0));
         target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 4));
 
-        return super.hitEntity(stack, target, attacker);
+        return super.hurtEnemy(stack, target, attacker);
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(Level worldIn, Player playerIn, InteractionHand handIn) {
+    public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
         ItemStack stack = playerIn.getItemInHand(handIn);
 
         if (!worldIn.isClientSide) {
             if (!playerIn.isShiftKeyDown()) {
-                if (playerIn.getAbilities().isCreativeMode || playerIn.getFoodData().getFoodLevel() >= 4) {
-                    if (!playerIn.getAbilities().isCreativeMode) {
-                        playerIn.getFoodData().addStats(-4, 0);
+                if (playerIn.isCreative() || playerIn.getFoodData().getFoodLevel() >= 4) {
+                    if (!playerIn.isCreative()) {
+                        playerIn.getFoodData().eat(-4, 0);
                     }
 
                     playerIn.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 1200, 0));
 
                     playerIn.getCooldowns().addCooldown(stack.getItem(), 2400);
-                    stack.damageItem(5, playerIn, (player -> player.sendBreakAnimation(handIn)));
-                    return new ActionResult<>(ActionResultType.SUCCESS, stack);
+                    stack.hurtAndBreak(5, playerIn, (player -> player.broadcastBreakEvent(handIn)));
+                    return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);
                 }
             }
         }
-        return new ActionResult<>(ActionResultType.FAIL, stack);
+
+        return new InteractionResultHolder<>(InteractionResult.FAIL, stack);
     }
 
     @Override
-    public ActionResultType onItemUse(ItemUseContext context) {
-        Level world = context.getWorld();
-        BlockPos pos = context.getPos();
+    public InteractionResult useOn(UseOnContext context) {
+        Level world = context.getLevel();
+        BlockPos pos = context.getClickedPos();
         Player player = context.getPlayer();
-        ItemStack mag = context.getItem();
-        Hand hand = context.getHand();
+        ItemStack mag = context.getItemInHand();
+        InteractionHand hand = context.getHand();
 
         if(!(world.getBlockState(pos).getBlock() instanceof AirBlock) && player != null){
             if (player.isShiftKeyDown()) {
-                if (player.getAbilities().isCreativeMode || player.getFoodData().getFoodLevel() >= 2) {
-                    if (!player.getAbilities().isCreativeMode) {
-                        player.getFoodData().addStats(-2, 0);
+                if (player.isCreative() || player.getFoodData().getFoodLevel() >= 2) {
+                    if (!player.isCreative()) {
+                        player.getFoodData().eat(-2, 0);
                     }
 
                     if (!world.isClientSide) {
@@ -101,12 +102,13 @@ public class Magnifier extends SwordItem {
 
 
                         player.getCooldowns().addCooldown(mag.getItem(), 2400);
-                        mag.damageItem(25, player, (player1 -> player1.sendBreakAnimation(hand)));
+                        mag.hurtAndBreak(25, player, (player1 -> player1.broadcastBreakEvent(hand)));
                     }
-                    return ActionResultType.SUCCESS;
+                    return InteractionResult.SUCCESS;
                 }
             }
         }
-        return super.onItemUse(context);
+
+        return super.useOn(context);
     }
 }
