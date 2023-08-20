@@ -15,7 +15,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import top.yora.virtuarealcraft.Utils;
-import top.yora.virtuarealcraft.group.ModGroup;
+import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.models.SharkTailModel;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
@@ -25,7 +25,7 @@ import java.util.List;
 
 public class SharkTail extends ArmorItem {
     public SharkTail() {
-        super(ArmorMaterials.IRON, EquipmentSlot.LEGS, new Properties().group(ModGroup.itemgroup).rarity(Rarity.UNCOMMON).durability(517));
+        super(ArmorMaterials.IRON, EquipmentSlot.LEGS, new Properties().group(GroupRegistry.itemgroup).rarity(Rarity.UNCOMMON).durability(517));
     }
 
     @OnlyIn(Dist.CLIENT)

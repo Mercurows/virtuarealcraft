@@ -16,7 +16,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
-import top.yora.virtuarealcraft.group.ModGroup;
+import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 
@@ -29,7 +29,7 @@ public class IceCreamBlackTea extends Item {
             .effect(() -> new MobEffectInstance(MobEffects.NIGHT_VISION, 1000, 0), 1.0f).build();
 
     public IceCreamBlackTea() {
-        super(new Properties().group(ModGroup.itemgroup).food(food).maxStackSize(1));
+        super(new Properties().group(GroupRegistry.itemgroup).food(food).maxStackSize(1));
     }
 
 

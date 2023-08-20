@@ -11,7 +11,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import top.yora.virtuarealcraft.group.ModGroup;
+import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 
@@ -20,7 +20,7 @@ import java.util.List;
 
 public class AngelHalo extends ArmorItem {
     public AngelHalo() {
-        super(ArmorMaterials.IRON, EquipmentSlot.HEAD, new Properties().durability(303).group(ModGroup.itemgroup));
+        super(ArmorMaterials.IRON, EquipmentSlot.HEAD, new Properties().durability(303).group(GroupRegistry.itemgroup));
     }
 
     @OnlyIn(Dist.CLIENT)

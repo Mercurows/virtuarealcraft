@@ -14,7 +14,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import top.yora.virtuarealcraft.group.ModGroup;
+import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.init.ItemRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
@@ -24,7 +24,7 @@ import java.util.List;
 
 public class AdventBadge extends Item {
     public AdventBadge() {
-        super(new Properties().durability(62).group(ModGroup.itemgroup));
+        super(new Properties().durability(62).group(GroupRegistry.itemgroup));
     }
 
     @OnlyIn(Dist.CLIENT)

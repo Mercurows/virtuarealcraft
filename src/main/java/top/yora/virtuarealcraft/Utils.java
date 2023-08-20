@@ -5,6 +5,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import top.yora.virtuarealcraft.init.EntityRegistry;
+import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.init.ItemRegistry;
 import top.yora.virtuarealcraft.init.SoundRegistry;
 
@@ -21,6 +22,7 @@ public class Utils {
 //        EffectRegistry.EFFECTS.register(eventBus);
 //        PotionRegistry.POTION_TYPES.register(eventBus);
 //        EnchantRegistry.ENCHANTMENTS.register(eventBus);
+        GroupRegistry.TABS.register(eventBus);
         SoundRegistry.SOUNDS.register(eventBus);
         EntityRegistry.ENTITY_TYPES.register(eventBus);
 //        VillagerInit.POINTS_OF_INTEREST.register(eventBus);

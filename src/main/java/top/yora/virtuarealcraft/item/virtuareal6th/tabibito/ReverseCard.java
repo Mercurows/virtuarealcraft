@@ -15,7 +15,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import top.yora.virtuarealcraft.group.ModGroup;
+import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 
@@ -24,7 +24,7 @@ import java.util.List;
 
 public class ReverseCard extends SwordItem {
     public ReverseCard() {
-        super(Tiers.WOOD, 1, -1.0f, new Properties().durability(610).setNoRepair().group(ModGroup.itemgroup));
+        super(Tiers.WOOD, 1, -1.0f, new Properties().durability(610).setNoRepair().group(GroupRegistry.itemgroup));
     }
 
     @OnlyIn(Dist.CLIENT)

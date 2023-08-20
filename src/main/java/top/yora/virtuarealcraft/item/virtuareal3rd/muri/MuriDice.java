@@ -14,7 +14,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import top.yora.virtuarealcraft.group.ModGroup;
+import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.init.ItemRegistry;
 import top.yora.virtuarealcraft.tool.ItemNBTTool;
 import top.yora.virtuarealcraft.tool.Livers;
@@ -25,7 +25,7 @@ import java.util.List;
 
 public class MuriDice extends Item {
     public MuriDice() {
-        super(new Properties().group(ModGroup.itemgroup).maxStackSize(1));
+        super(new Properties().group(GroupRegistry.itemgroup).maxStackSize(1));
     }
 
     @OnlyIn(Dist.CLIENT)

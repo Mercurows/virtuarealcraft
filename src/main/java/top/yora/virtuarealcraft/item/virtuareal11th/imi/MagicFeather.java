@@ -18,7 +18,7 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import top.yora.virtuarealcraft.group.ModGroup;
+import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 
@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 
 public class MagicFeather extends Item {
     public MagicFeather() {
-        super(new Properties().group(ModGroup.itemgroup));
+        super(new Properties().group(GroupRegistry.itemgroup));
     }
 
     @OnlyIn(Dist.CLIENT)

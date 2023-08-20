@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.IceBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import top.yora.virtuarealcraft.group.ModGroup;
+import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.tiers.ModArmorMaterial;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
@@ -27,7 +27,7 @@ import java.util.List;
 
 public class FrozenBoots extends ArmorItem {
     public FrozenBoots() {
-        super(ModArmorMaterial.YUA, EquipmentSlot.FEET, new Properties().durability(154).group(ModGroup.itemgroup));
+        super(ModArmorMaterial.YUA, EquipmentSlot.FEET, new Properties().durability(154).group(GroupRegistry.itemgroup));
     }
 
     @OnlyIn(Dist.CLIENT)

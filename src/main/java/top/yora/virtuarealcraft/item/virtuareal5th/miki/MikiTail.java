@@ -15,7 +15,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import top.yora.virtuarealcraft.Utils;
-import top.yora.virtuarealcraft.group.ModGroup;
+import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.models.MihiruTailModel;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
@@ -25,7 +25,7 @@ import java.util.List;
 
 public class MikiTail extends ArmorItem {
     public MikiTail() {
-        super(ArmorMaterials.LEATHER, EquipmentSlot.LEGS, new Properties().group(ModGroup.itemgroup));
+        super(ArmorMaterials.LEATHER, EquipmentSlot.LEGS, new Properties().group(GroupRegistry.itemgroup));
     }
 
     @OnlyIn(Dist.CLIENT)

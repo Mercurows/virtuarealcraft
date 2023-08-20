@@ -14,7 +14,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import top.yora.virtuarealcraft.group.ModGroup;
+import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.init.ItemRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
@@ -24,7 +24,7 @@ import java.util.List;
 
 public class WeatherGem extends Item {
     public WeatherGem() {
-        super(new Properties().group(ModGroup.itemgroup).durability(10).rarity(Rarity.UNCOMMON));
+        super(new Properties().group(GroupRegistry.itemgroup).durability(10).rarity(Rarity.UNCOMMON));
     }
 
     @OnlyIn(Dist.CLIENT)

@@ -4,6 +4,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.item.Food;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -15,7 +16,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import top.yora.virtuarealcraft.group.ModGroup;
+import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.init.SoundRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
@@ -28,7 +29,7 @@ public class RedSunflowerSeeds extends Item {
             .effect(() -> new MobEffectInstance(MobEffects.LEVITATION, 60, 0), 1.0f).build();
 
     public RedSunflowerSeeds() {
-        super(new Properties().group(ModGroup.itemgroup).food(food));
+        super(new Properties().food(food));
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -40,14 +41,13 @@ public class RedSunflowerSeeds extends Item {
     }
 
     @Override
-    public ItemStack onItemUseFinish(ItemStack stack, Level worldIn, LivingEntity entityLiving) {
-        if (entityLiving instanceof Player) {
-            Player player = (Player) entityLiving;
+    public ItemStack finishUsingItem(ItemStack stack, Level worldIn, LivingEntity entityLiving) {
+        if (entityLiving instanceof Player player) {
 
             if (worldIn.isClientSide) {
-                worldIn.playSound(player, player.getPosition(), SoundRegistry.HOSHIMI_MUA.get(), SoundCategory.AMBIENT, 2.0f, 1.0f);
+                worldIn.playSound(player, player.getOnPos(), SoundRegistry.HOSHIMI_MUA.get(), SoundSource.AMBIENT, 2.0f, 1.0f);
             }
         }
-        return super.onItemUseFinish(stack, worldIn, entityLiving);
+        return super.finishUsingItem(stack, worldIn, entityLiving);
     }
 }

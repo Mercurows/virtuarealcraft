@@ -18,7 +18,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import top.yora.virtuarealcraft.Utils;
-import top.yora.virtuarealcraft.group.ModGroup;
+import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.models.ShadowHoodModel;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
@@ -28,7 +28,7 @@ import java.util.List;
 
 public class ShadowHood extends ArmorItem {
     public ShadowHood() {
-        super(ArmorMaterials.LEATHER, EquipmentSlot.HEAD, new Properties().durability(147).group(ModGroup.itemgroup));
+        super(ArmorMaterials.LEATHER, EquipmentSlot.HEAD, new Properties().durability(147).group(GroupRegistry.itemgroup));
     }
 
     @OnlyIn(Dist.CLIENT)

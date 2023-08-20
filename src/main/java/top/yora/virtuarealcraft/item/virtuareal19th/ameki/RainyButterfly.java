@@ -28,7 +28,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import top.yora.virtuarealcraft.Utils;
-import top.yora.virtuarealcraft.group.ModGroup;
+import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.init.ItemRegistry;
 import top.yora.virtuarealcraft.tool.ItemNBTTool;
 import top.yora.virtuarealcraft.tool.Livers;
@@ -46,7 +46,7 @@ public class RainyButterfly extends SwordItem {
     public static final String TAG_RAINY_BUTTERFLY_RAIN = "rainy_butterfly_rain";
 
     public RainyButterfly(){
-        super(Tiers.IRON, -2, -2.1f, new Properties().group(ModGroup.itemgroup).durability(1206).rarity(Rarity.EPIC));
+        super(Tiers.IRON, -2, -2.1f, new Properties().group(GroupRegistry.itemgroup).durability(1206).rarity(Rarity.EPIC));
     }
 
     @OnlyIn(Dist.CLIENT)

@@ -17,7 +17,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AirBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import top.yora.virtuarealcraft.group.ModGroup;
+import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 
@@ -27,7 +27,7 @@ import java.util.Random;
 
 public class Magnifier extends SwordItem {
     public Magnifier() {
-        super(Tiers.GOLD, 4, -3.0f, new Properties().group(ModGroup.itemgroup).defaultMaxDamage(114));
+        super(Tiers.GOLD, 4, -3.0f, new Properties().group(GroupRegistry.itemgroup).defaultMaxDamage(114));
     }
 
     @OnlyIn(Dist.CLIENT)

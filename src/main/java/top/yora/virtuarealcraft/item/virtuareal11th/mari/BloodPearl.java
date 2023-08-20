@@ -23,7 +23,7 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.yora.virtuarealcraft.Utils;
-import top.yora.virtuarealcraft.group.ModGroup;
+import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.init.ItemRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
@@ -35,7 +35,7 @@ import java.util.UUID;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class BloodPearl extends Item {
     public BloodPearl() {
-        super(new Properties().group(ModGroup.itemgroup).maxStackSize(1));
+        super(new Properties().group(GroupRegistry.itemgroup).maxStackSize(1));
     }
 
     @OnlyIn(Dist.CLIENT)

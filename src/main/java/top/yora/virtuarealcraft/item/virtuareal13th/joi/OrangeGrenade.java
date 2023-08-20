@@ -13,7 +13,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import top.yora.virtuarealcraft.group.ModGroup;
+import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 
@@ -24,7 +24,7 @@ public class OrangeGrenade extends Item {
     private static final Food food = new Food.Builder().setAlwaysEdible().hunger(4).saturation(0.2f).build();
 
     public OrangeGrenade() {
-        super(new Properties().group(ModGroup.itemgroup).food(food));
+        super(new Properties().group(GroupRegistry.itemgroup).food(food));
     }
 
     @OnlyIn(Dist.CLIENT)

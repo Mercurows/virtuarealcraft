@@ -16,7 +16,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import top.yora.virtuarealcraft.entity.KuyaEntity;
-import top.yora.virtuarealcraft.group.ModGroup;
+import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 
@@ -25,7 +25,7 @@ import java.util.List;
 
 public class Kuya extends Item {
     public Kuya(){
-        super(new Properties().group(ModGroup.itemgroup).rarity(Rarity.UNCOMMON));
+        super(new Properties().group(GroupRegistry.itemgroup).rarity(Rarity.UNCOMMON));
     }
 
     @OnlyIn(Dist.CLIENT)

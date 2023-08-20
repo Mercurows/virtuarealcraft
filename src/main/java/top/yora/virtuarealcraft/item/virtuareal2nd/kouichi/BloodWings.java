@@ -11,7 +11,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import top.yora.virtuarealcraft.group.ModGroup;
+import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 
@@ -20,7 +20,7 @@ import java.util.List;
 
 public class BloodWings extends ArmorItem {
     public BloodWings() {
-        super(ArmorMaterials.IRON, EquipmentSlot.CHEST, new Properties().tab(ModGroup.itemgroup));
+        super(ArmorMaterials.IRON, EquipmentSlot.CHEST, new Properties().tab(GroupRegistry.itemgroup));
     }
 
     @OnlyIn(Dist.CLIENT)

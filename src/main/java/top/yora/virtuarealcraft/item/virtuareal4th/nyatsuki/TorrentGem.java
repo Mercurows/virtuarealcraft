@@ -28,7 +28,7 @@ import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import top.yora.virtuarealcraft.group.ModGroup;
+import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 
@@ -39,7 +39,7 @@ import static net.minecraft.block.CauldronBlock.LEVEL;
 
 public class TorrentGem extends Item {
     public TorrentGem() {
-        super(new Properties().group(ModGroup.itemgroup).durability(99).rarity(Rarity.RARE));
+        super(new Properties().group(GroupRegistry.itemgroup).durability(99).rarity(Rarity.RARE));
     }
 
     @OnlyIn(Dist.CLIENT)
