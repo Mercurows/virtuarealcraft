@@ -1,19 +1,19 @@
 package top.yora.virtuarealcraft.item.virtuareal4th.waku;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.ChatFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.init.ItemRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
@@ -37,12 +37,12 @@ public class WeatherGem extends Item {
     }
 
     @Override
-    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+    public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
         return repair.getItem() == Items.HONEYCOMB;
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(Level worldIn, Player playerIn, InteractionHand handIn) {
+    public @NotNull InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
         boolean flag = false;
 
         ItemStack itemStack = playerIn.getItemInHand(handIn);
@@ -50,7 +50,7 @@ public class WeatherGem extends Item {
             if (!worldIn.isClientSide) {
                 ItemStack off = playerIn.getMainHandItem();
                 if (off.isEmpty()) {
-                    return new ActionResult<>(ActionResultType.FAIL, itemStack);
+                    return new InteractionResultHolder<>(InteractionResult.FAIL, itemStack);
                 } else {
                     if (off.getItem() == Items.TORCH) {
                         off.shrink(1);
@@ -78,8 +78,8 @@ public class WeatherGem extends Item {
                         flag = true;
                     }
 
-                    if(flag){
-                        return new ActionResult<>(ActionResultType.SUCCESS, itemStack);
+                    if (flag) {
+                        return new InteractionResultHolder<>(InteractionResult.SUCCESS, itemStack);
                     }
                 }
             }
@@ -90,13 +90,13 @@ public class WeatherGem extends Item {
                     flag = true;
                 }
 
-                if(flag) {
+                if (flag) {
                     Minecraft.getInstance().gameRenderer.displayItemActivation(new ItemStack(ItemRegistry.WEATHER_GEM.get()));
                 }
             }
 
         }
 
-        return new ActionResult<>(ActionResultType.FAIL, itemStack);
+        return new InteractionResultHolder<>(InteractionResult.FAIL, itemStack);
     }
 }

@@ -3,8 +3,8 @@ package top.yora.virtuarealcraft.item.virtuareal11th.chiyuu;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.util.ActionResult;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
@@ -37,24 +37,24 @@ public class GhostCloak extends Item {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(Level worldIn, Player playerIn, InteractionHand handIn) {
+    public InteractionResultHolder<ItemStack> onItemRightClick(Level worldIn, Player playerIn, InteractionHand handIn) {
         ItemStack stack = playerIn.getItemInHand(handIn);
 
         if (!worldIn.isClientSide) {
-            playerIn.addPotionEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 200, 0, false, false));
-            playerIn.addPotionEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 200, 1, false, false));
-            playerIn.addPotionEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200, 1, false, false));
+            playerIn.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 200, 0, false, false));
+            playerIn.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 200, 1, false, false));
+            playerIn.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200, 1, false, false));
 
             playerIn.getCooldowns().addCooldown(stack.getItem(), 400);
 
             stack.damageItem(1, playerIn, player -> player.sendBreakAnimation(handIn));
         }
 
-        return ActionResult.func_233538_a_(stack, worldIn.isClientSide);
+        return InteractionResultHolder.func_233538_a_(stack, worldIn.isClientSide);
     }
 
     @Override
-    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+    public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
         return repair.getItem() == Items.LEATHER;
     }
 

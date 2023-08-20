@@ -4,8 +4,8 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.item.Food;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.util.ActionResult;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -13,6 +13,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
@@ -38,16 +39,16 @@ public class OrangeGrenade extends Item {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(Level worldIn, Player playerIn, InteractionHand handIn) {
+    public @NotNull InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
         ItemStack itemstack = playerIn.getItemInHand(handIn);
         if (playerIn.isShiftKeyDown()) {
             playerIn.sendSystemMessage(Component.literal("丢橘子"), true);
 
             itemstack.shrink(1);
-            return ActionResult.resultSuccess(itemstack);
-        }else {
+            return InteractionResultHolder.success(itemstack);
+        } else {
             playerIn.setActiveHand(handIn);
-            return ActionResult.resultConsume(itemstack);
+            return InteractionResultHolder.success(itemstack);
         }
     }
 

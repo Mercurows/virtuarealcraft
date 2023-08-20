@@ -1,14 +1,13 @@
 package top.yora.virtuarealcraft.item.virtuareal4th.nyatsuki;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.block.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
-import net.minecraft.ChatFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -19,6 +18,7 @@ import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Strider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CauldronBlock;
@@ -28,6 +28,7 @@ import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
@@ -51,14 +52,13 @@ public class TorrentGem extends Item {
     }
 
     @Override
-    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+    public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
         return repair.getItem() == Items.DIAMOND;
     }
 
     @Override
     public void inventoryTick(ItemStack stack, Level worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-        if (!worldIn.isClientSide && entityIn instanceof Player) {
-            Player player = (Player) entityIn;
+        if (!worldIn.isClientSide && entityIn instanceof Player player) {
             if (isSelected) {
                 player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 40, 0, false, false));
             }
@@ -85,11 +85,11 @@ public class TorrentGem extends Item {
     }
 
     @Override
-    public ActionResultType onItemUse(ItemUseContext context) {
-        Level world = context.getWorld();
-        BlockPos pos = context.getPos();
+    public @NotNull InteractionResult useOn(UseOnContext context) {
+        Level world = context.getLevel();
+        BlockPos pos = context.getClickedPos();
         Player player = context.getPlayer();
-        ItemStack stack = context.getItem();
+        ItemStack stack = context.getItemInHand();
         InteractionHand hand = context.getHand();
 
         if (!world.isClientSide && player != null) {
@@ -100,7 +100,7 @@ public class TorrentGem extends Item {
                 world.setBlockState(pos.add(0, 1, 0), Blocks.OBSIDIAN.defaultBlockState(), 3);
                 stack.damageItem(1, player, p -> p.sendBreakAnimation(hand));
 
-                return ActionResultType.SUCCESS;
+                return InteractionResult.SUCCESS;
             }
 
             //这段没有Codeium我就死了
@@ -141,18 +141,18 @@ public class TorrentGem extends Item {
 
                 stack.damageItem(1, player, p -> p.sendBreakAnimation(hand));
 
-                return ActionResultType.SUCCESS;
+                return InteractionResult.SUCCESS;
             } else if (state.getBlock() instanceof CauldronBlock) {
                 if (world.getBlockState(pos).get(LEVEL) == 3) {
-                    return ActionResultType.FAIL;
+                    return InteractionResult.FAIL;
                 }
 
                 world.setBlockState(pos, state.with(LEVEL, 3), 2);
                 stack.damageItem(1, player, p -> p.sendBreakAnimation(hand));
 
-                return ActionResultType.SUCCESS;
+                return InteractionResult.SUCCESS;
             }
         }
-        return super.onItemUse(context);
+        return super.useOn(context);
     }
 }

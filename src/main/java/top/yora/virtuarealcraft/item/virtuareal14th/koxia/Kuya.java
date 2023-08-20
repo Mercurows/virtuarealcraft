@@ -1,20 +1,17 @@
 package top.yora.virtuarealcraft.item.virtuareal14th.koxia;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.item.UseAction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.util.ActionResult;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 import top.yora.virtuarealcraft.entity.KuyaEntity;
 import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
@@ -24,7 +21,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class Kuya extends Item {
-    public Kuya(){
+    public Kuya() {
         super(new Properties().group(GroupRegistry.itemgroup).rarity(Rarity.UNCOMMON));
     }
 
@@ -38,22 +35,21 @@ public class Kuya extends Item {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(Level worldIn, Player playerIn, InteractionHand handIn) {
+    public @NotNull InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
         ItemStack stack = playerIn.getItemInHand(handIn);
         playerIn.setActiveHand(handIn);
-        return ActionResult.resultConsume(stack);
+        return InteractionResultHolder.consume(stack);
     }
 
     @Override
-    public UseAction getUseAction(ItemStack stack) {
-        return UseAction.SPEAR;
+    public @NotNull UseAnim getUseAnimation(@NotNull ItemStack stack) {
+        return UseAnim.SPEAR;
     }
 
     @Override
-    public void onPlayerStoppedUsing(ItemStack stack, Level worldIn, LivingEntity entityLiving, int timeLeft) {
+    public void releaseUsing(ItemStack stack, Level worldIn, LivingEntity entityLiving, int timeLeft) {
         if (!worldIn.isClientSide) {
-            if (entityLiving instanceof Player) {
-                Player player = (Player) entityLiving;
+            if (entityLiving instanceof Player player) {
 
                 KuyaEntity kuyaEntity = new KuyaEntity(worldIn, player);
                 int usingTime = this.getUseDuration(stack) - timeLeft;
@@ -63,7 +59,7 @@ public class Kuya extends Item {
                 kuyaEntity.func_234612_a_(player, player.rotationPitch, player.rotationYaw, 0.0f, power, 0.0f);
                 worldIn.addFreshEntity(kuyaEntity);
 
-                if(!player.isCreative()) {
+                if (!player.isCreative()) {
                     stack.shrink(1);
                 }
 
