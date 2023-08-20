@@ -3,9 +3,10 @@ package top.yora.virtuarealcraft.item.virtuareal4th.nyatsuki;
 import net.minecraft.block.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.ChatFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -44,7 +45,7 @@ public class TorrentGem extends Item {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        tooltip.add(new TranslationTextComponent("des.virtuarealcraft.torrent_gem").mergeStyle(TextFormatting.GRAY));
+        tooltip.add(Component.translatable("des.virtuarealcraft.torrent_gem").setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
 
         TooltipTool.addLiverInfo(tooltip, Livers.NYATSUKI);
     }

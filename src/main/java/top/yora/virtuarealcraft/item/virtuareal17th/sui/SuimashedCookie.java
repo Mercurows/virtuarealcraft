@@ -1,7 +1,9 @@
 package top.yora.virtuarealcraft.item.virtuareal17th.sui;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.item.Food;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.util.text.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -26,7 +28,7 @@ public class SuimashedCookie extends Item {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        tooltip.add((new TranslationTextComponent("des.virtuarealcraft.suimashed_cookie")).mergeStyle(TextFormatting.GRAY));
+        tooltip.add((Component.translatable("des.virtuarealcraft.suimashed_cookie")).setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
 
         TooltipTool.addLiverInfo(tooltip, Livers.SUI);
     }

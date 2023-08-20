@@ -1,11 +1,10 @@
 package top.yora.virtuarealcraft.item.virtuareal13th.joi;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.item.Food;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -32,8 +31,8 @@ public class OrangeGrenade extends Item {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
         TooltipTool.addDevelopingText(tooltip);
-        tooltip.add(new TranslationTextComponent("des.virtuarealcraft.orange_grenade_1").mergeStyle(TextFormatting.GRAY));
-        tooltip.add(new TranslationTextComponent("des.virtuarealcraft.orange_grenade_2").mergeStyle(TextFormatting.GRAY).mergeStyle(TextFormatting.ITALIC));
+        tooltip.add(Component.translatable("des.virtuarealcraft.orange_grenade_1").setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
+        tooltip.add(Component.translatable("des.virtuarealcraft.orange_grenade_2").setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)).setStyle(Style.EMPTY.withColor(ChatFormatting.ITALIC)));
 
         TooltipTool.addLiverInfo(tooltip, Livers.JOI);
     }
@@ -42,7 +41,7 @@ public class OrangeGrenade extends Item {
     public ActionResult<ItemStack> onItemRightClick(Level worldIn, Player playerIn, InteractionHand handIn) {
         ItemStack itemstack = playerIn.getItemInHand(handIn);
         if (playerIn.isShiftKeyDown()) {
-            playerIn.sendSystemMessage(new StringTextComponent("丢橘子"), true);
+            playerIn.sendSystemMessage(Component.literal("丢橘子"), true);
 
             itemstack.shrink(1);
             return ActionResult.resultSuccess(itemstack);

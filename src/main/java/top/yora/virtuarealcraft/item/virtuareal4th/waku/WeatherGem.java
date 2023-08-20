@@ -2,10 +2,11 @@ package top.yora.virtuarealcraft.item.virtuareal4th.waku;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.ChatFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
@@ -29,8 +30,8 @@ public class WeatherGem extends Item {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        tooltip.add(new TranslationTextComponent("des.virtuarealcraft.weather_gem.func").mergeStyle(TextFormatting.AQUA));
-        tooltip.add(new TranslationTextComponent("des.virtuarealcraft.weather_gem").mergeStyle(TextFormatting.GRAY));
+        tooltip.add(Component.translatable("des.virtuarealcraft.weather_gem.func").setStyle(Style.EMPTY.withColor(ChatFormatting.AQUA)));
+        tooltip.add(Component.translatable("des.virtuarealcraft.weather_gem").setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
 
         TooltipTool.addLiverInfo(tooltip, Livers.WAKU);
     }

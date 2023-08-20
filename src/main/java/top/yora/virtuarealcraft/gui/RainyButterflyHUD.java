@@ -20,7 +20,7 @@ public class RainyButterflyHUD extends AbstractGui {
     private final boolean rain;
 
     public RainyButterflyHUD(PoseStack matrixStack, ItemStack stack, boolean rain) {
-        this.PoseStack = matrixStack;
+        this.matrixStack = matrixStack;
         this.stack = stack;
         this.rain = rain;
     }

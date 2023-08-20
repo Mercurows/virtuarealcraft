@@ -1,10 +1,10 @@
 package top.yora.virtuarealcraft.item.virtuareal5th.miki;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.Style;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -32,8 +32,8 @@ public class MikiTail extends ArmorItem {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
         TooltipTool.addDevelopingText(tooltip);
-        tooltip.add(new TranslationTextComponent("des.virtuarealcraft.miki_tail_1").mergeStyle(TextFormatting.GRAY).mergeStyle(TextFormatting.ITALIC));
-        tooltip.add(new TranslationTextComponent("des.virtuarealcraft.miki_tail_2").mergeStyle(TextFormatting.GRAY));
+        tooltip.add(Component.translatable("des.virtuarealcraft.miki_tail_1").setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)).setStyle(Style.EMPTY.withColor(ChatFormatting.ITALIC)));
+        tooltip.add(Component.translatable("des.virtuarealcraft.miki_tail_2").setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
 
         TooltipTool.addLiverInfo(tooltip, Livers.MIKI);
     }

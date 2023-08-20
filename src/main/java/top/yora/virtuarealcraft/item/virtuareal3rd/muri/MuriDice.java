@@ -1,10 +1,9 @@
 package top.yora.virtuarealcraft.item.virtuareal3rd.muri;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.Style;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -32,7 +31,7 @@ public class MuriDice extends Item {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        tooltip.add(new TranslationTextComponent("des.virtuarealcraft.muri_dice").mergeStyle(TextFormatting.GRAY));
+        tooltip.add(Component.translatable("des.virtuarealcraft.muri_dice").setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
 
         TooltipTool.addLiverInfo(tooltip, Livers.MURI);
     }
@@ -47,7 +46,7 @@ public class MuriDice extends Item {
                 if (!worldIn.isClientSide) {
                     int rand = (int)(Math.random() * 6 + 1);
 
-                    player.sendSystemMessage(new StringTextComponent("1D6 = " + rand).mergeStyle(TextFormatting.BOLD), true);
+                    player.sendSystemMessage(Component.literal("1D6 = " + rand).setStyle(Style.EMPTY.withColor(ChatFormatting.BOLD)), true);
 
                     if (rand > 3) {
                         player.addEffect(new MobEffectInstance(MobEffects.NAUSEA, 200, 0));

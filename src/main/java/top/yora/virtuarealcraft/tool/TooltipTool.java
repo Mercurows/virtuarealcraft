@@ -1,8 +1,10 @@
 package top.yora.virtuarealcraft.tool;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.text.*;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
 
 import java.util.List;
 
@@ -14,13 +16,13 @@ public class TooltipTool {
     }
 
     public static void addDevelopingText(List<Component> tooltip) {
-        tooltip.add(new StringTextComponent("本物品还在开发中").mergeStyle(TextFormatting.BOLD).mergeStyle(Style.EMPTY.setColor(Color.fromHex("#ADDBFF"))));
+        tooltip.add(Component.literal("本物品还在开发中").setStyle(Style.EMPTY.withBold(true).withColor(TextColor.parseColor("#ADDBFF"))));
     }
 
     public static void addLiverInfo(List<Component> tooltip, Livers liver) {
-        addHideText(tooltip, new StringTextComponent(""));
-        addHideText(tooltip, new TranslationTextComponent("liver.virtuarealcraft.liver").mergeStyle(TextFormatting.WHITE));
-        addHideText(tooltip, new TranslationTextComponent("liver.virtuarealcraft." + liver.getName()).mergeStyle(Style.EMPTY.setColor(Color.fromHex(liver.getColor()))));
+        addHideText(tooltip, Component.literal(""));
+        addHideText(tooltip, Component.translatable("liver.virtuarealcraft.liver").setStyle(Style.EMPTY.withColor(ChatFormatting.WHITE)));
+        addHideText(tooltip, Component.translatable("liver.virtuarealcraft." + liver.getName()).setStyle(Style.EMPTY.withColor(TextColor.parseColor(liver.getColor()))));
         String gen = liver.getGen();
         String bgColor = "#FFFFFF";
         switch (gen) {
@@ -83,10 +85,12 @@ public class TooltipTool {
                 break;
         }
         if (!liver.isActive()) {
-            addHideText(tooltip, new TranslationTextComponent("des.virtuarealcraft.group." + gen).mergeStyle(Style.EMPTY.setColor(Color.fromHex(bgColor))).
-                    mergeStyle(TextFormatting.BOLD).mergeStyle(TextFormatting.STRIKETHROUGH));
+            addHideText(tooltip, Component.translatable("des.virtuarealcraft.group." + gen)
+                    .setStyle(Style.EMPTY.withColor(TextColor.parseColor(bgColor))
+                            .withBold(true)
+                            .withStrikethrough(true)));
         } else {
-            addHideText(tooltip, new TranslationTextComponent("des.virtuarealcraft.group." + gen).mergeStyle(Style.EMPTY.setColor(Color.fromHex(bgColor))).mergeStyle(TextFormatting.BOLD));
+            addHideText(tooltip, Component.translatable("des.virtuarealcraft.group." + gen).setStyle(Style.EMPTY.withColor(TextColor.parseColor(bgColor)).withBold(true)));
         }
     }
 

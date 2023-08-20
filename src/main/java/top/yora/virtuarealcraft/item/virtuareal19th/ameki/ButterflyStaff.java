@@ -1,9 +1,9 @@
 package top.yora.virtuarealcraft.item.virtuareal19th.ameki;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.item.ItemTier;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.TooltipFlag;
@@ -27,7 +27,7 @@ public class ButterflyStaff extends SwordItem {
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
         TooltipTool.addDevelopingText(tooltip);
 
-        tooltip.add(new TranslationTextComponent("des.virtuarealcraft.butterfly_staff").mergeStyle(TextFormatting.GRAY));
+        tooltip.add(Component.translatable("des.virtuarealcraft.butterfly_staff").setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
 
         TooltipTool.addLiverInfo(tooltip, Livers.AMEKI);
     }

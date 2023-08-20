@@ -1,9 +1,9 @@
 package top.yora.virtuarealcraft.item.virtuareal9th.chiharu;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.item.Food;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.Style;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Item;
@@ -31,7 +31,7 @@ public class LittleSpringRoll extends Item {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        tooltip.add((new TranslationTextComponent("des.virtuarealcraft.little_spring_roll")).mergeStyle(TextFormatting.GRAY));
+        tooltip.add((Component.translatable("des.virtuarealcraft.little_spring_roll")).setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
 
         TooltipTool.addLiverInfo(tooltip, Livers.CHIHARU);
     }

@@ -1,9 +1,9 @@
 package top.yora.virtuarealcraft.item.virtuareal10th.yua;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.block.SnowBlock;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.Style;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -33,7 +33,7 @@ public class FrozenBoots extends ArmorItem {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        tooltip.add(new TranslationTextComponent("des.virtuarealcraft.frozen_boots").mergeStyle(TextFormatting.GRAY));
+        tooltip.add(Component.translatable("des.virtuarealcraft.frozen_boots").setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
 
         TooltipTool.addLiverInfo(tooltip, Livers.YUA);
     }
@@ -44,11 +44,11 @@ public class FrozenBoots extends ArmorItem {
             BlockState state = world.getBlockState(player.getPosition().add(0, -1, 0));
             BlockState state1 = world.getBlockState(player.getPosition());
             if(state.getBlock() instanceof IceBlock || state.getBlock() == Blocks.PACKED_ICE || state.getBlock() == Blocks.BLUE_ICE){
-                player.addEffect(new MobEffectInstance(MobEffects.SPEED, 20, 2, false, false));
+                player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20, 2, false, false));
             }
             if(state1.getBlock() instanceof SnowBlock || state.getBlock() == Blocks.SNOW_BLOCK){
                 if (player.isShiftKeyDown()) {
-                    player.addEffect(new MobEffectInstance(MobEffects.JUMP_BOOST, 20, 1, false, false));
+                    player.addEffect(new MobEffectInstance(MobEffects.JUMP, 20, 1, false, false));
                 }
             }
         }

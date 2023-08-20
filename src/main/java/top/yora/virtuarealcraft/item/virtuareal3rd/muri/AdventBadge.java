@@ -1,15 +1,15 @@
 package top.yora.virtuarealcraft.item.virtuareal3rd.muri;
 
-import net.minecraft.item.Items;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
@@ -30,7 +30,7 @@ public class AdventBadge extends Item {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        tooltip.add(new TranslationTextComponent("des.virtuarealcraft.advent_badge").mergeStyle(TextFormatting.GRAY).mergeStyle(TextFormatting.ITALIC));
+        tooltip.add(Component.translatable("des.virtuarealcraft.advent_badge").setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)).setStyle(Style.EMPTY.withColor(ChatFormatting.ITALIC)));
 
         TooltipTool.addLiverInfo(tooltip, Livers.MURI);
     }
@@ -46,9 +46,9 @@ public class AdventBadge extends Item {
             stack.damageItem(1, playerIn, p -> p.sendBreakAnimation(handIn));
 
             for (Player player : worldIn.getPlayers()) {
-                if(player != playerIn){
-                    player.sendSystemMessage(new TranslationTextComponent("des.virtuarealcraft.advent_badge.warn")
-                            .mergeStyle(TextFormatting.DARK_PURPLE).mergeStyle(TextFormatting.BOLD), true);
+                if (player != playerIn) {
+                    player.sendSystemMessage(Component.translatable("des.virtuarealcraft.advent_badge.warn")
+                            .setStyle(Style.EMPTY.withColor(ChatFormatting.DARK_PURPLE).withBold(true)), true);
                     player.addItem(new ItemStack(ItemRegistry.MURI_DICE.get()));
                 }
             }
