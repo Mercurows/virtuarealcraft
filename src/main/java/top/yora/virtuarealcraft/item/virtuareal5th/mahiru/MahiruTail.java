@@ -2,13 +2,13 @@ package top.yora.virtuarealcraft.item.virtuareal5th.mahiru;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.item.ArmorMaterial;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -25,7 +25,7 @@ import java.util.List;
 
 public class MahiruTail extends ArmorItem {
     public MahiruTail() {
-        super(ArmorMaterial.LEATHER, EquipmentSlot.LEGS, new Properties().group(ModGroup.itemgroup));
+        super(ArmorMaterials.LEATHER, EquipmentSlot.LEGS, new Properties().group(ModGroup.itemgroup));
     }
 
     @OnlyIn(Dist.CLIENT)

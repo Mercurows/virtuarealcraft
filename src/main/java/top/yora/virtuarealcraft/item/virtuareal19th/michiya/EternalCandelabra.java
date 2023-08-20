@@ -1,11 +1,11 @@
 package top.yora.virtuarealcraft.item.virtuareal19th.michiya;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.item.ItemTier;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
@@ -19,7 +19,7 @@ import java.util.List;
 
 public class EternalCandelabra extends SwordItem {
     public EternalCandelabra() {
-        super(ItemTier.IRON, 4, -2.5f, new Properties().durability(1118).group(ModGroup.itemgroup));
+        super(Tiers.IRON, 4, -2.5f, new Properties().durability(1118).group(ModGroup.itemgroup));
     }
 
     @OnlyIn(Dist.CLIENT)

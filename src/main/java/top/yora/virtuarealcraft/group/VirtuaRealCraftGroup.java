@@ -1,5 +1,6 @@
 package top.yora.virtuarealcraft.group;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import top.yora.virtuarealcraft.init.ItemRegistry;
@@ -8,7 +9,9 @@ import javax.annotation.Nonnull;
 
 public class VirtuaRealCraftGroup extends CreativeModeTab {
     public VirtuaRealCraftGroup() {
-        super("VirtuaRealCraft Items");
+        super(CreativeModeTab.builder()
+                .title(Component.literal("VirtuaRealCraft Items"))
+        );
     }
 
     @Override

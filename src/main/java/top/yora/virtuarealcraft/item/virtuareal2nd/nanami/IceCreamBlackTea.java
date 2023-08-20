@@ -15,6 +15,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 import top.yora.virtuarealcraft.group.ModGroup;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
@@ -41,7 +42,7 @@ public class IceCreamBlackTea extends Item {
     }
 
     @Override
-    public SoundEvent getEatSound() {
+    public @NotNull SoundEvent getEatingSound() {
         return SoundEvents.GENERIC_DRINK;
     }
 

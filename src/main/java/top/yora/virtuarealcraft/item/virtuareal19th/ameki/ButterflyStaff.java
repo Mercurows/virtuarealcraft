@@ -1,7 +1,7 @@
 package top.yora.virtuarealcraft.item.virtuareal19th.ameki;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.item.ItemTier;
+import net.minecraft.item.Tiers;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.ItemStack;
@@ -19,7 +19,7 @@ import java.util.List;
 
 public class ButterflyStaff extends SwordItem {
     public ButterflyStaff() {
-        super(ItemTier.IRON, 3, -2.0f, new Properties().durability(261).group(ModGroup.itemgroup));
+        super(Tiers.IRON, 3, -2.0f, new Properties().durability(261).group(ModGroup.itemgroup));
     }
 
     @OnlyIn(Dist.CLIENT)

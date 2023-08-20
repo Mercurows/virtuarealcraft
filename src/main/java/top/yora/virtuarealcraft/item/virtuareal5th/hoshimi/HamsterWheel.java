@@ -4,7 +4,6 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.item.ArmorMaterial;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -16,10 +15,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -39,7 +35,7 @@ public class HamsterWheel extends ArmorItem {
     public static final String TAG_SPIRIT = "spiriting";
 
     public HamsterWheel() {
-        super(ArmorMaterial.IRON, EquipmentSlot.CHEST, new Item.Properties().group(ModGroup.itemgroup).durability(515));
+        super(ArmorMaterials.IRON, EquipmentSlot.CHEST, new Item.Properties().group(ModGroup.itemgroup).durability(515));
     }
 
     @OnlyIn(Dist.CLIENT)

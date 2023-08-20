@@ -14,9 +14,9 @@ import top.yora.virtuarealcraft.init.ItemRegistry;
 public class HudClientEvent {
     @SubscribeEvent
     public static void onRainyButterflyHudRender(RenderGuiOverlayEvent.Post event) {
-        if (event.getType() != RenderGuiOverlayEvent.ElementType.ALL) {
-            return;
-        }
+//        if (event.getType() != RenderGuiOverlayEvent.ElementType.ALL) {
+//            return;
+//        }
         if (Minecraft.getInstance().player == null) {
             return;
         }

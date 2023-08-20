@@ -2,7 +2,6 @@ package top.yora.virtuarealcraft.item.virtuareal2nd.nanami;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.item.ArmorMaterial;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -11,10 +10,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -29,7 +25,7 @@ import java.util.List;
 
 public class SharkTail extends ArmorItem {
     public SharkTail() {
-        super(ArmorMaterial.IRON, EquipmentSlot.LEGS, new Properties().group(ModGroup.itemgroup).rarity(Rarity.UNCOMMON).durability(517));
+        super(ArmorMaterials.IRON, EquipmentSlot.LEGS, new Properties().group(ModGroup.itemgroup).rarity(Rarity.UNCOMMON).durability(517));
     }
 
     @OnlyIn(Dist.CLIENT)

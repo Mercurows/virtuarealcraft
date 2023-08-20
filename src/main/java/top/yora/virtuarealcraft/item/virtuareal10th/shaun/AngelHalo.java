@@ -1,11 +1,11 @@
 package top.yora.virtuarealcraft.item.virtuareal10th.shaun;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.item.ArmorMaterial;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -20,7 +20,7 @@ import java.util.List;
 
 public class AngelHalo extends ArmorItem {
     public AngelHalo() {
-        super(ArmorMaterial.IRON, EquipmentSlot.HEAD, new Properties().durability(303).group(ModGroup.itemgroup));
+        super(ArmorMaterials.IRON, EquipmentSlot.HEAD, new Properties().durability(303).group(ModGroup.itemgroup));
     }
 
     @OnlyIn(Dist.CLIENT)

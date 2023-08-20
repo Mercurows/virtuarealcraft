@@ -2,7 +2,6 @@ package top.yora.virtuarealcraft.item.virtuareal16th.girimi;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.item.ArmorMaterial;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -12,6 +11,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -28,7 +28,7 @@ import java.util.List;
 
 public class ShadowHood extends ArmorItem {
     public ShadowHood() {
-        super(ArmorMaterial.LEATHER, EquipmentSlot.HEAD, new Properties().durability(147).group(ModGroup.itemgroup));
+        super(ArmorMaterials.LEATHER, EquipmentSlot.HEAD, new Properties().durability(147).group(ModGroup.itemgroup));
     }
 
     @OnlyIn(Dist.CLIENT)
