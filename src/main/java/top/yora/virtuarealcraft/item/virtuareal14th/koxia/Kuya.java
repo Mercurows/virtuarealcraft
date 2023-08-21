@@ -13,7 +13,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import top.yora.virtuarealcraft.entity.KuyaEntity;
-import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 
@@ -56,7 +55,7 @@ public class Kuya extends Item {
 
                 float power = Math.min(usingTime / 30.0f, 3.5f);
 
-                kuyaEntity.shoot(player, player.rotationPitch, player.rotationYaw, 0.0f, power, 0.0f);
+                kuyaEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0f, power, 0.0f);
                 worldIn.addFreshEntity(kuyaEntity);
 
                 if (!player.isCreative()) {

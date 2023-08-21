@@ -3,13 +3,11 @@ package top.yora.virtuarealcraft.render;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
@@ -24,11 +22,11 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @OnlyIn(Dist.CLIENT)
 public class KuyaEntityRenderer extends EntityRenderer<KuyaEntity> {
     public static final ResourceLocation TEXTURE = new ResourceLocation(Utils.MOD_ID, "textures/entity/kuya_texture.png");
-    private final KuyaModel kuyaEntityEntityModel;
+    private final KuyaModel<KuyaEntity> kuyaEntityEntityModel;
 
     public KuyaEntityRenderer(EntityRendererProvider.Context manager) {
         super(manager);
-        kuyaEntityEntityModel = new KuyaModel(manager.bakeLayer(new ModelLayerLocation(new ModelResourceLocation(new ResourceLocation(Utils.MOD_ID, "kuya"), "main"), "main")));
+        kuyaEntityEntityModel = new KuyaModel<>(manager.bakeLayer(KuyaModel.LAYER_LOCATION));
     }
 
     @Override
