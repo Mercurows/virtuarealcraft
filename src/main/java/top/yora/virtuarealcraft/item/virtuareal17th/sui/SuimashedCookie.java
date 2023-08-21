@@ -1,17 +1,15 @@
 package top.yora.virtuarealcraft.item.virtuareal17th.sui;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.item.Food;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.util.text.*;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 
@@ -19,10 +17,10 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class SuimashedCookie extends Item {
-    private static final Food food = new Food.Builder().fastToEat().setAlwaysEdible().hunger(2).saturation(0.25f).build();
+    private static final FoodProperties food = new FoodProperties.Builder().fast().alwaysEat().nutrition(2).saturationMod(0.25f).build();
 
     public SuimashedCookie() {
-        super(new Properties().group(GroupRegistry.itemgroup).food(food));
+        super(new Properties().food(food));
     }
 
     @OnlyIn(Dist.CLIENT)

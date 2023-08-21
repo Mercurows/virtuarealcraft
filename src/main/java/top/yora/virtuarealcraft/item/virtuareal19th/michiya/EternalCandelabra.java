@@ -10,7 +10,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 
@@ -19,7 +18,7 @@ import java.util.List;
 
 public class EternalCandelabra extends SwordItem {
     public EternalCandelabra() {
-        super(Tiers.IRON, 4, -2.5f, new Properties().durability(1118).group(GroupRegistry.itemgroup));
+        super(Tiers.IRON, 4, -2.5f, new Properties().durability(1118));
     }
 
     @OnlyIn(Dist.CLIENT)

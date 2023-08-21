@@ -24,66 +24,28 @@ public class TooltipTool {
         addHideText(tooltip, Component.translatable("liver.virtuarealcraft.liver").setStyle(Style.EMPTY.withColor(ChatFormatting.WHITE)));
         addHideText(tooltip, Component.translatable("liver.virtuarealcraft." + liver.getName()).setStyle(Style.EMPTY.withColor(TextColor.parseColor(liver.getColor()))));
         String gen = liver.getGen();
-        String bgColor = "#FFFFFF";
-        switch (gen) {
-            case "1st":
-                bgColor = "#913837";
-                break;
-            case "2nd":
-                bgColor = "#E8DED3";
-                break;
-            case "3rd":
-                bgColor = "#E6F4FD";
-                break;
-            case "4th":
-                bgColor = "#6ECECF";
-                break;
-            case "5th":
-                bgColor = "#EE756B";
-                break;
-            case "6th":
-                bgColor = "#6CDA90";
-                break;
-            case "7th":
-                bgColor = "#EF9EF7";
-                break;
-            case "8th":
-                bgColor = "#D8D382";
-                break;
-            case "9th":
-                bgColor = "#AC8582";
-                break;
-            case "10th":
-                bgColor = "#C9EDD8";
-                break;
-            case "11th":
-                bgColor = "#C67B7D";
-                break;
-            case "12th":
-                bgColor = "#F9F3DE";
-                break;
-            case "13th":
-                bgColor = "#F7CDDB";
-                break;
-            case "14th":
-                bgColor = "#AA9EE1";
-                break;
-            case "15th":
-                bgColor = "#B77361";
-                break;
-            case "16th":
-                bgColor = "#8DB4E8";
-                break;
-            case "17th":
-                bgColor = "#C92F51";
-                break;
-            case "18th":
-                bgColor = "#FCF9F0";
-                break;
-            case "19th":
-                bgColor = "#F8BCA3";
-                break;
-        }
+        String bgColor = switch (gen) {
+            case "1st" -> "#913837";
+            case "2nd" -> "#E8DED3";
+            case "3rd" -> "#E6F4FD";
+            case "4th" -> "#6ECECF";
+            case "5th" -> "#EE756B";
+            case "6th" -> "#6CDA90";
+            case "7th" -> "#EF9EF7";
+            case "8th" -> "#D8D382";
+            case "9th" -> "#AC8582";
+            case "10th" -> "#C9EDD8";
+            case "11th" -> "#C67B7D";
+            case "12th" -> "#F9F3DE";
+            case "13th" -> "#F7CDDB";
+            case "14th" -> "#AA9EE1";
+            case "15th" -> "#B77361";
+            case "16th" -> "#8DB4E8";
+            case "17th" -> "#C92F51";
+            case "18th" -> "#FCF9F0";
+            case "19th" -> "#F8BCA3";
+            default -> "#FFFFFF";
+        };
         if (!liver.isActive()) {
             addHideText(tooltip, Component.translatable("des.virtuarealcraft.group." + gen)
                     .setStyle(Style.EMPTY.withColor(TextColor.parseColor(bgColor))

@@ -3,6 +3,7 @@ package top.yora.virtuarealcraft.item.virtuareal19th.ameki;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
@@ -30,7 +31,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import top.yora.virtuarealcraft.Utils;
-import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.init.ItemRegistry;
 import top.yora.virtuarealcraft.tool.ItemNBTTool;
 import top.yora.virtuarealcraft.tool.Livers;
@@ -62,7 +62,7 @@ public class RainyButterfly extends SwordItem {
     }
 
     @Override
-    public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         Level world = attacker.level();
         if (!world.isClientSide) {
             if(!ItemNBTTool.getBoolean(stack, TAG_RAINY_BUTTERFLY_OPEN, false)) {
@@ -77,11 +77,11 @@ public class RainyButterfly extends SwordItem {
                 }
             }
         }
-        return super.hitEntity(stack, target, attacker);
+        return super.hurtEnemy(stack, target, attacker);
     }
 
     @Override
-    public void onCreated(ItemStack stack, Level worldIn, Player playerIn) {
+    public void onCraftedBy(ItemStack stack, Level pLevel, Player pPlayer) {
         ItemNBTTool.setInt(stack, TAG_RAINY_BUTTERFLY_COUNT, 0);
         ItemNBTTool.setInt(stack, TAG_RAINY_BUTTERFLY_TIME, 0);
         ItemNBTTool.setBoolean(stack, TAG_RAINY_BUTTERFLY_OPEN, false);
@@ -91,9 +91,7 @@ public class RainyButterfly extends SwordItem {
     @Override
     public void inventoryTick(ItemStack stack, Level worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
         if (!worldIn.isClientSide) {
-            if (entityIn instanceof Player) {
-                Player player = (Player) entityIn;
-
+            if (entityIn instanceof Player player) {
                 boolean isMainhand = player.getMainHandItem() == stack;
                 boolean isOffHand = player.getMainHandItem() == stack;
 
@@ -155,7 +153,7 @@ public class RainyButterfly extends SwordItem {
                     Vec3 endPos = position.add(look.scale(4.0));
 
                     AABB box = new AABB(position, endPos);
-                    List<Entity> entities = worldIn.getEntitiesWithinAABB(Entity.class, box);
+                    List<Entity> entities = worldIn.getEntitiesOfClass(Entity.class, box);
 
                     for (Entity entity : entities) {
                         if (entity != playerIn && entity.isPushable()) {
@@ -183,8 +181,8 @@ public class RainyButterfly extends SwordItem {
     @SubscribeEvent
     public static void propertyOverrideRegistry(FMLClientSetupEvent event) {
         event.enqueueWork(() ->
-                ItemModelsProperties.registerProperty(ItemRegistry.RAINY_BUTTERFLY.get(), new ResourceLocation("open"),
-                        (stack, world, entity) -> ItemNBTTool.getBoolean(stack, TAG_RAINY_BUTTERFLY_OPEN, false) ? 1.0F : 0.0F)
+                ItemProperties.register(ItemRegistry.RAINY_BUTTERFLY.get(), new ResourceLocation("open"),
+                        (stack, level, entity, seed) -> ItemNBTTool.getBoolean(stack, TAG_RAINY_BUTTERFLY_OPEN, false) ? 1.0F : 0.0F)
         );
     }
 
