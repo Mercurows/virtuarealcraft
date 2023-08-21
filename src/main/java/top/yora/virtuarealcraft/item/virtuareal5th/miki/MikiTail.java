@@ -1,12 +1,10 @@
 package top.yora.virtuarealcraft.item.virtuareal5th.miki;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.ItemStack;
@@ -15,8 +13,6 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import top.yora.virtuarealcraft.Utils;
-import top.yora.virtuarealcraft.init.GroupRegistry;
-import top.yora.virtuarealcraft.models.MihiruTailModel;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 
@@ -25,7 +21,7 @@ import java.util.List;
 
 public class MikiTail extends ArmorItem {
     public MikiTail() {
-        super(ArmorMaterials.LEATHER, EquipmentSlot.LEGS, new Properties().group(GroupRegistry.itemgroup));
+        super(ArmorMaterials.LEATHER, Type.LEGGINGS, new Properties());
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -36,14 +32,6 @@ public class MikiTail extends ArmorItem {
         tooltip.add(Component.translatable("des.virtuarealcraft.miki_tail_2").setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
 
         TooltipTool.addLiverInfo(tooltip, Livers.MIKI);
-    }
-
-    @SuppressWarnings("unchecked")
-    @OnlyIn(Dist.CLIENT)
-    @Nullable
-    @Override
-    public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, A _default) {
-        return (A) new MihiruTailModel<>();
     }
 
     @Nullable
