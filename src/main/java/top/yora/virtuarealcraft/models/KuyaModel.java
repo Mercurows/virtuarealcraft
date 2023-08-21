@@ -5,22 +5,22 @@ package top.yora.virtuarealcraft.models;// Made with Blockbench 4.8.1
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
 import top.yora.virtuarealcraft.Utils;
 
 @SuppressWarnings("unused")
-public class KuyaModel<T extends Entity> extends EntityModel<T> {
+public class KuyaModel extends Model {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(Utils.MOD_ID, "kuya_model"), "main");
+	public static final ResourceLocation TEXTURE = new ResourceLocation(Utils.MOD_ID, "textures/entity/kuya_texture.png");
 	private final ModelPart main;
 
 	public KuyaModel(ModelPart root) {
+		super(RenderType::entitySolid);
 		this.main = root.getChild("main");
 	}
 
@@ -75,11 +75,6 @@ public class KuyaModel<T extends Entity> extends EntityModel<T> {
 		PartDefinition cube_r12 = bow.addOrReplaceChild("cube_r12", CubeListBuilder.create().texOffs(24, 26).addBox(-1.5F, -1.0F, -0.5F, 2.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.2296F, 0.1571F, 0.3293F, 0.0F, 0.0F, 0.3927F));
 
 		return LayerDefinition.create(meshdefinition, 32, 32);
-	}
-
-	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
 	}
 
 	@Override
