@@ -13,6 +13,6 @@ public class EntityRegistry {
 
     public static final RegistryObject<EntityType<KuyaEntity>> KUYA_ENTITY =
             ENTITY_TYPES.register("kuya",
-                    () -> EntityType.Builder.of(KuyaEntity::new, MobCategory.MISC).sized(0.3f, 0.3f).build("kuya"));
+                    () -> EntityType.Builder.<KuyaEntity>of(KuyaEntity::new, MobCategory.MISC).sized(0.3f, 0.3f).build("kuya"));
 
 }

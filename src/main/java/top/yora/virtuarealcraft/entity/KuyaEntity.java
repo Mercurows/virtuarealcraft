@@ -1,11 +1,8 @@
 package top.yora.virtuarealcraft.entity;
 
-import io.netty.buffer.Unpooled;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.IPacket;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -22,7 +19,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.fml.network.NetworkHooks;
 import top.yora.virtuarealcraft.init.EntityRegistry;
 import top.yora.virtuarealcraft.init.ItemRegistry;
 import top.yora.virtuarealcraft.init.SoundRegistry;
@@ -106,18 +102,6 @@ public class KuyaEntity extends ThrowableItemProjectile {
         this.setFuse(pCompound.getShort("Fuse"));
     }
 
-    @Override
-    public IPacket<?> createSpawnPacket() {
-        PacketBuffer pack = new PacketBuffer(Unpooled.buffer());
-        pack.writeDouble(getPosX());
-        pack.writeDouble(getPosY());
-        pack.writeDouble(getPosZ());
-        pack.writeInt(getEntityId());
-        pack.writeUniqueId(getUniqueID());
-
-        return NetworkHooks.getEntitySpawningPacket(this);
-    }
-
     public int getFuse() {
         return fuse;
     }
@@ -137,8 +121,8 @@ public class KuyaEntity extends ThrowableItemProjectile {
             return;
         }
 
-        ((ServerLevel) world).addParticle(ParticleTypes.EXPLOSION, entity.getX(), entity.getY(), entity.getZ(), 10, 1.0D, 0.0D, 0.0D, 0.1);
-        ((ServerLevel) world).addParticle(ParticleTypes.HEART, entity.getX(), entity.getY(), entity.getZ(), 30, 3.0D, 3.0D, 3.0D, 0.2);
+        ((ServerLevel) world).sendParticles(ParticleTypes.EXPLOSION, entity.getX(), entity.getY(), entity.getZ(), 10, 1.0D, 0.0D, 0.0D, 0.1);
+        ((ServerLevel) world).sendParticles(ParticleTypes.HEART, entity.getX(), entity.getY(), entity.getZ(), 30, 3.0D, 3.0D, 3.0D, 0.2);
 
         entity.playSound(SoundRegistry.HEAL.get(), 4.0F, 1.0f);
 
