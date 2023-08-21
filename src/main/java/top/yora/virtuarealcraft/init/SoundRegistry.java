@@ -10,8 +10,8 @@ import top.yora.virtuarealcraft.Utils;
 public class SoundRegistry {
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Utils.MOD_ID);
 
-    public static final RegistryObject<SoundEvent> NNCB = SOUNDS.register("nncb", () -> new SoundEvent(new ResourceLocation(Utils.MOD_ID, "nncb")));
-    public static final RegistryObject<SoundEvent> HEAL = SOUNDS.register("heal", () -> new SoundEvent(new ResourceLocation(Utils.MOD_ID, "heal")));
-    public static final RegistryObject<SoundEvent> HOSHIMI_MUA = SOUNDS.register("hoshimi_mua", () -> new SoundEvent(new ResourceLocation(Utils.MOD_ID, "hoshimi_mua")));
+    public static final RegistryObject<SoundEvent> NNCB = SOUNDS.register("nncb", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(Utils.MOD_ID, "nncb")));
+    public static final RegistryObject<SoundEvent> HEAL = SOUNDS.register("heal", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(Utils.MOD_ID, "heal")));
+    public static final RegistryObject<SoundEvent> HOSHIMI_MUA = SOUNDS.register("hoshimi_mua", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(Utils.MOD_ID, "hoshimi_mua")));
 
 }

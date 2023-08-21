@@ -3,7 +3,6 @@ package top.yora.virtuarealcraft.item.virtuareal6th.tabibito;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.util.DamageSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
@@ -16,7 +15,6 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
-import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 
@@ -25,7 +23,7 @@ import java.util.List;
 
 public class ReverseCard extends SwordItem {
     public ReverseCard() {
-        super(Tiers.WOOD, 1, -1.0f, new Properties().durability(610).setNoRepair().group(GroupRegistry.itemgroup));
+        super(Tiers.WOOD, 1, -1.0f, new Properties().durability(610).setNoRepair());
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -48,12 +46,12 @@ public class ReverseCard extends SwordItem {
     }
 
     @Override
-    public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (attacker instanceof Player player) {
             if(player.getHealth() <= 1.0f){
-                target.attackEntityFrom(DamageSource.causePlayerDamage(player), 100.0f);
+                target.hurt(target.level().damageSources().playerAttack(player), 100.0f);
             }
         }
-        return super.hitEntity(stack, target, attacker);
+        return super.hurtEnemy(stack, target, attacker);
     }
 }
