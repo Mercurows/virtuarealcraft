@@ -5,9 +5,8 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import top.yora.virtuarealcraft.init.ItemRegistry;
 
-public class VirtuaRealCraftGroup extends CreativeModeTab {
-    public VirtuaRealCraftGroup() {
-        super(CreativeModeTab.builder()
+public class ModGroup {
+    public static CreativeModeTab VRC_TAB = CreativeModeTab.builder()
                 .title(Component.translatable("itemGroup.VirtuaRealCraft Items"))
                 .icon(() -> new ItemStack(ItemRegistry.VRC_LOGO.get()))
                 .displayItems((param, output) ->
@@ -16,7 +15,5 @@ public class VirtuaRealCraftGroup extends CreativeModeTab {
                                 output.accept(registryObject.get());
                             }
                         }))
-        );
-    }
-
+                .build();
 }
