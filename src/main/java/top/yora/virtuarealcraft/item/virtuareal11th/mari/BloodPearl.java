@@ -73,7 +73,7 @@ public class BloodPearl extends Item {
         Entity entity = event.getSource().getDirectEntity();
 
         if (entity instanceof Player player && !entity.level().isClientSide) {
-            if (player.getMainHandItem().getItem() == ItemRegistry.BLOOD_PEARL.get()) {
+            if (player.getOffhandItem().getItem() == ItemRegistry.BLOOD_PEARL.get()) {
                 float damage = event.getAmount();
 
                 if(player.getHealth() < player.getMaxHealth() / 2){

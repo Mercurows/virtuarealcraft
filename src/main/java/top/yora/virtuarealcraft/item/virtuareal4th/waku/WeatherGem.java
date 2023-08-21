@@ -47,7 +47,7 @@ public class WeatherGem extends Item {
         ItemStack itemStack = playerIn.getItemInHand(handIn);
         if (handIn == InteractionHand.MAIN_HAND) {
             if (!worldIn.isClientSide) {
-                ItemStack off = playerIn.getMainHandItem();
+                ItemStack off = playerIn.getOffhandItem();
                 if (off.isEmpty()) {
                     return new InteractionResultHolder<>(InteractionResult.FAIL, itemStack);
                 } else {
@@ -84,7 +84,7 @@ public class WeatherGem extends Item {
             }
 
             if (worldIn.isClientSide) {
-                ItemStack off = playerIn.getMainHandItem();
+                ItemStack off = playerIn.getOffhandItem();
                 if (off.getItem() == Items.TORCH || off.getItem() == Items.WHEAT_SEEDS || off.getItem() == Items.GUNPOWDER) {
                     flag = true;
                 }
