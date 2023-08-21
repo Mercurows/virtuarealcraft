@@ -29,8 +29,8 @@ public class WeatherGem extends Item {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        tooltip.add(Component.translatable("des.virtuarealcraft.weather_gem.func").setStyle(Style.EMPTY.withColor(ChatFormatting.AQUA)));
-        tooltip.add(Component.translatable("des.virtuarealcraft.weather_gem").setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
+        tooltip.add(Component.translatable("des.virtuarealcraft.weather_gem.func").withStyle(Style.EMPTY.withColor(ChatFormatting.AQUA)));
+        tooltip.add(Component.translatable("des.virtuarealcraft.weather_gem").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
 
         TooltipTool.addLiverInfo(tooltip, Livers.WAKU);
     }

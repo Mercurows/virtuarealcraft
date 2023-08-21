@@ -30,7 +30,7 @@ public class AdventBadge extends Item {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        tooltip.add(Component.translatable("des.virtuarealcraft.advent_badge").setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)).setStyle(Style.EMPTY.withColor(ChatFormatting.ITALIC)));
+        tooltip.add(Component.translatable("des.virtuarealcraft.advent_badge").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY).withItalic(Boolean.TRUE)));
 
         TooltipTool.addLiverInfo(tooltip, Livers.MURI);
     }
@@ -48,7 +48,7 @@ public class AdventBadge extends Item {
             for (Player player : worldIn.players()) {
                 if (player != playerIn) {
                     player.displayClientMessage(Component.translatable("des.virtuarealcraft.advent_badge.warn")
-                            .setStyle(Style.EMPTY.withColor(ChatFormatting.DARK_PURPLE).withBold(true)), true);
+                            .withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_PURPLE).withBold(true)), true);
                     player.addItem(new ItemStack(ItemRegistry.MURI_DICE.get()));
                 }
             }

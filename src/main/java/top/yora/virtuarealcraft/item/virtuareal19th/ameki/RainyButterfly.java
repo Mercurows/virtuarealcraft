@@ -54,9 +54,9 @@ public class RainyButterfly extends SwordItem {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        tooltip.add((Component.translatable("des.virtuarealcraft.rainy_butterfly_1")).setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
-        tooltip.add((Component.translatable("des.virtuarealcraft.rainy_butterfly_2")).setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
-        tooltip.add((Component.translatable("des.virtuarealcraft.rainy_butterfly_3")).setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
+        tooltip.add((Component.translatable("des.virtuarealcraft.rainy_butterfly_1")).withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
+        tooltip.add((Component.translatable("des.virtuarealcraft.rainy_butterfly_2")).withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
+        tooltip.add((Component.translatable("des.virtuarealcraft.rainy_butterfly_3")).withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
 
         TooltipTool.addLiverInfo(tooltip, Livers.AMEKI);
     }

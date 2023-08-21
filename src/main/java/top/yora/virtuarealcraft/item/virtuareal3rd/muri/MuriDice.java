@@ -30,7 +30,7 @@ public class MuriDice extends Item {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        tooltip.add(Component.translatable("des.virtuarealcraft.muri_dice").setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
+        tooltip.add(Component.translatable("des.virtuarealcraft.muri_dice").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
 
         TooltipTool.addLiverInfo(tooltip, Livers.MURI);
     }
@@ -44,7 +44,7 @@ public class MuriDice extends Item {
                 if (!worldIn.isClientSide) {
                     int rand = (int)(Math.random() * 6 + 1);
 
-                    player.displayClientMessage(Component.literal("1D6 = " + rand).setStyle(Style.EMPTY.withColor(ChatFormatting.BOLD)), true);
+                    player.displayClientMessage(Component.literal("1D6 = " + rand).withStyle(Style.EMPTY.withColor(ChatFormatting.BOLD)), true);
 
                     if (rand > 3) {
                         player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));

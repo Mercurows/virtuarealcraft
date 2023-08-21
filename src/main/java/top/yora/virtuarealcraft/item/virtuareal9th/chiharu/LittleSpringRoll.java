@@ -30,7 +30,7 @@ public class LittleSpringRoll extends Item {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        tooltip.add((Component.translatable("des.virtuarealcraft.little_spring_roll")).setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
+        tooltip.add((Component.translatable("des.virtuarealcraft.little_spring_roll")).withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
 
         TooltipTool.addLiverInfo(tooltip, Livers.CHIHARU);
     }
