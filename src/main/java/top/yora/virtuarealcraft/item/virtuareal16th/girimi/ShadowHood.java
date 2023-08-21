@@ -1,7 +1,9 @@
 package top.yora.virtuarealcraft.item.virtuareal16th.girimi;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.renderer.entity.model.BipedModel;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -17,13 +19,18 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import org.jetbrains.annotations.NotNull;
 import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.models.ShadowHoodModel;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Consumer;
 
 public class ShadowHood extends ArmorItem {
     public ShadowHood() {
@@ -38,12 +45,25 @@ public class ShadowHood extends ArmorItem {
         TooltipTool.addLiverInfo(tooltip, Livers.GIRIMI);
     }
 
-    @SuppressWarnings("unchecked")
-    @OnlyIn(Dist.CLIENT)
-    @Nullable
     @Override
-    public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, A _default) {
-        return (A) new ShadowHoodModel<>();
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        consumer.accept(new IClientItemExtensions() {
+            @Override
+            public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+                HumanoidModel<?> armorModel = new HumanoidModel<>(new ModelPart(Collections.emptyList(), Map.of(
+                        "body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+                        "left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+                        "right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+                        "head", new ShadowHoodModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(ShadowHoodModel.LAYER_LOCATION)).main,
+                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+                        "right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+                        "left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()))));
+                armorModel.crouching = livingEntity.isShiftKeyDown();
+                armorModel.riding = original.riding;
+                armorModel.young = livingEntity.isBaby();
+                return armorModel;
+            }
+        });
     }
 
     @Nullable
@@ -55,7 +75,7 @@ public class ShadowHood extends ArmorItem {
     @Override
     public void onArmorTick(ItemStack stack, Level world, Player player) {
         if (!world.isClientSide) {
-            if (!world.isDay() || !world.canSeeSky(player.getPosition()) || world.isRaining()) {
+            if (!world.isDay() || !world.canSeeSky(player.getOnPos()) || world.isRaining()) {
                 player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 40, 1, false, false));
                 player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 40, 1, false, false));
                 player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 40, 0, false, false));

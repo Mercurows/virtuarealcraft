@@ -3,7 +3,7 @@ package top.yora.virtuarealcraft.item.virtuareal5th.hoshimi;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.renderer.entity.model.BipedModel;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -19,9 +19,10 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import org.jetbrains.annotations.NotNull;
 import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.init.ItemRegistry;
-import top.yora.virtuarealcraft.models.HamsterWheelModel;
 import top.yora.virtuarealcraft.tool.ItemNBTTool;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
@@ -29,6 +30,7 @@ import top.yora.virtuarealcraft.tool.TooltipTool;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 public class HamsterWheel extends ArmorItem {
     public static final String TAG_SPIRIT = "spiriting";
@@ -45,12 +47,14 @@ public class HamsterWheel extends ArmorItem {
         TooltipTool.addLiverInfo(tooltip, Livers.HOSHIMI);
     }
 
-    @SuppressWarnings("unchecked")
-    @OnlyIn(Dist.CLIENT)
-    @Nullable
     @Override
-    public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, A _default) {
-        return (A) new HamsterWheelModel<>();
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        consumer.accept(new IClientItemExtensions() {
+            @Override
+            public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+                return IClientItemExtensions.super.getHumanoidArmorModel(livingEntity, itemStack, equipmentSlot, original);
+            }
+        });
     }
 
     @Nullable
