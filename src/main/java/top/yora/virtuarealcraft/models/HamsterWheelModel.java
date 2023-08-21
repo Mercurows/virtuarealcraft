@@ -18,7 +18,7 @@ import top.yora.virtuarealcraft.Utils;
 public class HamsterWheelModel<T extends Entity> extends EntityModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(Utils.MOD_ID, "hamster_wheel_model"), "main");
-	private final ModelPart bb_main;
+	public final ModelPart bb_main;
 
 	public HamsterWheelModel(ModelPart root) {
 		this.bb_main = root.getChild("bb_main");

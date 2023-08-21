@@ -3,7 +3,9 @@ package top.yora.virtuarealcraft.item.virtuareal5th.hoshimi;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -23,12 +25,15 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.init.ItemRegistry;
+import top.yora.virtuarealcraft.models.HamsterWheelModel;
 import top.yora.virtuarealcraft.tool.ItemNBTTool;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.function.Consumer;
 
@@ -52,7 +57,18 @@ public class HamsterWheel extends ArmorItem {
         consumer.accept(new IClientItemExtensions() {
             @Override
             public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
-                return IClientItemExtensions.super.getHumanoidArmorModel(livingEntity, itemStack, equipmentSlot, original);
+                HumanoidModel<?> armorModel = new HumanoidModel<>(new ModelPart(Collections.emptyList(), Map.of(
+                        "body", new HamsterWheelModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(HamsterWheelModel.LAYER_LOCATION)).bb_main,
+                        "left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+                        "right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+                        "head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+                        "right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+                        "left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()))));
+                armorModel.crouching = livingEntity.isShiftKeyDown();
+                armorModel.riding = original.riding;
+                armorModel.young = livingEntity.isBaby();
+                return armorModel;
             }
         });
     }
