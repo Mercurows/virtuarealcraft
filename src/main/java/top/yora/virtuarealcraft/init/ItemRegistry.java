@@ -28,6 +28,7 @@ import top.yora.virtuarealcraft.item.virtuareal5th.hoshimi.GreenSunflowerSeeds;
 import top.yora.virtuarealcraft.item.virtuareal5th.hoshimi.HamsterWheel;
 import top.yora.virtuarealcraft.item.virtuareal5th.hoshimi.RedSunflowerSeeds;
 import top.yora.virtuarealcraft.item.virtuareal5th.mahiru.MahiruTail;
+import top.yora.virtuarealcraft.item.virtuareal5th.miki.Mi;
 import top.yora.virtuarealcraft.item.virtuareal5th.miki.MikiTail;
 import top.yora.virtuarealcraft.item.virtuareal6th.tabibito.ReverseCard;
 import top.yora.virtuarealcraft.item.virtuareal9th.chiharu.LittleSpringRoll;
@@ -73,6 +74,7 @@ public class ItemRegistry {
      */
     //miki
     public static final RegistryObject<Item> MIKI_TAIL = ITEMS.register("miki_tail", MikiTail::new);
+    public static final RegistryObject<Item> MI = ITEMS.register("mi", Mi::new);
 
     //hoshimi
     public static final RegistryObject<Item> HAMSTER_WHEEL = ITEMS.register("hamster_wheel", HamsterWheel::new);
