@@ -14,7 +14,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.init.ItemRegistry;
 import top.yora.virtuarealcraft.tool.ItemNBTTool;
 import top.yora.virtuarealcraft.tool.Livers;
@@ -25,7 +24,7 @@ import java.util.List;
 
 public class MuriDice extends Item {
     public MuriDice() {
-        super(new Properties().group(GroupRegistry.itemgroup).maxStackSize(1));
+        super(new Properties().stacksTo(1));
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -38,18 +37,17 @@ public class MuriDice extends Item {
 
     @Override
     public void inventoryTick(ItemStack stack, Level worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-        if (entityIn instanceof Player) {
-            Player player = (Player) entityIn;
+        if (entityIn instanceof Player player) {
             ItemNBTTool.setInt(stack, "time", Math.min(60, ItemNBTTool.getInt(stack, "time", 0) + 1));
 
             if(ItemNBTTool.getInt(stack, "time", 0) >= 60){
                 if (!worldIn.isClientSide) {
                     int rand = (int)(Math.random() * 6 + 1);
 
-                    player.sendSystemMessage(Component.literal("1D6 = " + rand).setStyle(Style.EMPTY.withColor(ChatFormatting.BOLD)), true);
+                    player.displayClientMessage(Component.literal("1D6 = " + rand).setStyle(Style.EMPTY.withColor(ChatFormatting.BOLD)), true);
 
                     if (rand > 3) {
-                        player.addEffect(new MobEffectInstance(MobEffects.NAUSEA, 200, 0));
+                        player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));
                         player.addEffect(new MobEffectInstance(MobEffects.WITHER, 200, 0));
                         player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 200, 0));
                         player.addEffect(new MobEffectInstance(MobEffects.UNLUCK, 200, 0));

@@ -3,7 +3,6 @@ package top.yora.virtuarealcraft.item.virtuareal2nd.kouichi;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.ItemStack;
@@ -11,7 +10,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 
@@ -20,7 +18,7 @@ import java.util.List;
 
 public class BloodWings extends ArmorItem {
     public BloodWings() {
-        super(ArmorMaterials.IRON, EquipmentSlot.CHEST, new Properties().tab(GroupRegistry.itemgroup));
+        super(ArmorMaterials.IRON, Type.CHESTPLATE, new Properties());
     }
 
     @OnlyIn(Dist.CLIENT)

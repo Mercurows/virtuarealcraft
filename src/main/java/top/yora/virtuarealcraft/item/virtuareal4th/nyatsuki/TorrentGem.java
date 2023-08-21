@@ -1,11 +1,9 @@
 package top.yora.virtuarealcraft.item.virtuareal4th.nyatsuki;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.block.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.util.DamageSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -23,24 +21,21 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CauldronBlock;
 import net.minecraft.world.level.block.ConcretePowderBlock;
+import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import org.jetbrains.annotations.NotNull;
-import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static net.minecraft.block.CauldronBlock.LEVEL;
-
 public class TorrentGem extends Item {
     public TorrentGem() {
-        super(new Properties().group(GroupRegistry.itemgroup).durability(99).rarity(Rarity.RARE));
+        super(new Properties().durability(99).rarity(Rarity.RARE));
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -64,7 +59,7 @@ public class TorrentGem extends Item {
             }
 
             if (player.tickCount % 20 == 0 && worldIn.isRaining()) {
-                stack.damageItem(-1, player, player1 -> player1.sendBreakAnimation(player1.getActiveHand()));
+                stack.hurtAndBreak(-1, player, player1 -> player1.broadcastBreakEvent(player1.getUsedItemHand()));
             }
         }
 
@@ -72,20 +67,19 @@ public class TorrentGem extends Item {
     }
 
     @Override
-    public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        if (attacker instanceof Player) {
-            Player player = (Player) attacker;
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        if (attacker instanceof Player player) {
 
             if (target instanceof EnderMan || target instanceof Blaze || target instanceof SnowGolem
                     || target instanceof Strider) {
-                target.attackEntityFrom(DamageSource.causePlayerDamage(player), 100.0f);
+                target.hurt(target.level().damageSources().playerAttack(player), 100.0f);
             }
         }
-        return super.hitEntity(stack, target, attacker);
+        return super.hurtEnemy(stack, target, attacker);
     }
 
     @Override
-    public @NotNull InteractionResult useOn(UseOnContext context) {
+    public InteractionResult useOn(UseOnContext context) {
         Level world = context.getLevel();
         BlockPos pos = context.getClickedPos();
         Player player = context.getPlayer();
@@ -96,9 +90,9 @@ public class TorrentGem extends Item {
             BlockState state = world.getBlockState(pos);
             FluidState fluidState = world.getFluidState(pos.offset(0, 1, 0));
 
-            if (fluidState.getBlockState().getBlock() instanceof FlowingFluid) {
-                world.setBlockState(pos.add(0, 1, 0), Blocks.OBSIDIAN.defaultBlockState(), 3);
-                stack.damageItem(1, player, p -> p.sendBreakAnimation(hand));
+            if (fluidState.getType() == Fluids.LAVA || fluidState.getType() == Fluids.FLOWING_LAVA) {
+                world.setBlock(pos.offset(0, 1, 0), Blocks.OBSIDIAN.defaultBlockState(), 3);
+                stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
 
                 return InteractionResult.SUCCESS;
             }
@@ -139,16 +133,16 @@ public class TorrentGem extends Item {
                     world.setBlockAndUpdate(pos, Blocks.BLACK_CONCRETE.defaultBlockState());
                 }
 
-                stack.damageItem(1, player, p -> p.sendBreakAnimation(hand));
+                stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
 
                 return InteractionResult.SUCCESS;
             } else if (state.getBlock() instanceof CauldronBlock) {
-                if (world.getBlockState(pos).get(LEVEL) == 3) {
+                if (world.getBlockState(pos).getValue(LayeredCauldronBlock.LEVEL) == 3) {
                     return InteractionResult.FAIL;
                 }
 
-                world.setBlockState(pos, state.with(LEVEL, 3), 2);
-                stack.damageItem(1, player, p -> p.sendBreakAnimation(hand));
+                world.setBlock(pos, state.setValue(LayeredCauldronBlock.LEVEL, 3), 2);
+                stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
 
                 return InteractionResult.SUCCESS;
             }

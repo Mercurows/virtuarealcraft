@@ -25,7 +25,7 @@ import java.util.List;
 
 public class SharkTail extends ArmorItem {
     public SharkTail() {
-        super(ArmorMaterials.IRON, EquipmentSlot.LEGS, new Properties().group(GroupRegistry.itemgroup).rarity(Rarity.UNCOMMON).durability(517));
+        super(ArmorMaterials.IRON, Type.LEGGINGS, new Properties().rarity(Rarity.UNCOMMON).durability(517));
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -43,6 +43,8 @@ public class SharkTail extends ArmorItem {
     public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, A _default) {
         return (A) new SharkTailModel<>();
     }
+
+
 
     @Nullable
     @Override
