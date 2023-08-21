@@ -14,7 +14,6 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
-import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.init.ItemRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
@@ -24,7 +23,7 @@ import java.util.List;
 
 public class WeatherGem extends Item {
     public WeatherGem() {
-        super(new Properties().group(GroupRegistry.itemgroup).durability(10).rarity(Rarity.UNCOMMON));
+        super(new Properties().durability(10).rarity(Rarity.UNCOMMON));
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -55,24 +54,24 @@ public class WeatherGem extends Item {
                     if (off.getItem() == Items.TORCH) {
                         off.shrink(1);
 
-                        ((ServerLevel) worldIn).func_241113_a_(12000, 0, false, false);
-                        itemStack.damageItem(1, playerIn, p -> p.sendBreakAnimation(handIn));
+                        ((ServerLevel) worldIn).setWeatherParameters(12000, 0, false, false);
+                        itemStack.hurtAndBreak(1, playerIn, p -> p.broadcastBreakEvent(handIn));
                         playerIn.getCooldowns().addCooldown(itemStack.getItem(), 6000);
 
                         flag = true;
                     } else if (off.getItem() == Items.WHEAT_SEEDS) {
                         off.shrink(1);
 
-                        ((ServerLevel) worldIn).func_241113_a_(0, 12000, true, false);
-                        itemStack.damageItem(1, playerIn, p -> p.sendBreakAnimation(handIn));
+                        ((ServerLevel) worldIn).setWeatherParameters(0, 12000, true, false);
+                        itemStack.hurtAndBreak(1, playerIn, p -> p.broadcastBreakEvent(handIn));
                         playerIn.getCooldowns().addCooldown(itemStack.getItem(), 6000);
 
                         flag = true;
                     } else if (off.getItem() == Items.GUNPOWDER) {
                         off.shrink(1);
 
-                        ((ServerLevel) worldIn).func_241113_a_(0, 12000, true, true);
-                        itemStack.damageItem(1, playerIn, p -> p.sendBreakAnimation(handIn));
+                        ((ServerLevel) worldIn).setWeatherParameters(0, 12000, true, true);
+                        itemStack.hurtAndBreak(1, playerIn, p -> p.broadcastBreakEvent(handIn));
                         playerIn.getCooldowns().addCooldown(itemStack.getItem(), 6000);
 
                         flag = true;

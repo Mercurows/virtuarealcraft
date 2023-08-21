@@ -20,7 +20,6 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import top.yora.virtuarealcraft.Utils;
-import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.init.ItemRegistry;
 import top.yora.virtuarealcraft.models.HamsterWheelModel;
 import top.yora.virtuarealcraft.tool.ItemNBTTool;
@@ -35,7 +34,7 @@ public class HamsterWheel extends ArmorItem {
     public static final String TAG_SPIRIT = "spiriting";
 
     public HamsterWheel() {
-        super(ArmorMaterials.IRON, EquipmentSlot.CHEST, new Item.Properties().group(GroupRegistry.itemgroup).durability(515));
+        super(ArmorMaterials.IRON, Type.CHESTPLATE, new Item.Properties().durability(515));
     }
 
     @OnlyIn(Dist.CLIENT)
