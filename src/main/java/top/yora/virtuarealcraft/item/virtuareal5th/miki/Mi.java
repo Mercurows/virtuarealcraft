@@ -61,10 +61,16 @@ public class Mi extends Item {
         if (font == null) font = Minecraft.getInstance().font;
 
         int width = font.width(text);
-        int tooltipTextWidth = 0;
 
-        if (Minecraft.getInstance().screen != null && mouseX > Minecraft.getInstance().screen.width / 2)
+        int tooltipTextWidth;
+
+        assert Minecraft.getInstance().screen != null;
+        int screenWidth = Minecraft.getInstance().screen.width;
+        if (mouseX > screenWidth / 2)
             tooltipTextWidth = mouseX - 12 - 8;
+        else
+            tooltipTextWidth = screenWidth - 16 - mouseX;
+
         return tooltipTextWidth / width + 1;
     }
 
