@@ -6,6 +6,7 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.yora.virtuarealcraft.models.HamsterWheelModel;
+import top.yora.virtuarealcraft.models.KuyaModel;
 import top.yora.virtuarealcraft.models.ShadowHoodModel;
 import top.yora.virtuarealcraft.models.SharkTailModel;
 
@@ -16,5 +17,6 @@ public class ModelRegistry {
         event.registerLayerDefinition(SharkTailModel.LAYER_LOCATION, SharkTailModel::createBodyLayer);
         event.registerLayerDefinition(ShadowHoodModel.LAYER_LOCATION, ShadowHoodModel::createBodyLayer);
         event.registerLayerDefinition(HamsterWheelModel.LAYER_LOCATION, HamsterWheelModel::createBodyLayer);
+        event.registerLayerDefinition(KuyaModel.LAYER_LOCATION, KuyaModel::createBodyLayer);
     }
 }
