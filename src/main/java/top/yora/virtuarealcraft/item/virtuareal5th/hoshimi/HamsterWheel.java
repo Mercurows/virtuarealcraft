@@ -56,6 +56,7 @@ public class HamsterWheel extends ArmorItem {
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
             @Override
+            @OnlyIn(Dist.CLIENT)
             public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
                 HumanoidModel<?> armorModel = new HumanoidModel<>(new ModelPart(Collections.emptyList(), Map.of(
                         "body", new HamsterWheelModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(HamsterWheelModel.LAYER_LOCATION)).bb_main,
