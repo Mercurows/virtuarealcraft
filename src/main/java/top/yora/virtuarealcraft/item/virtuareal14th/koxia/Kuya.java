@@ -12,7 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
-import top.yora.virtuarealcraft.entity.KuyaEntity;
+//import top.yora.virtuarealcraft.entity.KuyaEntity;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 
@@ -45,27 +45,27 @@ public class Kuya extends Item {
         return UseAnim.SPEAR;
     }
 
-    @Override
-    public void releaseUsing(ItemStack stack, Level worldIn, LivingEntity entityLiving, int timeLeft) {
-        if (!worldIn.isClientSide) {
-            if (entityLiving instanceof Player player) {
-
-                KuyaEntity kuyaEntity = new KuyaEntity(worldIn, player);
-                int usingTime = this.getUseDuration(stack) - timeLeft;
-
-                float power = Math.min(usingTime / 30.0f, 3.5f);
-
-                kuyaEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0f, power, 0.0f);
-                worldIn.addFreshEntity(kuyaEntity);
-
-                if (!player.isCreative()) {
-                    stack.shrink(1);
-                }
-
-                player.getCooldowns().addCooldown(stack.getItem(), 100);
-            }
-        }
-    }
+//    @Override
+//    public void releaseUsing(ItemStack stack, Level worldIn, LivingEntity entityLiving, int timeLeft) {
+//        if (!worldIn.isClientSide) {
+//            if (entityLiving instanceof Player player) {
+//
+//                KuyaEntity kuyaEntity = new KuyaEntity(worldIn, player);
+//                int usingTime = this.getUseDuration(stack) - timeLeft;
+//
+//                float power = Math.min(usingTime / 30.0f, 3.5f);
+//
+//                kuyaEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0f, power, 0.0f);
+//                worldIn.addFreshEntity(kuyaEntity);
+//
+//                if (!player.isCreative()) {
+//                    stack.shrink(1);
+//                }
+//
+//                player.getCooldowns().addCooldown(stack.getItem(), 100);
+//            }
+//        }
+//    }
 
     @Override
     public int getUseDuration(ItemStack stack) {

@@ -42,7 +42,7 @@ public class HudClientEvent {
         }
 
         if (stack != null) {
-            RainyButterflyHUD butterflyHUD = new RainyButterflyHUD(event.getGuiGraphics().pose(), stack, player.level().isRaining());
+            RainyButterflyHUD butterflyHUD = new RainyButterflyHUD(event.getGuiGraphics(), stack, player.level().isRaining());
             butterflyHUD.render();
         }
     }
