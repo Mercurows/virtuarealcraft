@@ -15,7 +15,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 
@@ -24,7 +23,7 @@ import java.util.List;
 
 public class GhostCloak extends Item {
     public GhostCloak() {
-        super(new Properties().durability(21).group(GroupRegistry.itemgroup));
+        super(new Properties().durability(21));
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -37,7 +36,7 @@ public class GhostCloak extends Item {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> onItemRightClick(Level worldIn, Player playerIn, InteractionHand handIn) {
+    public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
         ItemStack stack = playerIn.getItemInHand(handIn);
 
         if (!worldIn.isClientSide) {
@@ -47,10 +46,10 @@ public class GhostCloak extends Item {
 
             playerIn.getCooldowns().addCooldown(stack.getItem(), 400);
 
-            stack.damageItem(1, playerIn, player -> player.sendBreakAnimation(handIn));
+            stack.hurtAndBreak(1, playerIn, player -> player.broadcastBreakEvent(handIn));
         }
 
-        return InteractionResultHolder.func_233538_a_(stack, worldIn.isClientSide);
+        return InteractionResultHolder.sidedSuccess(stack, worldIn.isClientSide);
     }
 
     @Override

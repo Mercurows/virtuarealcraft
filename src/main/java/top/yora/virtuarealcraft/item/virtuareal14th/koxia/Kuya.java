@@ -22,7 +22,7 @@ import java.util.List;
 
 public class Kuya extends Item {
     public Kuya() {
-        super(new Properties().group(GroupRegistry.itemgroup).rarity(Rarity.UNCOMMON));
+        super(new Properties().rarity(Rarity.UNCOMMON));
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -37,7 +37,7 @@ public class Kuya extends Item {
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
         ItemStack stack = playerIn.getItemInHand(handIn);
-        playerIn.setActiveHand(handIn);
+        playerIn.startUsingItem(handIn);
         return InteractionResultHolder.consume(stack);
     }
 
@@ -56,7 +56,7 @@ public class Kuya extends Item {
 
                 float power = Math.min(usingTime / 30.0f, 3.5f);
 
-                kuyaEntity.func_234612_a_(player, player.rotationPitch, player.rotationYaw, 0.0f, power, 0.0f);
+                kuyaEntity.shoot(player, player.rotationPitch, player.rotationYaw, 0.0f, power, 0.0f);
                 worldIn.addFreshEntity(kuyaEntity);
 
                 if (!player.isCreative()) {

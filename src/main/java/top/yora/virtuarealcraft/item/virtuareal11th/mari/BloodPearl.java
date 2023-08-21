@@ -23,7 +23,6 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.yora.virtuarealcraft.Utils;
-import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.init.ItemRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
@@ -35,7 +34,7 @@ import java.util.UUID;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class BloodPearl extends Item {
     public BloodPearl() {
-        super(new Properties().group(GroupRegistry.itemgroup).maxStackSize(1));
+        super(new Properties().stacksTo(1));
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -48,8 +47,7 @@ public class BloodPearl extends Item {
 
     @Override
     public void inventoryTick(ItemStack stack, Level worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-        if (!worldIn.isClientSide && entityIn instanceof Player) {
-            Player player = (Player) entityIn;
+        if (!worldIn.isClientSide && entityIn instanceof Player player) {
             if(itemSlot == 0){
                 player.addEffect(new MobEffectInstance(MobEffects.JUMP, 40, 0, false, false));
             }
@@ -72,10 +70,9 @@ public class BloodPearl extends Item {
 
     @SubscribeEvent
     public static void bloodPearlEffect(LivingDamageEvent event){
-        Entity entity = event.getSource().getImmediateSource();
+        Entity entity = event.getSource().getDirectEntity();
 
-        if (entity instanceof Player && !entity.level().isClientSide) {
-            Player player = (Player) entity;
+        if (entity instanceof Player player && !entity.level().isClientSide) {
             if (player.getMainHandItem().getItem() == ItemRegistry.BLOOD_PEARL.get()) {
                 float damage = event.getAmount();
 

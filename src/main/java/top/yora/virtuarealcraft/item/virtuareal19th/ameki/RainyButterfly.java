@@ -48,7 +48,7 @@ public class RainyButterfly extends SwordItem {
     public static final String TAG_RAINY_BUTTERFLY_RAIN = "rainy_butterfly_rain";
 
     public RainyButterfly(){
-        super(Tiers.IRON, -2, -2.1f, new Properties().group(GroupRegistry.itemgroup).durability(1206).rarity(Rarity.EPIC));
+        super(Tiers.IRON, -2, -2.1f, new Properties().durability(1206).rarity(Rarity.EPIC));
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -124,7 +124,7 @@ public class RainyButterfly extends SwordItem {
             if (stack.getDamageValue() < stack.getMaxDamage()) {
                 Player player = (Player) entityIn;
                 if (player.tickCount % 20 == 0) {
-                    stack.hurtAndBreak(-1, player, (Player) -> Player.sendBreakAnimation(player.getUsedItemHand()));
+                    stack.hurtAndBreak(-1, player, (Player) -> Player.broadcastBreakEvent(player.getUsedItemHand()));
                 }
             }
             ItemNBTTool.setBoolean(stack, TAG_RAINY_BUTTERFLY_RAIN, true);
@@ -134,7 +134,7 @@ public class RainyButterfly extends SwordItem {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> onItemRightClick(Level worldIn, Player playerIn, InteractionHand handIn) {
+    public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
         ItemStack stack = playerIn.getItemInHand(handIn);
 
         boolean open = ItemNBTTool.getBoolean(stack, TAG_RAINY_BUTTERFLY_OPEN, false);
