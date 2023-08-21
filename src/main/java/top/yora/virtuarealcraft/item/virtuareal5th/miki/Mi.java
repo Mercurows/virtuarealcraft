@@ -28,6 +28,7 @@ public class Mi extends Item {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
+        //TODO 修改描述
         tooltip.add(Component.translatable("des.virtuarealcraft.mi").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
 
         TooltipTool.addLiverInfo(tooltip, Livers.MIKI);
