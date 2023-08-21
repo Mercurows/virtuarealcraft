@@ -3,27 +3,19 @@ package top.yora.virtuarealcraft.entity;
 import io.netty.buffer.Unpooled;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.entity.EntityType;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
@@ -88,14 +80,14 @@ public class KuyaEntity extends ThrowableItemProjectile {
                 //From TaC
                 Direction direction = blockResult.getDirection();
                 switch (direction.getAxis()) {
-                    case X -> this.setMotion(this.getMotion().mul(-0.5, 0.75, 0.75));
+                    case X -> this.setDeltaMovement(this.getDeltaMovement().multiply(-0.5, 0.75, 0.75));
                     case Y -> {
-                        this.setMotion(this.getMotion().mul(0.75, -0.25, 0.75));
-                        if (this.getMotion().getY() < this.getGravityVelocity()) {
-                            this.setMotion(this.getMotion().mul(1, 0, 1));
+                        this.setDeltaMovement(this.getDeltaMovement().multiply(0.75, -0.25, 0.75));
+                        if (this.getDeltaMovement().get(Direction.Axis.Y) < this.getGravity()) {
+                            this.setDeltaMovement(this.getDeltaMovement().multiply(1, 0, 1));
                         }
                     }
-                    case Z -> this.setMotion(this.getMotion().mul(0.75, 0.75, -0.5));
+                    case Z -> this.setDeltaMovement(this.getDeltaMovement().multiply(0.75, 0.75, -0.5));
                 }
             } else {
                 this.discard();
@@ -105,13 +97,13 @@ public class KuyaEntity extends ThrowableItemProjectile {
     }
 
     @Override
-    public void readAdditional(CompoundNBT compound) {
-        this.setFuse(compound.getShort("Fuse"));
+    public void addAdditionalSaveData(CompoundTag pCompound) {
+        pCompound.putShort("Fuse", (short) this.getFuse());
     }
 
     @Override
-    public void writeAdditional(CompoundNBT compound) {
-        compound.putShort("Fuse", (short) this.getFuse());
+    public void readAdditionalSaveData(CompoundTag pCompound) {
+        this.setFuse(pCompound.getShort("Fuse"));
     }
 
     @Override

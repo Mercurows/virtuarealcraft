@@ -1,7 +1,7 @@
 package top.yora.virtuarealcraft.init;
 
-import net.minecraft.entity.EntityClassification;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -13,6 +13,6 @@ public class EntityRegistry {
 
     public static final RegistryObject<EntityType<KuyaEntity>> KUYA_ENTITY =
             ENTITY_TYPES.register("kuya",
-                    () -> EntityType.Builder.of(KuyaEntity::new, EntityClassification.MISC).size(0.3f, 0.3f).build("kuya"));
+                    () -> EntityType.Builder.of(KuyaEntity::new, MobCategory.MISC).sized(0.3f, 0.3f).build("kuya"));
 
 }
