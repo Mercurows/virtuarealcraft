@@ -5,6 +5,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
@@ -39,16 +40,21 @@ public class FrozenBoots extends ArmorItem {
     @Override
     public void onArmorTick(ItemStack stack, Level world, Player player) {
         if (!world.isClientSide) {
-            BlockState state = world.getBlockState(player.getOnPos().offset(0, -1, 0));
-            BlockState state1 = world.getBlockState(player.getOnPos());
+            BlockState state = world.getBlockState(player.getOnPos());
+            BlockState state1 = world.getBlockState(player.getOnPos().offset(0,1,0));
             if(state.getBlock() instanceof IceBlock || state.getBlock() == Blocks.PACKED_ICE || state.getBlock() == Blocks.BLUE_ICE){
                 player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20, 2, false, false));
             }
-            if(state1.getBlock() instanceof SnowLayerBlock || state.getBlock() == Blocks.SNOW_BLOCK){
+            if(state1.getBlock() instanceof SnowLayerBlock || state.getBlock() instanceof SnowLayerBlock || state.getBlock() == Blocks.SNOW_BLOCK){
                 if (player.isShiftKeyDown()) {
                     player.addEffect(new MobEffectInstance(MobEffects.JUMP, 20, 1, false, false));
                 }
             }
         }
+    }
+
+    @Override
+    public boolean canWalkOnPowderedSnow(ItemStack stack, LivingEntity wearer) {
+        return true;
     }
 }
