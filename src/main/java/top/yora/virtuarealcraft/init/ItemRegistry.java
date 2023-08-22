@@ -5,6 +5,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import top.yora.virtuarealcraft.Utils;
+import top.yora.virtuarealcraft.item.others.TokimoriSeisand;
 import top.yora.virtuarealcraft.item.others.VrcLogo;
 import top.yora.virtuarealcraft.item.virtuareal10th.shaun.AngelHalo;
 import top.yora.virtuarealcraft.item.virtuareal10th.yua.FrozenBoots;
@@ -176,5 +177,10 @@ public class ItemRegistry {
     public static final RegistryObject<Item> ETERNAL_CANDELABRA = ITEMS.register("eternal_candelabra", EternalCandelabra::new);
 
 
+    /**
+     * producer
+     */
+    //tokimori seisa
+    public static final RegistryObject<Item> TOKIMORI_SEISAND = ITEMS.register("tokimori_seisand", TokimoriSeisand::new);
 
 }
