@@ -33,15 +33,10 @@ public class TokimoriSeisand extends Item {
             int finalG;
             int finalB;
 
-            if(step < 1000){
-                finalR = (int) (startR + (endR - startR) * step / 1000f);
-                finalG = (int) (startG + (endG - startG) * step / 1000f);
-                finalB = (int) (startB + (endB - startB) * step / 1000f);
-            }else {
-                finalR = (int) (endR + (startR - endR) * (step - 1000) / 1000f);
-                finalG = (int) (endG + (startG - endG) * (step - 1000) / 1000f);
-                finalB = (int) (endB + (startB - endB) * (step - 1000) / 1000f);
-            }
+            step = step > 1000 ? 2000 - step : step;
+            finalR = (int) (startR + (endR - startR) * step / 1000f);
+            finalG = (int) (startG + (endG - startG) * step / 1000f);
+            finalB = (int) (startB + (endB - startB) * step / 1000f);
             int rgb = finalR * 65536 + finalG * 256 + finalB;
 
             return Style.EMPTY.withColor(rgb);
