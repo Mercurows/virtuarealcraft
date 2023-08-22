@@ -17,7 +17,35 @@ import java.util.List;
 
 public class TokimoriSeisand extends Item {
     public TokimoriSeisand() {
-        super(new Properties().rarity(Rarity.create("virtuarealcraft_producer", s -> Style.EMPTY.withColor(3092282))));
+        super(new Properties().rarity(Rarity.create("virtuarealcraft_producer", s -> {
+            long time = System.currentTimeMillis();
+            int step = (int) (time % 1000);
+
+            int startR = 47;
+            int startG = 47;
+            int startB = 58;
+
+            int endR = 236;
+            int endG = 85;
+            int endB = 106;
+
+            int finalR;
+            int finalG;
+            int finalB;
+
+            if(step < 500){
+                finalR = (int) (startR + (endR - startR) * step / 500f);
+                finalG = (int) (startG + (endG - startG) * step / 500f);
+                finalB = (int) (startB + (endB - startB) * step / 500f);
+            }else {
+                finalR = (int) (endR + (startR - endR) * (step - 500) / 500f);
+                finalG = (int) (endG + (startG - endG) * (step - 500) / 500f);
+                finalB = (int) (endB + (startB - endB) * (step - 500) / 500f);
+            }
+            int rgb = finalR * 65536 + finalG * 256 + finalB;
+
+            return Style.EMPTY.withColor(rgb);
+        })));
     }
 
     @OnlyIn(Dist.CLIENT)
