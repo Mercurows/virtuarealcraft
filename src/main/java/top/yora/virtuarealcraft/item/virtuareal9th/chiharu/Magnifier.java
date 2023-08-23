@@ -34,7 +34,7 @@ public class Magnifier extends SwordItem {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
         tooltip.add(Component.translatable("des.virtuarealcraft.magnifier_1").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
-        tooltip.add(Component.translatable("des.virtuarealcraft.magnifier_2").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY).withItalic(Boolean.TRUE)));
+        tooltip.add(Component.translatable("des.virtuarealcraft.magnifier_2").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY).withItalic(true)));
 
         TooltipTool.addLiverInfo(tooltip, Livers.CHIHARU);
     }

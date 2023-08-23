@@ -25,7 +25,7 @@ public class GameConsole extends Item {
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
         TooltipTool.addDevelopingText(tooltip);
         tooltip.add(Component.translatable("des.virtuarealcraft.game_console_1").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
-        tooltip.add(Component.translatable("des.virtuarealcraft.game_console_2").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY).withItalic(Boolean.TRUE)));
+        tooltip.add(Component.translatable("des.virtuarealcraft.game_console_2").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY).withItalic(true)));
 
         TooltipTool.addLiverInfo(tooltip, Livers.KIYUU);
     }

@@ -37,7 +37,7 @@ public class MagicFeather extends Item {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
         tooltip.add(Component.translatable("des.virtuarealcraft.magic_feather_1").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
-        tooltip.add(Component.translatable("des.virtuarealcraft.magic_feather_2").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY).withItalic(Boolean.TRUE)));
+        tooltip.add(Component.translatable("des.virtuarealcraft.magic_feather_2").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY).withItalic(true)));
 
         TooltipTool.addLiverInfo(tooltip, Livers.IMI);
     }

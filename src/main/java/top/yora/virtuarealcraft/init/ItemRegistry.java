@@ -7,6 +7,7 @@ import net.minecraftforge.registries.RegistryObject;
 import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.item.others.TokimoriSeisand;
 import top.yora.virtuarealcraft.item.others.VrcLogo;
+import top.yora.virtuarealcraft.item.others.WorkaholicFury;
 import top.yora.virtuarealcraft.item.virtuareal10th.shaun.AngelHalo;
 import top.yora.virtuarealcraft.item.virtuareal10th.shaun.BakedSweetPotato;
 import top.yora.virtuarealcraft.item.virtuareal10th.shaun.LittleSweetPotato;
@@ -186,5 +187,6 @@ public class ItemRegistry {
      */
     //tokimori seisa
     public static final RegistryObject<Item> TOKIMORI_SEISAND = ITEMS.register("tokimori_seisand", TokimoriSeisand::new);
+    public static final RegistryObject<Item> WORKAHOLIC_FURY = ITEMS.register("workaholic_fury", WorkaholicFury::new);
 
 }

@@ -30,7 +30,7 @@ public class AdventBadge extends Item {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        tooltip.add(Component.translatable("des.virtuarealcraft.advent_badge").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY).withItalic(Boolean.TRUE)));
+        tooltip.add(Component.translatable("des.virtuarealcraft.advent_badge").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY).withItalic(true)));
 
         TooltipTool.addLiverInfo(tooltip, Livers.MURI);
     }

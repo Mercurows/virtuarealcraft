@@ -40,7 +40,7 @@ public class ShadowHood extends ArmorItem {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        tooltip.add(Component.translatable("des.virtuarealcraft.shadow_hood").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY).withItalic(Boolean.TRUE)));
+        tooltip.add(Component.translatable("des.virtuarealcraft.shadow_hood").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY).withItalic(true)));
 
         TooltipTool.addLiverInfo(tooltip, Livers.GIRIMI);
     }
