@@ -8,6 +8,8 @@ import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.item.others.TokimoriSeisand;
 import top.yora.virtuarealcraft.item.others.VrcLogo;
 import top.yora.virtuarealcraft.item.virtuareal10th.shaun.AngelHalo;
+import top.yora.virtuarealcraft.item.virtuareal10th.shaun.BakedSweetPotato;
+import top.yora.virtuarealcraft.item.virtuareal10th.shaun.LittleSweetPotato;
 import top.yora.virtuarealcraft.item.virtuareal10th.yua.FrozenBoots;
 import top.yora.virtuarealcraft.item.virtuareal11th.chiyuu.GhostCloak;
 import top.yora.virtuarealcraft.item.virtuareal11th.imi.MagicFeather;
@@ -117,6 +119,8 @@ public class ItemRegistry {
      */
     //shaun
     public static final RegistryObject<Item> ANGEL_HALO = ITEMS.register("angel_halo", AngelHalo::new);
+    public static final RegistryObject<Item> LITTLE_SWEET_POTATO = ITEMS.register("little_sweet_potato", LittleSweetPotato::new);
+    public static final RegistryObject<Item> BAKED_SWEET_POTATO = ITEMS.register("baked_sweet_potato", BakedSweetPotato::new);
 
     //yua
     public static final RegistryObject<Item> FROZEN_BOOTS = ITEMS.register("frozen_boots", FrozenBoots::new);
