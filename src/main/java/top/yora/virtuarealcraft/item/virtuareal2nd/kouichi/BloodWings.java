@@ -44,39 +44,45 @@ public class BloodWings extends ArmorItem {
 
     @SubscribeEvent
     public static void leftClick(PlayerInteractEvent.LeftClickEmpty event) {
-        sendPacket(event, true);
-    }
-
-    @SubscribeEvent
-    public static void rightClick(PlayerInteractEvent.RightClickEmpty event) {
-        sendPacket(event, false);
+        if (!event.getItemStack().isEmpty()) {
+            return;
+        }
 
         Player player = Minecraft.getInstance().player;
         if (player == null) {
             return;
         }
 
-        Level level = player.level();
-
-        if (level.isClientSide) {
-            if (!player.getCooldowns().isOnCooldown(ItemRegistry.BLOOD_WINGS.get())) {
-                player.playSound(SoundEvents.SCULK_SHRIEKER_SHRIEK, 1f, 1f);
-            }
+        if (!player.getItemBySlot(EquipmentSlot.CHEST).getItem().equals(ItemRegistry.BLOOD_WINGS.get()) || player.getCooldowns().isOnCooldown(ItemRegistry.BLOOD_WINGS.get())) {
+            return;
         }
+
+        VrcNetwork.CHANNEL.sendToServer(new BloodWingPacket(true));
     }
 
-    private static void sendPacket(PlayerInteractEvent event, boolean isLeftClick) {
+    @SubscribeEvent
+    public static void rightClick(PlayerInteractEvent.RightClickEmpty event) {
         if (!event.getItemStack().isEmpty()) {
             return;
         }
 
         Player player = Minecraft.getInstance().player;
-        assert player != null;
+        if (player == null) {
+            return;
+        }
 
         if (!player.getItemBySlot(EquipmentSlot.CHEST).getItem().equals(ItemRegistry.BLOOD_WINGS.get()) || player.getCooldowns().isOnCooldown(ItemRegistry.BLOOD_WINGS.get())) {
             return;
         }
 
-        VrcNetwork.CHANNEL.sendToServer(new BloodWingPacket(isLeftClick));
+        VrcNetwork.CHANNEL.sendToServer(new BloodWingPacket(false));
+
+        Level level = player.level();
+
+        if (level.isClientSide) {
+            if (!player.getCooldowns().isOnCooldown(ItemRegistry.BLOOD_WINGS.get())) {
+                player.playSound(SoundEvents.SCULK_SHRIEKER_SHRIEK, 0.8f, 1f);
+            }
+        }
     }
 }

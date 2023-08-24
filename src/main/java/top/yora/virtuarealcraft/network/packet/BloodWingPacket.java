@@ -1,8 +1,9 @@
 package top.yora.virtuarealcraft.network.packet;
 
 import io.netty.buffer.ByteBuf;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Fireball;
@@ -53,6 +54,11 @@ public class BloodWingPacket {
                         for (var entity : level.getEntitiesOfClass(LivingEntity.class, box)) {
                             if (!entity.equals(player)) {
                                 entity.hurt(level.damageSources().sonicBoom(player), 3);
+
+                                if (!level.isClientSide) {
+                                    ((ServerLevel) level).sendParticles(ParticleTypes.SCULK_SOUL,
+                                            entity.getX(), entity.getY() + 0.5, entity.getZ(), 1, 0, 0, 0, 0.01);
+                                }
                             }
                         }
                         player.getItemBySlot(EquipmentSlot.CHEST).hurtAndBreak(10, player, p -> p.broadcastBreakEvent(EquipmentSlot.CHEST));
