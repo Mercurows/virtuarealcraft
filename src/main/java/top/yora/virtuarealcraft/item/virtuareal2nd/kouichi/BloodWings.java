@@ -4,6 +4,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
@@ -49,6 +50,19 @@ public class BloodWings extends ArmorItem {
     @SubscribeEvent
     public static void rightClick(PlayerInteractEvent.RightClickEmpty event) {
         sendPacket(event, false);
+
+        Player player = Minecraft.getInstance().player;
+        if(player == null){
+            return;
+        }
+
+        Level level = player.level();
+
+        if(level.isClientSide){
+            if(!player.getCooldowns().isOnCooldown(ItemRegistry.BLOOD_WINGS.get())) {
+                player.playSound(SoundEvents.SCULK_SHRIEKER_SHRIEK, 1f, 1f);
+            }
+        }
     }
 
     private static void sendPacket(PlayerInteractEvent event, boolean isLeftClick) {
