@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "BNB",
+    " B "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:gunpowder"
+    },
+    "B": {
+      "item": "minecraft:blaze_powder"
+    },
+    "N": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "result": {
+    "item": "virtuarealcraft:workaholic_fury",
+    "count": 1
+  }
+}
