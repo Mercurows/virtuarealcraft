@@ -47,7 +47,7 @@ public class RainyButterfly extends SwordItem {
     public static final String TAG_RAINY_BUTTERFLY_OPEN = "rainy_butterfly_open";
     public static final String TAG_RAINY_BUTTERFLY_RAIN = "rainy_butterfly_rain";
 
-    public RainyButterfly(){
+    public RainyButterfly() {
         super(Tiers.IRON, -2, -2.1f, new Properties().durability(1206).rarity(Rarity.EPIC));
     }
 
@@ -65,7 +65,7 @@ public class RainyButterfly extends SwordItem {
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         Level world = attacker.level();
         if (!world.isClientSide) {
-            if(!ItemNBTTool.getBoolean(stack, TAG_RAINY_BUTTERFLY_OPEN, false)) {
+            if (!ItemNBTTool.getBoolean(stack, TAG_RAINY_BUTTERFLY_OPEN, false)) {
                 int count = ItemNBTTool.getInt(stack, TAG_RAINY_BUTTERFLY_COUNT, 0);
                 if (count > 0) {
                     if (!world.isRaining()) {
@@ -95,7 +95,7 @@ public class RainyButterfly extends SwordItem {
                 boolean isMainhand = player.getMainHandItem() == stack;
                 boolean isOffHand = player.getMainHandItem() == stack;
 
-                if(isMainhand || isOffHand) {
+                if (isMainhand || isOffHand) {
                     boolean open = ItemNBTTool.getBoolean(stack, TAG_RAINY_BUTTERFLY_OPEN, false);
                     if (open) {
                         if (player.tickCount % 20 == 0 && getRainyButterflyTime(stack) < 20
@@ -118,7 +118,7 @@ public class RainyButterfly extends SwordItem {
                 }
             }
         }
-        if(worldIn.isRaining()){
+        if (worldIn.isRaining()) {
             if (stack.getDamageValue() < stack.getMaxDamage()) {
                 Player player = (Player) entityIn;
                 if (player.tickCount % 20 == 0) {
@@ -126,7 +126,7 @@ public class RainyButterfly extends SwordItem {
                 }
             }
             ItemNBTTool.setBoolean(stack, TAG_RAINY_BUTTERFLY_RAIN, true);
-        }else {
+        } else {
             ItemNBTTool.setBoolean(stack, TAG_RAINY_BUTTERFLY_RAIN, false);
         }
     }
@@ -136,15 +136,15 @@ public class RainyButterfly extends SwordItem {
         ItemStack stack = playerIn.getItemInHand(handIn);
 
         boolean open = ItemNBTTool.getBoolean(stack, TAG_RAINY_BUTTERFLY_OPEN, false);
-        if(open){
+        if (open) {
             if (playerIn.isShiftKeyDown()) {
                 ItemNBTTool.setBoolean(stack, TAG_RAINY_BUTTERFLY_OPEN, false);
                 playerIn.getCooldowns().addCooldown(stack.getItem(), 40);
                 playerIn.playSound(SoundEvents.ARMOR_EQUIP_LEATHER, 1.0f, 1.0f);
             }
-        }else {
+        } else {
             int level = getRainyButterflyCount(stack);
-            if(level > 0){
+            if (level > 0) {
                 if (playerIn.isShiftKeyDown()) {
                     playerIn.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 800, level - 1, false, false));
 
@@ -165,7 +165,7 @@ public class RainyButterfly extends SwordItem {
                     }
 
                     setRainyButterflyCount(stack, 0);
-                }else {
+                } else {
                     playerIn.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 1200, 0, false, false));
                     setRainyButterflyCount(stack, level - 1);
                 }
@@ -211,19 +211,19 @@ public class RainyButterfly extends SwordItem {
         return map;
     }
 
-    private static int getRainyButterflyCount(ItemStack stack){
+    private static int getRainyButterflyCount(ItemStack stack) {
         return ItemNBTTool.getInt(stack, TAG_RAINY_BUTTERFLY_COUNT, 0);
     }
 
-    private static int getRainyButterflyTime(ItemStack stack){
+    private static int getRainyButterflyTime(ItemStack stack) {
         return ItemNBTTool.getInt(stack, TAG_RAINY_BUTTERFLY_TIME, 0);
     }
 
-    private static void setRainyButterflyCount(ItemStack stack, int count){
+    private static void setRainyButterflyCount(ItemStack stack, int count) {
         ItemNBTTool.setInt(stack, TAG_RAINY_BUTTERFLY_COUNT, count);
     }
 
-    private static void setRainyButterflyTime(ItemStack stack, int time){
+    private static void setRainyButterflyTime(ItemStack stack, int time) {
         ItemNBTTool.setInt(stack, TAG_RAINY_BUTTERFLY_TIME, time);
     }
 

@@ -78,7 +78,7 @@ public class Magnifier extends SwordItem {
         ItemStack mag = context.getItemInHand();
         InteractionHand hand = context.getHand();
 
-        if(!(world.getBlockState(pos).getBlock() instanceof AirBlock) && player != null){
+        if (!(world.getBlockState(pos).getBlock() instanceof AirBlock) && player != null) {
             if (player.isShiftKeyDown()) {
                 if (player.isCreative() || player.getFoodData().getFoodLevel() >= 2) {
                     if (!player.isCreative()) {

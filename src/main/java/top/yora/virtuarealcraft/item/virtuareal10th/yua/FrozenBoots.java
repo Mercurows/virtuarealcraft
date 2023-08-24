@@ -41,11 +41,11 @@ public class FrozenBoots extends ArmorItem {
     public void onArmorTick(ItemStack stack, Level world, Player player) {
         if (!world.isClientSide) {
             BlockState state = world.getBlockState(player.getOnPos());
-            BlockState state1 = world.getBlockState(player.getOnPos().offset(0,1,0));
-            if(state.getBlock() instanceof IceBlock || state.getBlock() == Blocks.PACKED_ICE || state.getBlock() == Blocks.BLUE_ICE){
+            BlockState state1 = world.getBlockState(player.getOnPos().offset(0, 1, 0));
+            if (state.getBlock() instanceof IceBlock || state.getBlock() == Blocks.PACKED_ICE || state.getBlock() == Blocks.BLUE_ICE) {
                 player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20, 2, false, false));
             }
-            if(state1.getBlock() instanceof SnowLayerBlock || state.getBlock() instanceof SnowLayerBlock || state.getBlock() == Blocks.SNOW_BLOCK){
+            if (state1.getBlock() instanceof SnowLayerBlock || state.getBlock() instanceof SnowLayerBlock || state.getBlock() == Blocks.SNOW_BLOCK) {
                 if (player.isShiftKeyDown()) {
                     player.addEffect(new MobEffectInstance(MobEffects.JUMP, 20, 1, false, false));
                 }

@@ -73,7 +73,7 @@ public class SharkTail extends ArmorItem {
     @Override
     public void onArmorTick(ItemStack stack, Level world, Player player) {
         if (!world.isClientSide) {
-            if(player.isInWater()){
+            if (player.isInWater()) {
                 player.addEffect(new MobEffectInstance(MobEffects.WATER_BREATHING, 40, 0, false, false));
                 player.addEffect(new MobEffectInstance(MobEffects.DOLPHINS_GRACE, 40, 0, false, false));
                 player.addEffect(new MobEffectInstance(MobEffects.CONDUIT_POWER, 40, 0, false, false));

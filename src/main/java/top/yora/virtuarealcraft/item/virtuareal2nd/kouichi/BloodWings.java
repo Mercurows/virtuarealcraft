@@ -52,14 +52,14 @@ public class BloodWings extends ArmorItem {
         sendPacket(event, false);
 
         Player player = Minecraft.getInstance().player;
-        if(player == null){
+        if (player == null) {
             return;
         }
 
         Level level = player.level();
 
-        if(level.isClientSide){
-            if(!player.getCooldowns().isOnCooldown(ItemRegistry.BLOOD_WINGS.get())) {
+        if (level.isClientSide) {
+            if (!player.getCooldowns().isOnCooldown(ItemRegistry.BLOOD_WINGS.get())) {
                 player.playSound(SoundEvents.SCULK_SHRIEKER_SHRIEK, 1f, 1f);
             }
         }

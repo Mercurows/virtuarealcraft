@@ -23,7 +23,7 @@ public class LittleSpringRoll extends Item {
             .effect(() -> new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200, 0), 1.0f)
             .effect(() -> new MobEffectInstance(MobEffects.HUNGER, 300, 0), 0.5f).build();
 
-    public LittleSpringRoll(){
+    public LittleSpringRoll() {
         super(new Properties().food(food));
     }
 

@@ -45,30 +45,30 @@ public class GameConsole extends Item {
 
     @Override
     public ItemStack finishUsingItem(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity) {
-        if(pLivingEntity instanceof Player player){
-               int level = player.experienceLevel;
-               double prob = Math.min(0.3 + level * 0.01, 0.8);
-               double rand = Math.random();
+        if (pLivingEntity instanceof Player player) {
+            int level = player.experienceLevel;
+            double prob = Math.min(0.3 + level * 0.01, 0.8);
+            double rand = Math.random();
 
-               if(rand < prob){
-                   if(!pLevel.isClientSide){
-                       player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 2400, 1));
-                       player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 2400, 1));
-                       player.addEffect(new MobEffectInstance(MobEffects.LUCK, 2400, 0));
-                   }else {
-                       player.playSound(SoundEvents.ARROW_HIT_PLAYER, 1, 1);
-                   }
-               }else {
-                   if(!pLevel.isClientSide){
-                       player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 1200, 0));
-                       player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 1200, 0));
-                       player.addEffect(new MobEffectInstance(MobEffects.UNLUCK, 1200, 0));
-                   }else {
-                       player.playSound(SoundEvents.VILLAGER_NO, 1, 1);
-                   }
-               }
+            if (rand < prob) {
+                if (!pLevel.isClientSide) {
+                    player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 2400, 1));
+                    player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 2400, 1));
+                    player.addEffect(new MobEffectInstance(MobEffects.LUCK, 2400, 0));
+                } else {
+                    player.playSound(SoundEvents.ARROW_HIT_PLAYER, 1, 1);
+                }
+            } else {
+                if (!pLevel.isClientSide) {
+                    player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 1200, 0));
+                    player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 1200, 0));
+                    player.addEffect(new MobEffectInstance(MobEffects.UNLUCK, 1200, 0));
+                } else {
+                    player.playSound(SoundEvents.VILLAGER_NO, 1, 1);
+                }
+            }
 
-               player.getCooldowns().addCooldown(pStack.getItem(), 6000);
+            player.getCooldowns().addCooldown(pStack.getItem(), 6000);
         }
         return super.finishUsingItem(pStack, pLevel, pLivingEntity);
     }

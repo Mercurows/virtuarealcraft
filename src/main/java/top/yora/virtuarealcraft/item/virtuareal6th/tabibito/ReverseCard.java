@@ -48,7 +48,7 @@ public class ReverseCard extends SwordItem {
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (attacker instanceof Player player) {
-            if(player.getHealth() <= 1.0f){
+            if (player.getHealth() <= 1.0f) {
                 target.hurt(target.level().damageSources().playerAttack(player), 100.0f);
             }
         }

@@ -82,7 +82,7 @@ public class ShadowHood extends ArmorItem {
                 player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 40, 0, false, false));
                 player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 300, 0, false, false));
                 player.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 40, 1, false, false));
-            }else {
+            } else {
                 player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 1, false, false));
                 player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 40, 1, false, false));
                 player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 300, 0, false, false));

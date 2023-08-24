@@ -65,7 +65,6 @@ public class ItemRegistry {
     public static final RegistryObject<Item> MURI_DICE = ITEMS.register("muri_dice", MuriDice::new);
 
 
-
     /**
      * 4th
      */
@@ -74,7 +73,6 @@ public class ItemRegistry {
 
     //waku
     public static final RegistryObject<Item> WEATHER_GEM = ITEMS.register("weather_gem", WeatherGem::new);
-
 
 
     /**
@@ -105,8 +103,6 @@ public class ItemRegistry {
     public static final RegistryObject<Item> REVERSE_CARD = ITEMS.register("reverse_card", ReverseCard::new);
 
     //roi
-
-
 
 
     /**

@@ -7,13 +7,13 @@ import top.yora.virtuarealcraft.init.ItemRegistry;
 
 public class ModGroup {
     public static CreativeModeTab VRC_TAB = CreativeModeTab.builder()
-                .title(Component.translatable("itemGroup.VirtuaRealCraft Items"))
-                .icon(() -> new ItemStack(ItemRegistry.VRC_LOGO.get()))
-                .displayItems((param, output) ->
-                        ItemRegistry.ITEMS.getEntries().forEach((registryObject) -> {
-                            if(registryObject != ItemRegistry.VRC_LOGO) {
-                                output.accept(registryObject.get());
-                            }
-                        }))
-                .build();
+            .title(Component.translatable("itemGroup.VirtuaRealCraft Items"))
+            .icon(() -> new ItemStack(ItemRegistry.VRC_LOGO.get()))
+            .displayItems((param, output) ->
+                    ItemRegistry.ITEMS.getEntries().forEach((registryObject) -> {
+                        if (registryObject != ItemRegistry.VRC_LOGO) {
+                            output.accept(registryObject.get());
+                        }
+                    }))
+            .build();
 }

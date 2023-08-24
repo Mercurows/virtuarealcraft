@@ -48,7 +48,7 @@ public class BloodPearl extends Item {
     @Override
     public void inventoryTick(ItemStack stack, Level worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
         if (!worldIn.isClientSide && entityIn instanceof Player player) {
-            if(itemSlot == 0){
+            if (itemSlot == 0) {
                 player.addEffect(new MobEffectInstance(MobEffects.JUMP, 40, 0, false, false));
             }
         }
@@ -69,16 +69,16 @@ public class BloodPearl extends Item {
     }
 
     @SubscribeEvent
-    public static void bloodPearlEffect(LivingDamageEvent event){
+    public static void bloodPearlEffect(LivingDamageEvent event) {
         Entity entity = event.getSource().getDirectEntity();
 
         if (entity instanceof Player player && !entity.level().isClientSide) {
             if (player.getOffhandItem().getItem() == ItemRegistry.BLOOD_PEARL.get()) {
                 float damage = event.getAmount();
 
-                if(player.getHealth() < player.getMaxHealth() / 2){
+                if (player.getHealth() < player.getMaxHealth() / 2) {
                     player.heal(damage * 0.4f);
-                }else {
+                } else {
                     player.heal(damage * 0.2f);
                 }
             }

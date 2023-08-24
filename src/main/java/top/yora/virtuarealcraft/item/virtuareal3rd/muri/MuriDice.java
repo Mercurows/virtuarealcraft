@@ -40,9 +40,9 @@ public class MuriDice extends Item {
         if (entityIn instanceof Player player) {
             ItemNBTTool.setInt(stack, "time", Math.min(60, ItemNBTTool.getInt(stack, "time", 0) + 1));
 
-            if(ItemNBTTool.getInt(stack, "time", 0) >= 60){
+            if (ItemNBTTool.getInt(stack, "time", 0) >= 60) {
                 if (!worldIn.isClientSide) {
-                    int rand = (int)(Math.random() * 6 + 1);
+                    int rand = (int) (Math.random() * 6 + 1);
 
                     player.displayClientMessage(Component.literal("1D6 = " + rand).withStyle(Style.EMPTY.withColor(ChatFormatting.BOLD)), true);
 
@@ -52,7 +52,7 @@ public class MuriDice extends Item {
                         player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 200, 0));
                         player.addEffect(new MobEffectInstance(MobEffects.UNLUCK, 200, 0));
                     }
-                }else {
+                } else {
                     Minecraft.getInstance().gameRenderer.displayItemActivation(new ItemStack(ItemRegistry.MURI_DICE.get()));
                 }
 
