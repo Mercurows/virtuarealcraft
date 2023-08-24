@@ -23,6 +23,7 @@ import top.yora.virtuarealcraft.item.virtuareal17th.sui.SuimashedCookie;
 import top.yora.virtuarealcraft.item.virtuareal19th.ameki.ButterflyStaff;
 import top.yora.virtuarealcraft.item.virtuareal19th.ameki.RainyButterfly;
 import top.yora.virtuarealcraft.item.virtuareal19th.michiya.EternalCandelabra;
+import top.yora.virtuarealcraft.item.virtuareal2nd.kouichi.BloodWings;
 import top.yora.virtuarealcraft.item.virtuareal2nd.nanami.IceCreamBlackTea;
 import top.yora.virtuarealcraft.item.virtuareal2nd.nanami.SharkTail;
 import top.yora.virtuarealcraft.item.virtuareal3rd.muri.AdventBadge;
@@ -52,6 +53,9 @@ public class ItemRegistry {
     public static final RegistryObject<Item> ICE_CREAM_BLACK_TEA = ITEMS.register("ice_cream_black_tea", IceCreamBlackTea::new);
     public static final RegistryObject<Item> SHARK_TAIL = ITEMS.register("shark_tail", SharkTail::new);
 
+    //kouichi
+    public static final RegistryObject<Item> BLOOD_WINGS = ITEMS.register("blood_wings", BloodWings::new);
+
 
     /**
      * 3rd
@@ -67,7 +71,6 @@ public class ItemRegistry {
      */
     //nyatsuki
     public static final RegistryObject<Item> TORRENT_GEM = ITEMS.register("torrent_gem", TorrentGem::new);
-
 
     //waku
     public static final RegistryObject<Item> WEATHER_GEM = ITEMS.register("weather_gem", WeatherGem::new);
@@ -100,7 +103,6 @@ public class ItemRegistry {
 
     //tabibito
     public static final RegistryObject<Item> REVERSE_CARD = ITEMS.register("reverse_card", ReverseCard::new);
-
 
     //roi
 
