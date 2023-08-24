@@ -80,9 +80,7 @@ public class BloodWings extends ArmorItem {
         Level level = player.level();
 
         if (level.isClientSide) {
-            if (!player.getCooldowns().isOnCooldown(ItemRegistry.BLOOD_WINGS.get())) {
-                player.playSound(SoundEvents.SCULK_SHRIEKER_SHRIEK, 0.8f, 1f);
-            }
+            player.playSound(SoundEvents.SCULK_SHRIEKER_SHRIEK, 0.8f, 1f);
         }
     }
 }
