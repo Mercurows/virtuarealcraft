@@ -8,6 +8,7 @@ import top.yora.virtuarealcraft.init.EntityRegistry;
 import top.yora.virtuarealcraft.init.GroupRegistry;
 import top.yora.virtuarealcraft.init.ItemRegistry;
 import top.yora.virtuarealcraft.init.SoundRegistry;
+import top.yora.virtuarealcraft.network.VrcNetwork;
 
 @Mod("virtuarealcraft")
 public class Utils {
@@ -33,6 +34,7 @@ public class Utils {
 //        TileEntityRegistry.TILE_ENTITY_TYPES.register(eventBus);
 //        LootTableHandler.init(eventBus);
 //        CompatHandler.registerCompatItems(eventBus);
+        VrcNetwork.init();
 
         MinecraftForge.EVENT_BUS.register(this);
     }
