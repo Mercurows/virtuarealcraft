@@ -105,6 +105,30 @@
       "model": "virtuarealcraft:block/kouichi_zipper_open",
       "y": 270,
       "x": 180
+    },
+    "facing=south,open=false,top=true,wall=true": {
+      "model": "virtuarealcraft:block/kouichi_zipper_close"
+    },
+    "facing=east,open=false,top=true,wall=true": {
+      "model": "virtuarealcraft:block/kouichi_zipper_close"
+    },
+    "facing=north,open=false,top=true,wall=true": {
+      "model": "virtuarealcraft:block/kouichi_zipper_close"
+    },
+    "facing=west,open=false,top=true,wall=true": {
+      "model": "virtuarealcraft:block/kouichi_zipper_close"
+    },
+    "facing=south,open=true,top=true,wall=true": {
+      "model": "virtuarealcraft:block/kouichi_zipper_open"
+    },
+    "facing=east,open=true,top=true,wall=true": {
+      "model": "virtuarealcraft:block/kouichi_zipper_open"
+    },
+    "facing=north,open=true,top=true,wall=true": {
+      "model": "virtuarealcraft:block/kouichi_zipper_open"
+    },
+    "facing=west,open=true,top=true,wall=true": {
+      "model": "virtuarealcraft:block/kouichi_zipper_open"
     }
   }
 }
