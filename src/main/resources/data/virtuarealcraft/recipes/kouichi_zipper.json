@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "cWc",
+    "cVc",
+    "cgc"
+  ],
+  "key": {
+    "c": {
+      "item": "minecraft:copper_ingot"
+    },
+    "W": {
+      "item": "minecraft:white_dye"
+    },
+    "V": {
+      "item": "virtuarealcraft:tokimori_seisand"
+    },
+    "g": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "result": {
+    "item": "virtuarealcraft:kouichi_zipper",
+    "count": 32
+  }
+}
