@@ -32,10 +32,11 @@ import java.util.List;
 public class KouichiZipper extends Block {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty OPEN = BooleanProperty.create("open");
+    public static final BooleanProperty WALL = BooleanProperty.create("wall");
 
     public KouichiZipper() {
         super(Properties.of().noCollission());
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(OPEN, false));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(OPEN, false).setValue(WALL, false));
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -46,29 +47,68 @@ public class KouichiZipper extends Block {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(FACING, OPEN);
+        pBuilder.add(FACING, OPEN, WALL);
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
         BlockState blockstate = this.defaultBlockState();
+        Direction facing = pContext.getClickedFace();
         blockstate = blockstate.setValue(FACING, pContext.getHorizontalDirection().getOpposite());
-
+        if(facing == Direction.DOWN || facing == Direction.UP) {
+            blockstate = blockstate.setValue(WALL, false);
+        }else {
+            blockstate = blockstate.setValue(WALL, true);
+        }
         return blockstate;
     }
 
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        if (pState.getValue(OPEN)) {
-            return Block.box(0, 0, 0, 16, 1, 16);
+        Direction facing = pState.getValue(FACING);
+        if(pState.getValue(WALL)){
+            switch (facing){
+                case NORTH -> {
+                    if (pState.getValue(OPEN)) {
+                        return Block.box(0, 0, 15, 16, 16, 16);
+                    }else {
+                        return Block.box(7, 0, 15, 9, 16, 16);
+                    }
+                }
+                case WEST -> {
+                    if(pState.getValue(OPEN)){
+                        return Block.box(15, 0, 0, 16, 16, 16);
+                    }else {
+                        return Block.box(15, 0, 7, 16, 16, 9);
+                    }
+                }
+                case SOUTH -> {
+                    if(pState.getValue(OPEN)){
+                        return Block.box(0, 0, 0, 16, 16, 1);
+                    }else {
+                        return Block.box(7, 0, 0, 9, 16, 1);
+                    }
+                }
+                case EAST -> {
+                    if(pState.getValue(OPEN)){
+                        return Block.box(0, 0, 0, 1, 16, 16);
+                    }else {
+                        return Block.box(0, 0, 7, 1, 16, 9);
+                    }
+                }
+            }
         } else {
-            Direction facing = pState.getValue(FACING);
-            if(facing == Direction.SOUTH || facing == Direction.NORTH) {
-                return Block.box(7, 0, 0, 9, 1, 16);
-            }else {
-                return Block.box(0, 0, 7, 16, 1, 9);
+            if (pState.getValue(OPEN)) {
+                return Block.box(0, 0, 0, 16, 1, 16);
+            } else {
+                if(facing == Direction.SOUTH || facing == Direction.NORTH) {
+                    return Block.box(7, 0, 0, 9, 1, 16);
+                }else {
+                    return Block.box(0, 0, 7, 16, 1, 9);
+                }
             }
         }
+        return Block.box(7, 0, 0, 9, 1, 16);
     }
 
     @Override
