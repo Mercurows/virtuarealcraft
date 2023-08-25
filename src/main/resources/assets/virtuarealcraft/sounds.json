@@ -22,5 +22,13 @@
         "name": "virtuarealcraft:hoshimi_mua"
       }
     ]
+  },
+  "zipper": {
+    "subtitle": "subtitle.virtuarealcraft.zipper",
+    "sounds": [
+      {
+        "name": "virtuarealcraft:zipper"
+      }
+    ]
   }
 }

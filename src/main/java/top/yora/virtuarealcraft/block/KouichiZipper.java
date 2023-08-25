@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -25,6 +26,9 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
+import top.yora.virtuarealcraft.init.SoundRegistry;
+import top.yora.virtuarealcraft.tool.Livers;
+import top.yora.virtuarealcraft.tool.TooltipTool;
 
 import java.util.List;
 
@@ -45,6 +49,8 @@ public class KouichiZipper extends Block {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable BlockGetter pLevel, List<Component> tooltip, TooltipFlag pFlag) {
         tooltip.add(Component.translatable("des.virtuarealcraft.kouichi_zipper").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY).withItalic(true)));
+
+        TooltipTool.addLiverInfo(tooltip, Livers.KOUICHI);
     }
 
     @Override
@@ -129,7 +135,7 @@ public class KouichiZipper extends Block {
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         pState = pState.cycle(OPEN);
         pLevel.setBlock(pPos, pState, 2);
-//        this.playSound(pPlayer, pLevel, pPos, pState.getValue(OPEN));
+        pLevel.playSound(pPlayer, pPos, SoundRegistry.ZIPPER.get(), SoundSource.BLOCKS, 1.0F, pLevel.getRandom().nextFloat() * 0.1F + 0.9F);
         return InteractionResult.sidedSuccess(pLevel.isClientSide);
     }
 }
