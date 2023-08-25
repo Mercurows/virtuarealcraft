@@ -1,72 +1,110 @@
 {
   "variants": {
-    "facing=north,open=false,wall=false": {
+    "facing=north,open=false,wall=false,top=false": {
       "model": "virtuarealcraft:block/kouichi_zipper_close"
     },
-    "facing=east,open=false,wall=false": {
+    "facing=east,open=false,wall=false,top=false": {
       "model": "virtuarealcraft:block/kouichi_zipper_close",
       "y": 90
     },
-    "facing=south,open=false,wall=false": {
+    "facing=south,open=false,wall=false,top=false": {
       "model": "virtuarealcraft:block/kouichi_zipper_close",
       "y": 180
     },
-    "facing=west,open=false,wall=false": {
+    "facing=west,open=false,wall=false,top=false": {
       "model": "virtuarealcraft:block/kouichi_zipper_close",
       "y": 270
     },
-    "facing=north,open=false,wall=true": {
+    "facing=north,open=false,wall=true,top=false": {
       "model": "virtuarealcraft:block/kouichi_zipper_close",
       "x": 90
     },
-    "facing=east,open=false,wall=true": {
+    "facing=east,open=false,wall=true,top=false": {
       "model": "virtuarealcraft:block/kouichi_zipper_close",
       "y": 90,
       "x": 90
     },
-    "facing=south,open=false,wall=true": {
+    "facing=south,open=false,wall=true,top=false": {
       "model": "virtuarealcraft:block/kouichi_zipper_close",
       "y": 180,
       "x": 90
     },
-    "facing=west,open=false,wall=true": {
+    "facing=west,open=false,wall=true,top=false": {
       "model": "virtuarealcraft:block/kouichi_zipper_close",
       "y": 270,
       "x": 90
     },
-    "facing=north,open=true,wall=false": {
+    "facing=north,open=true,wall=false,top=false": {
       "model": "virtuarealcraft:block/kouichi_zipper_open"
     },
-    "facing=east,open=true,wall=false": {
+    "facing=east,open=true,wall=false,top=false": {
       "model": "virtuarealcraft:block/kouichi_zipper_open",
       "y": 90
     },
-    "facing=south,open=true,wall=false": {
+    "facing=south,open=true,wall=false,top=false": {
       "model": "virtuarealcraft:block/kouichi_zipper_open",
       "y": 180
     },
-    "facing=west,open=true,wall=false": {
+    "facing=west,open=true,wall=false,top=false": {
       "model": "virtuarealcraft:block/kouichi_zipper_open",
       "y": 270
     },
-    "facing=north,open=true,wall=true": {
+    "facing=north,open=true,wall=true,top=false": {
       "model": "virtuarealcraft:block/kouichi_zipper_open",
       "x": 90
     },
-    "facing=east,open=true,wall=true": {
+    "facing=east,open=true,wall=true,top=false": {
       "model": "virtuarealcraft:block/kouichi_zipper_open",
       "y": 90,
       "x": 90
     },
-    "facing=south,open=true,wall=true": {
+    "facing=south,open=true,wall=true,top=false": {
       "model": "virtuarealcraft:block/kouichi_zipper_open",
       "y": 180,
       "x": 90
     },
-    "facing=west,open=true,wall=true": {
+    "facing=west,open=true,wall=true,top=false": {
       "model": "virtuarealcraft:block/kouichi_zipper_open",
       "y": 270,
       "x": 90
+    },
+    "facing=north,open=false,wall=false,top=true": {
+      "model": "virtuarealcraft:block/kouichi_zipper_close",
+      "x": 180
+    },
+    "facing=east,open=false,wall=false,top=true": {
+      "model": "virtuarealcraft:block/kouichi_zipper_close",
+      "y": 90,
+      "x": 180
+    },
+    "facing=south,open=false,wall=false,top=true": {
+      "model": "virtuarealcraft:block/kouichi_zipper_close",
+      "y": 180,
+      "x": 180
+    },
+    "facing=west,open=false,wall=false,top=true": {
+      "model": "virtuarealcraft:block/kouichi_zipper_close",
+      "y": 270,
+      "x": 180
+    },
+    "facing=north,open=true,wall=false,top=true": {
+      "model": "virtuarealcraft:block/kouichi_zipper_open",
+      "x": 180
+    },
+    "facing=east,open=true,wall=false,top=true": {
+      "model": "virtuarealcraft:block/kouichi_zipper_open",
+      "y": 90,
+      "x": 180
+    },
+    "facing=south,open=true,wall=false,top=true": {
+      "model": "virtuarealcraft:block/kouichi_zipper_open",
+      "y": 180,
+      "x": 180
+    },
+    "facing=west,open=true,wall=false,top=true": {
+      "model": "virtuarealcraft:block/kouichi_zipper_open",
+      "y": 270,
+      "x": 180
     }
   }
 }
