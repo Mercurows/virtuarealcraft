@@ -40,7 +40,7 @@ public class KouichiZipper extends Block {
     public static final BooleanProperty TOP = BooleanProperty.create("top");
 
     public KouichiZipper() {
-        super(Properties.of().noCollission());
+        super(Properties.of().noCollission().strength(1.0f));
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(OPEN, false)
                 .setValue(WALL, false).setValue(TOP, false));
     }
