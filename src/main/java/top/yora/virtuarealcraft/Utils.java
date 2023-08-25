@@ -4,10 +4,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import top.yora.virtuarealcraft.init.EntityRegistry;
-import top.yora.virtuarealcraft.init.GroupRegistry;
-import top.yora.virtuarealcraft.init.ItemRegistry;
-import top.yora.virtuarealcraft.init.SoundRegistry;
+import top.yora.virtuarealcraft.init.*;
 import top.yora.virtuarealcraft.network.VrcNetwork;
 
 @Mod("virtuarealcraft")
@@ -28,7 +25,7 @@ public class Utils {
         EntityRegistry.ENTITY_TYPES.register(eventBus);
 //        VillagerInit.POINTS_OF_INTEREST.register(eventBus);
 //        VillagerInit.PROFESSIONS.register(eventBus);
-//        BlockRegistry.BLOCKS.register(eventBus);
+        BlockRegistry.BLOCKS.register(eventBus);
 //        AttributeRegistry.ATTRIBUTES.register(eventBus);
 //        ParticleRegistry.PARTICLE_TYPES.register(eventBus);
 //        TileEntityRegistry.TILE_ENTITY_TYPES.register(eventBus);

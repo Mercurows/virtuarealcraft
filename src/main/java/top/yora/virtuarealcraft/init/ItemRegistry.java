@@ -1,5 +1,6 @@
 package top.yora.virtuarealcraft.init;
 
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -55,6 +56,7 @@ public class ItemRegistry {
 
     //kouichi
     public static final RegistryObject<Item> BLOOD_WINGS = ITEMS.register("blood_wings", BloodWings::new);
+    public static final RegistryObject<Item> KOUICHI_ZIPPER = ITEMS.register("kouichi_zipper", () -> new BlockItem(BlockRegistry.KOUICHI_ZIPPER.get(), new Item.Properties()));
 
 
     /**
