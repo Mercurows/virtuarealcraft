@@ -8,10 +8,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterials;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -30,7 +27,7 @@ import java.util.List;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class BloodWings extends ArmorItem {
     public BloodWings() {
-        super(ArmorMaterials.IRON, Type.CHESTPLATE, new Properties());
+        super(ArmorMaterials.IRON, Type.CHESTPLATE, new Properties().rarity(Rarity.UNCOMMON).durability(410));
     }
 
     @OnlyIn(Dist.CLIENT)
