@@ -5,10 +5,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import top.yora.virtuarealcraft.models.HamsterWheelModel;
-import top.yora.virtuarealcraft.models.KuyaModel;
-import top.yora.virtuarealcraft.models.ShadowHoodModel;
-import top.yora.virtuarealcraft.models.SharkTailModel;
+import top.yora.virtuarealcraft.models.*;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModelRegistry {
@@ -18,5 +15,6 @@ public class ModelRegistry {
         event.registerLayerDefinition(ShadowHoodModel.LAYER_LOCATION, ShadowHoodModel::createBodyLayer);
         event.registerLayerDefinition(HamsterWheelModel.LAYER_LOCATION, HamsterWheelModel::createBodyLayer);
         event.registerLayerDefinition(KuyaModel.LAYER_LOCATION, KuyaModel::createBodyLayer);
+        event.registerLayerDefinition(BarrierHatModel.LAYER_LOCATION, BarrierHatModel::createBodyLayer);
     }
 }
