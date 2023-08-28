@@ -38,6 +38,7 @@ import top.yora.virtuarealcraft.item.virtuareal5th.hoshimi.RedSunflowerSeeds;
 import top.yora.virtuarealcraft.item.virtuareal5th.mahiru.MahiruTail;
 import top.yora.virtuarealcraft.item.virtuareal5th.miki.Mi;
 import top.yora.virtuarealcraft.item.virtuareal5th.miki.MikiTail;
+import top.yora.virtuarealcraft.item.virtuareal6th.roi.RoyalHalo;
 import top.yora.virtuarealcraft.item.virtuareal6th.tabibito.ReverseCard;
 import top.yora.virtuarealcraft.item.virtuareal7th.saya.SugarCaneCake;
 import top.yora.virtuarealcraft.item.virtuareal7th.yukie.YukieDumplings;
@@ -115,7 +116,7 @@ public class ItemRegistry {
     public static final RegistryObject<Item> REVERSE_CARD = ITEMS.register("reverse_card", ReverseCard::new);
 
     //roi
-
+    public static final RegistryObject<Item> ROYAL_HALO = ITEMS.register("royal_halo", RoyalHalo::new);
 
     /**
      * 7th
