@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "SPS",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:wheat"
+    },
+    "S": {
+      "item": "minecraft:snowball"
+    },
+    "P": {
+      "item": "minecraft:porkchop"
+    }
+  },
+  "result": {
+    "item": "virtuarealcraft:yukie_dumplings",
+    "count": 2
+  }
+}
