@@ -38,6 +38,7 @@ import top.yora.virtuarealcraft.item.virtuareal5th.mahiru.MahiruTail;
 import top.yora.virtuarealcraft.item.virtuareal5th.miki.Mi;
 import top.yora.virtuarealcraft.item.virtuareal5th.miki.MikiTail;
 import top.yora.virtuarealcraft.item.virtuareal6th.tabibito.ReverseCard;
+import top.yora.virtuarealcraft.item.virtuareal7th.yukie.YukieDumplings;
 import top.yora.virtuarealcraft.item.virtuareal9th.chiharu.LittleSpringRoll;
 import top.yora.virtuarealcraft.item.virtuareal9th.chiharu.Magnifier;
 
@@ -105,6 +106,16 @@ public class ItemRegistry {
     public static final RegistryObject<Item> REVERSE_CARD = ITEMS.register("reverse_card", ReverseCard::new);
 
     //roi
+
+
+    /**
+     * 7th
+     */
+    //saya
+
+
+    //yukie
+    public static final RegistryObject<Item> YUKIE_DUMPLINGS = ITEMS.register("yukie_dumplings", YukieDumplings::new);
 
 
     /**
