@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "SSS",
+    "YYY"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:milk_bucket"
+    },
+    "S": {
+      "item": "minecraft:sugar"
+    },
+    "Y": {
+      "item": "minecraft:sugar_cane"
+    }
+  },
+  "result": {
+    "item": "virtuarealcraft:sugar_cane_cake",
+    "count": 1
+  }
+}
