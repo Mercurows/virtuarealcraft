@@ -16,5 +16,6 @@ public class ModelRegistry {
         event.registerLayerDefinition(HamsterWheelModel.LAYER_LOCATION, HamsterWheelModel::createBodyLayer);
         event.registerLayerDefinition(KuyaModel.LAYER_LOCATION, KuyaModel::createBodyLayer);
         event.registerLayerDefinition(BarrierHatModel.LAYER_LOCATION, BarrierHatModel::createBodyLayer);
+        event.registerLayerDefinition(RainCrystalModel.LAYER_LOCATION, RainCrystalModel::createBodyLayer);
     }
 }

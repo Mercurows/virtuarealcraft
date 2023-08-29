@@ -3,6 +3,10 @@ package top.yora.virtuarealcraft.item.virtuareal19th.ameki;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tiers;
@@ -29,5 +33,26 @@ public class ButterflyStaff extends SwordItem {
         tooltip.add(Component.translatable("des.virtuarealcraft.butterfly_staff").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
 
         TooltipTool.addLiverInfo(tooltip, Livers.AMEKI);
+    }
+
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
+        ItemStack stack = pPlayer.getItemInHand(pUsedHand);
+        pPlayer.startUsingItem(pUsedHand);
+        return InteractionResultHolder.consume(stack);
+    }
+
+    @Override
+    public void onUseTick(Level pLevel, LivingEntity pLivingEntity, ItemStack pStack, int pRemainingUseDuration) {
+        int tick = this.getUseDuration(pStack) - pRemainingUseDuration;
+        if(tick % 10 == 0){
+
+
+        }
+    }
+
+    @Override
+    public int getUseDuration(ItemStack pStack) {
+        return 72000;
     }
 }
