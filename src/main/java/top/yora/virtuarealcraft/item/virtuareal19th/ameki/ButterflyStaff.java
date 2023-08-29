@@ -14,6 +14,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import top.yora.virtuarealcraft.entity.RainCrystalEntity;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 
@@ -46,7 +47,14 @@ public class ButterflyStaff extends SwordItem {
     public void onUseTick(Level pLevel, LivingEntity pLivingEntity, ItemStack pStack, int pRemainingUseDuration) {
         int tick = this.getUseDuration(pStack) - pRemainingUseDuration;
         if(tick % 10 == 0){
-
+            if(!pLevel.isClientSide && pLivingEntity instanceof Player player){
+                for(int i=0;i<8;i++){
+                    RainCrystalEntity rainCrystal = new RainCrystalEntity(pLevel, player);
+                    //TODO 修改为正确的发射方向
+                    rainCrystal.shoot(player.getXRot(), 0, 1, 4f, 0);
+                    pLevel.addFreshEntity(rainCrystal);
+                }
+            }
 
         }
     }
