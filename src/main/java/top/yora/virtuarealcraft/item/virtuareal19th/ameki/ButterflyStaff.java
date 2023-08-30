@@ -99,7 +99,7 @@ public class ButterflyStaff extends SwordItem {
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
         if(pEntity instanceof Player player) {
             if(player.tickCount % 20 == 0) {
-                pStack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(p.getUsedItemHand()));
+                pStack.hurtAndBreak(-1, player, p -> p.broadcastBreakEvent(p.getUsedItemHand()));
             }
         }
     }
