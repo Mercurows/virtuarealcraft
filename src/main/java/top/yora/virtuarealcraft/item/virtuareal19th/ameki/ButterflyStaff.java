@@ -47,12 +47,14 @@ public class ButterflyStaff extends SwordItem {
     public void onUseTick(Level pLevel, LivingEntity pLivingEntity, ItemStack pStack, int pRemainingUseDuration) {
         int tick = this.getUseDuration(pStack) - pRemainingUseDuration;
         if(tick % 10 == 0){
-            if(!pLevel.isClientSide && pLivingEntity instanceof Player player){
+            if(pLivingEntity instanceof Player player){
                 for(int i=0;i<8;i++){
-                    RainCrystalEntity rainCrystal = new RainCrystalEntity(pLevel, player);
-                    //TODO 修改为正确的发射方向
-                    rainCrystal.shoot(player.getXRot(), 0, 1, 4f, 0);
-                    pLevel.addFreshEntity(rainCrystal);
+                    if(!pLevel.isClientSide) {
+                        RainCrystalEntity rainCrystal = new RainCrystalEntity(pLevel, player);
+                        //TODO 修改为正确的发射方向
+                        rainCrystal.shootFromRotation(player, player.getXRot() + i * 45.0f, 90.0f, 0.0f, 3f, 0.0f);
+                        pLevel.addFreshEntity(rainCrystal);
+                    }
                 }
             }
 
