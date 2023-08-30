@@ -43,6 +43,7 @@ public class ButterflyStaff extends SwordItem {
         return InteractionResultHolder.consume(stack);
     }
 
+    @SuppressWarnings("IntegerDivisionInFloatingPointContext")
     @Override
     public void onUseTick(Level pLevel, LivingEntity pLivingEntity, ItemStack pStack, int pRemainingUseDuration) {
         int tick = this.getUseDuration(pStack) - pRemainingUseDuration;
@@ -51,13 +52,13 @@ public class ButterflyStaff extends SwordItem {
                 for (int i = 0; i < 8; i++) {
                     if (!pLevel.isClientSide) {
                         RainCrystalEntity rainCrystal = new RainCrystalEntity(pLevel, player);
-                        rainCrystal.shootFromRotation(player, 0, player.getYRot() + i * 45, 0, 3f, 0);
-                        rainCrystal.setPos(player.getPosition(0));
+                        rainCrystal.shootFromRotation(player, 0, player.getYRot() + i * 45 + (tick % 90 / 10) * 5f, 0, 3.2f, 0);
+                        rainCrystal.setPos(player.getPosition(0).add(0, 1, 0));
+                        rainCrystal.setNoGravity(true);
                         pLevel.addFreshEntity(rainCrystal);
                     }
                 }
             }
-
         }
     }
 
