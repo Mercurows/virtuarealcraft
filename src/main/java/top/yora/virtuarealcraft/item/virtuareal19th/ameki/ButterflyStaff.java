@@ -23,14 +23,12 @@ import java.util.List;
 
 public class ButterflyStaff extends SwordItem {
     public ButterflyStaff() {
-        super(Tiers.IRON, 1, -2.0f, new Properties().durability(261));
+        super(Tiers.IRON, 1, -2.0f, new Properties().durability(261).rarity(Rarity.UNCOMMON));
     }
 
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        TooltipTool.addDevelopingText(tooltip);
-
         tooltip.add(Component.translatable("des.virtuarealcraft.butterfly_staff").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
 
         TooltipTool.addLiverInfo(tooltip, Livers.AMEKI);
