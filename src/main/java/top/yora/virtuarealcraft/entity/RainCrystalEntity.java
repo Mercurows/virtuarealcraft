@@ -56,7 +56,6 @@ public class RainCrystalEntity extends ThrowableItemProjectile {
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
         if (pResult.getEntity() instanceof LivingEntity livingEntity) {
-            //TODO 添加自定义伤害类型
             livingEntity.hurt(DamageSourceRegistry.rainCrystal(level(), getOwner()), 4.0F);
         }
         super.onHitEntity(pResult);
