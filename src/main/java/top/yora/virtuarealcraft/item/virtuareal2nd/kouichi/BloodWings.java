@@ -40,6 +40,7 @@ public class BloodWings extends ArmorItem {
         TooltipTool.addLiverInfo(tooltip, Livers.KOUICHI);
     }
 
+    @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void leftClick(PlayerInteractEvent.LeftClickEmpty event) {
         if (!event.getItemStack().isEmpty()) {
@@ -58,6 +59,7 @@ public class BloodWings extends ArmorItem {
         VrcNetwork.CHANNEL.sendToServer(new BloodWingPacket(true));
     }
 
+    @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void rightClick(PlayerInteractEvent.RightClickEmpty event) {
         if (!event.getItemStack().isEmpty()) {
