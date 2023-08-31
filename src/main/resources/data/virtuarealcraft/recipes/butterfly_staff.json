@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "gGg",
+    " D ",
+    " / "
+  ],
+  "key": {
+    "g": {
+      "item": "minecraft:gold_ingot"
+    },
+    "G": {
+      "item": "minecraft:gold_block"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "/": {
+      "item": "minecraft:end_rod"
+    }
+  },
+  "result": {
+    "item": "virtuarealcraft:butterfly_staff",
+    "count": 1
+  }
+}
