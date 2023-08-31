@@ -38,6 +38,7 @@ import top.yora.virtuarealcraft.item.virtuareal5th.hoshimi.RedSunflowerSeeds;
 import top.yora.virtuarealcraft.item.virtuareal5th.mahiru.MahiruTail;
 import top.yora.virtuarealcraft.item.virtuareal5th.miki.Mi;
 import top.yora.virtuarealcraft.item.virtuareal5th.miki.MikiTail;
+import top.yora.virtuarealcraft.item.virtuareal6th.aza.CharmingBrooch;
 import top.yora.virtuarealcraft.item.virtuareal6th.roi.RoyalHalo;
 import top.yora.virtuarealcraft.item.virtuareal6th.tabibito.ReverseCard;
 import top.yora.virtuarealcraft.item.virtuareal7th.saya.SugarCaneCake;
@@ -107,7 +108,7 @@ public class ItemRegistry {
      * 6th
      */
     //aza
-
+    public static final RegistryObject<Item> CHARMING_BROOCH = ITEMS.register("charming_brooch", CharmingBrooch::new);
 
     //yagi
 
