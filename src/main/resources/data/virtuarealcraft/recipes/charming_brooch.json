@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " #g",
+    "iDi",
+    " i "
+  ],
+  "key": {
+    "#": {
+      "item": "virtuarealcraft:tokimori_seisand"
+    },
+    "g": {
+      "item": "minecraft:gold_ingot"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "item": "virtuarealcraft:charming_brooch",
+    "count": 1
+  }
+}
