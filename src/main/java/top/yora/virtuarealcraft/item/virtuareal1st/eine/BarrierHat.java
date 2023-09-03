@@ -90,4 +90,9 @@ public class BarrierHat extends ArmorItem {
             }
         }
     }
+
+    @Override
+    public boolean isValidRepairItem(ItemStack pToRepair, ItemStack pRepair) {
+        return pRepair.getItem() == Items.IRON_INGOT;
+    }
 }

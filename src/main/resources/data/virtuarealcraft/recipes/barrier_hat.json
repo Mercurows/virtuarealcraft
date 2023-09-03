@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "SLS",
+    "# R"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:black_wool"
+    },
+    "S": {
+      "item": "minecraft:shield"
+    },
+    "L": {
+      "item": "minecraft:leather_helmet"
+    },
+    "R": {
+      "item": "minecraft:red_wool"
+    }
+  },
+  "result": {
+    "item": "virtuarealcraft:barrier_hat",
+    "count": 1
+  }
+}
