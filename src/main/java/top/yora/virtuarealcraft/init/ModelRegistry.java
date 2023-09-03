@@ -18,5 +18,7 @@ public class ModelRegistry {
         event.registerLayerDefinition(BarrierHatModel.LAYER_LOCATION, BarrierHatModel::createBodyLayer);
         event.registerLayerDefinition(RainCrystalModel.LAYER_LOCATION, RainCrystalModel::createBodyLayer);
         event.registerLayerDefinition(BloodWingsModel.LAYER_LOCATION, BloodWingsModel::createBodyLayer);
+        event.registerLayerDefinition(AngelHaloModel.LAYER_LOCATION, AngelHaloModel::createBodyLayer);
+        event.registerLayerDefinition(RoyalHaloModel.LAYER_LOCATION, RoyalHaloModel::createBodyLayer);
     }
 }
