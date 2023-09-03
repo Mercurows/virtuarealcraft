@@ -6,14 +6,16 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterials;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
@@ -31,14 +33,12 @@ import java.util.function.Consumer;
 
 public class BarrierHat extends ArmorItem {
     public BarrierHat() {
-        super(ArmorMaterials.LEATHER, Type.HELMET, new Properties().durability(202));
+        super(ArmorMaterials.LEATHER, Type.HELMET, new Properties().durability(202).rarity(Rarity.UNCOMMON));
     }
 
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        TooltipTool.addDevelopingText(tooltip);
-
         tooltip.add(Component.translatable("des.virtuarealcraft.barrier_hat").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY).withItalic(true)));
 
         TooltipTool.addLiverInfo(tooltip, Livers.EINE);
@@ -70,5 +70,24 @@ public class BarrierHat extends ArmorItem {
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
         return Utils.MOD_ID + ":textures/models/armor/barrier_hat.png";
+    }
+
+    @Override
+    public void onArmorTick(ItemStack stack, Level level, Player player) {
+        if (player.isSteppingCarefully()) {
+            if(!level.isClientSide){
+                player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 100, 0));
+            }
+
+            AABB box = new AABB(player.getOnPos()).inflate(2);
+            for (var entity : level.getEntitiesOfClass(Projectile.class, box)) {
+                if (entity.getOwner() != player && !entity.getTags().contains(Utils.MOD_ID + "_bounce") && !entity.onGround()) {
+                    entity.setDeltaMovement(entity.getDeltaMovement().multiply(-1, -1, -1));
+                    entity.addTag(Utils.MOD_ID + "_bounce");
+
+                    stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(EquipmentSlot.HEAD));
+                }
+            }
+        }
     }
 }
