@@ -20,5 +20,6 @@ public class ModelRegistry {
         event.registerLayerDefinition(BloodWingsModel.LAYER_LOCATION, BloodWingsModel::createBodyLayer);
         event.registerLayerDefinition(AngelHaloModel.LAYER_LOCATION, AngelHaloModel::createBodyLayer);
         event.registerLayerDefinition(RoyalHaloModel.LAYER_LOCATION, RoyalHaloModel::createBodyLayer);
+        event.registerLayerDefinition(MihiruTailModel.LAYER_LOCATION, MihiruTailModel::createBodyLayer);
     }
 }
