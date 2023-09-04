@@ -162,10 +162,13 @@ public class ItemRegistry {
     //mari
     public static final RegistryObject<Item> BLOOD_PEARL = ITEMS.register("blood_pearl", BloodPearl::new);
 
+
     /**
      * 12th
      */
+    //mayumi
     public static final RegistryObject<Item> MAYUMI_LEFTHAND = ITEMS.register("mayumi_lefthand", MayumiLefthand::new);
+
 
     /**
      * 13th

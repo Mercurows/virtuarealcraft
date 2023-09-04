@@ -1,9 +1,11 @@
 package top.yora.virtuarealcraft.item.virtuareal12th.mayumi;
 
-import net.minecraft.client.Minecraft;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -17,11 +19,10 @@ import top.yora.virtuarealcraft.tool.TooltipTool;
 import javax.annotation.Nullable;
 import java.util.List;
 
-// TODO 我贴图和物品名称呢
+// TODO 我模型呢
 public class MayumiLefthand extends Item {
     public MayumiLefthand() {
-        // TODO 我物品耐久呢
-        super(new Properties().durability(21));
+        super(new Properties().durability(816));
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -29,7 +30,7 @@ public class MayumiLefthand extends Item {
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
         TooltipTool.addDevelopingText(tooltip);
 
-        // TODO 我简介呢
+        tooltip.add(Component.translatable("des.virtuarealcraft.mayumi_lefthand").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
 
         TooltipTool.addLiverInfo(tooltip, Livers.MAYUMI);
     }
@@ -38,10 +39,12 @@ public class MayumiLefthand extends Item {
     // TODO 实现视线方块检测
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
-        if (pLevel.isNight()) {
-            Player p = Minecraft.getInstance().player;
-            if (p != null) {
-                float yrot = p.getViewYRot(0) % 360;
+        ItemStack stack = pPlayer.getItemInHand(pUsedHand);
+        InteractionHand left = pPlayer.getMainArm() == HumanoidArm.RIGHT ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
+
+        if(pUsedHand == left) {
+            if (pLevel.isNight()) {
+                float yrot = pPlayer.getViewYRot(0) % 360;
                 boolean isReversed = yrot < 0;
                 boolean isValid = false;
                 boolean isEast = false;
@@ -67,7 +70,7 @@ public class MayumiLefthand extends Item {
                         float playerPercent = (180 - (pPlayer.getViewXRot(0) + 90)) / 180f;
 
                         if (Math.abs(moonPercent - playerPercent) < 0.022 && isEast) {
-                            p.sendSystemMessage(Component.literal("moon look east"));
+                            pPlayer.sendSystemMessage(Component.literal("moon look east"));
                         }
                     } else {
                         // moon west
@@ -75,12 +78,13 @@ public class MayumiLefthand extends Item {
                         float playerPercent = (pPlayer.getViewXRot(0) + 90) / 180f;
 
                         if (Math.abs(moonPercent - playerPercent) < 0.022 && !isEast) {
-                            p.sendSystemMessage(Component.literal("moon look west"));
+                            pPlayer.sendSystemMessage(Component.literal("moon look west"));
                         }
                     }
+                    return InteractionResultHolder.success(stack);
                 }
             }
         }
-        return super.use(pLevel, pPlayer, pUsedHand);
+        return InteractionResultHolder.fail(stack);
     }
 }
