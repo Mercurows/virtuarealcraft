@@ -17,8 +17,10 @@ import top.yora.virtuarealcraft.tool.TooltipTool;
 import javax.annotation.Nullable;
 import java.util.List;
 
+// TODO 我贴图和物品名称呢
 public class MayumiLefthand extends Item {
     public MayumiLefthand() {
+        // TODO 我物品耐久呢
         super(new Properties().durability(21));
     }
 
