@@ -40,7 +40,6 @@ public class BloodWingPacket {
                         !player.getCooldowns().isOnCooldown(ItemRegistry.BLOOD_WINGS.get())) {
 
                     if (isLeftClick) {
-                        // TODO 修改为吓我一跳释放匕首
                         KouichiDartsEntity kouichiDarts = new KouichiDartsEntity(level, player);
                         kouichiDarts.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, 4, 0);
                         kouichiDarts.setPos(player.getPosition(0).add(0, player.getEyeHeight(), 0));

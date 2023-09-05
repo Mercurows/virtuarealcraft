@@ -44,8 +44,6 @@ public class BloodWings extends ArmorItem {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        TooltipTool.addDevelopingText(tooltip);
-
         tooltip.add(Component.translatable("des.virtuarealcraft.blood_wings").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
 
         TooltipTool.addLiverInfo(tooltip, Livers.KOUICHI);

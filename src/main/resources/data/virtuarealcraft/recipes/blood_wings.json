@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "g g",
+    "RIR",
+    "Z Z"
+  ],
+  "key": {
+    "g": {
+      "item": "minecraft:gold_ingot"
+    },
+    "R": {
+      "item": "minecraft:red_wool"
+    },
+    "I": {
+      "item": "minecraft:iron_chestplate"
+    },
+    "Z": {
+      "item": "minecraft:iron_sword"
+    }
+  },
+  "result": {
+    "item": "virtuarealcraft:blood_wings",
+    "count": 1
+  }
+}
