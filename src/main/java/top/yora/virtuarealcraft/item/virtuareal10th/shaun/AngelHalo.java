@@ -36,7 +36,7 @@ public class AngelHalo extends ArmorItem {
     public static final String TAG_TIME = "time";
 
     public AngelHalo() {
-        super(ArmorMaterials.IRON, Type.HELMET, new Properties().durability(303).rarity(Rarity.EPIC));
+        super(ArmorMaterials.GOLD, Type.HELMET, new Properties().durability(303).rarity(Rarity.EPIC));
     }
 
     @OnlyIn(Dist.CLIENT)
