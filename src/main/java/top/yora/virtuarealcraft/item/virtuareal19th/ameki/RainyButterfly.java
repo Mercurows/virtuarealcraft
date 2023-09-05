@@ -93,7 +93,7 @@ public class RainyButterfly extends SwordItem {
         if (!worldIn.isClientSide) {
             if (entityIn instanceof Player player) {
                 boolean isMainhand = player.getMainHandItem() == stack;
-                boolean isOffHand = player.getMainHandItem() == stack;
+                boolean isOffHand = player.getOffhandItem() == stack;
 
                 if (isMainhand || isOffHand) {
                     boolean open = ItemNBTTool.getBoolean(stack, TAG_RAINY_BUTTERFLY_OPEN, false);

@@ -26,7 +26,7 @@ public class HudClientEvent {
 
         ItemStack stack = null;
         ItemStack mainhandStack = player.getMainHandItem();
-        ItemStack offhandStack = player.getMainHandItem();
+        ItemStack offhandStack = player.getOffhandItem();
 
         if (mainhandStack.getItem() == ItemRegistry.RAINY_BUTTERFLY.get()) {
             stack = mainhandStack;
