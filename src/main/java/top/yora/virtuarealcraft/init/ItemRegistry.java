@@ -26,6 +26,7 @@ import top.yora.virtuarealcraft.item.virtuareal19th.ameki.ButterflyStaff;
 import top.yora.virtuarealcraft.item.virtuareal19th.ameki.RainyButterfly;
 import top.yora.virtuarealcraft.item.virtuareal19th.michiya.EternalCandelabra;
 import top.yora.virtuarealcraft.item.virtuareal1st.eine.BarrierHat;
+import top.yora.virtuarealcraft.item.virtuareal20th.kismet.ayumi.BaseballBat;
 import top.yora.virtuarealcraft.item.virtuareal2nd.kouichi.BloodWings;
 import top.yora.virtuarealcraft.item.virtuareal2nd.nanami.IceCreamBlackTea;
 import top.yora.virtuarealcraft.item.virtuareal2nd.nanami.SharkTail;
@@ -210,6 +211,13 @@ public class ItemRegistry {
 
     //michiya
     public static final RegistryObject<Item> ETERNAL_CANDELABRA = ITEMS.register("eternal_candelabra", EternalCandelabra::new);
+
+
+    /**
+     * 20th-kismet
+     */
+    //ayumi
+    public static final RegistryObject<Item> BASEBALL_BAT = ITEMS.register("baseball_bat", BaseballBat::new);
 
 
     /**
