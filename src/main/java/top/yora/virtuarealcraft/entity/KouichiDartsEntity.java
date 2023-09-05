@@ -44,6 +44,6 @@ public class KouichiDartsEntity extends ThrowableItemProjectile {
             livingEntity.addEffect(new MobEffectInstance(MobEffects.POISON, 300, 2));
             livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 300, 1));
         }
-        super.onHitEntity(pResult);
+        this.discard();
     }
 }

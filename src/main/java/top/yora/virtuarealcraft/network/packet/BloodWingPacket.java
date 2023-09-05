@@ -6,11 +6,10 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.Fireball;
-import net.minecraft.world.entity.projectile.SmallFireball;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.network.NetworkEvent;
+import top.yora.virtuarealcraft.entity.KouichiDartsEntity;
 import top.yora.virtuarealcraft.init.ItemRegistry;
 
 import java.util.function.Supplier;
@@ -42,10 +41,10 @@ public class BloodWingPacket {
 
                     if (isLeftClick) {
                         // TODO 修改为吓我一跳释放匕首
-                        Fireball ball = new SmallFireball(level, player, 0, 0, 0);
-                        ball.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, 5, 0);
-                        ball.setPos(player.getPosition(0).add(0, player.getEyeHeight(), 0));
-                        level.addFreshEntity(ball);
+                        KouichiDartsEntity kouichiDarts = new KouichiDartsEntity(level, player);
+                        kouichiDarts.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, 4, 0);
+                        kouichiDarts.setPos(player.getPosition(0).add(0, player.getEyeHeight(), 0));
+                        level.addFreshEntity(kouichiDarts);
 
                         player.getItemBySlot(EquipmentSlot.CHEST).hurtAndBreak(1, player, p -> p.broadcastBreakEvent(EquipmentSlot.CHEST));
                         player.getCooldowns().addCooldown(ItemRegistry.BLOOD_WINGS.get(), 80);

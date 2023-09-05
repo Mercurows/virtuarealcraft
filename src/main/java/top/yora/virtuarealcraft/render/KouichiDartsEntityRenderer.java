@@ -35,10 +35,10 @@ public class KouichiDartsEntityRenderer extends EntityRenderer<KouichiDartsEntit
         super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
         matrixStackIn.pushPose();
 
-        matrixStackIn.mulPose(Axis.YP.rotationDegrees(Mth.lerp(partialTicks, entityIn.yRotO, entityIn.getYRot()) - 90.0F));
-        matrixStackIn.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(partialTicks, entityIn.xRotO, entityIn.getXRot()) + 90.0F));
+        matrixStackIn.mulPose(Axis.YP.rotationDegrees(Mth.lerp(partialTicks, entityIn.yRotO, entityIn.getYRot()) + 180.0F));
+        matrixStackIn.mulPose(Axis.XP.rotationDegrees(Mth.lerp(partialTicks, entityIn.xRotO, entityIn.getXRot())));
 
-        matrixStackIn.translate(0.0f, -1.0f, 0.0f);
+        matrixStackIn.translate(0.0f, -1.4f, 0.0f);
         VertexConsumer vertexConsumer = ItemRenderer.getFoilBufferDirect(bufferIn, this.kouichiDartsModel.renderType(this.getTextureLocation(entityIn)), false, false);
         this.kouichiDartsModel.renderToBuffer(matrixStackIn, vertexConsumer, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
         matrixStackIn.popPose();
