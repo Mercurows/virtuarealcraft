@@ -79,7 +79,7 @@ public class BarrierHat extends ArmorItem {
                 player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 100, 0));
             }
 
-            AABB box = new AABB(player.getOnPos()).inflate(2);
+            AABB box = new AABB(player.getOnPos()).inflate(3);
             for (var entity : level.getEntitiesOfClass(Projectile.class, box)) {
                 if (entity.getOwner() != player && !entity.getTags().contains(Utils.MOD_ID + "_bounce") && !entity.onGround()) {
                     entity.setDeltaMovement(entity.getDeltaMovement().multiply(-1, -1, -1));
