@@ -6,6 +6,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import top.yora.virtuarealcraft.Utils;
+import top.yora.virtuarealcraft.entity.KouichiDartsEntity;
 import top.yora.virtuarealcraft.entity.KuyaEntity;
 import top.yora.virtuarealcraft.entity.RainCrystalEntity;
 
@@ -18,4 +19,7 @@ public class EntityRegistry {
     public static final RegistryObject<EntityType<RainCrystalEntity>> RAIN_CRYSTAL_ENTITY =
             ENTITY_TYPES.register("rain_crystal",
                     () -> EntityType.Builder.<RainCrystalEntity>of(RainCrystalEntity::new, MobCategory.MISC).sized(0.1f, 0.1f).build("rain_crystal"));
+    public static final RegistryObject<EntityType<KouichiDartsEntity>> KOUICHI_DARTS_ENTITY =
+            ENTITY_TYPES.register("kouichi_darts",
+                    () -> EntityType.Builder.<KouichiDartsEntity>of(KouichiDartsEntity::new, MobCategory.MISC).sized(0.2f, 0.2f).build("kouichi_darts"));
 }

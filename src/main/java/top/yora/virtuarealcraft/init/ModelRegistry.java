@@ -21,5 +21,6 @@ public class ModelRegistry {
         event.registerLayerDefinition(AngelHaloModel.LAYER_LOCATION, AngelHaloModel::createBodyLayer);
         event.registerLayerDefinition(RoyalHaloModel.LAYER_LOCATION, RoyalHaloModel::createBodyLayer);
         event.registerLayerDefinition(MihiruTailModel.LAYER_LOCATION, MihiruTailModel::createBodyLayer);
+        event.registerLayerDefinition(KouichiDartsModel.LAYER_LOCATION, KouichiDartsModel::createBodyLayer);
     }
 }

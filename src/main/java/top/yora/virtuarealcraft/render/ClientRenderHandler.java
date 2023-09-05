@@ -13,5 +13,6 @@ public class ClientRenderHandler {
     public static void onClientSetUpEvent(FMLClientSetupEvent event) {
         EntityRenderers.register(EntityRegistry.KUYA_ENTITY.get(), KuyaEntityRenderer::new);
         EntityRenderers.register(EntityRegistry.RAIN_CRYSTAL_ENTITY.get(), RainCrystalEntityRenderer::new);
+        EntityRenderers.register(EntityRegistry.KOUICHI_DARTS_ENTITY.get(), KouichiDartsEntityRenderer::new);
     }
 }
