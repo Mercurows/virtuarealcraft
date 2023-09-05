@@ -18,7 +18,6 @@ public enum Livers {
     YUKIE("yukie", "7th", "#FFECC7", true),
     CHIHARU("chiharu", "9th", "#8C6250", true),
     REVE("reve","10th","#91BCB5",false),
-    SIRIUS("sirius","10th","#3755BD",true),
     YUA("yua", "10th", "#8AB0CC", true),
     SHAUN("shaun", "10th", "#DFD6D3", true),
     TANOSHIBA("tanoshiba","11th","#E7B45B",true),
@@ -52,7 +51,20 @@ public enum Livers {
     AMEKI("ameki", "19th", "#9EEEFF", true),
     MICHIYA("michiya", "19th", "#EBE4D7", true),
     AWU("awu", "19th", "#F9A699", true),
-    HATSUNE("hatsune", "19th", "#BA66F6", true);
+    HATSUNE("hatsune", "19th", "#BA66F6", true),
+    AYUMI("ayumi","20th-k","#A08A94",true),
+    MIZUKI("mizuki","20th-k","#E8D9C2",true),
+    RICHI("richi","20th-k","#CD5666",true),
+    MIKOTO("mikoto","20th-i","#935059",true),
+    URUSHIHA("urushiha","20th-i","#6309EA",true),
+    HAJIME("hajime","20th-i","#3B6CF7",true),
+    INARI("inari","link","#FFB779",true),
+    AZUSA("azusa","link","#B4B8FD",true),
+    KERO("kero","link","#C9302A",true),
+    RIN("rin","link","#7678A5",true),
+    NOX("nox","link","#438E94",true),
+    SUSAM("susam","link","#E5B5F9",true),
+    NOI("noi","link","#FEBB70",true);
 
     private final String name;
     private final String gen;

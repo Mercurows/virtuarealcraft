@@ -44,6 +44,9 @@ public class TooltipTool {
             case "17th" -> "#C92F51";
             case "18th" -> "#FCF9F0";
             case "19th" -> "#F8BCA3";
+            case "20th-k" -> "#EE64C8";
+            case "20th-i" -> "#0F1DC0";
+            case "link" -> "#838EF1";
             default -> "#FFFFFF";
         };
         if (!liver.isActive()) {
