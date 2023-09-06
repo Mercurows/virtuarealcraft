@@ -1,23 +1,23 @@
 {
 	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
 	"textures": {
 		"0": "virtuarealcraft:block/kouichi_zipper",
-		"2": "virtuarealcraft:block/kouichi",
+		"3": "virtuarealcraft:block/kouichi",
 		"particle": "virtuarealcraft:block/kouichi_zipper"
 	},
-	"render_type": "cutout",
 	"elements": [
 		{
 			"from": [2, 0.175, 4],
 			"to": [14, 0.175, 16],
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 13]},
 			"faces": {
-				"north": {"uv": [0, 0, 12, 0], "texture": "#2"},
-				"east": {"uv": [0, 0, 12, 0], "texture": "#2"},
-				"south": {"uv": [0, 0, 12, 0], "texture": "#2"},
-				"west": {"uv": [0, 0, 12, 0], "texture": "#2"},
-				"up": {"uv": [2.01399, 2.43357, 14.01399, 14.43357], "rotation": 180, "texture": "#2"},
-				"down": {"uv": [0, 0, 0.33566, 0.81119], "rotation": 180, "texture": "#2"}
+				"north": {"uv": [0, 0, 6, 0], "texture": "#3"},
+				"east": {"uv": [0, 0, 6, 0], "texture": "#3"},
+				"south": {"uv": [0, 0, 6, 0], "texture": "#3"},
+				"west": {"uv": [0, 0, 6, 0], "texture": "#3"},
+				"up": {"uv": [6, 6, 0, 0], "texture": "#3"},
+				"down": {"uv": [6, 6, 0, 12], "texture": "#3"}
 			}
 		},
 		{
