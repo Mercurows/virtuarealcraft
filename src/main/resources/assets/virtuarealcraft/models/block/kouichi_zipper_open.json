@@ -6,6 +6,7 @@
 		"3": "virtuarealcraft:block/kouichi",
 		"particle": "virtuarealcraft:block/kouichi_zipper"
 	},
+	"render_type": "cutout",
 	"elements": [
 		{
 			"from": [2, 0.175, 4],

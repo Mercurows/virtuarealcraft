@@ -20,6 +20,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import top.yora.virtuarealcraft.Utils;
+import top.yora.virtuarealcraft.block.CrystalBridgeBlock;
 import top.yora.virtuarealcraft.init.BlockRegistry;
 import top.yora.virtuarealcraft.models.RoyalHaloModel;
 import top.yora.virtuarealcraft.tool.Livers;
@@ -49,16 +50,35 @@ public class RoyalHalo extends ArmorItem {
     @Override
     public void onArmorTick(ItemStack stack, Level level, Player player) {
         if (!level.isClientSide && !player.isSteppingCarefully()) {
-            BlockPos pos = player.getOnPos().below();
+            //TODO 修改为正确的造桥判定
+            BlockPos pos = player.getOnPosLegacy();
 
             BlockState state = level.getBlockState(pos);
 
             if (state.getBlock() instanceof AirBlock) {
-                level.setBlockAndUpdate(pos, BlockRegistry.CRYSTAL_BRIDGE.get().defaultBlockState());
+                setBlocks(level, pos, BlockRegistry.CRYSTAL_BRIDGE.get().defaultBlockState());
                 stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(EquipmentSlot.HEAD));
+            } else if (state.getBlock() instanceof CrystalBridgeBlock) {
+                setBlocks(level, pos, BlockRegistry.CRYSTAL_BRIDGE.get().defaultBlockState());
             }
         }
         super.onArmorTick(stack, level, player);
+    }
+
+    private static void setBlocks(Level level, BlockPos pos, BlockState state) {
+        level.setBlock(pos, state, 2);
+        if (level.getBlockState(pos.offset(1, 0, 0)).getBlock() instanceof AirBlock) {
+            level.setBlock(pos.offset(1, 0, 0), state, 2);
+        }
+        if (level.getBlockState(pos.offset(-1, 0, 0)).getBlock() instanceof AirBlock) {
+            level.setBlock(pos.offset(-1, 0, 0), state, 2);
+        }
+        if (level.getBlockState(pos.offset(0, 0, 1)).getBlock() instanceof AirBlock) {
+            level.setBlock(pos.offset(0, 0, 1), state, 2);
+        }
+        if (level.getBlockState(pos.offset(0, 0, -1)).getBlock() instanceof AirBlock) {
+            level.setBlock(pos.offset(0, 0, -1), state, 2);
+        }
     }
 
     @Override
