@@ -50,7 +50,7 @@ public class OrangeGrenade extends Item {
                 itemstack.shrink(1);
             }
 
-            playerIn.getCooldowns().addCooldown(itemstack.getItem(), 80);
+            playerIn.getCooldowns().addCooldown(itemstack.getItem(), 53);
         } else {
             playerIn.startUsingItem(handIn);
         }

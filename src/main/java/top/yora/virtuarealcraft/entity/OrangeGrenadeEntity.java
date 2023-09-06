@@ -59,7 +59,7 @@ public class OrangeGrenadeEntity extends ThrowableItemProjectile {
         }
 
         Explosion explosion = new Explosion(world, entity, null, null,
-                entity.getX(), entity.getY(), entity.getZ(), 2.0f, false, Explosion.BlockInteraction.KEEP);
+                entity.getX(), entity.getY(), entity.getZ(), 2.5f, false, Explosion.BlockInteraction.KEEP);
 
         if(net.minecraftforge.event.ForgeEventFactory.onExplosionStart(world, explosion)) {
             return;
@@ -71,8 +71,8 @@ public class OrangeGrenadeEntity extends ThrowableItemProjectile {
         explosion.clearToBlow();
 
         for (ServerPlayer player : ((ServerLevel) world).players()) {
-            if (player.distanceToSqr(player.getX(), player.getY(), player.getZ()) < 100) {
-                player.connection.send(new ClientboundExplodePacket(entity.getX(), entity.getY(), entity.getZ(), 2, explosion.getToBlow(), explosion.getHitPlayers().get(player)));
+            if (player.distanceToSqr(player.getX(), player.getY(), player.getZ()) < 200) {
+                player.connection.send(new ClientboundExplodePacket(entity.getX(), entity.getY(), entity.getZ(), 2.5f, explosion.getToBlow(), explosion.getHitPlayers().get(player)));
             }
         }
     }

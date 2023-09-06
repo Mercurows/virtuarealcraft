@@ -25,5 +25,5 @@ public class EntityRegistry {
                     () -> EntityType.Builder.<KouichiDartsEntity>of(KouichiDartsEntity::new, MobCategory.MISC).sized(0.2f, 0.2f).build("kouichi_darts"));
     public static final RegistryObject<EntityType<OrangeGrenadeEntity>> ORANGE_GRENADE_ENTITY =
             ENTITY_TYPES.register("orange_grenade",
-                    () -> EntityType.Builder.<OrangeGrenadeEntity>of(OrangeGrenadeEntity::new, MobCategory.MISC).sized(0.25f, 0.25f).build("orange_grenade"));
+                    () -> EntityType.Builder.<OrangeGrenadeEntity>of(OrangeGrenadeEntity::new, MobCategory.MISC).sized(0.3f, 0.3f).build("orange_grenade"));
 }

@@ -40,8 +40,8 @@ public class OrangeGrenadeEntityRenderer extends EntityRenderer<OrangeGrenadeEnt
         matrixStackIn.mulPose(Axis.XP.rotationDegrees(90.0F));
         matrixStackIn.mulPose(Axis.ZP.rotationDegrees(90.0F));
 
-        matrixStackIn.translate(0.0f, -1.0f, 0.0f);
-        matrixStackIn.scale(0.7f,0.7f,0.7f);
+        matrixStackIn.translate(0.0f, -0.5f, 0.0f);
+        matrixStackIn.scale(0.6f,0.6f,0.6f);
         VertexConsumer vertexConsumer = ItemRenderer.getFoilBufferDirect(bufferIn, this.orangeGrenadeModel.renderType(this.getTextureLocation(entityIn)), false, false);
         this.orangeGrenadeModel.renderToBuffer(matrixStackIn, vertexConsumer, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
         matrixStackIn.popPose();
