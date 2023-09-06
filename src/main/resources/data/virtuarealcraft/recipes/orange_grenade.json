@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " /L",
+    "OTO",
+    "OOO"
+  ],
+  "key": {
+    "/": {
+      "item": "minecraft:stick"
+    },
+    "L": {
+      "item": "minecraft:lime_dye"
+    },
+    "O": {
+      "item": "minecraft:orange_dye"
+    },
+    "T": {
+      "item": "minecraft:tnt"
+    }
+  },
+  "result": {
+    "item": "virtuarealcraft:orange_grenade",
+    "count": 3
+  }
+}
