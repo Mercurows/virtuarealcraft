@@ -28,7 +28,7 @@ public class Utils {
         BlockRegistry.BLOCKS.register(eventBus);
 //        AttributeRegistry.ATTRIBUTES.register(eventBus);
 //        ParticleRegistry.PARTICLE_TYPES.register(eventBus);
-//        TileEntityRegistry.TILE_ENTITY_TYPES.register(eventBus);
+        BlockEntityRegistry.BLOCK_ENTITY_TYPES.register(eventBus);
 //        LootTableHandler.init(eventBus);
 //        CompatHandler.registerCompatItems(eventBus);
         VrcNetwork.init();
