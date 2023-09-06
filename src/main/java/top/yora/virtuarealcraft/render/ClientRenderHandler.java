@@ -14,5 +14,6 @@ public class ClientRenderHandler {
         EntityRenderers.register(EntityRegistry.KUYA_ENTITY.get(), KuyaEntityRenderer::new);
         EntityRenderers.register(EntityRegistry.RAIN_CRYSTAL_ENTITY.get(), RainCrystalEntityRenderer::new);
         EntityRenderers.register(EntityRegistry.KOUICHI_DARTS_ENTITY.get(), KouichiDartsEntityRenderer::new);
+        EntityRenderers.register(EntityRegistry.ORANGE_GRENADE_ENTITY.get(), OrangeGrenadeEntityRenderer::new);
     }
 }

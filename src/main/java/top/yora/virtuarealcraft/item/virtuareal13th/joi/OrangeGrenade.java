@@ -14,6 +14,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
+import top.yora.virtuarealcraft.entity.OrangeGrenadeEntity;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 
@@ -30,7 +31,6 @@ public class OrangeGrenade extends Item {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        TooltipTool.addDevelopingText(tooltip);
         tooltip.add(Component.translatable("des.virtuarealcraft.orange_grenade_1").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
         tooltip.add(Component.translatable("des.virtuarealcraft.orange_grenade_2").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY).withItalic(true)));
 
@@ -41,14 +41,19 @@ public class OrangeGrenade extends Item {
     public @NotNull InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
         ItemStack itemstack = playerIn.getItemInHand(handIn);
         if (playerIn.isShiftKeyDown()) {
-            playerIn.displayClientMessage(Component.literal("丢橘子"), true);
+            OrangeGrenadeEntity orangeGrenade = new OrangeGrenadeEntity(worldIn, playerIn);
 
-            itemstack.shrink(1);
+            orangeGrenade.shootFromRotation(playerIn, playerIn.getXRot(), playerIn.getYRot(), 0.0f, 1.5f, 0.0f);
+            worldIn.addFreshEntity(orangeGrenade);
+
+            if (!playerIn.isCreative()) {
+                itemstack.shrink(1);
+            }
+
+            playerIn.getCooldowns().addCooldown(itemstack.getItem(), 80);
         } else {
             playerIn.startUsingItem(handIn);
         }
         return InteractionResultHolder.success(itemstack);
     }
-
-
 }

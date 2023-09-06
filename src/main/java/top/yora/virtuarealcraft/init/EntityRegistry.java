@@ -8,6 +8,7 @@ import net.minecraftforge.registries.RegistryObject;
 import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.entity.KouichiDartsEntity;
 import top.yora.virtuarealcraft.entity.KuyaEntity;
+import top.yora.virtuarealcraft.entity.OrangeGrenadeEntity;
 import top.yora.virtuarealcraft.entity.RainCrystalEntity;
 
 public class EntityRegistry {
@@ -22,4 +23,7 @@ public class EntityRegistry {
     public static final RegistryObject<EntityType<KouichiDartsEntity>> KOUICHI_DARTS_ENTITY =
             ENTITY_TYPES.register("kouichi_darts",
                     () -> EntityType.Builder.<KouichiDartsEntity>of(KouichiDartsEntity::new, MobCategory.MISC).sized(0.2f, 0.2f).build("kouichi_darts"));
+    public static final RegistryObject<EntityType<OrangeGrenadeEntity>> ORANGE_GRENADE_ENTITY =
+            ENTITY_TYPES.register("orange_grenade",
+                    () -> EntityType.Builder.<OrangeGrenadeEntity>of(OrangeGrenadeEntity::new, MobCategory.MISC).sized(0.25f, 0.25f).build("orange_grenade"));
 }
