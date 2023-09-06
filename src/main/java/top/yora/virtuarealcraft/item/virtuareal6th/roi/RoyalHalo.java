@@ -4,18 +4,23 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.AirBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import top.yora.virtuarealcraft.Utils;
+import top.yora.virtuarealcraft.init.BlockRegistry;
 import top.yora.virtuarealcraft.models.RoyalHaloModel;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
@@ -39,6 +44,21 @@ public class RoyalHalo extends ArmorItem {
         tooltip.add(Component.translatable("des.virtuarealcraft.royal_halo").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
 
         TooltipTool.addLiverInfo(tooltip, Livers.ROI);
+    }
+
+    @Override
+    public void onArmorTick(ItemStack stack, Level level, Player player) {
+        if (!level.isClientSide && !player.isSteppingCarefully()) {
+            BlockPos pos = player.getOnPos().below();
+
+            BlockState state = level.getBlockState(pos);
+
+            if (state.getBlock() instanceof AirBlock) {
+                level.setBlockAndUpdate(pos, BlockRegistry.CRYSTAL_BRIDGE.get().defaultBlockState());
+                stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(EquipmentSlot.HEAD));
+            }
+        }
+        super.onArmorTick(stack, level, player);
     }
 
     @Override
