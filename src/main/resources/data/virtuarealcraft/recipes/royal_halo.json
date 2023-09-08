@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#g#",
+    "gGg"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:diamond"
+    },
+    "g": {
+      "item": "minecraft:gold_ingot"
+    },
+    "G": {
+      "item": "minecraft:golden_helmet"
+    }
+  },
+  "result": {
+    "item": "virtuarealcraft:royal_halo",
+    "count": 1
+  }
+}
