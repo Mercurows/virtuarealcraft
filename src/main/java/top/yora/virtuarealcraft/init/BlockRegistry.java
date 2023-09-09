@@ -1,6 +1,10 @@
 package top.yora.virtuarealcraft.init;
 
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FlowerBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -17,4 +21,7 @@ public class BlockRegistry {
     public static final RegistryObject<Block> LITTLE_SWEET_POTATO_BLOCK = BLOCKS.register("little_sweet_potato", LittleSweetPotatoBlock::new);
     public static final RegistryObject<Block> CRYSTAL_BRIDGE = BLOCKS.register("crystal_bridge", CrystalBridgeBlock::new);
     public static final RegistryObject<Block> CORNUCOPIA = BLOCKS.register("cornucopia", CornucopiaBlock::new);
+
+    public static final RegistryObject<Block> GORGEOUS_BLOOM = BLOCKS.register("gorgeous_bloom",
+            () -> new FlowerBlock(() -> MobEffects.REGENERATION, 300, BlockBehaviour.Properties.copy(Blocks.ALLIUM)));
 }
