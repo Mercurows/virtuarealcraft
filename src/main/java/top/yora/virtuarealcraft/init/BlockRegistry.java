@@ -15,6 +15,7 @@ import top.yora.virtuarealcraft.block.CrystalBridgeBlock;
 import top.yora.virtuarealcraft.block.KouichiZipper;
 import top.yora.virtuarealcraft.block.LittleSweetPotatoBlock;
 
+@SuppressWarnings("unused")
 public class BlockRegistry {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Utils.MOD_ID);
 
@@ -24,7 +25,7 @@ public class BlockRegistry {
     public static final RegistryObject<Block> CORNUCOPIA = BLOCKS.register("cornucopia", CornucopiaBlock::new);
 
     public static final RegistryObject<Block> GORGEOUS_BLOOM = BLOCKS.register("gorgeous_bloom",
-            () -> new FlowerBlock(() -> MobEffects.REGENERATION, 300, BlockBehaviour.Properties.copy(Blocks.ALLIUM)));
+            () -> new FlowerBlock(() -> MobEffects.REGENERATION, 300, BlockBehaviour.Properties.copy(Blocks.ALLIUM).noOcclusion().noCollission()));
     public static final RegistryObject<Block> POTTED_GORGEOUS_BLOOM = BLOCKS.register("potted_gorgeous_bloom",
             () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT), BlockRegistry.GORGEOUS_BLOOM,
                     BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM).noOcclusion()));
