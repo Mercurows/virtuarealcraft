@@ -28,7 +28,6 @@ public class CrystalBridgeBlockEntity extends BlockEntity {
         } else {
             level.removeBlock(pos, false);
         }
-
     }
 
     @Override

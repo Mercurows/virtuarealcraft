@@ -19,6 +19,7 @@ import top.yora.virtuarealcraft.item.virtuareal11th.mari.BloodPearl;
 import top.yora.virtuarealcraft.item.virtuareal12th.mayumi.MayumiLefthand;
 import top.yora.virtuarealcraft.item.virtuareal13th.joi.OrangeGrenade;
 import top.yora.virtuarealcraft.item.virtuareal13th.kiti.Cornucopia;
+import top.yora.virtuarealcraft.item.virtuareal13th.tocci.JokerMask;
 import top.yora.virtuarealcraft.item.virtuareal14th.koxia.Kuya;
 import top.yora.virtuarealcraft.item.virtuareal16th.girimi.ShadowHood;
 import top.yora.virtuarealcraft.item.virtuareal16th.kiyuu.GameConsole;
@@ -176,7 +177,7 @@ public class ItemRegistry {
      * 13th
      */
     //tocci
-
+    public static final RegistryObject<Item> JOKER_MASK = ITEMS.register("joker_mask", JokerMask::new);
 
     //joi
     public static final RegistryObject<Item> ORANGE_GRENADE = ITEMS.register("orange_grenade", OrangeGrenade::new);
