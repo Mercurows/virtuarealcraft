@@ -4,6 +4,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerBlock;
+import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -24,4 +25,7 @@ public class BlockRegistry {
 
     public static final RegistryObject<Block> GORGEOUS_BLOOM = BLOCKS.register("gorgeous_bloom",
             () -> new FlowerBlock(() -> MobEffects.REGENERATION, 300, BlockBehaviour.Properties.copy(Blocks.ALLIUM)));
+    public static final RegistryObject<Block> POTTED_GORGEOUS_BLOOM = BLOCKS.register("potted_gorgeous_bloom",
+            () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT), BlockRegistry.GORGEOUS_BLOOM,
+                    BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM).noOcclusion()));
 }
