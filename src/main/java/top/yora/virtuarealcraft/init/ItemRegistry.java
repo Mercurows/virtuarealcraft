@@ -27,6 +27,7 @@ import top.yora.virtuarealcraft.item.virtuareal16th.kiyuu.GameConsole;
 import top.yora.virtuarealcraft.item.virtuareal17th.sui.SuimashedCookie;
 import top.yora.virtuarealcraft.item.virtuareal19th.ameki.ButterflyStaff;
 import top.yora.virtuarealcraft.item.virtuareal19th.ameki.RainyButterfly;
+import top.yora.virtuarealcraft.item.virtuareal19th.awu.ChengHuangCrystal;
 import top.yora.virtuarealcraft.item.virtuareal19th.michiya.EternalCandelabra;
 import top.yora.virtuarealcraft.item.virtuareal1st.eine.BarrierHat;
 import top.yora.virtuarealcraft.item.virtuareal20th.kismet.ayumi.BaseballBat;
@@ -189,6 +190,7 @@ public class ItemRegistry {
     //qilou
     public static final RegistryObject<Item> GORGEOUS_BLOOM = ITEMS.register("gorgeous_bloom", GorgeousBloom::new);
 
+
     /**
      * 14th
      */
@@ -223,12 +225,21 @@ public class ItemRegistry {
     //michiya
     public static final RegistryObject<Item> ETERNAL_CANDELABRA = ITEMS.register("eternal_candelabra", EternalCandelabra::new);
 
+    //awu
+    public static final RegistryObject<Item> CHENG_HUANG_CRYSTAL = ITEMS.register("cheng_huang_crystal", ChengHuangCrystal::new);
+
+    //hatsune
+
+
 
     /**
      * 20th-kismet
      */
     //ayumi
     public static final RegistryObject<Item> BASEBALL_BAT = ITEMS.register("baseball_bat", BaseballBat::new);
+
+    //mizuki
+
 
 
     /**
