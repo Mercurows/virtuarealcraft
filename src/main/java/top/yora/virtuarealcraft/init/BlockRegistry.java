@@ -10,10 +10,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import top.yora.virtuarealcraft.Utils;
-import top.yora.virtuarealcraft.block.CornucopiaBlock;
-import top.yora.virtuarealcraft.block.CrystalBridgeBlock;
-import top.yora.virtuarealcraft.block.KouichiZipper;
-import top.yora.virtuarealcraft.block.LittleSweetPotatoBlock;
+import top.yora.virtuarealcraft.block.*;
 
 @SuppressWarnings("unused")
 public class BlockRegistry {
@@ -29,4 +26,6 @@ public class BlockRegistry {
     public static final RegistryObject<Block> POTTED_GORGEOUS_BLOOM = BLOCKS.register("potted_gorgeous_bloom",
             () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT), BlockRegistry.GORGEOUS_BLOOM,
                     BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM).noOcclusion()));
+
+    public static final RegistryObject<Block> FUTURE_BREWING_STAND = BLOCKS.register("future_brewing_stand", FutureBrewingStandBlock::new);
 }
