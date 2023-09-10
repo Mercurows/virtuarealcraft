@@ -1,8 +1,11 @@
 package top.yora.virtuarealcraft;
 
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import top.yora.virtuarealcraft.init.*;
 import top.yora.virtuarealcraft.network.VrcNetwork;
@@ -33,6 +36,13 @@ public class Utils {
 //        CompatHandler.registerCompatItems(eventBus);
         VrcNetwork.init();
 
+        eventBus.addListener(this::commonSetup);
+
         MinecraftForge.EVENT_BUS.register(this);
     }
+
+    private void commonSetup(final FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(BlockRegistry.GORGEOUS_BLOOM.getId(), BlockRegistry.POTTED_GORGEOUS_BLOOM));
+    }
+
 }
