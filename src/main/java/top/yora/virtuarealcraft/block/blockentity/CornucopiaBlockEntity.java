@@ -35,7 +35,7 @@ public class CornucopiaBlockEntity extends BlockEntity {
                 stack = new ItemStack(Items.RAW_GOLD);
             }
 
-            ItemEntity entity = new ItemEntity(level, pos.getX(), pos.getY() + 0.6, pos.getZ(), stack, 0.0D, 0.2D, 0.0D);
+            ItemEntity entity = new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 0.6, pos.getZ() + 0.5, stack, 0.0D, 0.2D, 0.0D);
             level.addFreshEntity(entity);
 
             self.time = 0;
