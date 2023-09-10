@@ -53,7 +53,7 @@ public enum Livers {
     AWU("awu", "19th", "#F9A699", true),
     HATSUNE("hatsune", "19th", "#BA66F6", true),
     AYUMI("ayumi","20th-k","#7894D2",true),
-    MIZUKI("mizuki","20th-k","#E8D9C2",true),
+    MIZUKI("mizuki","20th-k","#FCC8CB",true),
     RICHI("richi","20th-k","#CD5666",true),
     MIKOTO("mikoto","20th-i","#935059",true),
     URUSHIHA("urushiha","20th-i","#6309EA",true),
