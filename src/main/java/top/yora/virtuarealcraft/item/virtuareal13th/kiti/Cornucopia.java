@@ -22,8 +22,6 @@ public class Cornucopia extends BlockItem {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        TooltipTool.addDevelopingText(tooltip);
-
         tooltip.add(Component.translatable("des.virtuarealcraft.cornucopia_1").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
         tooltip.add(Component.translatable("des.virtuarealcraft.cornucopia_2").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY).withItalic(true)));
 

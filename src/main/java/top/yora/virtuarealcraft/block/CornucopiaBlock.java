@@ -20,7 +20,7 @@ import top.yora.virtuarealcraft.init.ItemRegistry;
 @SuppressWarnings("ALL")
 public class CornucopiaBlock extends Block implements EntityBlock {
     public CornucopiaBlock() {
-        super(Properties.of().lightLevel(l -> 15).strength(2.0f));
+        super(Properties.of().lightLevel(l -> 15).strength(3.0f, 3.0f));
     }
 
     @Nullable

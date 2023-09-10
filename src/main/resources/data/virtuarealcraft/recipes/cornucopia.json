@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#G#",
+    "RBR"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:orange_glazed_terracotta"
+    },
+    "G": {
+      "item": "minecraft:gold_block"
+    },
+    "R": {
+      "item": "minecraft:red_glazed_terracotta"
+    },
+    "B": {
+      "item": "minecraft:brown_glazed_terracotta"
+    }
+  },
+  "result": {
+    "item": "virtuarealcraft:cornucopia",
+    "count": 1
+  }
+}
