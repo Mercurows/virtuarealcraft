@@ -7,6 +7,7 @@ import net.minecraftforge.registries.RegistryObject;
 import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.block.blockentity.CornucopiaBlockEntity;
 import top.yora.virtuarealcraft.block.blockentity.CrystalBridgeBlockEntity;
+import top.yora.virtuarealcraft.block.blockentity.FutureBrewingStandBlockEntity;
 
 public class BlockEntityRegistry {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, Utils.MOD_ID);
@@ -17,4 +18,7 @@ public class BlockEntityRegistry {
     public static final RegistryObject<BlockEntityType<CornucopiaBlockEntity>> CORNUCOPIA_BLOCK_ENTITY =
             BLOCK_ENTITY_TYPES.register("cornucopia_block_entity",
                     () -> BlockEntityType.Builder.of(CornucopiaBlockEntity::new, BlockRegistry.CORNUCOPIA.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FutureBrewingStandBlockEntity>> FUTURE_BREWING_STAND_BLOCK_ENTITY =
+            BLOCK_ENTITY_TYPES.register("future_brewing_stand_block_entity",
+                    () -> BlockEntityType.Builder.of(FutureBrewingStandBlockEntity::new, BlockRegistry.FUTURE_BREWING_STAND.get()).build(null));
 }
