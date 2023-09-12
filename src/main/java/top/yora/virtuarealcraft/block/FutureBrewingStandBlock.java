@@ -25,6 +25,7 @@ import org.jetbrains.annotations.Nullable;
 import top.yora.virtuarealcraft.block.blockentity.FutureBrewingStandBlockEntity;
 import top.yora.virtuarealcraft.init.BlockEntityRegistry;
 
+@SuppressWarnings("deprecation")
 public class FutureBrewingStandBlock extends Block implements EntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
