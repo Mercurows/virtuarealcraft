@@ -12,6 +12,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import top.yora.virtuarealcraft.init.ItemRegistry;
+import top.yora.virtuarealcraft.init.MenuTypeRegistry;
 
 //TODO 完成菜单类型注册和渲染
 public class FutureBrewingStandMenu extends AbstractContainerMenu {
@@ -24,7 +25,7 @@ public class FutureBrewingStandMenu extends AbstractContainerMenu {
     }
 
     public FutureBrewingStandMenu(int pContainerId, Inventory pPlayerInventory, Container pBrewingStandContainer, ContainerData pBrewingStandData) {
-        super(MenuType.BREWING_STAND, pContainerId);
+        super(MenuTypeRegistry.FUTURE_BREWING_STAND_MENU.get(), pContainerId);
 
         //TODO 修改为正确的槽位排列
         checkContainerSize(pBrewingStandContainer, 9);
