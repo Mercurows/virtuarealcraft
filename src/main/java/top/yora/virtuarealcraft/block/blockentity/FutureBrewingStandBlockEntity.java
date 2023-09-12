@@ -11,13 +11,16 @@ import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
+import net.minecraft.world.level.block.entity.BrewingStandBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
+import top.yora.virtuarealcraft.gui.FutureBrewingStandMenu;
 import top.yora.virtuarealcraft.init.BlockEntityRegistry;
 import top.yora.virtuarealcraft.init.ItemRegistry;
 
@@ -34,11 +37,13 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
     /**
      * 顶部输入 - 原材料
      * 底部输出 - 原材料和药水
-     * 侧面输入 - 燃料、粉末和药水
+     * 正面和两侧输入 - 燃料和药水
+     * 后面输入 - 粉末
      */
     private static final int[] SLOTS_FOR_UP = new int[]{6};
     private static final int[] SLOTS_FOR_DOWN = new int[]{0, 1, 2, 3, 4, 5, 6};
-    private static final int[] SLOTS_FOR_SIDES = new int[]{0, 1, 2, 3, 4, 5, 7, 8};
+    private static final int[] SLOTS_FOR_SIDES = new int[]{0, 1, 2, 3, 4, 5, 7};
+    private static final int[] SLOTS_FOR_BEHIND = new int[]{8};
 
     public static final int FUEL_USES = 20;
     public static final int DATA_BREW_TIME = 0;
@@ -51,6 +56,28 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
     private boolean[] lastPotionCount;
     private Item ingredient;
     int fuel;
+
+    protected final ContainerData dataAccess = new ContainerData() {
+        public int get(int p_59038_) {
+            return switch (p_59038_) {
+                case 0 -> FutureBrewingStandBlockEntity.this.brewTime;
+                case 1 -> FutureBrewingStandBlockEntity.this.fuel;
+                default -> 0;
+            };
+        }
+
+        public void set(int p_59040_, int p_59041_) {
+            switch (p_59040_) {
+                case 0 -> FutureBrewingStandBlockEntity.this.brewTime = p_59041_;
+                case 1 -> FutureBrewingStandBlockEntity.this.fuel = p_59041_;
+            }
+
+        }
+
+        public int getCount() {
+            return 2;
+        }
+    };
 
     /**
      * 模式：
@@ -72,8 +99,12 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
     public int[] getSlotsForFace(Direction pSide) {
         if (pSide == Direction.UP) {
             return SLOTS_FOR_UP;
+        } else if (pSide == Direction.DOWN) {
+            return SLOTS_FOR_DOWN;
+        } else if (pSide == Direction.SOUTH) {
+            return SLOTS_FOR_BEHIND;
         } else {
-            return pSide == Direction.DOWN ? SLOTS_FOR_DOWN : SLOTS_FOR_SIDES;
+            return SLOTS_FOR_SIDES;
         }
     }
 
@@ -84,7 +115,7 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
 
     @Override
     public boolean canTakeItemThroughFace(int pIndex, ItemStack pStack, Direction pDirection) {
-        return false;
+        return pIndex != 6 || pStack.is(Items.GLASS_BOTTLE);
     }
 
     @Override
@@ -95,7 +126,7 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
     @Override
     protected AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
         //TODO 完成炼药台的GUI
-        return null;
+        return new FutureBrewingStandMenu(pContainerId, pInventory, this, this.dataAccess);
     }
 
     @Override
