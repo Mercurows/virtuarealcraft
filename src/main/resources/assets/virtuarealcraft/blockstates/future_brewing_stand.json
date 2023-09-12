@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "virtuarealcraft:block/future_brewing_stand"
+    },
+    "facing=east": {
+      "model": "virtuarealcraft:block/future_brewing_stand",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "virtuarealcraft:block/future_brewing_stand",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "virtuarealcraft:block/future_brewing_stand",
+      "y": 270
+    }
+  }
+}
