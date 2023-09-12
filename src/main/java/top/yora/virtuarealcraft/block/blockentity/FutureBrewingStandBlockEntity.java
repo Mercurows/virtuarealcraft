@@ -17,7 +17,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
-import net.minecraft.world.level.block.entity.BrewingStandBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import top.yora.virtuarealcraft.gui.FutureBrewingStandMenu;
@@ -58,18 +57,20 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
     int fuel;
 
     protected final ContainerData dataAccess = new ContainerData() {
-        public int get(int p_59038_) {
-            return switch (p_59038_) {
+        public int get(int type) {
+            return switch (type) {
                 case 0 -> FutureBrewingStandBlockEntity.this.brewTime;
                 case 1 -> FutureBrewingStandBlockEntity.this.fuel;
+                case 2 -> FutureBrewingStandBlockEntity.this.mode;
                 default -> 0;
             };
         }
 
-        public void set(int p_59040_, int p_59041_) {
-            switch (p_59040_) {
-                case 0 -> FutureBrewingStandBlockEntity.this.brewTime = p_59041_;
-                case 1 -> FutureBrewingStandBlockEntity.this.fuel = p_59041_;
+        public void set(int type, int value) {
+            switch (type) {
+                case 0 -> FutureBrewingStandBlockEntity.this.brewTime = value;
+                case 1 -> FutureBrewingStandBlockEntity.this.fuel = value;
+                case 2 -> FutureBrewingStandBlockEntity.this.mode = value;
             }
 
         }
@@ -136,7 +137,7 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
 
     @Override
     public boolean isEmpty() {
-        for(ItemStack itemstack : this.items) {
+        for (ItemStack itemstack : this.items) {
             if (!itemstack.isEmpty()) {
                 return false;
             }
@@ -147,7 +148,7 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
     private boolean[] getPotionBits() {
         boolean[] bool = new boolean[3];
 
-        for(int i = 0; i < 6; ++i) {
+        for (int i = 0; i < 6; ++i) {
             if (!this.items.get(i).isEmpty()) {
                 bool[i] = true;
             }
@@ -169,10 +170,10 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         super.saveAdditional(pTag);
-        pTag.putShort("BrewTime", (short)this.brewTime);
+        pTag.putShort("BrewTime", (short) this.brewTime);
         ContainerHelper.saveAllItems(pTag, this.items);
-        pTag.putByte("Fuel", (byte)this.fuel);
-        pTag.putShort("Mode", (short)this.mode);
+        pTag.putByte("Fuel", (byte) this.fuel);
+        pTag.putShort("Mode", (short) this.mode);
     }
 
     @Override
