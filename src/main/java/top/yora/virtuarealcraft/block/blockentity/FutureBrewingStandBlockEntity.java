@@ -55,6 +55,13 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
     private boolean[] lastPotionCount;
     private Item ingredient;
     int fuel;
+    /**
+     * 模式：
+     * 0 - 普通;
+     * 1 - 自动注水;
+     * 2 - 自动注水 + 自动粗制;
+     */
+    int mode;
 
     protected final ContainerData dataAccess = new ContainerData() {
         public int get(int type) {
@@ -79,14 +86,6 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
             return 2;
         }
     };
-
-    /**
-     * 模式：
-     * 0 - 正常
-     * 1 - 自动注水
-     * 2 - 自动注水 + 自动粗制
-     */
-    int mode;
 
     public FutureBrewingStandBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.FUTURE_BREWING_STAND_BLOCK_ENTITY.get(), pos, state);
@@ -146,7 +145,7 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
     }
 
     private boolean[] getPotionBits() {
-        boolean[] bool = new boolean[3];
+        boolean[] bool = new boolean[6];
 
         for (int i = 0; i < 6; ++i) {
             if (!this.items.get(i).isEmpty()) {
