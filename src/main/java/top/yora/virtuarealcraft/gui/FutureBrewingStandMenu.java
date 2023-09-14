@@ -29,7 +29,7 @@ public class FutureBrewingStandMenu extends AbstractContainerMenu {
 
         //TODO 修改为正确的槽位排列
         checkContainerSize(pBrewingStandContainer, 9);
-        checkContainerDataCount(pBrewingStandData, 2);
+        checkContainerDataCount(pBrewingStandData, 3);
         this.brewingStand = pBrewingStandContainer;
         this.brewingStandData = pBrewingStandData;
         this.addSlot(new FutureBrewingStandMenu.PotionSlot(pBrewingStandContainer, 0, 36, 51));
