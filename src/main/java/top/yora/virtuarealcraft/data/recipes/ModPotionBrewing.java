@@ -18,9 +18,9 @@ public class ModPotionBrewing {
     private static final List<PotionBrewing.Mix<Potion>> POTION_MIXES = Lists.newArrayList();
     private static final List<PotionBrewing.Mix<Item>> CONTAINER_MIXES = Lists.newArrayList();
     private static final List<Ingredient> ALLOWED_CONTAINERS = Lists.newArrayList();
-    private static final Predicate<ItemStack> ALLOWED_CONTAINER = (p_43528_) -> {
-        for(Ingredient ingredient : ALLOWED_CONTAINERS) {
-            if (ingredient.test(p_43528_)) {
+    private static final Predicate<ItemStack> ALLOWED_CONTAINER = (item) -> {
+        for (Ingredient ingredient : ALLOWED_CONTAINERS) {
+            if (ingredient.test(item)) {
                 return true;
             }
         }
@@ -35,7 +35,7 @@ public class ModPotionBrewing {
     protected static boolean isContainerIngredient(ItemStack pInput) {
         int i = 0;
 
-        for(int j = CONTAINER_MIXES.size(); i < j; ++i) {
+        for (int j = CONTAINER_MIXES.size(); i < j; ++i) {
             if ((CONTAINER_MIXES.get(i)).ingredient.test(pInput)) {
                 return true;
             }
@@ -47,7 +47,7 @@ public class ModPotionBrewing {
     protected static boolean isPotionIngredient(ItemStack pInput) {
         int i = 0;
 
-        for(int j = POTION_MIXES.size(); i < j; ++i) {
+        for (int j = POTION_MIXES.size(); i < j; ++i) {
             if ((POTION_MIXES.get(i)).ingredient.test(pInput)) {
                 return true;
             }
@@ -55,8 +55,6 @@ public class ModPotionBrewing {
 
         return false;
     }
-
-
 
 
     public static void bootStrap() {
