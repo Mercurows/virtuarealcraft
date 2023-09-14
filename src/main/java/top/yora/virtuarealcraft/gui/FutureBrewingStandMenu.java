@@ -58,17 +58,14 @@ public class FutureBrewingStandMenu extends AbstractContainerMenu {
 
     @Override
     public ItemStack quickMoveStack(Player pPlayer, int pIndex) {
-        //TODO 完成从原料槽和粉末槽拿回物品的操作
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(pIndex);
         if (slot.hasItem()) {
             ItemStack itemstack1 = slot.getItem();
             itemstack = itemstack1.copy();
-            if ((pIndex < 0 || pIndex > 2) && pIndex != 3 && pIndex != 4) {
+            if ((pIndex < 0 || pIndex > 5) && pIndex != 6 && pIndex != 7 && pIndex != 8) {
                 if (FutureBrewingStandMenu.FuelSlot.mayPlaceItem(itemstack)) {
-                    //TODO 修改为正确的逻辑：如果燃料槽为空，则直接放入燃料槽；如果燃料槽不空，原料槽为空，则放入原料槽，否则放不进去
                     if (this.moveItemStackTo(itemstack1, 7, 8, false) ||
-                            !this.moveItemStackTo(itemstack1, 9, 45, false) ||
                             this.ingredientSlot.mayPlace(itemstack1) && !this.moveItemStackTo(itemstack1, 6, 7, false)) {
                         return ItemStack.EMPTY;
                     }
