@@ -50,9 +50,7 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
     private static final int[] SLOTS_FOR_BEHIND = new int[]{8};
 
     public static final int MAX_FUEL = 160;
-    public static final int DATA_BREW_TIME = 0;
-    public static final int DATA_FUEL_USES = 1;
-    public static final int NUM_DATA_VALUES = 2;
+    public static final int MAX_DATA_COUNT = 4;
 
     private NonNullList<ItemStack> items = NonNullList.withSize(9, ItemStack.EMPTY);
 
@@ -75,6 +73,7 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
                 case 0 -> FutureBrewingStandBlockEntity.this.brewTime;
                 case 1 -> FutureBrewingStandBlockEntity.this.fuel;
                 case 2 -> FutureBrewingStandBlockEntity.this.mode;
+                case 3 -> FutureBrewingStandBlockEntity.this.fuelTick;
                 default -> 0;
             };
         }
@@ -84,11 +83,12 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
                 case 0 -> FutureBrewingStandBlockEntity.this.brewTime = value;
                 case 1 -> FutureBrewingStandBlockEntity.this.fuel = value;
                 case 2 -> FutureBrewingStandBlockEntity.this.mode = value;
+                case 3 -> FutureBrewingStandBlockEntity.this.fuelTick = value;
             }
         }
 
         public int getCount() {
-            return 3;
+            return MAX_DATA_COUNT;
         }
     };
 
@@ -243,7 +243,7 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
     public static void serverTick(Level pLevel, BlockPos pPos, BlockState pState, FutureBrewingStandBlockEntity pBlockEntity) {
         //TODO 完成tick方法
         ItemStack fuel = pBlockEntity.items.get(FUEL_SLOT);
-        if (pBlockEntity.fuel <= MAX_FUEL - 20 && fuel.is(Items.BLAZE_POWDER)) {
+        if (pBlockEntity.fuel <= MAX_FUEL - 20 && fuel.is(Items.BLAZE_POWDER) && pBlockEntity.fuelTick != 200) {
             pBlockEntity.fuel += 20;
             fuel.shrink(1);
             setChanged(pLevel, pPos, pState);
@@ -268,6 +268,8 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
             boolean brewFinished = pBlockEntity.brewTime == 0;
             if (brewFinished && canBrew) {
                 // finish brewing
+                //TODO 粗制状态下，每次消耗2点燃料
+                pBlockEntity.fuel -= 1;
                 doBrew(pLevel, pPos, pBlockEntity.items);
                 setChanged(pLevel, pPos, pState);
             } else if (!canBrew || !ingredient.is(pBlockEntity.ingredient)) {
@@ -277,7 +279,6 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
             }
         } else if (canBrew && pBlockEntity.fuel > 0) {
             // start brewing
-            --pBlockEntity.fuel;
             pBlockEntity.brewTime = 200;    // 10s
             pBlockEntity.ingredient = ingredient.getItem();
             setChanged(pLevel, pPos, pState);

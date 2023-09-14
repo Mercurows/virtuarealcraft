@@ -11,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
+import top.yora.virtuarealcraft.block.blockentity.FutureBrewingStandBlockEntity;
 import top.yora.virtuarealcraft.init.ItemRegistry;
 import top.yora.virtuarealcraft.init.MenuTypeRegistry;
 
@@ -21,7 +22,7 @@ public class FutureBrewingStandMenu extends AbstractContainerMenu {
     private final Slot powderSlot;
 
     public FutureBrewingStandMenu(int pContainerId, Inventory pPlayerInventory) {
-        this(pContainerId, pPlayerInventory, new SimpleContainer(9), new SimpleContainerData(3));
+        this(pContainerId, pPlayerInventory, new SimpleContainer(9), new SimpleContainerData(FutureBrewingStandBlockEntity.MAX_DATA_COUNT));
     }
 
     public FutureBrewingStandMenu(int pContainerId, Inventory pPlayerInventory, Container pBrewingStandContainer, ContainerData pBrewingStandData) {
@@ -29,7 +30,7 @@ public class FutureBrewingStandMenu extends AbstractContainerMenu {
 
         //TODO 修改为正确的槽位排列
         checkContainerSize(pBrewingStandContainer, 9);
-        checkContainerDataCount(pBrewingStandData, 3);
+        checkContainerDataCount(pBrewingStandData, FutureBrewingStandBlockEntity.MAX_DATA_COUNT);
         this.brewingStand = pBrewingStandContainer;
         this.brewingStandData = pBrewingStandData;
         this.addSlot(new FutureBrewingStandMenu.PotionSlot(pBrewingStandContainer, 0, 36, 51));
@@ -116,8 +117,13 @@ public class FutureBrewingStandMenu extends AbstractContainerMenu {
         return itemstack;
     }
 
+    public int getFuelTick() {
+        return this.brewingStandData.get(3);
+    }
+
     /**
      * 获取当前炼药模式
+     *
      * @return 0 - 普通; 1 - 自动注水; 2 - 自动注水 + 自动粗制
      */
     public int getBrewingMode() {
