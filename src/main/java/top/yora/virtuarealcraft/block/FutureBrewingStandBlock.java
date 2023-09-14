@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -32,10 +33,11 @@ import top.yora.virtuarealcraft.init.BlockEntityRegistry;
 @SuppressWarnings("deprecation")
 public class FutureBrewingStandBlock extends Block implements EntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final IntegerProperty BOTTLES = IntegerProperty.create("bottle", 0, 6);
 
     public FutureBrewingStandBlock() {
         super(BlockBehaviour.Properties.of().strength(4.5f).noParticlesOnBreak().noOcclusion());
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(BOTTLES, 0));
     }
 
     @Override
@@ -78,7 +80,7 @@ public class FutureBrewingStandBlock extends Block implements EntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(FACING);
+        pBuilder.add(FACING, BOTTLES);
     }
 
     @Override

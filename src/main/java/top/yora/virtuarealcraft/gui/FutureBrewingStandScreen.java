@@ -40,13 +40,13 @@ public class FutureBrewingStandScreen extends AbstractContainerScreen<FutureBrew
         int i = (this.width - this.imageWidth) / 2;
         int j = (this.height - this.imageHeight) / 2;
         pGuiGraphics.blit(BREWING_STAND_LOCATION, i, j, 0, 0, this.imageWidth, this.imageHeight);
-        int k = (int) (Math.random() * 20); //this.menu.getFuel();
+        int k = this.menu.getFuel();
         int l = Mth.clamp((18 * k + 20 - 1) / 20, 0, 18);
         if (l > 0) {
             pGuiGraphics.blit(BREWING_STAND_LOCATION, i + 60, j + 44, 176, 29, l, 4);
         }
 
-        int i1 = 0;//this.menu.getBrewingTicks();
+        int i1 = this.menu.getBrewingTicks();
         if (i1 > 0) {
             int j1 = (int) (28.0F * (1.0F - (float) i1 / 400.0F));
             if (j1 > 0) {
