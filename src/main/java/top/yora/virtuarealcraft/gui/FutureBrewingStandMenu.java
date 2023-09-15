@@ -31,20 +31,19 @@ public class FutureBrewingStandMenu extends AbstractContainerMenu {
     public FutureBrewingStandMenu(int pContainerId, Inventory pPlayerInventory, Container pBrewingStandContainer, ContainerData pBrewingStandData) {
         super(MenuTypeRegistry.FUTURE_BREWING_STAND_MENU.get(), pContainerId);
 
-        //TODO 修改为正确的槽位排列
         checkContainerSize(pBrewingStandContainer, 9);
         checkContainerDataCount(pBrewingStandData, FutureBrewingStandBlockEntity.MAX_DATA_COUNT);
         this.brewingStand = pBrewingStandContainer;
         this.brewingStandData = pBrewingStandData;
-        this.addSlot(new FutureBrewingStandMenu.PotionSlot(pBrewingStandContainer, 0, 36, 51));
-        this.addSlot(new FutureBrewingStandMenu.PotionSlot(pBrewingStandContainer, 1, 60, 58));
-        this.addSlot(new FutureBrewingStandMenu.PotionSlot(pBrewingStandContainer, 2, 84, 65));
-        this.addSlot(new FutureBrewingStandMenu.PotionSlot(pBrewingStandContainer, 3, 108, 65));
-        this.addSlot(new FutureBrewingStandMenu.PotionSlot(pBrewingStandContainer, 4, 132, 58));
-        this.addSlot(new FutureBrewingStandMenu.PotionSlot(pBrewingStandContainer, 5, 156, 51));
+        this.addSlot(new FutureBrewingStandMenu.PotionSlot(pBrewingStandContainer, 0, 67, 45));
+        this.addSlot(new FutureBrewingStandMenu.PotionSlot(pBrewingStandContainer, 1, 90, 66));
+        this.addSlot(new FutureBrewingStandMenu.PotionSlot(pBrewingStandContainer, 2, 115, 73));
+        this.addSlot(new FutureBrewingStandMenu.PotionSlot(pBrewingStandContainer, 3, 143, 73));
+        this.addSlot(new FutureBrewingStandMenu.PotionSlot(pBrewingStandContainer, 4, 168, 66));
+        this.addSlot(new FutureBrewingStandMenu.PotionSlot(pBrewingStandContainer, 5, 191, 45));
         this.ingredientSlot = this.addSlot(new FutureBrewingStandMenu.IngredientsSlot(pBrewingStandContainer, 6, 129, 11));
         this.addSlot(new FutureBrewingStandMenu.FuelSlot(pBrewingStandContainer, 7, 14, 58));
-        this.powderSlot = this.addSlot(new FutureBrewingStandMenu.PowderSlot(pBrewingStandContainer, 8, 159, 24));
+        this.powderSlot = this.addSlot(new FutureBrewingStandMenu.PowderSlot(pBrewingStandContainer, 8, 160, 24));
         this.addDataSlots(pBrewingStandData);
 
         for (int i = 0; i < 3; ++i) {
