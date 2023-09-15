@@ -95,7 +95,7 @@ public class FutureBrewingStandBlock extends Block implements EntityBlock {
         if (pStack.hasCustomHoverName()) {
             BlockEntity blockentity = pLevel.getBlockEntity(pPos);
             if (blockentity instanceof FutureBrewingStandBlockEntity) {
-                ((FutureBrewingStandBlockEntity)blockentity).setCustomName(pStack.getHoverName());
+                ((FutureBrewingStandBlockEntity) blockentity).setCustomName(pStack.getHoverName());
             }
         }
     }
@@ -105,7 +105,7 @@ public class FutureBrewingStandBlock extends Block implements EntityBlock {
         if (!pState.is(pNewState.getBlock())) {
             BlockEntity blockentity = pLevel.getBlockEntity(pPos);
             if (blockentity instanceof FutureBrewingStandBlockEntity) {
-                Containers.dropContents(pLevel, pPos, (FutureBrewingStandBlockEntity)blockentity);
+                Containers.dropContents(pLevel, pPos, (FutureBrewingStandBlockEntity) blockentity);
             }
 
             super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);

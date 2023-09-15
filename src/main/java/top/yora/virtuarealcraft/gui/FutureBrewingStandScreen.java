@@ -2,6 +2,7 @@ package top.yora.virtuarealcraft.gui;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
@@ -10,7 +11,10 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.Nullable;
 import top.yora.virtuarealcraft.Utils;
+import top.yora.virtuarealcraft.network.VrcNetwork;
+import top.yora.virtuarealcraft.network.packet.FutureBrewingStandModeChangePacket;
 
 @OnlyIn(Dist.CLIENT)
 public class FutureBrewingStandScreen extends AbstractContainerScreen<FutureBrewingStandMenu> {
@@ -30,6 +34,11 @@ public class FutureBrewingStandScreen extends AbstractContainerScreen<FutureBrew
         this.titleLabelY = 9;
         this.inventoryLabelX = 37;
         this.inventoryLabelY = 113;
+
+        int i = (this.width - this.imageWidth) / 2;
+        int j = (this.height - this.imageHeight) / 2;
+        FutureBrewingStandButton button = new FutureBrewingStandButton(i + 14, j + 27);
+        this.addRenderableWidget(button);
     }
 
     public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
@@ -94,7 +103,7 @@ public class FutureBrewingStandScreen extends AbstractContainerScreen<FutureBrew
     }
 
     @OnlyIn(Dist.CLIENT)
-    static class FutureBrewingStandButton extends AbstractButton {
+    class FutureBrewingStandButton extends AbstractButton {
         private boolean selected;
 
         protected FutureBrewingStandButton(int x, int y) {
@@ -105,9 +114,22 @@ public class FutureBrewingStandScreen extends AbstractContainerScreen<FutureBrew
 
         }
 
+        @Nullable
+        @Override
+        public Tooltip getTooltip() {
+            return super.getTooltip();
+        }
+
         @Override
         public void onPress() {
-            //在这里切换模式
+            int mode = FutureBrewingStandScreen.this.menu.getBrewingMode();
+            mode = (mode + 1) % 3;
+            FutureBrewingStandScreen.this.menu.setBrewingMode(mode);
+
+            VrcNetwork.CHANNEL.sendToServer(new FutureBrewingStandModeChangePacket((byte) mode));
+
+            // TODO 使tooltip能正常显示
+            this.setTooltip(Tooltip.create(Component.literal("mode = " + mode)));
         }
 
         @Override
