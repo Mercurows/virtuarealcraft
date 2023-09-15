@@ -21,6 +21,9 @@ public class FutureBrewingStandMenu extends AbstractContainerMenu {
     private final Slot ingredientSlot;
     private final Slot powderSlot;
 
+    public static final int X_OFFSET = 30;
+    public static final int Y_OFFSET = 39;
+
     public FutureBrewingStandMenu(int pContainerId, Inventory pPlayerInventory) {
         this(pContainerId, pPlayerInventory, new SimpleContainer(9), new SimpleContainerData(FutureBrewingStandBlockEntity.MAX_DATA_COUNT));
     }
@@ -39,19 +42,19 @@ public class FutureBrewingStandMenu extends AbstractContainerMenu {
         this.addSlot(new FutureBrewingStandMenu.PotionSlot(pBrewingStandContainer, 3, 108, 65));
         this.addSlot(new FutureBrewingStandMenu.PotionSlot(pBrewingStandContainer, 4, 132, 58));
         this.addSlot(new FutureBrewingStandMenu.PotionSlot(pBrewingStandContainer, 5, 156, 51));
-        this.ingredientSlot = this.addSlot(new FutureBrewingStandMenu.IngredientsSlot(pBrewingStandContainer, 6, 96, 17));
-        this.addSlot(new FutureBrewingStandMenu.FuelSlot(pBrewingStandContainer, 7, 17, 17));
-        this.powderSlot = this.addSlot(new FutureBrewingStandMenu.PowderSlot(pBrewingStandContainer, 8, 120, 17));
+        this.ingredientSlot = this.addSlot(new FutureBrewingStandMenu.IngredientsSlot(pBrewingStandContainer, 6, 129, 11));
+        this.addSlot(new FutureBrewingStandMenu.FuelSlot(pBrewingStandContainer, 7, 14, 58));
+        this.powderSlot = this.addSlot(new FutureBrewingStandMenu.PowderSlot(pBrewingStandContainer, 8, 159, 24));
         this.addDataSlots(pBrewingStandData);
 
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 9; ++j) {
-                this.addSlot(new Slot(pPlayerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+                this.addSlot(new Slot(pPlayerInventory, j + i * 9 + 9, 8 + j * 18 + X_OFFSET, 84 + i * 18 + Y_OFFSET));
             }
         }
 
         for (int k = 0; k < 9; ++k) {
-            this.addSlot(new Slot(pPlayerInventory, k, 8 + k * 18, 142));
+            this.addSlot(new Slot(pPlayerInventory, k, 8 + k * 18 + X_OFFSET, 142 + Y_OFFSET));
         }
 
     }
