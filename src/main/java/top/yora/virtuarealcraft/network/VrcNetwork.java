@@ -5,6 +5,7 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.network.packet.BloodWingPacket;
+import top.yora.virtuarealcraft.network.packet.FutureBrewingStandModeChangePacket;
 
 public class VrcNetwork {
     public static final String NETWORK_VERSION = "1.0";
@@ -13,5 +14,6 @@ public class VrcNetwork {
 
     public static void init() {
         CHANNEL.registerMessage(0, BloodWingPacket.class, BloodWingPacket::encode, BloodWingPacket::decode, BloodWingPacket::handle);
+        CHANNEL.registerMessage(1, FutureBrewingStandModeChangePacket.class, FutureBrewingStandModeChangePacket::encode, FutureBrewingStandModeChangePacket::decode, FutureBrewingStandModeChangePacket::handle);
     }
 }

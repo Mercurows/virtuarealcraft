@@ -1,7 +1,10 @@
 package top.yora.virtuarealcraft.network.packet;
 
 import io.netty.buffer.ByteBuf;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraftforge.network.NetworkEvent;
+import top.yora.virtuarealcraft.gui.FutureBrewingStandMenu;
 
 import java.util.function.Supplier;
 
@@ -25,8 +28,17 @@ public class FutureBrewingStandModeChangePacket {
         ctx.get().enqueueWork(() -> {
             int mode = packet.mode % 3;
 
-            // TODO 实现炼药台状态切换
+            ServerPlayer player = ctx.get().getSender();
+            if (player != null) {
+                AbstractContainerMenu abstractcontainermenu = player.containerMenu;
+                if (abstractcontainermenu instanceof FutureBrewingStandMenu futureBrewingStandMenu) {
+                    if (!player.containerMenu.stillValid(player)) {
+                        return;
+                    }
 
+                    futureBrewingStandMenu.setBrewingMode(mode);
+                }
+            }
         });
         ctx.get().setPacketHandled(true);
     }
