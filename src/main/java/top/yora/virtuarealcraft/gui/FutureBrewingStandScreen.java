@@ -108,6 +108,7 @@ public class FutureBrewingStandScreen extends AbstractContainerScreen<FutureBrew
 
         protected FutureBrewingStandButton(int x, int y) {
             super(x, y, 16, 16, Component.translatable("button.virtuarealcraft.mode_change"));
+            this.setTooltip(getTooltip());
         }
 
         public void renderWidget(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
@@ -117,6 +118,17 @@ public class FutureBrewingStandScreen extends AbstractContainerScreen<FutureBrew
         @Nullable
         @Override
         public Tooltip getTooltip() {
+            switch (FutureBrewingStandScreen.this.menu.getBrewingMode()) {
+                case 0 -> {
+                    return Tooltip.create(Component.translatable("des.virtuarealcraft.future_brewing_stand.mode0"));
+                }
+                case 1 -> {
+                    return Tooltip.create(Component.translatable("des.virtuarealcraft.future_brewing_stand.mode1"));
+                }
+                case 2 -> {
+                    return Tooltip.create(Component.translatable("des.virtuarealcraft.future_brewing_stand.mode2"));
+                }
+            }
             return super.getTooltip();
         }
 
@@ -127,9 +139,7 @@ public class FutureBrewingStandScreen extends AbstractContainerScreen<FutureBrew
             FutureBrewingStandScreen.this.menu.setBrewingMode(mode);
 
             VrcNetwork.CHANNEL.sendToServer(new FutureBrewingStandModeChangePacket((byte) mode));
-
-            // TODO 使tooltip能正常显示
-            this.setTooltip(Tooltip.create(Component.literal("mode = " + mode)));
+            this.setTooltip(getTooltip());
         }
 
         @Override
