@@ -1,13 +1,19 @@
 package top.yora.virtuarealcraft.gui;
 
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.AbstractButton;
+import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import top.yora.virtuarealcraft.Utils;
 
+@OnlyIn(Dist.CLIENT)
 public class FutureBrewingStandScreen extends AbstractContainerScreen<FutureBrewingStandMenu> {
 
     private static final ResourceLocation BREWING_STAND_LOCATION = new ResourceLocation(Utils.MOD_ID, "textures/gui/future_brewing_stand_gui.png");
@@ -67,6 +73,29 @@ public class FutureBrewingStandScreen extends AbstractContainerScreen<FutureBrew
 
         //TODO 渲染按钮和模式指示灯
 
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    static class FutureBrewingStandButton extends AbstractButton {
+        private boolean selected;
+
+        protected FutureBrewingStandButton(int x, int y) {
+            super(x, y, 16, 16, Component.translatable("button.virtuarealcraft.mode_change"));
+        }
+
+        public void renderWidget(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
+
+        }
+
+        @Override
+        public void onPress() {
+            //在这里切换模式
+        }
+
+        @Override
+        protected void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
+
+        }
     }
 
 }
