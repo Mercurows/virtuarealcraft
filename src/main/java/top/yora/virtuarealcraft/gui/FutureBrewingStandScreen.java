@@ -21,9 +21,8 @@ public class FutureBrewingStandScreen extends AbstractContainerScreen<FutureBrew
 
     protected void init() {
         super.init();
-        this.titleLabelX = (this.imageWidth - this.font.width(this.title)) / 2 - 76;
+        this.titleLabelX = 15;
         this.titleLabelY = 9;
-        //测试数据
         this.inventoryLabelX = 37;
         this.inventoryLabelY = 113;
     }
@@ -34,7 +33,6 @@ public class FutureBrewingStandScreen extends AbstractContainerScreen<FutureBrew
         this.renderTooltip(pGuiGraphics, pMouseX, pMouseY);
     }
 
-    //TODO 好好滴渲染
     protected void renderBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
         int i = (this.width - this.imageWidth) / 2;
         int j = (this.height - this.imageHeight) / 2;
@@ -42,24 +40,32 @@ public class FutureBrewingStandScreen extends AbstractContainerScreen<FutureBrew
 
         //燃料条
         int k = this.menu.getFuel();
-        int l = Mth.clamp((18 * k + 20 - 1) / 160, 0, 18);
-        if (l > 0) {
-            pGuiGraphics.blit(BREWING_STAND_LOCATION, i + 60, j + 44, 176, 29, l, 4);
+        if (k > 0) {
+            pGuiGraphics.blit(BREWING_STAND_LOCATION, i + 38, j + 95, 0, 240, k, 3);
         }
 
         //气泡和箭头
         int i1 = this.menu.getBrewingTicks();
         if (i1 > 0) {
-            int j1 = (int) (28.0F * (1.0F - (float) i1 / 400.0F));
+            int j1 = (int) (32.0F * (1.0F - (float) i1 / 200.0F));
             if (j1 > 0) {
-                pGuiGraphics.blit(BREWING_STAND_LOCATION, i + 97, j + 16, 176, 0, 9, j1);
+                pGuiGraphics.blit(BREWING_STAND_LOCATION, i + 118, j + 15, 14, 206, 7, j1);
             }
 
             j1 = BUBBLELENGTHS[i1 / 2 % 7];
             if (j1 > 0) {
-                pGuiGraphics.blit(BREWING_STAND_LOCATION, i + 63, j + 14 + 29 - j1, 185, 29 - j1, 12, j1);
+                pGuiGraphics.blit(BREWING_STAND_LOCATION, i + 105, j + 17 + 29 - j1, 0, 237 - j1, 12, j1);
             }
         }
+
+        //燃料补充条
+        int ft = this.menu.getFuelTick();
+        int f = Mth.clamp((18 * ft + 200 - 1) / 200, 0, 18);
+        if (f > 0) {
+            pGuiGraphics.blit(BREWING_STAND_LOCATION, i + 13, j + 78, 0, 244, f, 2);
+        }
+
+        //TODO 渲染按钮和模式指示灯
 
     }
 

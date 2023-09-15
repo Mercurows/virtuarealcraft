@@ -163,7 +163,7 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
         ContainerHelper.loadAllItems(pTag, this.items);
         this.brewTime = pTag.getShort("BrewTime");
-        this.fuel = pTag.getByte("Fuel");
+        this.fuel = pTag.getShort("Fuel");
         this.mode = pTag.getShort("Mode");
         this.fuelTick = pTag.getShort("FuelTick");
     }
@@ -173,7 +173,7 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
         super.saveAdditional(pTag);
         pTag.putShort("BrewTime", (short) this.brewTime);
         ContainerHelper.saveAllItems(pTag, this.items);
-        pTag.putByte("Fuel", (byte) this.fuel);
+        pTag.putShort("Fuel", (short) this.fuel);
         pTag.putShort("Mode", (short) this.mode);
         pTag.putShort("FuelTick", (short) this.fuelTick);
     }
