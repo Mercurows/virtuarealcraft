@@ -4,7 +4,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -71,8 +70,27 @@ public class FutureBrewingStandScreen extends AbstractContainerScreen<FutureBrew
             pGuiGraphics.blit(BREWING_STAND_LOCATION, i + 13, j + 78, 0, 244, f, 2);
         }
 
-        //TODO 渲染按钮和模式指示灯
+        int mode = this.menu.getBrewingMode();
 
+        // TODO 鼠标悬停效果渲染
+        // 模式切换按钮
+        if (mode == 0) {
+            pGuiGraphics.blit(BREWING_STAND_LOCATION, i + 14, j + 27, 56, 223, 16, 16);
+        } else if (mode == 1) {
+            pGuiGraphics.blit(BREWING_STAND_LOCATION, i + 14, j + 27, 73, 206, 16, 16);
+        } else {
+            pGuiGraphics.blit(BREWING_STAND_LOCATION, i + 14, j + 27, 73, 223, 16, 16);
+        }
+
+        // 模式指示灯
+        if (mode > 0) {
+            // 自动注水
+            pGuiGraphics.blit(BREWING_STAND_LOCATION, i + 14, j + 43, 90, 206, 8, 8);
+            if (mode > 1) {
+                // 自动粗制
+                pGuiGraphics.blit(BREWING_STAND_LOCATION, i + 22, j + 43, 99, 206, 8, 8);
+            }
+        }
     }
 
     @OnlyIn(Dist.CLIENT)
