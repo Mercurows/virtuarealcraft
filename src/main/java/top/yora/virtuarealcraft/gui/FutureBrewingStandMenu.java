@@ -147,6 +147,10 @@ public class FutureBrewingStandMenu extends AbstractContainerMenu {
         return this.brewingStandData.get(0);
     }
 
+    public void setBrewingTicks(int ticks) {
+        this.brewingStandData.set(0, ticks);
+    }
+
     @Override
     public boolean stillValid(Player pPlayer) {
         return this.brewingStand.stillValid(pPlayer);

@@ -263,21 +263,26 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
         boolean canBrew = isBrewable(pBlockEntity.items);
         boolean brewing = pBlockEntity.brewTime > 0;
         ItemStack ingredient = pBlockEntity.items.get(INGREDIENT_SLOT);
+
         if (brewing) {
             --pBlockEntity.brewTime;
             boolean brewFinished = pBlockEntity.brewTime == 0;
             if (brewFinished && canBrew) {
                 // finish brewing
-                //TODO 粗制状态下，每次消耗2点燃料
-                pBlockEntity.fuel -= 1;
+                if (pBlockEntity.mode == 2) {
+                    pBlockEntity.fuel -= 2;
+                } else {
+                    pBlockEntity.fuel -= 1;
+                }
+
                 doBrew(pLevel, pPos, pBlockEntity.items);
                 setChanged(pLevel, pPos, pState);
-            } else if (!canBrew || !ingredient.is(pBlockEntity.ingredient)) {
+            } else if (!canBrew || !ingredient.is(pBlockEntity.ingredient) || (pBlockEntity.mode == 2 && pBlockEntity.fuel < 2)) {
                 // wrong ingredient, stop brewing
                 pBlockEntity.brewTime = 0;
                 setChanged(pLevel, pPos, pState);
             }
-        } else if (canBrew && pBlockEntity.fuel > 0) {
+        } else if (canBrew && canBrewInDifferentMode(pBlockEntity.mode, pBlockEntity.fuel)) {
             // start brewing
             pBlockEntity.brewTime = 200;    // 10s
             pBlockEntity.ingredient = ingredient.getItem();
@@ -302,6 +307,10 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
             blockstate = blockstate.setValue(FutureBrewingStandBlock.BOTTLES, count);
             pLevel.setBlock(pPos, blockstate, 2);
         }
+    }
+
+    private static boolean canBrewInDifferentMode(int mode, int fuel) {
+        return mode == 2 ? fuel > 1 : fuel > 0;
     }
 
     @Override

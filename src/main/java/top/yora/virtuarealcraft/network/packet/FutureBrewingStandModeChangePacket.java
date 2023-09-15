@@ -37,6 +37,8 @@ public class FutureBrewingStandModeChangePacket {
                     }
 
                     futureBrewingStandMenu.setBrewingMode(mode);
+
+                    futureBrewingStandMenu.setBrewingTicks(0);
                 }
             }
         });
