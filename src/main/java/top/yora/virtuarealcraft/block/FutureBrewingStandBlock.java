@@ -36,7 +36,7 @@ public class FutureBrewingStandBlock extends Block implements EntityBlock {
     public static final IntegerProperty BOTTLES = IntegerProperty.create("bottle", 0, 6);
 
     public FutureBrewingStandBlock() {
-        super(BlockBehaviour.Properties.of().strength(4.5f).noParticlesOnBreak().noOcclusion());
+        super(BlockBehaviour.Properties.of().strength(4.5f).noOcclusion());
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(BOTTLES, 0));
     }
 

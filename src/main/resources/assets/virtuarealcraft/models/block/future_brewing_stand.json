@@ -3,7 +3,7 @@
 	"texture_size": [64, 64],
 	"textures": {
 		"2": "virtuarealcraft:block/future_brewing_stand",
-		"particle": "virtuarealcraft:block/future_brewing_stand"
+		"particle": "virtuarealcraft:item/future_brewing_stand"
 	},
 	"render_type": "translucent",
 	"elements": [
