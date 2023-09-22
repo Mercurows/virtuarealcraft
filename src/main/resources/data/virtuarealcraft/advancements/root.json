@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "item": "virtuarealcraft:vrc_logo"
+    },
+    "title": {
+      "translate": "advancements.virtuarealcraft.root.title"
+    },
+    "description": {
+      "translate": "advancements.virtuarealcraft.root.des"
+    },
+    "background": "virtuarealcraft:textures/block/advancements_bg.png",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:tick"
+    }
+  }
+}

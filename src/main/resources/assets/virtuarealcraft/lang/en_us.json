@@ -216,5 +216,7 @@
   "des.virtuarealcraft.group.19th": "===VirtuaReal 19th Gen Item===",
   "des.virtuarealcraft.group.20th-k": "===VirtuaReal 20th Gen Kismet Item===",
   "des.virtuarealcraft.group.20th-i": "===VirtuaReal 20th Gen INTRO Item===",
-  "des.virtuarealcraft.group.link": "===VirtuaReal Link Item==="
+  "des.virtuarealcraft.group.link": "===VirtuaReal Link Item===",
+  "advancements.virtuarealcraft.root.title": "VirtuaRealCraft",
+  "advancements.virtuarealcraft.root.des": "向承载梦想的世界，出发"
 }
