@@ -15,4 +15,5 @@ public class SoundRegistry {
     public static final RegistryObject<SoundEvent> HOSHIMI_MUA = SOUNDS.register("hoshimi_mua", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(Utils.MOD_ID, "hoshimi_mua")));
     public static final RegistryObject<SoundEvent> ZIPPER = SOUNDS.register("zipper", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(Utils.MOD_ID, "zipper")));
 
+    public static final RegistryObject<SoundEvent> NICE_RECTANGLE = SOUNDS.register("nice_rectangle", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(Utils.MOD_ID, "nice_rectangle")));
 }

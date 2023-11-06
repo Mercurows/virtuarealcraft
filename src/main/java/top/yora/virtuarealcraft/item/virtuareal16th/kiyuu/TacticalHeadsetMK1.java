@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -22,6 +23,7 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.gui.RectangleHUD;
+import top.yora.virtuarealcraft.init.SoundRegistry;
 import top.yora.virtuarealcraft.models.TacticalHeadsetMK1Model;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
@@ -43,6 +45,7 @@ public class TacticalHeadsetMK1 extends ArmorItem {
         if (!player.getCooldowns().isOnCooldown(stack.getItem()) && player.isSteppingCarefully()) {
             if (level.isClientSide) {
                 RectangleHUD.lastActiveTime = System.currentTimeMillis();
+                level.playSound(player, player.getOnPos(), SoundRegistry.NICE_RECTANGLE.get(), SoundSource.AMBIENT, 2.0f, 1.0f);
             } else {
                 var startPos = player.position().add(-30, -30, -30);
                 var endPos = player.position().add(30, 30, 30);

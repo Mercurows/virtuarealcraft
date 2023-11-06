@@ -30,5 +30,13 @@
         "name": "virtuarealcraft:zipper"
       }
     ]
+  },
+  "nice_rectangle": {
+    "subtitle": "subtitle.virtuarealcraft.nice_rectangle",
+    "sounds": [
+      {
+        "name": "virtuarealcraft:nice_rectangle"
+      }
+    ]
   }
 }
