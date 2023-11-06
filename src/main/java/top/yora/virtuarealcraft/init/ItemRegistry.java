@@ -24,6 +24,7 @@ import top.yora.virtuarealcraft.item.virtuareal13th.tocci.JokerMask;
 import top.yora.virtuarealcraft.item.virtuareal14th.koxia.Kuya;
 import top.yora.virtuarealcraft.item.virtuareal16th.girimi.ShadowHood;
 import top.yora.virtuarealcraft.item.virtuareal16th.kiyuu.GameConsole;
+import top.yora.virtuarealcraft.item.virtuareal16th.kiyuu.TacticalHeadsetMK1;
 import top.yora.virtuarealcraft.item.virtuareal17th.sui.SuimashedCookie;
 import top.yora.virtuarealcraft.item.virtuareal19th.ameki.ButterflyStaff;
 import top.yora.virtuarealcraft.item.virtuareal19th.ameki.RainyButterfly;
@@ -207,7 +208,7 @@ public class ItemRegistry {
 
     //kiyuu
     public static final RegistryObject<Item> GAME_CONSOLE = ITEMS.register("game_console", GameConsole::new);
-
+    public static final RegistryObject<Item> TACTICAL_HEADSET_MK1 = ITEMS.register("tactical_headset_mk1", TacticalHeadsetMK1::new);
 
     /**
      * 17th
@@ -230,7 +231,6 @@ public class ItemRegistry {
     public static final RegistryObject<Item> CHENG_HUANG_CRYSTAL = ITEMS.register("cheng_huang_crystal", ChengHuangCrystal::new);
 
     //hatsune
-
 
 
     /**
