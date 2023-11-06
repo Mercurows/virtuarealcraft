@@ -1,9 +1,11 @@
 package top.yora.virtuarealcraft.item.virtuareal16th.kiyuu;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -93,7 +95,9 @@ public class TacticalHeadsetMK1 extends ArmorItem {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        // TODO 补充物品描述
+        tooltip.add(Component.translatable("des.virtuarealcraft.tactical_headset_mk1_1").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
+        tooltip.add(Component.translatable("des.virtuarealcraft.tactical_headset_mk1_2").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
+
         TooltipTool.addLiverInfo(tooltip, Livers.KIYUU);
     }
 
