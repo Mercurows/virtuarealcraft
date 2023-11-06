@@ -11,7 +11,7 @@ public class RectangleHUD {
 
         long currentTime = System.currentTimeMillis();
 
-        // 使用时间小于8秒或大于19秒则不渲染
+        // 距开始使用时间小于8秒或大于18秒则不渲染
         if (currentTime - lastActiveTime < 8000 || currentTime - lastActiveTime > 18000) {
             return;
         }
