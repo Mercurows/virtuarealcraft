@@ -23,5 +23,6 @@ public class ModelRegistry {
         event.registerLayerDefinition(MihiruTailModel.LAYER_LOCATION, MihiruTailModel::createBodyLayer);
         event.registerLayerDefinition(KouichiDartsModel.LAYER_LOCATION, KouichiDartsModel::createBodyLayer);
         event.registerLayerDefinition(OrangeGrenadeModel.LAYER_LOCATION, OrangeGrenadeModel::createBodyLayer);
+        event.registerLayerDefinition(TacticalHeadsetMK1Model.LAYER_LOCATION, TacticalHeadsetMK1Model::createBodyLayer);
     }
 }
