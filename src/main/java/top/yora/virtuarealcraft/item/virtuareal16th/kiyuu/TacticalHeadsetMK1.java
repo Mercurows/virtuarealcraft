@@ -22,6 +22,9 @@ import net.minecraft.world.phys.AABB;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.jetbrains.annotations.NotNull;
 import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.gui.RectangleHUD;
@@ -45,6 +48,8 @@ public class TacticalHeadsetMK1 extends ArmorItem {
     @Override
     public void onArmorTick(ItemStack stack, Level level, Player player) {
         if (!player.getCooldowns().isOnCooldown(stack.getItem()) && player.isSteppingCarefully()) {
+            player.getCooldowns().addCooldown(stack.getItem(), 600);
+
             if (level.isClientSide) {
                 RectangleHUD.lastActiveTime = System.currentTimeMillis();
                 level.playSound(player, player.getOnPos(), SoundRegistry.NICE_RECTANGLE.get(), SoundSource.AMBIENT, 2.0f, 1.0f);
@@ -55,11 +60,37 @@ public class TacticalHeadsetMK1 extends ArmorItem {
 
                 var entities = level.getEntitiesOfClass(LivingEntity.class, box);
                 entities.forEach(e -> {
-                    if (e.getStringUUID().equals(player.getStringUUID())) return;
-                    e.addEffect(new MobEffectInstance(MobEffects.GLOWING, 100, 1));
+                    if (e.getStringUUID().equals(player.getStringUUID())) {
+                        return;
+                    }
+                    e.addEffect(new MobEffectInstance(MobEffects.GLOWING, 100, 0, false, false));
                 });
 
-                player.getCooldowns().addCooldown(stack.getItem(), 600);
+                new Object() {
+                    private int ticks = 0;
+                    private float waitTicks;
+
+                    public void start(int waitTicks) {
+                        this.waitTicks = waitTicks;
+                        MinecraftForge.EVENT_BUS.register(this);
+                    }
+
+                    @SubscribeEvent
+                    public void tick(TickEvent.ServerTickEvent event) {
+                        if (event.phase == TickEvent.Phase.END) {
+                            this.ticks++;
+                            if (this.ticks >= this.waitTicks) {
+                                run();
+                            }
+                        }
+                    }
+
+                    private void run() {
+                        player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 80, 0, false, false));
+
+                        MinecraftForge.EVENT_BUS.unregister(this);
+                    }
+                }.start(100);
             }
         }
     }
