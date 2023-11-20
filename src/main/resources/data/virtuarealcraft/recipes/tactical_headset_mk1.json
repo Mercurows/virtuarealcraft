@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#B#",
+    "i i",
+    "N N"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:sculk_sensor"
+    },
+    "B": {
+      "item": "minecraft:black_wool"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    },
+    "N": {
+      "item": "minecraft:note_block"
+    }
+  },
+  "result": {
+    "item": "virtuarealcraft:tactical_headset_mk1",
+    "count": 1
+  }
+}

@@ -18,7 +18,7 @@ plugins {
 //apply plugin: 'net.minecraftforge.gradle'
 
 group = 'virtuarealcraft'
-version = '1.0.0-1.20-SNAPSHOT-0.0.5'
+version = '1.0.0-1.20-SNAPSHOT-0.0.6'
 
 java {
     archivesBaseName = 'virtuarealcraft'
