@@ -9,11 +9,15 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Phantom;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import top.theillusivec4.curios.api.CuriosApi;
@@ -37,6 +41,7 @@ public class AmekichiyaRing extends Item implements ICurioItem {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
+        TooltipTool.addDevelopingText(tooltip);
         tooltip.add((Component.translatable("des.virtuarealcraft.amekichiya_ring")).withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)).withStyle(ChatFormatting.ITALIC));
 
         TooltipTool.addLiverInfo(tooltip, Livers.AMEKI);
@@ -58,6 +63,19 @@ public class AmekichiyaRing extends Item implements ICurioItem {
         if (entity != null && !entity.level().isClientSide) {
             ItemNBTTool.setBoolean(stack, "isNight", !entity.level().isDay());
 
+            if (entity instanceof Player player) {
+                AABB box = new AABB(player.getOnPos().offset(10, 10, 10), player.getOnPos().offset(-10, -10, -10));
+
+                List<LivingEntity> entities = entity.level().getEntitiesOfClass(LivingEntity.class, box);
+                entities.forEach(e -> {
+                    if (e instanceof Phantom phantom) {
+                        if (phantom.getTarget() == player) {
+                            phantom.addDeltaMovement(new Vec3(phantom.getX() - player.getX(), 0, phantom.getZ() - player.getZ()).normalize().scale(3));
+                            phantom.setTarget(null);
+                        }
+                    }
+                });
+            }
         }
     }
 
