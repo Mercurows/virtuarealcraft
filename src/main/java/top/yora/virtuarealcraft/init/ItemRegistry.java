@@ -26,10 +26,12 @@ import top.yora.virtuarealcraft.item.virtuareal16th.girimi.ShadowHood;
 import top.yora.virtuarealcraft.item.virtuareal16th.kiyuu.GameConsole;
 import top.yora.virtuarealcraft.item.virtuareal16th.kiyuu.TacticalHeadsetMK1;
 import top.yora.virtuarealcraft.item.virtuareal17th.sui.SuimashedCookie;
+import top.yora.virtuarealcraft.item.virtuareal19th.ameki.AmekichiyaRing;
 import top.yora.virtuarealcraft.item.virtuareal19th.ameki.ButterflyStaff;
 import top.yora.virtuarealcraft.item.virtuareal19th.ameki.RainyButterfly;
 import top.yora.virtuarealcraft.item.virtuareal19th.awu.ChengHuangCrystal;
 import top.yora.virtuarealcraft.item.virtuareal19th.michiya.EternalCandelabra;
+import top.yora.virtuarealcraft.item.virtuareal19th.michiya.MichiyamekiRing;
 import top.yora.virtuarealcraft.item.virtuareal1st.eine.BarrierHat;
 import top.yora.virtuarealcraft.item.virtuareal20th.kismet.ayumi.BaseballBat;
 import top.yora.virtuarealcraft.item.virtuareal20th.kismet.mizuki.FutureBrewingStand;
@@ -223,9 +225,11 @@ public class ItemRegistry {
     //ameki
     public static final RegistryObject<Item> BUTTERFLY_STAFF = ITEMS.register("butterfly_staff", ButterflyStaff::new);
     public static final RegistryObject<Item> RAINY_BUTTERFLY = ITEMS.register("rainy_butterfly", RainyButterfly::new);
+    public static final RegistryObject<Item> AMEKICHIYA_RING = ITEMS.register("amekichiya_ring", AmekichiyaRing::new);
 
     //michiya
     public static final RegistryObject<Item> ETERNAL_CANDELABRA = ITEMS.register("eternal_candelabra", EternalCandelabra::new);
+    public static final RegistryObject<Item> MICHIYAMEKI_RING = ITEMS.register("michiyameki_ring", MichiyamekiRing::new);
 
     //awu
     public static final RegistryObject<Item> CHENG_HUANG_CRYSTAL = ITEMS.register("cheng_huang_crystal", ChengHuangCrystal::new);

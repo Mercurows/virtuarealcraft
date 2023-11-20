@@ -20,7 +20,7 @@ public enum Livers {
     REVE("reve","10th","#91BCB5",false),
     YUA("yua", "10th", "#C0E0F0", true),
     SHAUN("shaun", "10th", "#FFFAFA", true),
-    TANOSHIBA("tanoshiba","11th","#E7B45B",true),
+    TANOSHIBA("tanoshiba","11th","#E7B45B",false),
     MARI("mari", "11th", "#C70039", false),
     CHIYUU("chiyuu", "11th", "#CC225F", true),
     IMI("imi", "11th", "#CC777C", false),
