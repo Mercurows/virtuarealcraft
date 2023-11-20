@@ -19,6 +19,7 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import top.yora.virtuarealcraft.init.DamageSourceRegistry;
 import top.yora.virtuarealcraft.init.ItemRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
@@ -52,7 +53,20 @@ public class GameConsole extends Item {
             double prob = Math.min(0.3 + level * 0.01, 0.8);
             double rand = Math.random();
 
-            if (rand < prob || player.getItemBySlot(EquipmentSlot.HEAD).getItem() == ItemRegistry.TACTICAL_HEADSET_MK1.get()) {
+            if (player.getItemBySlot(EquipmentSlot.HEAD).getItem() == ItemRegistry.TACTICAL_HEADSET_MK1.get()) {
+                if (!pLevel.isClientSide) {
+                    player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 2400, 1));
+                    player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 2400, 1));
+                    player.addEffect(new MobEffectInstance(MobEffects.LUCK, 2400, 0));
+
+                    // prob = 0.0434... = 1/23
+                    if (rand <= 0.0434) {
+                        player.hurt(DamageSourceRegistry.causeJusticeBanDamage(pLevel.registryAccess(), null), 167.0f);
+                    }
+                } else {
+                    player.playSound(SoundEvents.ARROW_HIT_PLAYER, 1, 1);
+                }
+            } else if (rand < prob) {
                 if (!pLevel.isClientSide) {
                     player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 2400, 1));
                     player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 2400, 1));
