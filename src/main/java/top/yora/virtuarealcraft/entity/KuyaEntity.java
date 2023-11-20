@@ -46,11 +46,6 @@ public class KuyaEntity extends ThrowableItemProjectile {
         this.entityData.define(FUSE, 80);
     }
 
-    @Override
-    public boolean canBeCollidedWith() {
-        return this.isAlive();
-    }
-
     public void tick() {
         super.tick();
         --this.fuse;
