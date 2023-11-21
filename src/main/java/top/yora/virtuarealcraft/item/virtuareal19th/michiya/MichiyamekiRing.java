@@ -38,7 +38,6 @@ public class MichiyamekiRing extends Item implements ICurioItem {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        TooltipTool.addDevelopingText(tooltip);
         tooltip.add((Component.translatable("des.virtuarealcraft.michiyameki_ring")).withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)).withStyle(ChatFormatting.ITALIC));
 
         TooltipTool.addLiverInfo(tooltip, Livers.MICHIYA);
