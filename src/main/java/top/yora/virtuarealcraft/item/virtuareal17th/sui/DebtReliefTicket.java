@@ -29,8 +29,6 @@ public class DebtReliefTicket extends Item {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        TooltipTool.addDevelopingText(tooltip);
-
         tooltip.add((Component.translatable("des.virtuarealcraft.debt_relief_ticket_1")).withStyle(ChatFormatting.GRAY));
         tooltip.add((Component.translatable("des.virtuarealcraft.debt_relief_ticket_2")).withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
 
