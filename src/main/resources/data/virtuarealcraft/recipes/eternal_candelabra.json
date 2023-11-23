@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "iLi",
+    " _ "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:candle"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    },
+    "L": {
+      "item": "minecraft:lightning_rod"
+    },
+    "_": {
+      "item": "minecraft:waxed_cut_copper_slab"
+    }
+  },
+  "result": {
+    "item": "virtuarealcraft:eternal_candelabra",
+    "count": 1
+  }
+}
