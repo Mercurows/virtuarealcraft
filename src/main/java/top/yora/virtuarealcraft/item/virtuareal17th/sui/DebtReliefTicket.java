@@ -4,6 +4,8 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerProfession;
@@ -44,6 +46,7 @@ public class DebtReliefTicket extends Item {
                 }
 
                 villager.restock();
+                pPlayer.addEffect(new MobEffectInstance(MobEffects.HERO_OF_THE_VILLAGE, 1200, 4));
 
                 if (!pPlayer.isCreative()) {
                     pStack.shrink(1);
