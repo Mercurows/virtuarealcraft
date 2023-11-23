@@ -25,6 +25,7 @@ import top.yora.virtuarealcraft.item.virtuareal14th.koxia.Kuya;
 import top.yora.virtuarealcraft.item.virtuareal16th.girimi.ShadowHood;
 import top.yora.virtuarealcraft.item.virtuareal16th.kiyuu.GameConsole;
 import top.yora.virtuarealcraft.item.virtuareal16th.kiyuu.TacticalHeadsetMK1;
+import top.yora.virtuarealcraft.item.virtuareal17th.sui.DebtReliefTicket;
 import top.yora.virtuarealcraft.item.virtuareal17th.sui.SuimashedCookie;
 import top.yora.virtuarealcraft.item.virtuareal19th.ameki.AmekichiyaRing;
 import top.yora.virtuarealcraft.item.virtuareal19th.ameki.ButterflyStaff;
@@ -217,6 +218,7 @@ public class ItemRegistry {
      */
     //sui
     public static final RegistryObject<Item> SUIMASHED_COOKIE = ITEMS.register("suimashed_cookie", SuimashedCookie::new);
+    public static final RegistryObject<Item> DEBT_RELIEF_TICKET = ITEMS.register("debt_relief_ticket", DebtReliefTicket::new);
 
 
     /**
