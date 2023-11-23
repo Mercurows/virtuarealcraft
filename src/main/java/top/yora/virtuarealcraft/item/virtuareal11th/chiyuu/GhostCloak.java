@@ -2,7 +2,6 @@ package top.yora.virtuarealcraft.item.virtuareal11th.chiyuu;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -30,8 +29,8 @@ public class GhostCloak extends Item implements ICurioItem {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        tooltip.add(Component.translatable("des.virtuarealcraft.ghost_cloak_1").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
-        tooltip.add(Component.translatable("des.virtuarealcraft.ghost_cloak_2").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY).withItalic(true)));
+        tooltip.add(Component.translatable("des.virtuarealcraft.ghost_cloak_1").withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("des.virtuarealcraft.ghost_cloak_2").withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
 
         TooltipTool.addLiverInfo(tooltip, Livers.CHIYUU);
     }

@@ -2,7 +2,6 @@ package top.yora.virtuarealcraft.item.virtuareal11th.imi;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -36,8 +35,8 @@ public class MagicFeather extends Item {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        tooltip.add(Component.translatable("des.virtuarealcraft.magic_feather_1").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
-        tooltip.add(Component.translatable("des.virtuarealcraft.magic_feather_2").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY).withItalic(true)));
+        tooltip.add(Component.translatable("des.virtuarealcraft.magic_feather_1").withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("des.virtuarealcraft.magic_feather_2").withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
 
         TooltipTool.addLiverInfo(tooltip, Livers.IMI);
     }

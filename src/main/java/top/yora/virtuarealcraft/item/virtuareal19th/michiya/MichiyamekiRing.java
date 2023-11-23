@@ -4,8 +4,6 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -38,7 +36,7 @@ public class MichiyamekiRing extends Item implements ICurioItem {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        tooltip.add((Component.translatable("des.virtuarealcraft.michiyameki_ring")).withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)).withStyle(ChatFormatting.ITALIC));
+        tooltip.add((Component.translatable("des.virtuarealcraft.michiyameki_ring")).withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
 
         TooltipTool.addLiverInfo(tooltip, Livers.MICHIYA);
     }

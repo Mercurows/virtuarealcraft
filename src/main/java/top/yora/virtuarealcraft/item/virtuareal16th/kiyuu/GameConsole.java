@@ -2,7 +2,6 @@ package top.yora.virtuarealcraft.item.virtuareal16th.kiyuu;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
@@ -35,8 +34,8 @@ public class GameConsole extends Item {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        tooltip.add(Component.translatable("des.virtuarealcraft.game_console_1").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
-        tooltip.add(Component.translatable("des.virtuarealcraft.game_console_2").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY).withItalic(true)));
+        tooltip.add(Component.translatable("des.virtuarealcraft.game_console_1").withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("des.virtuarealcraft.game_console_2").withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
 
         TooltipTool.addLiverInfo(tooltip, Livers.KIYUU);
     }

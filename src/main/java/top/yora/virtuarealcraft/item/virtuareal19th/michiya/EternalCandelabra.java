@@ -2,7 +2,6 @@ package top.yora.virtuarealcraft.item.virtuareal19th.michiya;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tiers;
@@ -25,7 +24,7 @@ public class EternalCandelabra extends SwordItem {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
         TooltipTool.addDevelopingText(tooltip);
-        tooltip.add(Component.translatable("des.virtuarealcraft.eternal_candelabra").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
+        tooltip.add(Component.translatable("des.virtuarealcraft.eternal_candelabra").withStyle(ChatFormatting.GRAY));
 
         TooltipTool.addLiverInfo(tooltip, Livers.MICHIYA);
     }

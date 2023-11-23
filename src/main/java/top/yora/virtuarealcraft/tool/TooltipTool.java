@@ -21,7 +21,7 @@ public class TooltipTool {
 
     public static void addLiverInfo(List<Component> tooltip, Livers liver) {
         addHideText(tooltip, Component.literal(""));
-        addHideText(tooltip, Component.translatable("liver.virtuarealcraft.liver").withStyle(Style.EMPTY.withColor(ChatFormatting.WHITE)));
+        addHideText(tooltip, Component.translatable("liver.virtuarealcraft.liver").withStyle(ChatFormatting.WHITE));
         addHideText(tooltip, Component.translatable("liver.virtuarealcraft." + liver.getName()).withStyle(Style.EMPTY.withColor(TextColor.parseColor(liver.getColor()))));
         String gen = liver.getGen();
         String bgColor = switch (gen) {

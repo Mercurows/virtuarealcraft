@@ -2,7 +2,6 @@ package top.yora.virtuarealcraft.item.virtuareal19th.awu;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -25,7 +24,7 @@ public class ChengHuangCrystal extends Item {
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
         TooltipTool.addDevelopingText(tooltip);
 
-        tooltip.add(Component.translatable("des.virtuarealcraft.cheng_huang_crystal").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
+        tooltip.add(Component.translatable("des.virtuarealcraft.cheng_huang_crystal").withStyle(ChatFormatting.GRAY));
 
         TooltipTool.addLiverInfo(tooltip, Livers.AWU);
     }

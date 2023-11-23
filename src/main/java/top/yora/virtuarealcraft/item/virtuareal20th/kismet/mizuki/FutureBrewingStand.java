@@ -2,7 +2,6 @@ package top.yora.virtuarealcraft.item.virtuareal20th.kismet.mizuki;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
@@ -27,8 +26,8 @@ public class FutureBrewingStand extends BlockItem {
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
         TooltipTool.addDevelopingText(tooltip);
 
-        tooltip.add(Component.translatable("des.virtuarealcraft.future_brewing_stand_1").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
-        tooltip.add(Component.translatable("des.virtuarealcraft.future_brewing_stand_2").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY).withItalic(true)));
+        tooltip.add(Component.translatable("des.virtuarealcraft.future_brewing_stand_1").withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("des.virtuarealcraft.future_brewing_stand_2").withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
 
         TooltipTool.addLiverInfo(tooltip, Livers.MIZUKI);
     }
