@@ -1,27 +1,27 @@
 {
   "attributes": {
-    "attack_range": 4.5,
+    "attack_range": 5,
     "two_handed": true,
     "category": "eternal_candelabra",
     "attacks": [
       {
-        "hitbox": "VERTICAL_PLANE",
+        "hitbox": "HORIZONTAL_PLANE",
         "damage_multiplier": 1,
-        "angle": 180,
+        "angle": 160,
         "upswing": 0.5,
-        "animation": "bettercombat:two_handed_slash_vertical_right",
+        "animation": "bettercombat:two_handed_slash_horizontal_right",
         "swing_sound": {
-          "id": "bettercombat:axe_slash"
+          "id": "bettercombat:double_axe_swing"
         }
       },
       {
-        "hitbox": "VERTICAL_PLANE",
+        "hitbox": "HORIZONTAL_PLANE",
         "damage_multiplier": 1,
-        "angle": 180,
+        "angle": 160,
         "upswing": 0.5,
-        "animation": "bettercombat:two_handed_slash_vertical_left",
+        "animation": "bettercombat:two_handed_slash_horizontal_left",
         "swing_sound": {
-          "id": "bettercombat:axe_slash"
+          "id": "bettercombat:double_axe_swing"
         }
       },
       {
@@ -35,9 +35,8 @@
         }
       },
       {
-        "hitbox": "FORWARD_BOX",
+        "hitbox": "VERTICAL_PLANE",
         "damage_multiplier": 1.4,
-        "angle": 180,
         "upswing": 0.5,
         "animation": "bettercombat:two_handed_slam_heavy",
         "swing_sound": {

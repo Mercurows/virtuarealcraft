@@ -43,7 +43,7 @@ public class EternalCandelabra extends SwordItem {
     @Override
     public boolean hurtEnemy(ItemStack pStack, LivingEntity pTarget, LivingEntity pAttacker) {
         if (!pAttacker.level().isClientSide) {
-            pTarget.setSecondsOnFire(380);
+            pTarget.setSecondsOnFire(19);
             pTarget.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 1));
             pTarget.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 100, 0));
         }
