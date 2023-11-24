@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "gDg",
+    "VNH",
+    "gDg"
+  ],
+  "key": {
+    "g": {
+      "item": "minecraft:gold_ingot"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "V": {
+      "item": "virtuarealcraft:amekichiya_ring"
+    },
+    "N": {
+      "item": "virtuarealcraft:tokimori_seisand"
+    },
+    "H": {
+      "item": "virtuarealcraft:michiyameki_ring"
+    }
+  },
+  "result": {
+    "item": "virtuarealcraft:night_rain_ring",
+    "count": 1
+  }
+}

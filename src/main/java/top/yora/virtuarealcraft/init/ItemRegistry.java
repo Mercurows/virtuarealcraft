@@ -23,6 +23,7 @@ import top.yora.virtuarealcraft.item.virtuareal13th.kiti.Cornucopia;
 import top.yora.virtuarealcraft.item.virtuareal13th.qilou.GorgeousBloom;
 import top.yora.virtuarealcraft.item.virtuareal13th.tocci.JokerMask;
 import top.yora.virtuarealcraft.item.virtuareal14th.koxia.Kuya;
+import top.yora.virtuarealcraft.item.virtuareal14th.rhea.WisdomWand;
 import top.yora.virtuarealcraft.item.virtuareal16th.girimi.ShadowHood;
 import top.yora.virtuarealcraft.item.virtuareal16th.kiyuu.GameConsole;
 import top.yora.virtuarealcraft.item.virtuareal16th.kiyuu.TacticalHeadsetMK1;
@@ -203,6 +204,8 @@ public class ItemRegistry {
     //koxia
     public static final RegistryObject<Item> KUYA = ITEMS.register("kuya", Kuya::new);
 
+    //rhea
+    public static final RegistryObject<Item> WISDOM_WAND = ITEMS.register("wisdom_wand", WisdomWand::new);
 
     /**
      * 16th
