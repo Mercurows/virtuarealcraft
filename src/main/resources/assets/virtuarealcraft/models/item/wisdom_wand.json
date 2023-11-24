@@ -1,0 +1,12 @@
+{
+	"loader": "forge:separate_transforms",
+	"gui_light": "front",
+	"base": {
+		"parent": "virtuarealcraft:item/wisdom_wand_3d"
+	},
+	"perspectives": {
+		"gui": {
+			"parent": "virtuarealcraft:item/wisdom_wand_inventory"
+		}
+	}
+}
