@@ -6,6 +6,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import top.yora.virtuarealcraft.Utils;
+import top.yora.virtuarealcraft.item.others.NightRainRing;
 import top.yora.virtuarealcraft.item.others.TokimoriSeisand;
 import top.yora.virtuarealcraft.item.others.VrcLogo;
 import top.yora.virtuarealcraft.item.others.WorkaholicFury;
@@ -256,4 +257,9 @@ public class ItemRegistry {
     public static final RegistryObject<Item> TOKIMORI_SEISAND = ITEMS.register("tokimori_seisand", TokimoriSeisand::new);
     public static final RegistryObject<Item> WORKAHOLIC_FURY = ITEMS.register("workaholic_fury", WorkaholicFury::new);
 
+    /**
+     * combination
+     */
+    //ameki-michiya
+    public static final RegistryObject<Item> NIGHT_RAIN_RING = ITEMS.register("night_rain_ring", NightRainRing::new);
 }

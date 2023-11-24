@@ -20,6 +20,7 @@ import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 import top.yora.virtuarealcraft.Utils;
+import top.yora.virtuarealcraft.init.ItemRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 
@@ -46,6 +47,7 @@ public class MichiyamekiRing extends Item implements ICurioItem {
         LivingEntity livingEntity = slotContext.entity();
         AtomicBoolean flag = new AtomicBoolean(true);
         CuriosApi.getCuriosInventory(livingEntity).ifPresent(c -> c.findFirstCurio(this).ifPresent(s -> flag.set(false)));
+        CuriosApi.getCuriosInventory(livingEntity).ifPresent(c -> c.findFirstCurio(ItemRegistry.NIGHT_RAIN_RING.get()).ifPresent(s -> flag.set(false)));
 
         return flag.get();
     }
