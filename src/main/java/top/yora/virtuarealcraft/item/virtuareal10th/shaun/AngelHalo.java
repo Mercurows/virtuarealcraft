@@ -5,7 +5,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -42,9 +41,9 @@ public class AngelHalo extends ArmorItem {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        tooltip.add(Component.translatable("des.virtuarealcraft.angel_halo").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
+        tooltip.add(Component.translatable("des.virtuarealcraft.angel_halo").withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.literal(""));
-        tooltip.add(Component.translatable("des.virtuarealcraft.angel_halo.energy").withStyle(Style.EMPTY.withColor(ChatFormatting.WHITE)));
+        tooltip.add(Component.translatable("des.virtuarealcraft.angel_halo.energy").withStyle(ChatFormatting.WHITE));
         showFlyEnergy(pStack, tooltip);
         TooltipTool.addLiverInfo(tooltip, Livers.SHAUN);
     }
@@ -146,6 +145,6 @@ public class AngelHalo extends ArmorItem {
         double per = (double) getFlyEnergy(stack) / 1000;
         String percent = numberFormat.format(per);
 
-        tooltip.add(Component.literal(percent).withStyle(Style.EMPTY.withColor(formatting)));
+        tooltip.add(Component.literal(percent).withStyle(formatting));
     }
 }
