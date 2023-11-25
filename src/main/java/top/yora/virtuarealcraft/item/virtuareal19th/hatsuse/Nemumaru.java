@@ -29,7 +29,7 @@ public class Nemumaru extends Item {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        tooltip.add((Component.translatable("des.virtuarealcraft.nemumaru")).withStyle(ChatFormatting.GRAY));
+        tooltip.add((Component.translatable("des.virtuarealcraft.nemumaru")).withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
 
         TooltipTool.addLiverInfo(tooltip, Livers.HATSUSE);
     }
@@ -47,7 +47,6 @@ public class Nemumaru extends Item {
 
             effectInstances.forEach(e -> pLivingEntity.removeEffect(e.getEffect()));
         }
-
         return super.finishUsingItem(pStack, pLevel, pLivingEntity);
     }
 }

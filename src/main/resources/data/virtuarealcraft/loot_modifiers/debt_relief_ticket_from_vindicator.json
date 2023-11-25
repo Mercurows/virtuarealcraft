@@ -1,0 +1,14 @@
+{
+  "type": "virtuarealcraft:add_item",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:entities/vindicator"
+    },
+    {
+      "chance": 0.08,
+      "condition": "minecraft:random_chance"
+    }
+  ],
+  "item": "virtuarealcraft:debt_relief_ticket"
+}

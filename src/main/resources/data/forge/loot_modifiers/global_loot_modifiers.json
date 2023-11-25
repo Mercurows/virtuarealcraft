@@ -1,6 +1,10 @@
 {
   "entries": [
-    "virtuarealcraft:nemumaru_from_bat"
+    "virtuarealcraft:nemumaru_from_bat",
+    "virtuarealcraft:debt_relief_ticket_from_evoker",
+    "virtuarealcraft:debt_relief_ticket_from_pillager",
+    "virtuarealcraft:debt_relief_ticket_from_ravager",
+    "virtuarealcraft:debt_relief_ticket_from_vindicator"
   ],
   "replace": false
 }
