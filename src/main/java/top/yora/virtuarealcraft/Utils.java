@@ -35,6 +35,7 @@ public class Utils {
         MenuTypeRegistry.MENU_TYPES.register(eventBus);
 //        LootTableHandler.init(eventBus);
 //        CompatHandler.registerCompatItems(eventBus);
+        LootModifierRegistry.register(eventBus);
         VrcNetwork.init();
 
         eventBus.addListener(this::commonSetup);

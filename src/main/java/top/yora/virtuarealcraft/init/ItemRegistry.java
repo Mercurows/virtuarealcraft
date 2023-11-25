@@ -33,6 +33,7 @@ import top.yora.virtuarealcraft.item.virtuareal19th.ameki.AmekichiyaRing;
 import top.yora.virtuarealcraft.item.virtuareal19th.ameki.ButterflyStaff;
 import top.yora.virtuarealcraft.item.virtuareal19th.ameki.RainyButterfly;
 import top.yora.virtuarealcraft.item.virtuareal19th.awu.ChengHuangCrystal;
+import top.yora.virtuarealcraft.item.virtuareal19th.hatsuse.Nemumaru;
 import top.yora.virtuarealcraft.item.virtuareal19th.michiya.EternalCandelabra;
 import top.yora.virtuarealcraft.item.virtuareal19th.michiya.MichiyamekiRing;
 import top.yora.virtuarealcraft.item.virtuareal1st.eine.BarrierHat;
@@ -240,7 +241,8 @@ public class ItemRegistry {
     //awu
     public static final RegistryObject<Item> CHENG_HUANG_CRYSTAL = ITEMS.register("cheng_huang_crystal", ChengHuangCrystal::new);
 
-    //hatsune
+    //hatsuse
+    public static final RegistryObject<Item> NEMUMARU = ITEMS.register("nemumaru", Nemumaru::new);
 
 
     /**
