@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "gEg",
+    " O ",
+    " B "
+  ],
+  "key": {
+    "g": {
+      "item": "minecraft:gold_ingot"
+    },
+    "E": {
+      "item": "minecraft:end_crystal"
+    },
+    "O": {
+      "item": "minecraft:orange_wool"
+    },
+    "B": {
+      "item": "minecraft:blue_wool"
+    }
+  },
+  "result": {
+    "item": "virtuarealcraft:cheng_huang_crystal",
+    "count": 1
+  }
+}
