@@ -54,7 +54,7 @@ public class EternalCandelabra extends SwordItem {
     @Override
     public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot pEquipmentSlot) {
         Multimap<Attribute, AttributeModifier> map = super.getDefaultAttributeModifiers(pEquipmentSlot);
-        UUID uuid = new UUID(ItemRegistry.HAMSTER_WHEEL.hashCode() + pEquipmentSlot.toString().hashCode(), 0);
+        UUID uuid = new UUID(ItemRegistry.ETERNAL_CANDELABRA.hashCode() + pEquipmentSlot.toString().hashCode(), 0);
         if (pEquipmentSlot == EquipmentSlot.MAINHAND) {
             map = HashMultimap.create(map);
             map.put(ForgeMod.ENTITY_REACH.get(),

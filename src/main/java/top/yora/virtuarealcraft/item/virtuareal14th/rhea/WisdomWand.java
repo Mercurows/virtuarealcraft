@@ -1,5 +1,7 @@
 package top.yora.virtuarealcraft.item.virtuareal14th.rhea;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import com.google.common.collect.Streams;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -10,8 +12,13 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Fireball;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -24,15 +31,19 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import top.yora.virtuarealcraft.Utils;
+import top.yora.virtuarealcraft.init.ItemRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 
 import javax.annotation.Nullable;
 import java.util.Comparator;
 import java.util.List;
+import java.util.UUID;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -44,10 +55,33 @@ public class WisdomWand extends SwordItem {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        TooltipTool.addDevelopingText(tooltip);
         tooltip.add((Component.translatable("des.virtuarealcraft.wisdom_wand")).withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
 
         TooltipTool.addLiverInfo(tooltip, Livers.RHEA);
+    }
+
+    @Override
+    public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot pEquipmentSlot) {
+        Multimap<Attribute, AttributeModifier> map = super.getDefaultAttributeModifiers(pEquipmentSlot);
+        UUID uuid = new UUID(ItemRegistry.WISDOM_WAND.hashCode() + pEquipmentSlot.toString().hashCode(), 0);
+        if (pEquipmentSlot == EquipmentSlot.MAINHAND) {
+            map = HashMultimap.create(map);
+            map.put(ForgeMod.ENTITY_REACH.get(),
+                    new AttributeModifier(uuid, Utils.ATTRIBUTE_MODIFIER, 3.0f, AttributeModifier.Operation.ADDITION));
+        }
+        return map;
+    }
+
+    @Override
+    public boolean hurtEnemy(ItemStack pStack, LivingEntity pTarget, LivingEntity pAttacker) {
+        int lvl = -1;
+        if (pAttacker.hasEffect(MobEffects.DIG_SPEED)) {
+            lvl = pAttacker.getEffect(MobEffects.DIG_SPEED).getAmplifier();
+        }
+
+        pAttacker.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 120, lvl > 3 ? 4 : lvl + 1));
+
+        return super.hurtEnemy(pStack, pTarget, pAttacker);
     }
 
     @Override
@@ -70,7 +104,7 @@ public class WisdomWand extends SwordItem {
     @Override
     public ItemStack finishUsingItem(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity) {
         if (pLivingEntity instanceof Player player) {
-            if (player.isCrouching()) {
+            if (player.isSteppingCarefully()) {
                 if (player.getVehicle() != null) {
                     return pStack;
                 }
@@ -98,7 +132,7 @@ public class WisdomWand extends SwordItem {
                         for (int i = 1; i <= 20; i++) {
                             pLevel.addParticle(ParticleTypes.ENCHANT, true,
                                     player.getX(), player.getY(), player.getZ(),
-                                    pLevel.random.nextDouble() - 0.5, pLevel.random.nextDouble(), pLevel.random.nextDouble() - 0.5);
+                                    pLevel.random.nextDouble() * 3 - 0.5, pLevel.random.nextDouble() * 3, pLevel.random.nextDouble() * 3 - 0.5);
                         }
                     }
                 }
