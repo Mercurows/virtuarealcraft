@@ -49,7 +49,7 @@ import java.util.stream.Collectors;
 
 public class WisdomWand extends SwordItem {
     public WisdomWand() {
-        super(Tiers.IRON, 7, -3.2f, new Properties().rarity(Rarity.EPIC));
+        super(Tiers.IRON, 7, -3.2f, new Properties().rarity(Rarity.EPIC).durability(1487));
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -190,6 +190,7 @@ public class WisdomWand extends SwordItem {
             }
 
             player.getCooldowns().addCooldown(this, 140);
+            pStack.hurtAndBreak(1, player, pPlayer -> pPlayer.broadcastBreakEvent(pPlayer.getUsedItemHand()));
         }
         return super.finishUsingItem(pStack, pLevel, pLivingEntity);
     }
