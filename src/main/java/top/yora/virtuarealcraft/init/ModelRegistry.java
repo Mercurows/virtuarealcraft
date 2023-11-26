@@ -6,6 +6,7 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.yora.virtuarealcraft.models.*;
+import top.yora.virtuarealcraft.models.curios.OrangeAhogeModel;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModelRegistry {
@@ -24,5 +25,6 @@ public class ModelRegistry {
         event.registerLayerDefinition(KouichiDartsModel.LAYER_LOCATION, KouichiDartsModel::createBodyLayer);
         event.registerLayerDefinition(OrangeGrenadeModel.LAYER_LOCATION, OrangeGrenadeModel::createBodyLayer);
         event.registerLayerDefinition(TacticalHeadsetMK1Model.LAYER_LOCATION, TacticalHeadsetMK1Model::createBodyLayer);
+        event.registerLayerDefinition(OrangeAhogeModel.LAYER_LOCATION, OrangeAhogeModel::createBodyLayer);
     }
 }
