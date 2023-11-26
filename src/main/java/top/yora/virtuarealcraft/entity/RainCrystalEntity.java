@@ -58,7 +58,9 @@ public class RainCrystalEntity extends ThrowableItemProjectile {
         if (pResult.getEntity() instanceof LivingEntity livingEntity) {
             livingEntity.hurt(DamageSourceRegistry.causeRainCrystalDamage(level().registryAccess(), getOwner()), 4.0F);
         }
-        super.onHitEntity(pResult);
+        if (!this.level().isClientSide) {
+            this.discard();
+        }
     }
 
     public int getLife() {
