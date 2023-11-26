@@ -18,6 +18,7 @@ public enum Livers {
     SAYA("saya", "7th", "#764699", true),
     YUKIE("yukie", "7th", "#FFECC7", true),
     CHIHARU("chiharu", "9th", "#8C6250", true),
+    KIYORA("kiyora", "9th", "#D84E5A", false),
     REVE("reve","10th","#91BCB5",false),
     YUA("yua", "10th", "#C0E0F0", true),
     SHAUN("shaun", "10th", "#FFFAFA", true),

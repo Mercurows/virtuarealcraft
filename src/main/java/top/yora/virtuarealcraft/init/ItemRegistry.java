@@ -60,6 +60,7 @@ import top.yora.virtuarealcraft.item.virtuareal7th.saya.SugarCaneCake;
 import top.yora.virtuarealcraft.item.virtuareal7th.yukie.YukieDumplings;
 import top.yora.virtuarealcraft.item.virtuareal9th.chiharu.LittleSpringRoll;
 import top.yora.virtuarealcraft.item.virtuareal9th.chiharu.Magnifier;
+import top.yora.virtuarealcraft.item.virtuareal9th.kiyora.RebelPeriod;
 
 @SuppressWarnings("unused")
 public class ItemRegistry {
@@ -153,6 +154,9 @@ public class ItemRegistry {
     //chiharu
     public static final RegistryObject<Item> MAGNIFIER = ITEMS.register("magnifier", Magnifier::new);
     public static final RegistryObject<Item> LITTLE_SPRING_ROLL = ITEMS.register("little_spring_roll", LittleSpringRoll::new);
+
+    //kiyora
+    public static final RegistryObject<Item> REBEL_PERIOD = ITEMS.register("rebel_period", RebelPeriod::new);
 
 
     /**

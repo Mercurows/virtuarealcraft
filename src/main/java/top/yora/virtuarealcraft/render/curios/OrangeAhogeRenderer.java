@@ -12,11 +12,14 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
 import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.models.curios.OrangeAhogeModel;
 
+@OnlyIn(Dist.CLIENT)
 public class OrangeAhogeRenderer implements ICurioRenderer {
     private static final ResourceLocation TEXTURE = new ResourceLocation(Utils.MOD_ID, "textures/models/curios/orange_ahoge.png");
 
