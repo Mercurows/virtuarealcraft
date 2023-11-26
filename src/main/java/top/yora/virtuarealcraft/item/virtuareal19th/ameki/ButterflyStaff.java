@@ -22,7 +22,7 @@ import java.util.List;
 
 public class ButterflyStaff extends SwordItem {
     public ButterflyStaff() {
-        super(Tiers.IRON, 1, -2.0f, new Properties().durability(261).rarity(Rarity.UNCOMMON));
+        super(Tiers.IRON, 1, -2.0f, new Properties().durability(261));
     }
 
     @OnlyIn(Dist.CLIENT)

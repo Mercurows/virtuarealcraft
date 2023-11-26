@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.CauldronBlock;
 import net.minecraft.world.level.block.ConcretePowderBlock;
 import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.api.distmarker.Dist;
@@ -137,14 +138,17 @@ public class TorrentGem extends Item {
 
                 return InteractionResult.SUCCESS;
             } else if (state.getBlock() instanceof CauldronBlock) {
-                if (world.getBlockState(pos).getValue(LayeredCauldronBlock.LEVEL) == 3) {
-                    return InteractionResult.FAIL;
-                }
-
-                world.setBlock(pos, state.setValue(LayeredCauldronBlock.LEVEL, 3), 2);
+                world.setBlockAndUpdate(pos, Blocks.WATER_CAULDRON.defaultBlockState().setValue(BlockStateProperties.LEVEL_CAULDRON, 3));
                 stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
 
                 return InteractionResult.SUCCESS;
+            } else if (state.getBlock() instanceof LayeredCauldronBlock block) {
+                if (block.defaultBlockState().getValue(BlockStateProperties.LEVEL_CAULDRON) < 3) {
+                    world.setBlockAndUpdate(pos, Blocks.WATER_CAULDRON.defaultBlockState().setValue(BlockStateProperties.LEVEL_CAULDRON, 3));
+                    stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
+
+                    return InteractionResult.SUCCESS;
+                }
             }
         }
         return super.useOn(context);
