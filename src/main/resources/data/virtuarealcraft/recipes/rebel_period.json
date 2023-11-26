@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "L L"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:red_wool"
+    },
+    "L": {
+      "item": "minecraft:light_blue_wool"
+    }
+  },
+  "result": {
+    "item": "virtuarealcraft:rebel_period",
+    "count": 1
+  }
+}
