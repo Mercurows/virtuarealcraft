@@ -39,6 +39,7 @@ import top.yora.virtuarealcraft.item.virtuareal19th.michiya.MichiyamekiRing;
 import top.yora.virtuarealcraft.item.virtuareal1st.eine.BarrierHat;
 import top.yora.virtuarealcraft.item.virtuareal20th.kismet.ayumi.BaseballBat;
 import top.yora.virtuarealcraft.item.virtuareal20th.kismet.mizuki.FutureBrewingStand;
+import top.yora.virtuarealcraft.item.virtuareal2nd.ichigo.OrangeAhoge;
 import top.yora.virtuarealcraft.item.virtuareal2nd.kouichi.BloodWings;
 import top.yora.virtuarealcraft.item.virtuareal2nd.nanami.IceCreamBlackTea;
 import top.yora.virtuarealcraft.item.virtuareal2nd.nanami.SharkTail;
@@ -79,6 +80,9 @@ public class ItemRegistry {
     //nanami
     public static final RegistryObject<Item> ICE_CREAM_BLACK_TEA = ITEMS.register("ice_cream_black_tea", IceCreamBlackTea::new);
     public static final RegistryObject<Item> SHARK_TAIL = ITEMS.register("shark_tail", SharkTail::new);
+
+    //ichigo
+    public static final RegistryObject<Item> ORANGE_AHOGE = ITEMS.register("orange_ahoge", OrangeAhoge::new);
 
     //kouichi
     public static final RegistryObject<Item> BLOOD_WINGS = ITEMS.register("blood_wings", BloodWings::new);

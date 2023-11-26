@@ -3,6 +3,7 @@ package top.yora.virtuarealcraft.tool;
 public enum Livers {
     EINE("eine", "1st", "#A00000", true),
     NANAMI("nanami", "2nd", "#418BDE", true),
+    ICHIGO("ichigo", "2nd", "#F9C840", false),
     KOUICHI("kouichi", "2nd", "#E6E1D2", true),
     MURI("muri", "3rd", "#E9F6FE", false),
     NYATSUKI("nyatsuki", "4th", "#D8FEFE", false),
