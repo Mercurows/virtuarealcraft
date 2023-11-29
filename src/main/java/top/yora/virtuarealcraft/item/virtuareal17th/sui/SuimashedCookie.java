@@ -52,7 +52,7 @@ public class SuimashedCookie extends Item {
 
                 for (ServerPlayer serverPlayer : ((ServerLevel) pPlayer.level()).players()) {
                     if (serverPlayer.distanceToSqr(villager.getX(), villager.getY(), villager.getZ()) < 1024) {
-                        serverPlayer.connection.send(new ClientboundExplodePacket(villager.getX(), villager.getY(), villager.getZ(), 2, explosion.getToBlow(), explosion.getHitPlayers().get(villager)));
+                        serverPlayer.connection.send(new ClientboundExplodePacket(villager.getX(), villager.getY(), villager.getZ(), 2, explosion.getToBlow(), explosion.getHitPlayers().get(serverPlayer)));
                     }
                 }
 

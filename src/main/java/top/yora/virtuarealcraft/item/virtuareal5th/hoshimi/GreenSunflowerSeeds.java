@@ -54,7 +54,7 @@ public class GreenSunflowerSeeds extends Item {
 
                 for (ServerPlayer serverPlayer : ((ServerLevel) worldIn).players()) {
                     if (serverPlayer.distanceToSqr(player.getX(), player.getY(), player.getZ()) < 100) {
-                        serverPlayer.connection.send(new ClientboundExplodePacket(player.getX(), player.getY(), player.getZ(), 2, explosion.getToBlow(), explosion.getHitPlayers().get(player)));
+                        serverPlayer.connection.send(new ClientboundExplodePacket(player.getX(), player.getY(), player.getZ(), 2, explosion.getToBlow(), explosion.getHitPlayers().get(serverPlayer)));
                     }
                 }
             }
