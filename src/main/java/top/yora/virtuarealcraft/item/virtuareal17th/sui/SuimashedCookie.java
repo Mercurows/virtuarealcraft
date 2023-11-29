@@ -2,10 +2,19 @@ package top.yora.virtuarealcraft.item.virtuareal17th.sui;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundExplodePacket;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -28,5 +37,34 @@ public class SuimashedCookie extends Item {
         tooltip.add((Component.translatable("des.virtuarealcraft.suimashed_cookie")).withStyle(ChatFormatting.GRAY));
 
         TooltipTool.addLiverInfo(tooltip, Livers.SUI);
+    }
+
+    @Override
+    public InteractionResult interactLivingEntity(ItemStack pStack, Player pPlayer, LivingEntity pInteractionTarget, InteractionHand pUsedHand) {
+        if (pInteractionTarget instanceof Villager villager && !pPlayer.level().isClientSide) {
+            if (villager.getVillagerData().getProfession().name().equals("elifaus")) {
+                Explosion explosion = new Explosion(pPlayer.level(), villager, pPlayer.level().damageSources().explosion(villager, villager),
+                        null, villager.getX(), villager.getY(), villager.getZ(), 2, false, Explosion.BlockInteraction.KEEP);
+                explosion.explode();
+                explosion.finalizeExplosion(true);
+
+                explosion.clearToBlow();
+
+                for (ServerPlayer serverPlayer : ((ServerLevel) pPlayer.level()).players()) {
+                    if (serverPlayer.distanceToSqr(villager.getX(), villager.getY(), villager.getZ()) < 1024) {
+                        serverPlayer.connection.send(new ClientboundExplodePacket(villager.getX(), villager.getY(), villager.getZ(), 2, explosion.getToBlow(), explosion.getHitPlayers().get(villager)));
+                    }
+                }
+
+                villager.hurt(pPlayer.level().damageSources().explosion(null, null), 100.0f);
+
+                if (!pPlayer.isCreative()) {
+                    pStack.shrink(1);
+                }
+
+                return InteractionResult.SUCCESS;
+            }
+        }
+        return super.interactLivingEntity(pStack, pPlayer, pInteractionTarget, pUsedHand);
     }
 }
