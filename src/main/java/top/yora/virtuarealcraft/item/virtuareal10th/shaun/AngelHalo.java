@@ -77,12 +77,27 @@ public class AngelHalo extends ArmorItem {
     }
 
     @Override
+    public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
+        if (pEntity instanceof Player player) {
+            if (player.onGround() && !player.getItemBySlot(EquipmentSlot.HEAD).equals(pStack)) {
+                if (player.tickCount % 20 == 0) {
+                    setFlyEnergy(pStack, getFlyEnergy(pStack) + 1);
+                }
+            }
+        }
+    }
+
+    @Override
     public void onArmorTick(ItemStack stack, Level level, Player player) {
         if (!player.onGround()) {
-            if (getFlyEnergy(stack) > 0) {
+            if (getFlyEnergy(stack) > 0 && !player.isSpectator() && !(player.isCreative() && player.getAbilities().flying)) {
                 Vec3 look = player.getLookAngle();
 
-                player.setDeltaMovement(new Vec3(look.x * 0.25, look.y * 0.25 + 0.05, look.z * 0.25));
+                if (player.isSteppingCarefully()) {
+                    player.setDeltaMovement(0, 0, 0);
+                } else {
+                    player.setDeltaMovement(new Vec3(look.x * 0.25, look.y * 0.25 + 0.05, look.z * 0.25));
+                }
                 player.fallDistance = 0;
 
                 if (player.tickCount % 10 == 0) {
