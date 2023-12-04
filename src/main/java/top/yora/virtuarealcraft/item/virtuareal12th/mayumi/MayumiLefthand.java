@@ -43,6 +43,7 @@ public class MayumiLefthand extends Item {
         TooltipTool.addLiverInfo(tooltip, Livers.MAYUMI);
     }
 
+    //TODO 修复头顶判定
     public static boolean isValid(Level pLevel, Player pPlayer) {
         if (pLevel.isNight()) {
             Vec3 look = pPlayer.getLookAngle();
@@ -164,5 +165,10 @@ public class MayumiLefthand extends Item {
 
             player.getCooldowns().addCooldown(stack.getItem(), 200);
         }
+    }
+
+    @Override
+    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+        return slotChanged;
     }
 }
