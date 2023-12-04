@@ -3,9 +3,13 @@ package top.yora.virtuarealcraft.item.virtuareal12th.mayumi;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.network.protocol.game.ClientboundStopSoundPacket;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -17,6 +21,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import top.yora.virtuarealcraft.init.SoundRegistry;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 
@@ -45,7 +50,7 @@ public class MayumiLefthand extends Item {
         ItemStack stack = pPlayer.getItemInHand(pUsedHand);
         InteractionHand left = pPlayer.getMainArm() == HumanoidArm.RIGHT ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
 
-        if(pUsedHand == left) {
+        if (pUsedHand == left) {
             if (pLevel.isNight()) {
                 Vec3 look = pPlayer.getLookAngle();
                 Vec3 start = pPlayer.getEyePosition();
@@ -71,6 +76,7 @@ public class MayumiLefthand extends Item {
                 }
 
                 isEast = isReversed != isEast;
+                boolean flag = false;
 
                 // yrot correct
                 if (isValid) {
@@ -82,7 +88,7 @@ public class MayumiLefthand extends Item {
                         float playerPercent = (180 - (pPlayer.getViewXRot(0) + 90)) / 180f;
 
                         if (Math.abs(moonPercent - playerPercent) < 0.022 && isEast) {
-                            pPlayer.sendSystemMessage(Component.literal("moon look east"));
+                            flag = true;
                         }
                     } else {
                         // moon west
@@ -90,13 +96,49 @@ public class MayumiLefthand extends Item {
                         float playerPercent = (pPlayer.getViewXRot(0) + 90) / 180f;
 
                         if (Math.abs(moonPercent - playerPercent) < 0.022 && !isEast) {
-                            pPlayer.sendSystemMessage(Component.literal("moon look west"));
+                            flag = true;
                         }
                     }
-                    return InteractionResultHolder.success(stack);
+
+                    if (flag) {
+                        pPlayer.startUsingItem(pUsedHand);
+                        return InteractionResultHolder.consume(stack);
+                    }
                 }
             }
         }
+
         return InteractionResultHolder.fail(stack);
+    }
+
+    @Override
+    public void onUseTick(Level pLevel, LivingEntity pLivingEntity, ItemStack pStack, int pRemainingUseDuration) {
+        int time = getUseDuration(pStack) - pRemainingUseDuration;
+        if (time == 0) {
+            pLevel.playLocalSound(pLivingEntity.getOnPos(), SoundRegistry.MAYUMI_MOON_1.get(), SoundSource.PLAYERS, 1.0f, 1.0f, false);
+        }
+        if (time == 300) {
+            pLevel.playLocalSound(pLivingEntity.getOnPos(), SoundRegistry.MAYUMI_MOON_2.get(), SoundSource.PLAYERS, 1.0f, 1.0f, false);
+        }
+    }
+
+    @Override
+    public int getUseDuration(ItemStack pStack) {
+        return 540;
+    }
+
+    @Override
+    public void onStopUsing(ItemStack stack, LivingEntity entity, int count) {
+        if (!entity.level().isClientSide) {
+            List<ServerPlayer> players = entity.level().getEntitiesOfClass(ServerPlayer.class, entity.getBoundingBox().inflate(30, 30, 30));
+            int time = getUseDuration(stack) - count;
+            ClientboundStopSoundPacket clientboundstopsoundpacket;
+            if (time < 300) {
+                clientboundstopsoundpacket = new ClientboundStopSoundPacket(SoundRegistry.MAYUMI_MOON_1.get().getLocation(), SoundSource.PLAYERS);
+            } else {
+                clientboundstopsoundpacket = new ClientboundStopSoundPacket(SoundRegistry.MAYUMI_MOON_2.get().getLocation(), SoundSource.PLAYERS);
+            }
+            players.forEach(player -> player.connection.send(clientboundstopsoundpacket));
+        }
     }
 }

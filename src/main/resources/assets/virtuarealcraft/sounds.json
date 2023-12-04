@@ -38,5 +38,23 @@
         "name": "virtuarealcraft:nice_rectangle"
       }
     ]
+  },
+  "mayumi_moon_1": {
+    "subtitle": "subtitle.virtuarealcraft.mayumi_moon",
+    "sounds": [
+      {
+        "name": "virtuarealcraft:mayumi_moon_1",
+        "stream": true
+      }
+    ]
+  },
+  "mayumi_moon_2": {
+    "subtitle": "subtitle.virtuarealcraft.mayumi_moon",
+    "sounds": [
+      {
+        "name": "virtuarealcraft:mayumi_moon_2",
+        "stream": true
+      }
+    ]
   }
 }
