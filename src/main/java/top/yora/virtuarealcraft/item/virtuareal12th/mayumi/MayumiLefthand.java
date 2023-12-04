@@ -10,7 +10,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import top.yora.virtuarealcraft.tool.Livers;
@@ -36,7 +40,6 @@ public class MayumiLefthand extends Item {
     }
 
     // TODO 实现勾叫
-    // TODO 实现视线方块检测
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         ItemStack stack = pPlayer.getItemInHand(pUsedHand);
@@ -44,6 +47,15 @@ public class MayumiLefthand extends Item {
 
         if(pUsedHand == left) {
             if (pLevel.isNight()) {
+                Vec3 look = pPlayer.getLookAngle();
+                Vec3 start = pPlayer.getEyePosition();
+                Vec3 end = pPlayer.getEyePosition().add(look.x * 300, look.y * 300, look.z * 300);
+
+                BlockHitResult result = pLevel.clip(new ClipContext(start, end, ClipContext.Block.VISUAL, ClipContext.Fluid.NONE, pPlayer));
+                if (result.getType() == HitResult.Type.BLOCK) {
+                    return InteractionResultHolder.fail(stack);
+                }
+
                 float yrot = pPlayer.getViewYRot(0) % 360;
                 boolean isReversed = yrot < 0;
                 boolean isValid = false;
