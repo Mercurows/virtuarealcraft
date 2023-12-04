@@ -46,6 +46,7 @@ public class TooltipTool {
             case "19th" -> "#F8BCA3";
             case "20th-k" -> "#EE64C8";
             case "20th-i" -> "#0F1DC0";
+            case "21st" -> "#FFACD8";
             case "link" -> "#838EF1";
             default -> "#FFFFFF";
         };
