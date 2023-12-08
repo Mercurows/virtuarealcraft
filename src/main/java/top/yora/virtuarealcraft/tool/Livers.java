@@ -61,7 +61,7 @@ public enum Livers {
     URUSHIHA("urushiha","20th-i","#6309EA",true),
     HAJIME("hajime","20th-i","#3B6CF7",true),
     HIHI("hihi", "21st", "#FFC633", true),
-    YUKISYO("yukisyo", "21st", "#CCC2D9", true),
+    YUKISYO("yukisyo", "21st", "#995CA4", true),
     PAKO("pako", "21st", "#A564CD", true),
     NAGISA("nagisa", "21st", "#4D4030", true),
     INARI("inari","link","#FFB779",true),
