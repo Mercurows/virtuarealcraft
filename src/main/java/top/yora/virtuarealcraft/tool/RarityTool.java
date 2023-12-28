@@ -1,5 +1,6 @@
 package top.yora.virtuarealcraft.tool;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.Rarity;
 
@@ -28,4 +29,6 @@ public class RarityTool {
 
         return Style.EMPTY.withColor(rgb);
     });
+
+    public static final Rarity LEGENDARY = Rarity.create("virtuarealcraft_legendary", ChatFormatting.GOLD);
 }

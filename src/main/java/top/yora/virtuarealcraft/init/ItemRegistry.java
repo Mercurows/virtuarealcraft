@@ -31,6 +31,7 @@ import top.yora.virtuarealcraft.item.virtuareal17th.sui.DebtReliefTicket;
 import top.yora.virtuarealcraft.item.virtuareal17th.sui.SuimashedCookie;
 import top.yora.virtuarealcraft.item.virtuareal19th.ameki.AmekichiyaRing;
 import top.yora.virtuarealcraft.item.virtuareal19th.ameki.ButterflyStaff;
+import top.yora.virtuarealcraft.item.virtuareal19th.ameki.EndlessRainShower;
 import top.yora.virtuarealcraft.item.virtuareal19th.ameki.RainyButterfly;
 import top.yora.virtuarealcraft.item.virtuareal19th.awu.ChengHuangCrystal;
 import top.yora.virtuarealcraft.item.virtuareal19th.hatsuse.Nemumaru;
@@ -241,6 +242,7 @@ public class ItemRegistry {
     public static final RegistryObject<Item> BUTTERFLY_STAFF = ITEMS.register("butterfly_staff", ButterflyStaff::new);
     public static final RegistryObject<Item> RAINY_BUTTERFLY = ITEMS.register("rainy_butterfly", RainyButterfly::new);
     public static final RegistryObject<Item> AMEKICHIYA_RING = ITEMS.register("amekichiya_ring", AmekichiyaRing::new);
+    public static final RegistryObject<Item> ENDLESS_RAIN_SHOWER = ITEMS.register("endless_rain_shower", EndlessRainShower::new);
 
     //michiya
     public static final RegistryObject<Item> ETERNAL_CANDELABRA = ITEMS.register("eternal_candelabra", EternalCandelabra::new);

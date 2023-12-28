@@ -6,10 +6,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import top.yora.virtuarealcraft.Utils;
-import top.yora.virtuarealcraft.entity.KouichiDartsEntity;
-import top.yora.virtuarealcraft.entity.KuyaEntity;
-import top.yora.virtuarealcraft.entity.OrangeGrenadeEntity;
-import top.yora.virtuarealcraft.entity.RainCrystalEntity;
+import top.yora.virtuarealcraft.entity.*;
 
 public class EntityRegistry {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Utils.MOD_ID);
@@ -26,4 +23,7 @@ public class EntityRegistry {
     public static final RegistryObject<EntityType<OrangeGrenadeEntity>> ORANGE_GRENADE_ENTITY =
             ENTITY_TYPES.register("orange_grenade",
                     () -> EntityType.Builder.<OrangeGrenadeEntity>of(OrangeGrenadeEntity::new, MobCategory.MISC).sized(0.3f, 0.3f).build("orange_grenade"));
+    public static final RegistryObject<EntityType<RainShowerButterflyEntity>> RAIN_SHOWER_BUTTERFLY_ENTITY =
+            ENTITY_TYPES.register("rain_shower_butterfly",
+                    () -> EntityType.Builder.<RainShowerButterflyEntity>of(RainShowerButterflyEntity::new, MobCategory.MISC).sized(0.2f, 0.2f).build("rain_shower_butterfly"));
 }
