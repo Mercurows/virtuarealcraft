@@ -47,7 +47,17 @@ public class RainShowerButterflyModel<T extends Entity> extends EntityModel<T> {
 
     @Override
     public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        //TODO 改成匀速扇动翅膀
+        float sin = (float) Math.sin((System.currentTimeMillis() % 2000 - 1) * Math.PI / 8000);
+        float deg = sin * .2f - .2f;
+
+        poseStack.pushPose();
+
+        left.zRot += deg;
+        right.zRot -= deg;
+
         left.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
         right.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+        poseStack.popPose();
     }
 }

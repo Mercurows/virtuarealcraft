@@ -93,6 +93,7 @@ public class RainShowerButterflyEntity extends Projectile {
                     }
                 }
 
+                //TODO 解决在目标死亡后无法重新选择目标的问题
                 if (this.target != null && !this.target.isAlive()) {
                     this.targetId = null;
                 }
