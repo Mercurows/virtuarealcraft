@@ -38,7 +38,7 @@ public class EndlessRainShower extends SwordItem {
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         if (!pLevel.isClientSide) {
             RainShowerButterflyEntity entity = new RainShowerButterflyEntity(pLevel, pPlayer, null);
-            entity.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 1.0F, 0.2F);
+            entity.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 1.6F, 0.2F);
             entity.setPos(pPlayer.getPosition(0).add(0, 1.3, 0));
             entity.setNoGravity(true);
             pLevel.addFreshEntity(entity);

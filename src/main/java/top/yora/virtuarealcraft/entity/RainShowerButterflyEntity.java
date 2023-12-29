@@ -1,10 +1,12 @@
 package top.yora.virtuarealcraft.entity;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.game.ClientboundExplodePacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -16,6 +18,7 @@ import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
@@ -30,7 +33,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class RainShowerButterflyEntity extends Projectile {
-    private static final double MIN_VELOCITY = 0.1;
+    private static final double MIN_VELOCITY = 0.2;
     private static final double MAX_VELOCITY = 0.75;
     public static final int MAX_LIFE = 600;
     private static final int MAX_SPEED_TICK = 100; // 达到最大速度的tick
@@ -89,18 +92,20 @@ public class RainShowerButterflyEntity extends Projectile {
                     }
                 }
 
-                if (this.targetId == null || this.target.distanceToSqr(this) > 225) {
-                    List<LivingEntity> entities = this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(5));
+                if (this.target != null && !this.target.isAlive()) {
+                    this.targetId = null;
+                }
 
-                    LivingEntity closestEntity = entities.stream().filter(e -> e != this.getOwner() && this.canBeTarget(e))
-                            .min(Comparator.comparingDouble(this::getWeightedDistance))
-                            .orElse(null);
-
-                    this.targetId = closestEntity != null ? closestEntity.getUUID() : null;
+                if (this.targetId == null || this.target.distanceTo(this) > 25) {
+                    findTarget();
                 }
 
                 if (this.target != null) {
                     this.trackTarget(target);
+
+                    if (this.life >= MAX_LIFE) {
+                        explode();
+                    }
                 }
             }
 
@@ -115,8 +120,18 @@ public class RainShowerButterflyEntity extends Projectile {
         }
     }
 
+    private void findTarget() {
+        List<LivingEntity> entities = this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(8));
+
+        LivingEntity closestEntity = entities.stream().filter(e -> e != this.getOwner() && this.canBeTarget(e))
+                .min(Comparator.comparingDouble(this::getWeightedDistance))
+                .orElse(null);
+
+        this.targetId = closestEntity != null ? closestEntity.getUUID() : null;
+    }
+
     private void trackTarget(Entity target) {
-        Vec3 targetPos = target.position();
+        Vec3 targetPos = target.position().add(0, target.getEyeY() / 2, 0);
         Vec3 projectilePos = this.position();
         Vec3 direction = targetPos.subtract(projectilePos).normalize();
 
@@ -128,7 +143,7 @@ public class RainShowerButterflyEntity extends Projectile {
         Vec3 newVelocity = direction.scale(currentSpeed);
 
         // 使用线性插值来平滑过渡当前速度到新速度
-        double lerpFactor = 0.1; // 调整这个值使得转向更平滑，值越小转向越平滑
+        double lerpFactor = 0.2; // 调整这个值使得转向更平滑，值越小转向越平滑
         newVelocity = new Vec3(
                 currentVelocity.x + (newVelocity.x - currentVelocity.x) * lerpFactor,
                 currentVelocity.y + (newVelocity.y - currentVelocity.y) * lerpFactor,
@@ -143,9 +158,9 @@ public class RainShowerButterflyEntity extends Projectile {
 
         // 减少速度，避免在目标附近过射
         double distanceToTarget = projectilePos.distanceTo(targetPos);
-        final double slowDownThreshold = 10.0; // 当距离目标小于此值时，开始减速
+        final double slowDownThreshold = 2.0; // 当距离目标小于此值时，开始减速
 
-        if (distanceToTarget < slowDownThreshold) {
+        if (distanceToTarget < Math.sqrt(slowDownThreshold)) {
             double slowDownFactor = distanceToTarget / slowDownThreshold * (MAX_VELOCITY - MIN_VELOCITY) + MIN_VELOCITY;
             newVelocity = newVelocity.normalize().scale(slowDownFactor);
         }
@@ -158,19 +173,20 @@ public class RainShowerButterflyEntity extends Projectile {
         // 应用新的速度
         this.setDeltaMovement(newVelocity);
 
-        // 更新投射物的朝向
-        float newYaw = (float) (Math.atan2(newVelocity.z, newVelocity.x) * (180 / Math.PI)) - 90.0F;
-        float newPitch = (float) (-(Math.atan2(newVelocity.y, Math.sqrt(newVelocity.x * newVelocity.x + newVelocity.z * newVelocity.z)) * (180 / Math.PI)));
-        this.setYRot(newYaw);
-        this.setXRot(newPitch);
-        this.yRotO = newYaw;
-        this.xRotO = newPitch;
+        // 调整投射物的姿态，使其指向目标
+        double dx = target.getX() - this.getX();
+        double dy = target.getY() + (target.getEyeHeight() / 2) - this.getY();
+        double dz = target.getZ() - this.getZ();
+        float yaw = (float) (Math.atan2(dz, dx) * (180 / Math.PI)) + 90;
+        float pitch = (float) (-(Math.atan2(dy, Math.sqrt(dx * dx + dz * dz)) * (180 / Math.PI)));
+        this.setYRot(yaw);
+        this.setXRot(pitch);
 
         // 根据生存时间调整速度
         if (this.life <= MAX_SPEED_TICK) {
-            double velocityIncrement = MAX_VELOCITY / MAX_SPEED_TICK * life;
+            double velocityIncrement = MAX_VELOCITY * life / MAX_SPEED_TICK;
             Vec3 cur = this.getDeltaMovement();
-            Vec3 nVec = cur.multiply(1 + velocityIncrement, 1 + velocityIncrement, 1 + velocityIncrement);
+            Vec3 nVec = cur.normalize().scale(velocityIncrement);
 
             if (nVec.length() > MAX_VELOCITY) {
                 nVec = nVec.normalize().scale(MAX_VELOCITY);
@@ -187,8 +203,26 @@ public class RainShowerButterflyEntity extends Projectile {
         }
     }
 
+    private void explode() {
+        Explosion explosion = new Explosion(this.level(), this.getOwner(), level().damageSources().explosion(this.getOwner(), this),
+                null, this.getX(), this.getY(), this.getZ(), 1, false, Explosion.BlockInteraction.KEEP);
+        explosion.explode();
+        explosion.finalizeExplosion(true);
+
+        explosion.clearToBlow();
+
+        for (ServerPlayer serverPlayer : ((ServerLevel) this.level()).players()) {
+            if (serverPlayer.distanceToSqr(this.getX(), this.getY(), this.getZ()) < 1000) {
+                serverPlayer.connection.send(new ClientboundExplodePacket(this.getX(), this.getY(), this.getZ(), 1, explosion.getToBlow(), explosion.getHitPlayers().get(serverPlayer)));
+            }
+        }
+    }
+
     @Override
     protected boolean canHitEntity(Entity p_37341_) {
+        if (this.target != null) {
+            return p_37341_ == this.target && super.canHitEntity(p_37341_) && !p_37341_.noPhysics;
+        }
         return super.canHitEntity(p_37341_) && !p_37341_.noPhysics;
     }
 
@@ -223,6 +257,7 @@ public class RainShowerButterflyEntity extends Projectile {
     private double getWeightedDistance(LivingEntity entity) {
         double distance = this.distanceToSqr(entity);
         double weight;
+        double fix = 0;
 
         if (entity instanceof Monster) {
             if (entity instanceof NeutralMob) {
@@ -236,13 +271,16 @@ public class RainShowerButterflyEntity extends Projectile {
             weight = 2.5; // 中立生物优先级再次之
         } else if (entity instanceof Animal) {
             weight = 4.0; // 动物优先级更低
+            fix = 1000000;
         } else if (entity instanceof AbstractVillager) {
             weight = 100.0; // 村民最后才会考虑
+            fix = 1000000;
         } else {
             weight = 5.0; // 其他生物
+            fix = 30;
         }
 
-        return distance * weight;
+        return Math.sqrt(distance) * weight + fix;
     }
 
     @Override
