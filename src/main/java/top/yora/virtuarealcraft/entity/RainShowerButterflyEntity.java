@@ -7,6 +7,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -96,7 +97,7 @@ public class RainShowerButterflyEntity extends Projectile {
                     this.targetId = null;
                 }
 
-                if (this.targetId == null || this.target.distanceTo(this) > 25) {
+                if (this.targetId == null || this.target.distanceTo(this) > 25 || (this.target instanceof LivingEntity living && !canBeTarget(living))) {
                     findTarget();
                 }
 
@@ -142,8 +143,17 @@ public class RainShowerButterflyEntity extends Projectile {
         // 计算朝向目标的新速度向量
         Vec3 newVelocity = direction.scale(currentSpeed);
 
+        // 当距离目标小于此值时，开始减速
+        double distanceToTarget = projectilePos.distanceTo(targetPos);
+        final double slowDownThreshold = 2.0;
+
         // 使用线性插值来平滑过渡当前速度到新速度
         double lerpFactor = 0.2; // 调整这个值使得转向更平滑，值越小转向越平滑
+
+        if (distanceToTarget < Math.sqrt(slowDownThreshold)) {
+            lerpFactor = lerpFactor * Mth.clamp(distanceToTarget / Math.sqrt(slowDownThreshold), 0.05, 0.2);
+        }
+
         newVelocity = new Vec3(
                 currentVelocity.x + (newVelocity.x - currentVelocity.x) * lerpFactor,
                 currentVelocity.y + (newVelocity.y - currentVelocity.y) * lerpFactor,
@@ -157,9 +167,6 @@ public class RainShowerButterflyEntity extends Projectile {
         }
 
         // 减少速度，避免在目标附近过射
-        double distanceToTarget = projectilePos.distanceTo(targetPos);
-        final double slowDownThreshold = 2.0; // 当距离目标小于此值时，开始减速
-
         if (distanceToTarget < Math.sqrt(slowDownThreshold)) {
             double slowDownFactor = distanceToTarget / slowDownThreshold * (MAX_VELOCITY - MIN_VELOCITY) + MIN_VELOCITY;
             newVelocity = newVelocity.normalize().scale(slowDownFactor);
@@ -247,6 +254,9 @@ public class RainShowerButterflyEntity extends Projectile {
     }
 
     private boolean canBeTarget(LivingEntity entity) {
+        if (!entity.isAlive() || (entity instanceof Player player && player.isCreative())) {
+            return false;
+        }
         if (this.getOwner() != null) {
             return !(entity instanceof ArmorStand) && !entity.isAlliedTo(this.getOwner()) && entity.isAlive();
         } else {

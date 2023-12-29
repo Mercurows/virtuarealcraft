@@ -7,10 +7,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.yora.virtuarealcraft.models.armor.*;
 import top.yora.virtuarealcraft.models.curios.OrangeAhogeModel;
-import top.yora.virtuarealcraft.models.projectile.KouichiDartsModel;
-import top.yora.virtuarealcraft.models.projectile.KuyaModel;
-import top.yora.virtuarealcraft.models.projectile.OrangeGrenadeModel;
-import top.yora.virtuarealcraft.models.projectile.RainCrystalModel;
+import top.yora.virtuarealcraft.models.projectile.*;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModelRegistry {
@@ -30,5 +27,6 @@ public class ModelRegistry {
         event.registerLayerDefinition(OrangeGrenadeModel.LAYER_LOCATION, OrangeGrenadeModel::createBodyLayer);
         event.registerLayerDefinition(TacticalHeadsetMK1Model.LAYER_LOCATION, TacticalHeadsetMK1Model::createBodyLayer);
         event.registerLayerDefinition(OrangeAhogeModel.LAYER_LOCATION, OrangeAhogeModel::createBodyLayer);
+        event.registerLayerDefinition(RainShowerButterflyModel.LAYER_LOCATION, RainShowerButterflyModel::createBodyLayer);
     }
 }
