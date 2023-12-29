@@ -14,7 +14,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.entity.RainCrystalEntity;
-import top.yora.virtuarealcraft.models.RainCrystalModel;
+import top.yora.virtuarealcraft.models.projectile.RainCrystalModel;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;

@@ -14,7 +14,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.entity.OrangeGrenadeEntity;
-import top.yora.virtuarealcraft.models.OrangeGrenadeModel;
+import top.yora.virtuarealcraft.models.projectile.OrangeGrenadeModel;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;

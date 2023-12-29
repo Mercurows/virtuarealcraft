@@ -5,8 +5,12 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import top.yora.virtuarealcraft.models.*;
+import top.yora.virtuarealcraft.models.armor.*;
 import top.yora.virtuarealcraft.models.curios.OrangeAhogeModel;
+import top.yora.virtuarealcraft.models.projectile.KouichiDartsModel;
+import top.yora.virtuarealcraft.models.projectile.KuyaModel;
+import top.yora.virtuarealcraft.models.projectile.OrangeGrenadeModel;
+import top.yora.virtuarealcraft.models.projectile.RainCrystalModel;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModelRegistry {

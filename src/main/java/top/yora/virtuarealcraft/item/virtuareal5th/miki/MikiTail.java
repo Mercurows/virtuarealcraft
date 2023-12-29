@@ -29,7 +29,7 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.init.ItemRegistry;
-import top.yora.virtuarealcraft.models.MihiruTailModel;
+import top.yora.virtuarealcraft.models.armor.MihiruTailModel;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 

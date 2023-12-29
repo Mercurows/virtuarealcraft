@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.gui.RectangleHUD;
 import top.yora.virtuarealcraft.init.SoundRegistry;
-import top.yora.virtuarealcraft.models.TacticalHeadsetMK1Model;
+import top.yora.virtuarealcraft.models.armor.TacticalHeadsetMK1Model;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 

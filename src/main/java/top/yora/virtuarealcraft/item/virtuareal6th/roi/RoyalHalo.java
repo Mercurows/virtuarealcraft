@@ -29,7 +29,7 @@ import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.block.CrystalBridgeBlock;
 import top.yora.virtuarealcraft.init.BlockRegistry;
 import top.yora.virtuarealcraft.init.ItemRegistry;
-import top.yora.virtuarealcraft.models.RoyalHaloModel;
+import top.yora.virtuarealcraft.models.armor.RoyalHaloModel;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 

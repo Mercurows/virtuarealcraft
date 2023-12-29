@@ -1,4 +1,4 @@
-package top.yora.virtuarealcraft.models;// Made with Blockbench 4.8.1
+package top.yora.virtuarealcraft.models.projectile;// Made with Blockbench 4.8.1
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 // Paste this class into your mod and generate all required imports
 

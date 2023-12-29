@@ -18,7 +18,7 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.init.ItemRegistry;
-import top.yora.virtuarealcraft.models.AngelHaloModel;
+import top.yora.virtuarealcraft.models.armor.AngelHaloModel;
 import top.yora.virtuarealcraft.tool.ItemNBTTool;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;

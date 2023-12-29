@@ -23,7 +23,7 @@ import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
 import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.init.ItemRegistry;
-import top.yora.virtuarealcraft.models.BloodWingsModel;
+import top.yora.virtuarealcraft.models.armor.BloodWingsModel;
 import top.yora.virtuarealcraft.network.VrcNetwork;
 import top.yora.virtuarealcraft.network.packet.BloodWingPacket;
 import top.yora.virtuarealcraft.tool.Livers;

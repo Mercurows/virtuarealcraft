@@ -14,7 +14,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.entity.KuyaEntity;
-import top.yora.virtuarealcraft.models.KuyaModel;
+import top.yora.virtuarealcraft.models.projectile.KuyaModel;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
