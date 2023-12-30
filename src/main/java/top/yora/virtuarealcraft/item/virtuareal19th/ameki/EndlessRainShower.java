@@ -22,7 +22,7 @@ import java.util.List;
 
 public class EndlessRainShower extends SwordItem {
     public EndlessRainShower() {
-        super(Tiers.NETHERITE, 14, -2.0f, new Properties().rarity(RarityTool.LEGENDARY).durability(197).fireResistant().setNoRepair());
+        super(Tiers.NETHERITE, 14, -2.1f, new Properties().rarity(RarityTool.LEGENDARY).durability(197).fireResistant().setNoRepair());
     }
 
     @OnlyIn(Dist.CLIENT)
