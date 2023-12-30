@@ -21,6 +21,7 @@ import javax.annotation.Nullable;
 public class DamageSourceRegistry {
     public static final ResourceKey<DamageType> RAIN_CRYSTAL = key("rain_crystal");
     public static final ResourceKey<DamageType> JUSTICE_BAN = key("justice_ban");
+    public static final ResourceKey<DamageType> RAIN_SHOWER_BUTTERFLY = key("rain_shower_butterfly");
 
     public static DamageSource causeRainCrystalDamage(RegistryAccess registryAccess, @Nullable Entity entity) {
         return new DamageMessages(registryAccess.registry(Registries.DAMAGE_TYPE).get().getHolderOrThrow(RAIN_CRYSTAL), entity);
@@ -28,6 +29,10 @@ public class DamageSourceRegistry {
 
     public static DamageSource causeJusticeBanDamage(RegistryAccess registryAccess, @Nullable Entity entity) {
         return new DamageMessages(registryAccess.registry(Registries.DAMAGE_TYPE).get().getHolderOrThrow(JUSTICE_BAN), entity);
+    }
+
+    public static DamageSource causeRainShowerButterflyDamage(RegistryAccess registryAccess, @Nullable Entity entity) {
+        return new DamageMessages(registryAccess.registry(Registries.DAMAGE_TYPE).get().getHolderOrThrow(RAIN_SHOWER_BUTTERFLY), entity);
     }
 
     private static ResourceKey<DamageType> key(String name) {

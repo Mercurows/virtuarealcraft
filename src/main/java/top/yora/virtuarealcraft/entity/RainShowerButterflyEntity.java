@@ -94,10 +94,6 @@ public class RainShowerButterflyEntity extends Projectile {
                 }
 
                 //TODO 解决在目标死亡后无法重新选择目标的问题
-                if (this.target != null && !this.target.isAlive()) {
-                    this.targetId = null;
-                }
-
                 if (this.targetId == null || this.target.distanceTo(this) > 25 || (this.target instanceof LivingEntity living && !canBeTarget(living))) {
                     findTarget();
                 }
@@ -109,6 +105,10 @@ public class RainShowerButterflyEntity extends Projectile {
                         explode();
                     }
                 }
+            }
+
+            if (this.target != null && !this.target.isAlive()) {
+                findTarget();
             }
 
             HitResult hitresult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
@@ -123,7 +123,7 @@ public class RainShowerButterflyEntity extends Projectile {
     }
 
     private void findTarget() {
-        List<LivingEntity> entities = this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(8));
+        List<LivingEntity> entities = this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(10));
 
         LivingEntity closestEntity = entities.stream().filter(e -> e != this.getOwner() && this.canBeTarget(e))
                 .min(Comparator.comparingDouble(this::getWeightedDistance))
@@ -242,7 +242,10 @@ public class RainShowerButterflyEntity extends Projectile {
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
         if (pResult.getEntity() instanceof LivingEntity livingEntity) {
-            livingEntity.hurt(DamageSourceRegistry.causeRainCrystalDamage(level().registryAccess(), getOwner()), 4.0F);
+            List<RainShowerButterflyEntity> butterflyEntities = this.level().getEntitiesOfClass(RainShowerButterflyEntity.class, this.getBoundingBox().inflate(3));
+            float damage = 4 + butterflyEntities.size() * 0.3f;
+
+            livingEntity.hurt(DamageSourceRegistry.causeRainShowerButterflyDamage(level().registryAccess(), getOwner()), damage);
             livingEntity.invulnerableTime = 0;
         }
 
@@ -255,7 +258,7 @@ public class RainShowerButterflyEntity extends Projectile {
     }
 
     private boolean canBeTarget(LivingEntity entity) {
-        if (!entity.isAlive() || (entity instanceof Player player && player.isCreative())) {
+        if (!entity.isAlive() || (entity instanceof Player player && player.isCreative()) || entity instanceof AbstractVillager) {
             return false;
         }
         if (this.getOwner() != null) {
@@ -272,9 +275,9 @@ public class RainShowerButterflyEntity extends Projectile {
 
         if (entity instanceof Monster) {
             if (entity instanceof NeutralMob) {
-                weight = 2.0;
+                weight = 1.5;
             } else {
-                weight = 0.25; // 怪物优先级最高
+                weight = 0.1; // 怪物优先级最高
             }
         } else if (entity instanceof Player) {
             weight = 1.0; // 玩家优先级次之
@@ -282,9 +285,6 @@ public class RainShowerButterflyEntity extends Projectile {
             weight = 2.5; // 中立生物优先级再次之
         } else if (entity instanceof Animal) {
             weight = 4.0; // 动物优先级更低
-            fix = 1000000;
-        } else if (entity instanceof AbstractVillager) {
-            weight = 100.0; // 村民最后才会考虑
             fix = 1000000;
         } else {
             weight = 5.0; // 其他生物

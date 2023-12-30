@@ -22,14 +22,16 @@ import java.util.List;
 
 public class EndlessRainShower extends SwordItem {
     public EndlessRainShower() {
-        super(Tiers.NETHERITE, 14, -2.03f, new Properties().rarity(RarityTool.LEGENDARY).durability(197).fireResistant().setNoRepair());
+        super(Tiers.NETHERITE, 14, -2.0f, new Properties().rarity(RarityTool.LEGENDARY).durability(197).fireResistant().setNoRepair());
     }
 
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        tooltip.add(Component.translatable("des.virtuarealcraft.endless_rain_shower_1").withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
-        tooltip.add(Component.translatable("des.virtuarealcraft.endless_rain_shower_2").withStyle(ChatFormatting.GRAY));
+        TooltipTool.addDevelopingText(tooltip);
+
+        tooltip.add(Component.translatable("des.virtuarealcraft.endless_rain_shower_1").withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("des.virtuarealcraft.endless_rain_shower_2").withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
 
         TooltipTool.addLiverInfo(tooltip, Livers.AMEKI);
     }
@@ -45,5 +47,10 @@ public class EndlessRainShower extends SwordItem {
         }
 
         return InteractionResultHolder.success(pPlayer.getItemInHand(pUsedHand));
+    }
+
+    @Override
+    public boolean isDamageable(ItemStack stack) {
+        return false;
     }
 }

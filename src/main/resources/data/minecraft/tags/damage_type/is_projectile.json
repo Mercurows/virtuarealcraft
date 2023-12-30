@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "virtuarealcraft:rain_crystal"
+    "virtuarealcraft:rain_crystal",
+    "virtuarealcraft:rain_shower_butterfly"
   ]
 }
