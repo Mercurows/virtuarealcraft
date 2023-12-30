@@ -94,22 +94,23 @@ public class RainShowerButterflyEntity extends Projectile {
                     }
                 }
 
-                //TODO 解决在目标死亡后无法重新选择目标的问题
                 if (this.targetId == null || this.target.distanceTo(this) > 25 || (this.target instanceof LivingEntity living && !canBeTarget(living))) {
                     findTarget();
                 }
 
                 if (this.target != null) {
-                    this.trackTarget(target);
+                    if (this.target.isAlive()) {
+                        this.trackTarget(target);
+                    } else {
+                        this.target = null;
+                        this.targetId = null;
+                        findTarget();
+                    }
 
                     if (this.life >= MAX_LIFE) {
                         explode();
                     }
                 }
-            }
-
-            if (this.target != null && !this.target.isAlive()) {
-                findTarget();
             }
 
             HitResult hitresult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
