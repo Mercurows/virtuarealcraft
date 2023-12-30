@@ -32,6 +32,7 @@ import javax.annotation.Nullable;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class RainShowerButterflyEntity extends Projectile {
     private static final double MIN_VELOCITY = 0.2;
@@ -133,7 +134,7 @@ public class RainShowerButterflyEntity extends Projectile {
     }
 
     private void trackTarget(Entity target) {
-        Vec3 targetPos = target.position().add(0, target.getEyeY() / 2, 0);
+        Vec3 targetPos = target.position();
         Vec3 projectilePos = this.position();
         Vec3 direction = targetPos.subtract(projectilePos).normalize();
 
@@ -183,7 +184,7 @@ public class RainShowerButterflyEntity extends Projectile {
 
         // 调整投射物的姿态，使其指向目标
         double dx = target.getX() - this.getX();
-        double dy = target.getY() + (target.getEyeHeight() / 2) - this.getY();
+        double dy = target.getY() - this.getY();
         double dz = target.getZ() - this.getZ();
         float yaw = (float) (Math.atan2(dz, dx) * (180 / Math.PI)) + 90;
         float pitch = (float) (-(Math.atan2(dy, Math.sqrt(dx * dx + dz * dz)) * (180 / Math.PI)));
@@ -243,7 +244,14 @@ public class RainShowerButterflyEntity extends Projectile {
     protected void onHitEntity(EntityHitResult pResult) {
         if (pResult.getEntity() instanceof LivingEntity livingEntity) {
             List<RainShowerButterflyEntity> butterflyEntities = this.level().getEntitiesOfClass(RainShowerButterflyEntity.class, this.getBoundingBox().inflate(3));
-            float damage = 4 + butterflyEntities.size() * 0.3f;
+            AtomicInteger count = new AtomicInteger();
+            butterflyEntities.forEach(e -> {
+                if (e != this && (e.getOwner() != null || e.getOwner() == this.getOwner())) {
+                    count.getAndIncrement();
+                }
+            });
+
+            float damage = Math.min(4 + count.get() * 0.3f, 19.7f);
 
             livingEntity.hurt(DamageSourceRegistry.causeRainShowerButterflyDamage(level().registryAccess(), getOwner()), damage);
             livingEntity.invulnerableTime = 0;
