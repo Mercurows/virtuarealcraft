@@ -1,12 +1,10 @@
 package top.yora.virtuarealcraft.entity;
 
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.game.ClientboundExplodePacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -19,7 +17,6 @@ import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
-import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
@@ -108,7 +105,7 @@ public class RainShowerButterflyEntity extends Projectile {
                     }
 
                     if (this.life >= MAX_LIFE) {
-                        explode();
+                        destroy();
                     }
                 }
             }
@@ -213,18 +210,14 @@ public class RainShowerButterflyEntity extends Projectile {
         }
     }
 
-    private void explode() {
-        Explosion explosion = new Explosion(this.level(), this.getOwner(), level().damageSources().explosion(this.getOwner(), this),
-                null, this.getX(), this.getY(), this.getZ(), 1, false, Explosion.BlockInteraction.KEEP);
-        explosion.explode();
-        explosion.finalizeExplosion(true);
-
-        explosion.clearToBlow();
-
-        for (ServerPlayer serverPlayer : ((ServerLevel) this.level()).players()) {
-            if (serverPlayer.distanceToSqr(this.getX(), this.getY(), this.getZ()) < 1000) {
-                serverPlayer.connection.send(new ClientboundExplodePacket(this.getX(), this.getY(), this.getZ(), 1, explosion.getToBlow(), explosion.getHitPlayers().get(serverPlayer)));
-            }
+    private void destroy() {
+        for (int i = 0; i < 8; i++) {
+            LivingEntity owner = this.getOwner() instanceof LivingEntity ? (LivingEntity) this.getOwner() : null;
+            RainCrystalEntity rainCrystal = new RainCrystalEntity(this.level(), owner);
+            rainCrystal.shootFromRotation(this, 0, this.getYRot() + i * 45, 0, 2.0f, 0);
+            rainCrystal.setPos(this.position());
+            rainCrystal.setNoGravity(true);
+            this.level().addFreshEntity(rainCrystal);
         }
     }
 
@@ -252,7 +245,7 @@ public class RainShowerButterflyEntity extends Projectile {
                 }
             });
 
-            float damage = Math.min(4 + count.get() * 0.3f, 19.7f);
+            float damage = Math.min(2 + count.get() * 0.3f, 19.7f);
 
             livingEntity.hurt(DamageSourceRegistry.causeRainShowerButterflyDamage(level().registryAccess(), getOwner()), damage);
             livingEntity.invulnerableTime = 0;

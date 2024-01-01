@@ -60,13 +60,13 @@ public class EndlessRainShower extends SwordItem {
             float useProgress = (getUseDuration(pStack) - pRemainingUseDuration) / (float) getUseDuration(pStack);
 
             if (pRemainingUseDuration == 1) {
-                int butterfliesToSpawn = 10;
+                int butterfliesToSpawn = 8;
                 for (int i = 0; i < butterfliesToSpawn; i++) {
                     spawnButterfly(pLevel, player, 1);
                 }
 
                 player.getCooldowns().addCooldown(this, 180);
-            } else if (pRemainingUseDuration % 4 == 0) {
+            } else if (pRemainingUseDuration % 5 == 0) {
                 spawnButterfly(pLevel, player, Mth.clamp(useProgress, 0.2f, 1.0f));
                 if (useProgress > .4f) {
                     spawnButterfly(pLevel, player, Mth.clamp(useProgress, 0.2f, 1.0f));
