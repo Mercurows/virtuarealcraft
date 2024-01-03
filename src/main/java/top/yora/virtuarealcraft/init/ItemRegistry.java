@@ -40,6 +40,9 @@ import top.yora.virtuarealcraft.item.virtuareal19th.michiya.MichiyamekiRing;
 import top.yora.virtuarealcraft.item.virtuareal1st.eine.BarrierHat;
 import top.yora.virtuarealcraft.item.virtuareal20th.kismet.ayumi.BaseballBat;
 import top.yora.virtuarealcraft.item.virtuareal20th.kismet.mizuki.FutureBrewingStand;
+import top.yora.virtuarealcraft.item.virtuareal20th.kismet.richi.FoxMirror;
+import top.yora.virtuarealcraft.item.virtuareal21st.hihi.SunnyDoll;
+import top.yora.virtuarealcraft.item.virtuareal21st.yukisyo.BurningMirror;
 import top.yora.virtuarealcraft.item.virtuareal2nd.ichigo.OrangeAhoge;
 import top.yora.virtuarealcraft.item.virtuareal2nd.kouichi.BloodWings;
 import top.yora.virtuarealcraft.item.virtuareal2nd.nanami.IceCreamBlackTea;
@@ -263,6 +266,20 @@ public class ItemRegistry {
 
     //mizuki
     public static final RegistryObject<Item> FUTURE_BREWING_STAND = ITEMS.register("future_brewing_stand", FutureBrewingStand::new);
+
+    //richi
+    public static final RegistryObject<Item> FOX_MIRROR = ITEMS.register("fox_mirror", FoxMirror::new);
+
+
+    /**
+     * 21st
+     */
+    //hihi
+    public static final RegistryObject<Item> SUNNY_DOLL = ITEMS.register("sunny_doll", SunnyDoll::new);
+
+    //yukisyo
+    public static final RegistryObject<Item> BURNING_MIRROR = ITEMS.register("burning_mirror", BurningMirror::new);
+
 
 
     /**
