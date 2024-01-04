@@ -42,6 +42,7 @@ import top.yora.virtuarealcraft.item.virtuareal20th.kismet.ayumi.BaseballBat;
 import top.yora.virtuarealcraft.item.virtuareal20th.kismet.mizuki.FutureBrewingStand;
 import top.yora.virtuarealcraft.item.virtuareal20th.kismet.richi.FoxMirror;
 import top.yora.virtuarealcraft.item.virtuareal21st.hihi.SunnyDoll;
+import top.yora.virtuarealcraft.item.virtuareal21st.pako.KindnessBottle;
 import top.yora.virtuarealcraft.item.virtuareal21st.yukisyo.BurningMirror;
 import top.yora.virtuarealcraft.item.virtuareal2nd.ichigo.OrangeAhoge;
 import top.yora.virtuarealcraft.item.virtuareal2nd.kouichi.BloodWings;
@@ -279,6 +280,9 @@ public class ItemRegistry {
 
     //yukisyo
     public static final RegistryObject<Item> BURNING_MIRROR = ITEMS.register("burning_mirror", BurningMirror::new);
+
+    //pako
+    public static final RegistryObject<Item> KINDNESS_BOTTLE = ITEMS.register("kindness_bottle", KindnessBottle::new);
 
 
 
