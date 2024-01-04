@@ -1,11 +1,13 @@
 package top.yora.virtuarealcraft.entity;
 
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -78,7 +80,7 @@ public class RainShowerButterflyEntity extends Projectile {
         Vec3 vec = this.getDeltaMovement();
 
         if (++this.life > MAX_LIFE) {
-            this.discard();
+            destroy();
             return;
         }
 
@@ -211,14 +213,27 @@ public class RainShowerButterflyEntity extends Projectile {
     }
 
     private void destroy() {
-        for (int i = 0; i < 8; i++) {
-            LivingEntity owner = this.getOwner() instanceof LivingEntity ? (LivingEntity) this.getOwner() : null;
-            RainCrystalEntity rainCrystal = new RainCrystalEntity(this.level(), owner);
-            rainCrystal.shootFromRotation(this, 0, this.getYRot() + i * 45, 0, 2.0f, 0);
-            rainCrystal.setPos(this.position());
-            rainCrystal.setNoGravity(true);
-            this.level().addFreshEntity(rainCrystal);
+        if (this.target != null) {
+            for (int i = 0; i < 8; i++) {
+                LivingEntity owner = this.getOwner() instanceof LivingEntity ? (LivingEntity) this.getOwner() : null;
+                RainCrystalEntity rainCrystal = new RainCrystalEntity(this.level(), owner);
+                rainCrystal.shootFromRotation(this, 0, this.getYRot() + i * 45, 0, 2.0f, 0);
+                rainCrystal.setPos(this.position());
+                rainCrystal.setNoGravity(true);
+                this.level().addFreshEntity(rainCrystal);
+            }
         }
+        this.discard();
+    }
+
+    @Override
+    public boolean hurt(DamageSource pSource, float pAmount) {
+        if (!this.level().isClientSide) {
+            ((ServerLevel)this.level()).sendParticles(ParticleTypes.CRIT, this.getX(), this.getY(), this.getZ(), 3, 0.2D, 0.2D, 0.2D, 0.0D);
+            this.destroy();
+        }
+
+        return true;
     }
 
     @Override
