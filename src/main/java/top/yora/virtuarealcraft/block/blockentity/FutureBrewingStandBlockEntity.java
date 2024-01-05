@@ -13,13 +13,13 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import org.jetbrains.annotations.Nullable;
 import top.yora.virtuarealcraft.block.FutureBrewingStandBlock;
 import top.yora.virtuarealcraft.gui.FutureBrewingStandMenu;
@@ -263,33 +263,31 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
         ItemStack ingredient = pItems.get(INGREDIENT_SLOT);
 
         if (!ingredient.isEmpty()) {
-            return net.minecraftforge.common.brewing.BrewingRecipeRegistry.canBrew(getProcessedBottles(pItems, blockEntity.mode), ingredient, SLOTS_FOR_SIDES); // divert to VanillaBrewingRegistry
-        }
-
-        if (PotionBrewing.isIngredient(ingredient)) {
-            // 6个药水槽
-            for (int i = 0; i < 6; ++i) {
-                Optional<FutureBrewingRecipe> futureBrewingRecipeLazyOptional = getCurrentRecipe(blockEntity, i);
-
-                ItemStack potion = pItems.get(i);
-                // TODO 添加自定义配方判断
-                if (!potion.isEmpty() && (PotionBrewing.hasMix(potion, ingredient) || futureBrewingRecipeLazyOptional.isPresent())) {
-                    return true;
-                }
-            }
+            return pItems.stream().limit(6).anyMatch(item ->
+                    getCurrentRecipe(blockEntity, item).isPresent()
+            ) || BrewingRecipeRegistry.canBrew(getProcessedBottles(pItems, blockEntity.mode), ingredient, SLOTS_FOR_SIDES);
         }
         return false;
     }
 
-    private static boolean shouldConsumePowder(NonNullList<ItemStack> inputs, ItemStack ingredient, ItemStack powder, int[] inputIndexes) {
+    private static boolean shouldConsumePowder(NonNullList<ItemStack> inputs, ItemStack ingredient, ItemStack powder, int[] inputIndexes, FutureBrewingStandBlockEntity blockEntity) {
         if (powder.isEmpty()) return false;
         for (int index : inputIndexes) {
+            var input = inputs.get(index);
+
             // 正常炼造
-            ItemStack output = getOutput(inputs.get(index), ingredient);
+            ItemStack output = getOutput(input, ingredient);
 
             // 粉末炼造
             var temp = getOutput(output, powder);
             if (!temp.isEmpty()) return true;
+
+            // 自定义配方粉末消耗检测
+            var customRecipe = getCurrentRecipe(blockEntity, input);
+            if (customRecipe.isPresent()) {
+                var recipePowder = customRecipe.get().powder;
+                if (recipePowder != null) return true;
+            }
         }
         return false;
     }
@@ -351,7 +349,7 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
         // 提前替换玻璃瓶和水瓶
         replaceBottles(pItems, mode);
 
-        var powderConsumed = shouldConsumePowder(pItems, ingredient, powder, SLOTS_FOR_SIDES);
+        var powderConsumed = shouldConsumePowder(pItems, ingredient, powder, SLOTS_FOR_SIDES, entity);
         customBrew(pItems, ingredient, powder, SLOTS_FOR_SIDES);
 
         // 消耗粉末
@@ -410,7 +408,7 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
         ItemStack ingredient = pBlockEntity.items.get(INGREDIENT_SLOT);
 
         if (brewing) {
-            --pBlockEntity.brewTime;
+            pBlockEntity.brewTime -= 10;
             boolean brewFinished = pBlockEntity.brewTime == 0;
             if (brewFinished && canBrew) {
                 // finish brewing
@@ -458,23 +456,16 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
         return mode == 2 ? fuel > 1 : fuel > 0;
     }
 
-    private static Optional<FutureBrewingRecipe> getCurrentRecipe(FutureBrewingStandBlockEntity blockEntity, int index) {
+    private static Optional<FutureBrewingRecipe> getCurrentRecipe(FutureBrewingStandBlockEntity blockEntity, ItemStack input) {
         RecipeManager recipeManager = blockEntity.level.getRecipeManager();
 
         SimpleContainer inventory = new SimpleContainer(3);
-        inventory.setItem(0, blockEntity.items.get(index));
-        inventory.setItem(1, blockEntity.items.get(6));
-        inventory.setItem(2, blockEntity.items.get(8));
+        inventory.setItem(0, input);
+        inventory.setItem(1, blockEntity.items.get(INGREDIENT_SLOT));
+        inventory.setItem(2, blockEntity.items.get(POWDER_SLOT));
 
         List<FutureBrewingRecipe> allRecipes = recipeManager.getAllRecipesFor(FutureBrewingRecipe.Type.INSTANCE);
-
-        for (FutureBrewingRecipe recipe : allRecipes) {
-            if (recipe.matches(inventory, blockEntity.level)) {
-                return Optional.of(recipe);
-            }
-        }
-
-        return Optional.empty();
+        return allRecipes.stream().filter(recipe -> recipe.matches(inventory, blockEntity.level)).findFirst();
     }
 
     @Override

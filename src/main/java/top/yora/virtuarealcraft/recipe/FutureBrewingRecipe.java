@@ -32,21 +32,11 @@ public class FutureBrewingRecipe implements Recipe<SimpleContainer> {
 
     @Override
     public boolean matches(SimpleContainer pContainer, Level pLevel) {
-        if (pLevel.isClientSide()) {
-            return false;
-        }
+        if (pLevel.isClientSide()) return false;
 
-        boolean inputMatched = false;
-        for (int i = 0; i <= 5; i++) {
-            if (input.test(pContainer.getItem(i))) {
-                inputMatched = true;
-                break;
-            }
-        }
-
-        boolean ingredientMatched = ingredient.test(pContainer.getItem(6));
-
-        boolean powderMatched = powder == null || powder.test(pContainer.getItem(8));
+        boolean inputMatched = input.test(pContainer.getItem(0));
+        boolean ingredientMatched = ingredient.test(pContainer.getItem(1));
+        boolean powderMatched = powder == null || powder.test(pContainer.getItem(2));
 
         return inputMatched && ingredientMatched && powderMatched;
     }
