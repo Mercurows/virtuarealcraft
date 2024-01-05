@@ -18,6 +18,7 @@ import top.yora.virtuarealcraft.network.packet.FutureBrewingStandModeChangePacke
 
 @OnlyIn(Dist.CLIENT)
 public class FutureBrewingStandScreen extends AbstractContainerScreen<FutureBrewingStandMenu> {
+
     private static final ResourceLocation BREWING_STAND_LOCATION = new ResourceLocation(Utils.MOD_ID, "textures/gui/future_brewing_stand_gui.png");
     private static final int[] BUBBLELENGTHS = new int[]{29, 24, 20, 16, 11, 6, 0};
 
@@ -115,6 +116,10 @@ public class FutureBrewingStandScreen extends AbstractContainerScreen<FutureBrew
         public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
             super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
             updateToolTip(FutureBrewingStandScreen.this.menu.getBrewingMode());
+        }
+
+        public void renderWidget(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
+
         }
 
         @Nullable
