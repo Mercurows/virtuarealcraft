@@ -5,10 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.Container;
-import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.Containers;
-import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -19,6 +16,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -26,9 +24,13 @@ import org.jetbrains.annotations.Nullable;
 import top.yora.virtuarealcraft.block.FutureBrewingStandBlock;
 import top.yora.virtuarealcraft.gui.FutureBrewingStandMenu;
 import top.yora.virtuarealcraft.init.BlockEntityRegistry;
+import top.yora.virtuarealcraft.recipe.FutureBrewingRecipe;
+import top.yora.virtuarealcraft.recipe.FutureBrewingRecipeRegistry;
 import top.yora.virtuarealcraft.tool.ModTags;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 import static net.minecraftforge.common.brewing.BrewingRecipeRegistry.getOutput;
 
@@ -130,7 +132,6 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
 
     @Override
     protected AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
-        //TODO 完成炼药台的GUI
         return new FutureBrewingStandMenu(pContainerId, pInventory, this, this.dataAccess);
     }
 
@@ -184,15 +185,15 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
 
     @Override
     public boolean canPlaceItem(int pIndex, ItemStack pStack) {
-        //TODO 修改为自定义的配方检测
         if (pIndex == 6) {
-            return net.minecraftforge.common.brewing.BrewingRecipeRegistry.isValidIngredient(pStack);
+            return net.minecraftforge.common.brewing.BrewingRecipeRegistry.isValidIngredient(pStack) || FutureBrewingRecipeRegistry.isValidIngredient(pStack);
         } else if (pIndex == 7) {
             return pStack.is(Items.BLAZE_POWDER);
         } else if (pIndex == 8) {
             return pStack.is(ModTags.Items.BREWING_POWDER);
         } else {
-            return net.minecraftforge.common.brewing.BrewingRecipeRegistry.isValidInput(pStack) && this.getItem(pIndex).isEmpty();
+            return (net.minecraftforge.common.brewing.BrewingRecipeRegistry.isValidInput(pStack) || FutureBrewingRecipeRegistry.isValidInput(pStack))
+                    && this.getItem(pIndex).isEmpty();
         }
     }
 
@@ -221,27 +222,35 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
         NonNullList<ItemStack> list = NonNullList.create();
         if (mode != 0) {
             items.stream().map(i -> {
-                if (i.getItem() != Items.GLASS_BOTTLE && i.getItem() != Items.POTION) return i;
+                if (i.getItem() != Items.GLASS_BOTTLE && i.getItem() != Items.POTION) {
+                    return i;
+                }
                 var potion = PotionUtils.getPotion(i);
                 // 空瓶 == Potions.EMPTY似乎存在问题，这里使用tag进行判断
 
                 // 自动注水
-                if (i.getTag() == null && mode == 1)
-                    if (replace)
+                if (i.getTag() == null && mode == 1) {
+                    if (replace) {
                         return PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER);
-                    else
+                    } else {
                         return PotionUtils.setPotion(i.copy(), Potions.WATER);
+                    }
+                }
 
                 // 自动粗制
-                if ((i.getTag() == null || potion == Potions.WATER) && mode == 2)
-                    if (replace)
+                if ((i.getTag() == null || potion == Potions.WATER) && mode == 2) {
+                    if (replace) {
                         return PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD);
-                    else
+                    } else {
                         return PotionUtils.setPotion(i.copy(), Potions.AWKWARD);
+                    }
+                }
 
                 return i;
             }).forEach(list::add);
-        } else list.addAll(items);
+        } else {
+            list.addAll(items);
+        }
         if (replace) {
             for (int i = 0; i < list.size(); i++) {
                 items.set(i, list.get(i));
@@ -257,17 +266,14 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
             return net.minecraftforge.common.brewing.BrewingRecipeRegistry.canBrew(getProcessedBottles(pItems, blockEntity.mode), ingredient, SLOTS_FOR_SIDES); // divert to VanillaBrewingRegistry
         }
 
-//        ItemStack powder = pItems.get(POWDER_SLOT);
-//        if (!powder.isEmpty()) {
-//
-//        }
-
         if (PotionBrewing.isIngredient(ingredient)) {
             // 6个药水槽
             for (int i = 0; i < 6; ++i) {
+                Optional<FutureBrewingRecipe> futureBrewingRecipeLazyOptional = getCurrentRecipe(blockEntity, i);
+
                 ItemStack potion = pItems.get(i);
                 // TODO 添加自定义配方判断
-                if (!potion.isEmpty() && PotionBrewing.hasMix(potion, ingredient)) {
+                if (!potion.isEmpty() && (PotionBrewing.hasMix(potion, ingredient) || futureBrewingRecipeLazyOptional.isPresent())) {
                     return true;
                 }
             }
@@ -292,10 +298,17 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
         for (int index : inputIndexes) {
             // 正常炼造
             ItemStack output = getOutput(inputs.get(index), ingredient);
+            if (output.isEmpty()) {
+                output = getCustomOutput(inputs.get(index), ingredient, null);
+            }
 
             // 粉末炼造
             if (!powder.isEmpty()) {
                 var temp = getOutput(output, powder);
+                if (temp.isEmpty()) {
+                    temp = getCustomOutput(inputs.get(index), ingredient, powder);
+                }
+
                 if (!temp.isEmpty()) {
                     output = temp;
                 }
@@ -307,9 +320,31 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
         }
     }
 
+    public static ItemStack getCustomOutput(ItemStack input, ItemStack ingredient, ItemStack powder) {
+        if (input.isEmpty() || input.getCount() != 1) {
+            return ItemStack.EMPTY;
+        }
+        if (ingredient.isEmpty()) {
+            return ItemStack.EMPTY;
+        }
 
-    private static void doBrew(Level pLevel, BlockPos pPos, NonNullList<ItemStack> pItems, int mode) {
-        if (net.minecraftforge.event.ForgeEventFactory.onPotionAttemptBrew(pItems)) return;
+        for (FutureBrewingRecipe recipe : FutureBrewingRecipeRegistry.recipes) {
+            ItemStack output = recipe.getOutput(input, ingredient, powder);
+            if (!output.isEmpty()) {
+                return output;
+            }
+        }
+
+        return ItemStack.EMPTY;
+    }
+
+    private static void doBrew(Level pLevel, BlockPos pPos, FutureBrewingStandBlockEntity entity) {
+        NonNullList<ItemStack> pItems = entity.items;
+        int mode = entity.mode;
+
+        if (net.minecraftforge.event.ForgeEventFactory.onPotionAttemptBrew(pItems)) {
+            return;
+        }
         var ingredient = pItems.get(INGREDIENT_SLOT);
         var powder = pItems.get(POWDER_SLOT);
 
@@ -327,7 +362,9 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
                 if (!powder.isEmpty()) {
                     Containers.dropItemStack(pLevel, pPos.getX(), pPos.getY(), pPos.getZ(), powderStack);
                 }
-            } else powder.shrink(1);
+            } else {
+                powder.shrink(1);
+            }
         }
 
         // 消耗原料
@@ -339,11 +376,12 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
             } else {
                 Containers.dropItemStack(pLevel, pPos.getX(), pPos.getY(), pPos.getZ(), ingredientStack);
             }
-        } else ingredient.shrink(1);
+        } else {
+            ingredient.shrink(1);
+        }
 
         pItems.set(INGREDIENT_SLOT, ingredient);
 
-        // play sound?
         pLevel.levelEvent(1035, pPos, 0);
     }
 
@@ -382,7 +420,7 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
                     pBlockEntity.fuel -= 1;
                 }
 
-                doBrew(pLevel, pPos, pBlockEntity.items, pBlockEntity.mode);
+                doBrew(pLevel, pPos, pBlockEntity);
                 setChanged(pLevel, pPos, pState);
             } else if (!canBrew || !ingredient.is(pBlockEntity.ingredient) || (pBlockEntity.mode == 2 && pBlockEntity.fuel < 2)) {
                 // wrong ingredient, stop brewing
@@ -418,6 +456,25 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
 
     private static boolean canBrewInDifferentMode(int mode, int fuel) {
         return mode == 2 ? fuel > 1 : fuel > 0;
+    }
+
+    private static Optional<FutureBrewingRecipe> getCurrentRecipe(FutureBrewingStandBlockEntity blockEntity, int index) {
+        RecipeManager recipeManager = blockEntity.level.getRecipeManager();
+
+        SimpleContainer inventory = new SimpleContainer(3);
+        inventory.setItem(0, blockEntity.items.get(index));
+        inventory.setItem(1, blockEntity.items.get(6));
+        inventory.setItem(2, blockEntity.items.get(8));
+
+        List<FutureBrewingRecipe> allRecipes = recipeManager.getAllRecipesFor(FutureBrewingRecipe.Type.INSTANCE);
+
+        for (FutureBrewingRecipe recipe : allRecipes) {
+            if (recipe.matches(inventory, blockEntity.level)) {
+                return Optional.of(recipe);
+            }
+        }
+
+        return Optional.empty();
     }
 
     @Override

@@ -15,12 +15,12 @@ import javax.annotation.Nullable;
 
 @SuppressWarnings("ClassCanBeRecord")
 public class FutureBrewingRecipe implements Recipe<SimpleContainer> {
-    private final Ingredient input;
-    private final Ingredient ingredient;
+    public final Ingredient input;
+    public final Ingredient ingredient;
     @Nullable
-    private final Ingredient powder;
-    private final ItemStack output;
-    private final ResourceLocation id;
+    public final Ingredient powder;
+    public final ItemStack output;
+    public final ResourceLocation id;
 
     public FutureBrewingRecipe(Ingredient input, Ingredient ingredient, @Nullable Ingredient powder, ItemStack output, ResourceLocation id) {
         this.input = input;
@@ -64,6 +64,17 @@ public class FutureBrewingRecipe implements Recipe<SimpleContainer> {
     @Override
     public ItemStack getResultItem(RegistryAccess pRegistryAccess) {
         return output.copy();
+    }
+
+    public ItemStack getOutput() {
+        return output.copy();
+    }
+
+    public ItemStack getOutput(ItemStack input, ItemStack ingredient, @Nullable ItemStack powder) {
+        if (this.powder == null) {
+            return this.input.test(input) && this.ingredient.test(ingredient) ? getOutput().copy() : ItemStack.EMPTY;
+        }
+        return this.input.test(input) && this.ingredient.test(ingredient) && this.powder.test(powder) ? getOutput().copy() : ItemStack.EMPTY;
     }
 
     @Override

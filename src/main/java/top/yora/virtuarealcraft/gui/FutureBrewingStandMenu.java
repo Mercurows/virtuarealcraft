@@ -16,6 +16,7 @@ import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import top.yora.virtuarealcraft.block.blockentity.FutureBrewingStandBlockEntity;
 import top.yora.virtuarealcraft.init.MenuTypeRegistry;
+import top.yora.virtuarealcraft.recipe.FutureBrewingRecipeRegistry;
 import top.yora.virtuarealcraft.tool.ModTags;
 
 public class FutureBrewingStandMenu extends AbstractContainerMenu {
@@ -180,7 +181,7 @@ public class FutureBrewingStandMenu extends AbstractContainerMenu {
         }
 
         public boolean mayPlace(ItemStack pStack) {
-            return net.minecraftforge.common.brewing.BrewingRecipeRegistry.isValidIngredient(pStack);
+            return net.minecraftforge.common.brewing.BrewingRecipeRegistry.isValidIngredient(pStack) || FutureBrewingRecipeRegistry.isValidIngredient(pStack);
         }
 
         public int getMaxStackSize() {
