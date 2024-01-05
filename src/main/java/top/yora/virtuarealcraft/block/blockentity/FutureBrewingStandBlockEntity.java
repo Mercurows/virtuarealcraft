@@ -26,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
 import top.yora.virtuarealcraft.block.FutureBrewingStandBlock;
 import top.yora.virtuarealcraft.gui.FutureBrewingStandMenu;
 import top.yora.virtuarealcraft.init.BlockEntityRegistry;
-import top.yora.virtuarealcraft.init.ItemRegistry;
+import top.yora.virtuarealcraft.tool.ModTags;
 
 import java.util.Arrays;
 
@@ -190,7 +190,7 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
         } else if (pIndex == 7) {
             return pStack.is(Items.BLAZE_POWDER);
         } else if (pIndex == 8) {
-            return pStack.is(Items.REDSTONE) || pStack.is(Items.GLOWSTONE_DUST) || pStack.is(ItemRegistry.TOKIMORI_SEISAND.get());
+            return pStack.is(ModTags.Items.BREWING_POWDER);
         } else {
             return net.minecraftforge.common.brewing.BrewingRecipeRegistry.isValidInput(pStack) && this.getItem(pIndex).isEmpty();
         }
@@ -253,8 +253,14 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
     private static boolean isBrewable(NonNullList<ItemStack> pItems, FutureBrewingStandBlockEntity blockEntity) {
         ItemStack ingredient = pItems.get(INGREDIENT_SLOT);
 
-        if (!ingredient.isEmpty())
+        if (!ingredient.isEmpty()) {
             return net.minecraftforge.common.brewing.BrewingRecipeRegistry.canBrew(getProcessedBottles(pItems, blockEntity.mode), ingredient, SLOTS_FOR_SIDES); // divert to VanillaBrewingRegistry
+        }
+
+//        ItemStack powder = pItems.get(POWDER_SLOT);
+//        if (!powder.isEmpty()) {
+//
+//        }
 
         if (PotionBrewing.isIngredient(ingredient)) {
             // 6个药水槽

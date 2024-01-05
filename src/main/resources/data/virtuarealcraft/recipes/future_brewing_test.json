@@ -1,0 +1,18 @@
+{
+  "type": "virtuarealcraft:future_brewing",
+  "input": {
+    "item": "minecraft:potion",
+    "data": {
+      "potion": "minecraft:water"
+    }
+  },
+  "ingredient": {
+    "item": "virtuarealcraft:kouichi_zipper"
+  },
+  "powder": {
+    "item": "virtuarealcraft:tokimori_seisand"
+  },
+  "output": {
+    "item": "minecraft:apple"
+  }
+}
