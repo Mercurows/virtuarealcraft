@@ -42,6 +42,7 @@ public class Utils {
 //        LootTableHandler.init(eventBus);
 //        CompatHandler.registerCompatItems(eventBus);
         LootModifierRegistry.register(eventBus);
+        RecipeRegistry.register(eventBus);
         VrcNetwork.init();
 
         eventBus.addListener(this::commonSetup);
