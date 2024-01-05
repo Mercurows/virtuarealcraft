@@ -30,6 +30,8 @@ import top.yora.virtuarealcraft.init.ItemRegistry;
 
 import java.util.Arrays;
 
+import static net.minecraftforge.common.brewing.BrewingRecipeRegistry.getOutput;
+
 public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer {
     /**
      * 原料槽 - 6
@@ -267,15 +269,62 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
         return false;
     }
 
+    private static boolean shouldConsumePowder(NonNullList<ItemStack> inputs, ItemStack ingredient, ItemStack powder, int[] inputIndexes) {
+        if (powder.isEmpty()) return false;
+        for (int index : inputIndexes) {
+            // 正常炼造
+            ItemStack output = getOutput(inputs.get(index), ingredient);
+
+            // 粉末炼造
+            var temp = getOutput(output, powder);
+            if (!temp.isEmpty()) return true;
+        }
+        return false;
+    }
+
+    private static void customBrew(NonNullList<ItemStack> inputs, ItemStack ingredient, ItemStack powder, int[] inputIndexes) {
+        for (int index : inputIndexes) {
+            // 正常炼造
+            ItemStack output = getOutput(inputs.get(index), ingredient);
+
+            // 粉末炼造
+            if (!powder.isEmpty()) {
+                var temp = getOutput(output, powder);
+                if (!temp.isEmpty()) {
+                    output = temp;
+                }
+            }
+
+            if (!output.isEmpty()) {
+                inputs.set(index, output);
+            }
+        }
+    }
+
+
     private static void doBrew(Level pLevel, BlockPos pPos, NonNullList<ItemStack> pItems, int mode) {
         if (net.minecraftforge.event.ForgeEventFactory.onPotionAttemptBrew(pItems)) return;
-        ItemStack ingredient = pItems.get(INGREDIENT_SLOT);
+        var ingredient = pItems.get(INGREDIENT_SLOT);
+        var powder = pItems.get(POWDER_SLOT);
 
         // 提前替换玻璃瓶和水瓶
         replaceBottles(pItems, mode);
 
-        net.minecraftforge.common.brewing.BrewingRecipeRegistry.brewPotions(pItems, ingredient, SLOTS_FOR_SIDES);
+        var powderConsumed = shouldConsumePowder(pItems, ingredient, powder, SLOTS_FOR_SIDES);
+        customBrew(pItems, ingredient, powder, SLOTS_FOR_SIDES);
 
+        // 消耗粉末
+        if (powderConsumed) {
+            if (powder.hasCraftingRemainingItem()) {
+                ItemStack powderStack = powder.getCraftingRemainingItem();
+                powder.shrink(1);
+                if (!powder.isEmpty()) {
+                    Containers.dropItemStack(pLevel, pPos.getX(), pPos.getY(), pPos.getZ(), powderStack);
+                }
+            } else powder.shrink(1);
+        }
+
+        // 消耗原料
         if (ingredient.hasCraftingRemainingItem()) {
             ItemStack ingredientStack = ingredient.getCraftingRemainingItem();
             ingredient.shrink(1);
