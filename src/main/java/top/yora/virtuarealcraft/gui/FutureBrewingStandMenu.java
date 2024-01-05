@@ -15,8 +15,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import top.yora.virtuarealcraft.block.blockentity.FutureBrewingStandBlockEntity;
-import top.yora.virtuarealcraft.init.ItemRegistry;
 import top.yora.virtuarealcraft.init.MenuTypeRegistry;
+import top.yora.virtuarealcraft.tool.ModTags;
 
 public class FutureBrewingStandMenu extends AbstractContainerMenu {
     private final Container brewingStand;
@@ -194,7 +194,7 @@ public class FutureBrewingStandMenu extends AbstractContainerMenu {
         }
 
         public boolean mayPlace(ItemStack pStack) {
-            return pStack.is(Items.REDSTONE) || pStack.is(Items.GLOWSTONE_DUST) || pStack.is(ItemRegistry.TOKIMORI_SEISAND.get());
+            return pStack.is(ModTags.Items.BREWING_POWDER);
         }
 
         public int getMaxStackSize() {
