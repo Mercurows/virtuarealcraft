@@ -51,7 +51,7 @@ public class Utils {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(BlockRegistry.GORGEOUS_BLOOM.getId(), BlockRegistry.POTTED_GORGEOUS_BLOOM));
-        event.enqueueWork(() -> BrewingRecipeRegistry.addRecipe(Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WEAKNESS)), Ingredient.of(Items.GOLDEN_APPLE), new ItemStack(ItemRegistry.KINDNESS_BOTTLE.get())));
+        event.enqueueWork(() -> BrewingRecipeRegistry.addRecipe(Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.REGENERATION)), Ingredient.of(Items.GOLDEN_APPLE), new ItemStack(ItemRegistry.KINDNESS_BOTTLE.get())));
     }
 
 }
