@@ -18,7 +18,6 @@ import top.yora.virtuarealcraft.network.packet.FutureBrewingStandModeChangePacke
 
 @OnlyIn(Dist.CLIENT)
 public class FutureBrewingStandScreen extends AbstractContainerScreen<FutureBrewingStandMenu> {
-
     private static final ResourceLocation BREWING_STAND_LOCATION = new ResourceLocation(Utils.MOD_ID, "textures/gui/future_brewing_stand_gui.png");
     private static final int[] BUBBLELENGTHS = new int[]{29, 24, 20, 16, 11, 6, 0};
 
@@ -38,6 +37,7 @@ public class FutureBrewingStandScreen extends AbstractContainerScreen<FutureBrew
         int i = (this.width - this.imageWidth) / 2;
         int j = (this.height - this.imageHeight) / 2;
         FutureBrewingStandButton button = new FutureBrewingStandButton(i + 14, j + 27);
+        button.updateToolTip(this.menu.getBrewingMode());
         this.addRenderableWidget(button);
     }
 
@@ -111,15 +111,15 @@ public class FutureBrewingStandScreen extends AbstractContainerScreen<FutureBrew
             this.setTooltip(getTooltip());
         }
 
-        public void renderWidget(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
-
+        @Override
+        public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
+            super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
+            updateToolTip(FutureBrewingStandScreen.this.menu.getBrewingMode());
         }
 
-        //TODO 修复重新加载时tooltip错误的问题
         @Nullable
-        @Override
-        public Tooltip getTooltip() {
-            switch (FutureBrewingStandScreen.this.menu.getBrewingMode()) {
+        public Tooltip getTooltipForMode(int mode) {
+            switch (mode) {
                 case 0 -> {
                     return Tooltip.create(Component.translatable("des.virtuarealcraft.future_brewing_stand.mode0"));
                 }
@@ -133,6 +133,10 @@ public class FutureBrewingStandScreen extends AbstractContainerScreen<FutureBrew
             return super.getTooltip();
         }
 
+        public void updateToolTip(int mode) {
+            this.setTooltip(getTooltipForMode(mode));
+        }
+
         @Override
         public void onPress() {
             int mode = FutureBrewingStandScreen.this.menu.getBrewingMode();
@@ -140,7 +144,7 @@ public class FutureBrewingStandScreen extends AbstractContainerScreen<FutureBrew
             FutureBrewingStandScreen.this.menu.setBrewingMode(mode);
 
             VrcNetwork.CHANNEL.sendToServer(new FutureBrewingStandModeChangePacket((byte) mode));
-            this.setTooltip(getTooltip());
+            updateToolTip(mode);
         }
 
         @Override
