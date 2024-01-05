@@ -49,12 +49,12 @@ public class KindnessBottle extends Item {
 
     @Override
     public int getUseDuration(ItemStack pStack) {
-        return 32;
+        return 64;
     }
 
     @Override
     public ItemStack finishUsingItem(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity) {
-        pLivingEntity.addEffect(new MobEffectInstance(MobEffects.HEALTH_BOOST, 400, 0));
+        pLivingEntity.addEffect(new MobEffectInstance(MobEffects.HEALTH_BOOST, 400, 1));
         pLivingEntity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 400, 1));
         pLivingEntity.heal(pLivingEntity.getMaxHealth() * 0.1f);
 
