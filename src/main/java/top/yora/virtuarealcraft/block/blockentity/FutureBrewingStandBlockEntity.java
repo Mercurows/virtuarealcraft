@@ -194,30 +194,66 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
         }
     }
 
+    /**
+     * 根据模式原地替换原先的物品列表
+     *
+     * @param items 物品列表
+     * @param mode  炼药台模式
+     */
+    private static void replaceBottles(NonNullList<ItemStack> items, int mode) {
+        processBottles(items, mode, true);
+    }
+
+    /**
+     * 获取经过指定模式处理后的原料
+     *
+     * @param items 原料
+     * @param mode  模式
+     * @return 经过指定模式处理后的原料
+     */
+    private static NonNullList<ItemStack> getProcessedBottles(NonNullList<ItemStack> items, int mode) {
+        return processBottles(items, mode, false);
+    }
+
+    private static NonNullList<ItemStack> processBottles(NonNullList<ItemStack> items, int mode, boolean replace) {
+        NonNullList<ItemStack> list = NonNullList.create();
+        if (mode != 0) {
+            items.stream().map(i -> {
+                if (i.getItem() != Items.GLASS_BOTTLE && i.getItem() != Items.POTION) return i;
+                var potion = PotionUtils.getPotion(i);
+                // 空瓶 == Potions.EMPTY似乎存在问题，这里使用tag进行判断
+
+                // 自动注水
+                if (i.getTag() == null && mode == 1)
+                    if (replace)
+                        return PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER);
+                    else
+                        return PotionUtils.setPotion(i.copy(), Potions.WATER);
+
+                // 自动粗制
+                if ((i.getTag() == null || potion == Potions.WATER) && mode == 2)
+                    if (replace)
+                        return PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD);
+                    else
+                        return PotionUtils.setPotion(i.copy(), Potions.AWKWARD);
+
+                return i;
+            }).forEach(list::add);
+        } else list.addAll(items);
+        if (replace) {
+            for (int i = 0; i < list.size(); i++) {
+                items.set(i, list.get(i));
+            }
+        }
+        return list;
+    }
+
     private static boolean isBrewable(NonNullList<ItemStack> pItems, FutureBrewingStandBlockEntity blockEntity) {
         ItemStack ingredient = pItems.get(INGREDIENT_SLOT);
 
-        if (!ingredient.isEmpty()) {
-            // 自动注水
-            NonNullList<ItemStack> list = NonNullList.create();
-            if (blockEntity.mode != 0) {
-                pItems.stream().map(i -> {
-                    if (i.getItem() != Items.GLASS_BOTTLE && i.getItem() != Items.POTION) return i;
-                    var potion = PotionUtils.getPotion(i);
+        if (!ingredient.isEmpty())
+            return net.minecraftforge.common.brewing.BrewingRecipeRegistry.canBrew(getProcessedBottles(pItems, blockEntity.mode), ingredient, SLOTS_FOR_SIDES); // divert to VanillaBrewingRegistry
 
-                    // 自动注水
-                    if (potion == Potions.EMPTY && blockEntity.mode == 1)
-                        return PotionUtils.setPotion(i.copy(), Potions.WATER);
-
-                    // 自动粗制
-                    if ((potion == Potions.EMPTY || potion == Potions.WATER) && blockEntity.mode == 2)
-                        return PotionUtils.setPotion(i.copy(), Potions.AWKWARD);
-
-                    return i;
-                }).forEach(list::add);
-            } else list.addAll(pItems);
-            return net.minecraftforge.common.brewing.BrewingRecipeRegistry.canBrew(list, ingredient, SLOTS_FOR_SIDES); // divert to VanillaBrewingRegistry
-        }
         if (PotionBrewing.isIngredient(ingredient)) {
             // 6个药水槽
             for (int i = 0; i < 6; ++i) {
@@ -231,13 +267,14 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
         return false;
     }
 
-    private static void doBrew(Level pLevel, BlockPos pPos, NonNullList<ItemStack> pItems) {
+    private static void doBrew(Level pLevel, BlockPos pPos, NonNullList<ItemStack> pItems, int mode) {
         if (net.minecraftforge.event.ForgeEventFactory.onPotionAttemptBrew(pItems)) return;
         ItemStack ingredient = pItems.get(INGREDIENT_SLOT);
 
-        // event listener
+        // 提前替换玻璃瓶和水瓶
+        replaceBottles(pItems, mode);
+
         net.minecraftforge.common.brewing.BrewingRecipeRegistry.brewPotions(pItems, ingredient, SLOTS_FOR_SIDES);
-        net.minecraftforge.event.ForgeEventFactory.onPotionBrewed(pItems);
 
         if (ingredient.hasCraftingRemainingItem()) {
             ItemStack ingredientStack = ingredient.getCraftingRemainingItem();
@@ -290,7 +327,7 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
                     pBlockEntity.fuel -= 1;
                 }
 
-                doBrew(pLevel, pPos, pBlockEntity.items);
+                doBrew(pLevel, pPos, pBlockEntity.items, pBlockEntity.mode);
                 setChanged(pLevel, pPos, pState);
             } else if (!canBrew || !ingredient.is(pBlockEntity.ingredient) || (pBlockEntity.mode == 2 && pBlockEntity.fuel < 2)) {
                 // wrong ingredient, stop brewing
