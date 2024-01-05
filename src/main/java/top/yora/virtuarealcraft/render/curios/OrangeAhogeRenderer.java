@@ -37,7 +37,6 @@ public class OrangeAhogeRenderer implements ICurioRenderer {
         this.model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
         this.model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 
-        ICurioRenderer.translateIfSneaking(matrixStack, entity);
         ICurioRenderer.followHeadRotations(entity, this.model.main);
 
         VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(TEXTURE), false, stack.hasFoil());

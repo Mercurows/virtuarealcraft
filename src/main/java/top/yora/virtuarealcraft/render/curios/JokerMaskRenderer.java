@@ -18,7 +18,6 @@ import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
 import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.models.curios.JokerMaskModel;
-import top.yora.virtuarealcraft.models.curios.OrangeAhogeModel;
 
 @OnlyIn(Dist.CLIENT)
 public class JokerMaskRenderer implements ICurioRenderer {
@@ -38,8 +37,7 @@ public class JokerMaskRenderer implements ICurioRenderer {
         this.model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
         this.model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 
-        ICurioRenderer.translateIfSneaking(matrixStack, entity);
-        ICurioRenderer.followHeadRotations(entity, this.model.armorHead);
+        ICurioRenderer.followHeadRotations(entity, this.model.bone);
 
         VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(TEXTURE), false, stack.hasFoil());
 
