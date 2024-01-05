@@ -8,6 +8,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 import top.yora.virtuarealcraft.init.EntityRegistry;
 import top.yora.virtuarealcraft.init.ItemRegistry;
+import top.yora.virtuarealcraft.render.curios.JokerMaskRenderer;
 import top.yora.virtuarealcraft.render.curios.OrangeAhogeRenderer;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -21,5 +22,6 @@ public class ClientRenderHandler {
         EntityRenderers.register(EntityRegistry.RAIN_SHOWER_BUTTERFLY_ENTITY.get(), RainShowerButterflyEntityRenderer::new);
 
         CuriosRendererRegistry.register(ItemRegistry.ORANGE_AHOGE.get(), OrangeAhogeRenderer::new);
+        CuriosRendererRegistry.register(ItemRegistry.JOKER_MASK.get(), JokerMaskRenderer::new);
     }
 }

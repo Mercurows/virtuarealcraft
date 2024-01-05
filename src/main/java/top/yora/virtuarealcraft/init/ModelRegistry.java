@@ -6,6 +6,7 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.yora.virtuarealcraft.models.armor.*;
+import top.yora.virtuarealcraft.models.curios.JokerMaskModel;
 import top.yora.virtuarealcraft.models.curios.OrangeAhogeModel;
 import top.yora.virtuarealcraft.models.projectile.*;
 
@@ -28,5 +29,6 @@ public class ModelRegistry {
         event.registerLayerDefinition(TacticalHeadsetMK1Model.LAYER_LOCATION, TacticalHeadsetMK1Model::createBodyLayer);
         event.registerLayerDefinition(OrangeAhogeModel.LAYER_LOCATION, OrangeAhogeModel::createBodyLayer);
         event.registerLayerDefinition(RainShowerButterflyModel.LAYER_LOCATION, RainShowerButterflyModel::createBodyLayer);
+        event.registerLayerDefinition(JokerMaskModel.LAYER_LOCATION, JokerMaskModel::createBodyLayer);
     }
 }
