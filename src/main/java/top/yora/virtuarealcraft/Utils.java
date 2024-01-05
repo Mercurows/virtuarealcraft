@@ -27,7 +27,7 @@ public class Utils {
 
         ItemRegistry.ITEMS.register(eventBus);
 //        EffectRegistry.EFFECTS.register(eventBus);
-//        PotionRegistry.POTION_TYPES.register(eventBus);
+        PotionRegistry.POTIONS.register(eventBus);
 //        EnchantRegistry.ENCHANTMENTS.register(eventBus);
         GroupRegistry.TABS.register(eventBus);
         SoundRegistry.SOUNDS.register(eventBus);
