@@ -7,9 +7,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import top.yora.virtuarealcraft.Utils;
+import top.yora.virtuarealcraft.tool.RecipeTool;
 
 import javax.annotation.Nullable;
 
@@ -32,9 +36,11 @@ public class FutureBrewingRecipe implements Recipe<SimpleContainer> {
 
     @Override
     public boolean matches(SimpleContainer pContainer, Level pLevel) {
-        if (pLevel.isClientSide()) return false;
+        if (pLevel.isClientSide()) {
+            return false;
+        }
 
-        boolean inputMatched = input.test(pContainer.getItem(0));
+        boolean inputMatched = RecipeTool.strictTest(input, pContainer.getItem(0));
         boolean ingredientMatched = ingredient.test(pContainer.getItem(1));
         boolean powderMatched = powder == null || powder.test(pContainer.getItem(2));
 
@@ -93,10 +99,10 @@ public class FutureBrewingRecipe implements Recipe<SimpleContainer> {
 
         @Override
         public FutureBrewingRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
-            Ingredient input = Ingredient.fromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "input"));
+            Ingredient input = RecipeTool.potionFromJson(pSerializedRecipe, "input");
             Ingredient ingredient = Ingredient.fromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "ingredient"));
             Ingredient powder = pSerializedRecipe.has("powder") ? Ingredient.fromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "powder")) : null;
-            ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "output"));
+            ItemStack output = RecipeTool.potionItemFromJson(pSerializedRecipe, "output");
 
             return new FutureBrewingRecipe(input, ingredient, powder, output, pRecipeId);
         }

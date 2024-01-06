@@ -1,7 +1,10 @@
 {
   "type": "virtuarealcraft:future_brewing",
   "input": {
-    "item": "minecraft:glass_bottle"
+    "potion": {
+      "potion": "minecraft:water",
+      "type": "potion"
+    }
   },
   "ingredient": {
     "item": "virtuarealcraft:kouichi_zipper"
