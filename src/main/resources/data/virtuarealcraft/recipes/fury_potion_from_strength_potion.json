@@ -1,0 +1,16 @@
+{
+  "type": "virtuarealcraft:future_brewing",
+  "input": {
+    "potion": {
+      "potion": "minecraft:strong_strength"
+    }
+  },
+  "ingredient": {
+    "item": "virtuarealcraft:tokimori_seisand"
+  },
+  "output": {
+    "potion": {
+      "potion": "virtuarealcraft:fury"
+    }
+  }
+}
