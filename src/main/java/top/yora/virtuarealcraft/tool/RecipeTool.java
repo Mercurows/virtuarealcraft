@@ -23,19 +23,21 @@ public class RecipeTool {
                 if (!potion.has("potion")) {
                     throw new JsonSyntaxException("Missing potion, expected to find a String");
                 }
+
+                ItemStack base;
+
                 if (!potion.has("type")) {
-                    throw new JsonSyntaxException("Missing type, expected to find a String");
+                    base = new ItemStack(Items.POTION);
+                } else {
+                    String typeStr = GsonHelper.getAsString(potion, "type");
+                    base = switch (typeStr) {
+                        case "lingering" -> new ItemStack(Items.LINGERING_POTION);
+                        case "splash" -> new ItemStack(Items.SPLASH_POTION);
+                        default -> new ItemStack(Items.POTION);
+                    };
                 }
 
                 String potionStr = GsonHelper.getAsString(potion, "potion");
-                String typeStr = GsonHelper.getAsString(potion, "type");
-
-                ItemStack base = switch (typeStr) {
-                    case "potion" -> new ItemStack(Items.POTION);
-                    case "lingering" -> new ItemStack(Items.LINGERING_POTION);
-                    case "splash" -> new ItemStack(Items.SPLASH_POTION);
-                    default -> throw new JsonSyntaxException("Unknown potion type: " + typeStr);
-                };
 
                 ItemStack potionStack = PotionUtils.setPotion(base, Potion.byName(potionStr));
                 if (potionStack.isEmpty()) {
@@ -61,19 +63,21 @@ public class RecipeTool {
                 if (!potion.has("potion")) {
                     throw new JsonSyntaxException("Missing potion, expected to find a String");
                 }
+
+                ItemStack base;
+
                 if (!potion.has("type")) {
-                    throw new JsonSyntaxException("Missing type, expected to find a String");
+                    base = new ItemStack(Items.POTION);
+                } else {
+                    String typeStr = GsonHelper.getAsString(potion, "type");
+                    base = switch (typeStr) {
+                        case "lingering" -> new ItemStack(Items.LINGERING_POTION);
+                        case "splash" -> new ItemStack(Items.SPLASH_POTION);
+                        default -> new ItemStack(Items.POTION);
+                    };
                 }
 
                 String potionStr = GsonHelper.getAsString(potion, "potion");
-                String typeStr = GsonHelper.getAsString(potion, "type");
-
-                ItemStack base = switch (typeStr) {
-                    case "potion" -> new ItemStack(Items.POTION);
-                    case "lingering" -> new ItemStack(Items.LINGERING_POTION);
-                    case "splash" -> new ItemStack(Items.SPLASH_POTION);
-                    default -> throw new JsonSyntaxException("Unknown potion type: " + typeStr);
-                };
 
                 ItemStack potionStack = PotionUtils.setPotion(base, Potion.byName(potionStr));
                 if (potionStack.isEmpty()) {

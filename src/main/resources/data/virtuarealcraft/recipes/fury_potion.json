@@ -1,0 +1,19 @@
+{
+  "type": "virtuarealcraft:future_brewing",
+  "input": {
+    "potion": {
+      "potion": "minecraft:water"
+    }
+  },
+  "ingredient": {
+    "item": "virtuarealcraft:tokimori_seisand"
+  },
+  "powder": {
+    "item": "minecraft:redstone"
+  },
+  "output": {
+    "potion": {
+      "potion": "virtuarealcraft:fury"
+    }
+  }
+}
