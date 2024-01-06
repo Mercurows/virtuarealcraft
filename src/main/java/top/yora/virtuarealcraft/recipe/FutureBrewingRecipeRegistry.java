@@ -3,7 +3,6 @@ package top.yora.virtuarealcraft.recipe;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -21,9 +20,8 @@ public class FutureBrewingRecipeRegistry {
     }
 
     @SubscribeEvent
-    public static void onInit(ServerStartingEvent event) {
-        Level level = event.getServer().overworld();
-        RecipeManager recipeManager = level.getRecipeManager();
+    public static void onServerStarting(ServerStartingEvent event) {
+        RecipeManager recipeManager = event.getServer().getRecipeManager();
         List<FutureBrewingRecipe> list = recipeManager.getAllRecipesFor(FutureBrewingRecipe.Type.INSTANCE);
         if (FutureBrewingRecipeRegistry.recipes == null) {
             FutureBrewingRecipeRegistry.loadRecipes(list);
