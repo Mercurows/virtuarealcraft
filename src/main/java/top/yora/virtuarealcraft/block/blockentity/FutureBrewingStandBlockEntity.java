@@ -122,7 +122,7 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
 
     @Override
     public boolean canTakeItemThroughFace(int pIndex, ItemStack pStack, Direction pDirection) {
-        return pIndex != 6 || pStack.is(Items.GLASS_BOTTLE);
+        return pIndex != INGREDIENT_SLOT || pStack.is(Items.GLASS_BOTTLE);
     }
 
     @Override
@@ -142,12 +142,7 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
 
     @Override
     public boolean isEmpty() {
-        for (ItemStack itemstack : this.items) {
-            if (!itemstack.isEmpty()) {
-                return false;
-            }
-        }
-        return true;
+        return items.stream().allMatch(ItemStack::isEmpty);
     }
 
     private boolean[] getPotionBits() {
@@ -185,11 +180,11 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
 
     @Override
     public boolean canPlaceItem(int pIndex, ItemStack pStack) {
-        if (pIndex == 6) {
+        if (pIndex == INGREDIENT_SLOT) {
             return net.minecraftforge.common.brewing.BrewingRecipeRegistry.isValidIngredient(pStack) || FutureBrewingRecipeRegistry.isValidIngredient(pStack);
-        } else if (pIndex == 7) {
+        } else if (pIndex == FUEL_SLOT) {
             return pStack.is(Items.BLAZE_POWDER);
-        } else if (pIndex == 8) {
+        } else if (pIndex == POWDER_SLOT) {
             return pStack.is(ModTags.Items.BREWING_POWDER);
         } else {
             return (net.minecraftforge.common.brewing.BrewingRecipeRegistry.isValidInput(pStack) || FutureBrewingRecipeRegistry.isValidInput(pStack))
@@ -263,7 +258,8 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
         ItemStack ingredient = pItems.get(INGREDIENT_SLOT);
 
         if (!ingredient.isEmpty()) {
-            return pItems.stream().limit(6).anyMatch(item ->
+            // TODO 修复自定义配方在自动注水/粗制模式下意外消耗原料的bug
+            return getProcessedBottles(pItems, blockEntity.mode).stream().anyMatch(item ->
                     getCurrentRecipe(blockEntity, item).isPresent()
             ) || BrewingRecipeRegistry.canBrew(getProcessedBottles(pItems, blockEntity.mode), ingredient, SLOTS_FOR_SIDES);
         }
@@ -337,20 +333,18 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
     }
 
     private static void doBrew(Level pLevel, BlockPos pPos, FutureBrewingStandBlockEntity entity) {
-        NonNullList<ItemStack> pItems = entity.items;
+        NonNullList<ItemStack> items = entity.items;
         int mode = entity.mode;
 
-        if (net.minecraftforge.event.ForgeEventFactory.onPotionAttemptBrew(pItems)) {
-            return;
-        }
-        var ingredient = pItems.get(INGREDIENT_SLOT);
-        var powder = pItems.get(POWDER_SLOT);
+        if (net.minecraftforge.event.ForgeEventFactory.onPotionAttemptBrew(items)) return;
+        var ingredient = items.get(INGREDIENT_SLOT);
+        var powder = items.get(POWDER_SLOT);
 
         // 提前替换玻璃瓶和水瓶
-        replaceBottles(pItems, mode);
+        replaceBottles(items, mode);
 
-        var powderConsumed = shouldConsumePowder(pItems, ingredient, powder, SLOTS_FOR_SIDES, entity);
-        customBrew(pItems, ingredient, powder, SLOTS_FOR_SIDES);
+        var powderConsumed = shouldConsumePowder(items, ingredient, powder, SLOTS_FOR_SIDES, entity);
+        customBrew(items, ingredient, powder, SLOTS_FOR_SIDES);
 
         // 消耗粉末
         if (powderConsumed) {
@@ -378,20 +372,22 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
             ingredient.shrink(1);
         }
 
-        pItems.set(INGREDIENT_SLOT, ingredient);
+        items.set(INGREDIENT_SLOT, ingredient);
 
         pLevel.levelEvent(1035, pPos, 0);
     }
 
     public static void serverTick(Level pLevel, BlockPos pPos, BlockState pState, FutureBrewingStandBlockEntity pBlockEntity) {
-        //TODO 完成tick方法
         ItemStack fuel = pBlockEntity.items.get(FUEL_SLOT);
+
+        // 烈焰粉充能
         if (pBlockEntity.fuel <= MAX_FUEL - 20 && fuel.is(Items.BLAZE_POWDER) && pBlockEntity.fuelTick != 200) {
             pBlockEntity.fuel += 20;
             fuel.shrink(1);
             setChanged(pLevel, pPos, pState);
         }
 
+        // 自动充能
         if (pBlockEntity.fuel < MAX_FUEL) {
             if (pBlockEntity.fuelTick < 200) {
                 pBlockEntity.fuelTick += 1;
@@ -407,26 +403,30 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
         boolean brewing = pBlockEntity.brewTime > 0;
         ItemStack ingredient = pBlockEntity.items.get(INGREDIENT_SLOT);
 
+        // 炼药
         if (brewing) {
-            pBlockEntity.brewTime -= 10;
+            pBlockEntity.brewTime--;
             boolean brewFinished = pBlockEntity.brewTime == 0;
+
+            // 炼药完成
             if (brewFinished && canBrew) {
-                // finish brewing
                 if (pBlockEntity.mode == 2) {
+                    // 自动粗制能量-2
                     pBlockEntity.fuel -= 2;
                 } else {
+                    // 其他情况能量-1
                     pBlockEntity.fuel -= 1;
                 }
 
                 doBrew(pLevel, pPos, pBlockEntity);
                 setChanged(pLevel, pPos, pState);
             } else if (!canBrew || !ingredient.is(pBlockEntity.ingredient) || (pBlockEntity.mode == 2 && pBlockEntity.fuel < 2)) {
-                // wrong ingredient, stop brewing
+                // 原料错误，重置炼药进度
                 pBlockEntity.brewTime = 0;
                 setChanged(pLevel, pPos, pState);
             }
         } else if (canBrew && canBrewInDifferentMode(pBlockEntity.mode, pBlockEntity.fuel)) {
-            // start brewing
+            // 设置炼药开始
             pBlockEntity.brewTime = 200;    // 10s
             pBlockEntity.ingredient = ingredient.getItem();
             setChanged(pLevel, pPos, pState);
@@ -436,9 +436,7 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
         if (!Arrays.equals(potionBits, pBlockEntity.lastPotionCount)) {
             pBlockEntity.lastPotionCount = potionBits;
             BlockState blockstate = pState;
-            if (!(pState.getBlock() instanceof FutureBrewingStandBlock)) {
-                return;
-            }
+            if (!(pState.getBlock() instanceof FutureBrewingStandBlock)) return;
 
             int count = 0;
             for (boolean potionBit : potionBits) {
@@ -460,6 +458,7 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
         RecipeManager recipeManager = blockEntity.level.getRecipeManager();
 
         SimpleContainer inventory = new SimpleContainer(3);
+
         inventory.setItem(0, input);
         inventory.setItem(1, blockEntity.items.get(INGREDIENT_SLOT));
         inventory.setItem(2, blockEntity.items.get(POWDER_SLOT));
