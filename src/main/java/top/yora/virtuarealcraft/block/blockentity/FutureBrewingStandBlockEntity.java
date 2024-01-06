@@ -54,6 +54,7 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
     private static final int[] SLOTS_FOR_DOWN = new int[]{0, 1, 2, 3, 4, 5, 6};
     private static final int[] SLOTS_FOR_SIDES = new int[]{0, 1, 2, 3, 4, 5, 7};
     private static final int[] SLOTS_FOR_BEHIND = new int[]{8};
+    private static final int[] SLOTS_INPUT = new int[]{0, 1, 2, 3, 4, 5};
 
     public static final int MAX_FUEL = 160;
     public static final int MAX_DATA_COUNT = 4;
@@ -290,26 +291,35 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
 
     private static void customBrew(NonNullList<ItemStack> inputs, ItemStack ingredient, ItemStack powder, int[] inputIndexes) {
         for (int index : inputIndexes) {
-            // 正常炼造
-            ItemStack output = getOutput(inputs.get(index), ingredient);
-            if (output.isEmpty()) {
-                output = getCustomOutput(inputs.get(index), ingredient, null);
-            }
+            ItemStack input = inputs.get(index);
 
-            // 粉末炼造
+            ItemStack output = getOutput(input, ingredient);
+
+            // 优先选择粉末酿造
             if (!powder.isEmpty()) {
-                var temp = getOutput(output, powder);
-                if (temp.isEmpty()) {
-                    temp = getCustomOutput(inputs.get(index), ingredient, powder);
-                }
+                ItemStack temp = getOutput(output, powder);
 
                 if (!temp.isEmpty()) {
-                    output = temp;
+                    inputs.set(index, temp);
+                    continue;
+                } else {
+                    ItemStack temp2 = getCustomOutput(input, ingredient, powder);
+
+                    if (!temp2.isEmpty()) {
+                        inputs.set(index, temp2);
+                        continue;
+                    }
                 }
             }
 
+            // 正常炼造
             if (!output.isEmpty()) {
                 inputs.set(index, output);
+            } else {
+                output = getCustomOutput(inputs.get(index), ingredient, null);
+                if (!output.isEmpty()) {
+                    inputs.set(index, output);
+                }
             }
         }
     }
@@ -343,8 +353,8 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
         // 提前替换玻璃瓶和水瓶
         replaceBottles(items, mode);
 
-        var powderConsumed = shouldConsumePowder(items, ingredient, powder, SLOTS_FOR_SIDES, entity);
-        customBrew(items, ingredient, powder, SLOTS_FOR_SIDES);
+        var powderConsumed = shouldConsumePowder(items, ingredient, powder, SLOTS_INPUT, entity);
+        customBrew(items, ingredient, powder, SLOTS_INPUT);
 
         // 消耗粉末
         if (powderConsumed) {

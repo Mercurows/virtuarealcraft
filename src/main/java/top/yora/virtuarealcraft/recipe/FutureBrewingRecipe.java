@@ -68,9 +68,9 @@ public class FutureBrewingRecipe implements Recipe<SimpleContainer> {
 
     public ItemStack getOutput(ItemStack input, ItemStack ingredient, @Nullable ItemStack powder) {
         if (this.powder == null) {
-            return this.input.test(input) && this.ingredient.test(ingredient) ? getOutput().copy() : ItemStack.EMPTY;
+            return RecipeTool.strictTest(this.input, input) && this.ingredient.test(ingredient) ? getOutput().copy() : ItemStack.EMPTY;
         }
-        return this.input.test(input) && this.ingredient.test(ingredient) && this.powder.test(powder) ? getOutput().copy() : ItemStack.EMPTY;
+        return RecipeTool.strictTest(this.input, input) && this.ingredient.test(ingredient) && this.powder.test(powder) ? getOutput().copy() : ItemStack.EMPTY;
     }
 
     @Override
