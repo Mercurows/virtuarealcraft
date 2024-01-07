@@ -25,6 +25,7 @@ import top.yora.virtuarealcraft.item.virtuareal13th.tocci.JokerMask;
 import top.yora.virtuarealcraft.item.virtuareal14th.koxia.Kuya;
 import top.yora.virtuarealcraft.item.virtuareal14th.rhea.WisdomWand;
 import top.yora.virtuarealcraft.item.virtuareal16th.girimi.ShadowHood;
+import top.yora.virtuarealcraft.item.virtuareal16th.karisa.TailFeatherSword;
 import top.yora.virtuarealcraft.item.virtuareal16th.kiyuu.GameConsole;
 import top.yora.virtuarealcraft.item.virtuareal16th.kiyuu.TacticalHeadsetMK1;
 import top.yora.virtuarealcraft.item.virtuareal17th.sui.DebtReliefTicket;
@@ -230,6 +231,9 @@ public class ItemRegistry {
     //kiyuu
     public static final RegistryObject<Item> GAME_CONSOLE = ITEMS.register("game_console", GameConsole::new);
     public static final RegistryObject<Item> TACTICAL_HEADSET_MK1 = ITEMS.register("tactical_headset_mk1", TacticalHeadsetMK1::new);
+
+    //karisa
+    public static final RegistryObject<Item> TAIL_FEATHER_SWORD = ITEMS.register("tail_feather_sword", TailFeatherSword::new);
 
     /**
      * 17th
