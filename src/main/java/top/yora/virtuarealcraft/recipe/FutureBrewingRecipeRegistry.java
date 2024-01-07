@@ -3,6 +3,7 @@ package top.yora.virtuarealcraft.recipe;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -23,7 +24,7 @@ public class FutureBrewingRecipeRegistry {
     public static void onServerStarting(ServerStartingEvent event) {
         RecipeManager recipeManager = event.getServer().getRecipeManager();
         List<FutureBrewingRecipe> list = recipeManager.getAllRecipesFor(FutureBrewingRecipe.Type.INSTANCE);
-        if (FutureBrewingRecipeRegistry.recipes == null) {
+        if (recipes == null || !FutureBrewingRecipeRegistry.recipes.equals(list)) {
             FutureBrewingRecipeRegistry.loadRecipes(list);
         }
     }
@@ -31,10 +32,20 @@ public class FutureBrewingRecipeRegistry {
     @SubscribeEvent
     public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
         Player player = event.getEntity();
+        RecipeManager recipeManager = player.level().getRecipeManager();
+        List<FutureBrewingRecipe> list = recipeManager.getAllRecipesFor(FutureBrewingRecipe.Type.INSTANCE);
 
-        if (FutureBrewingRecipeRegistry.recipes == null) {
-            RecipeManager recipeManager = player.level().getRecipeManager();
-            List<FutureBrewingRecipe> list = recipeManager.getAllRecipesFor(FutureBrewingRecipe.Type.INSTANCE);
+        if (recipes == null || !FutureBrewingRecipeRegistry.recipes.equals(list)) {
+            FutureBrewingRecipeRegistry.loadRecipes(list);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onResourceReload(AddReloadListenerEvent event) {
+        RecipeManager recipeManager = event.getServerResources().getRecipeManager();
+        List<FutureBrewingRecipe> list = recipeManager.getAllRecipesFor(FutureBrewingRecipe.Type.INSTANCE);
+
+        if (recipes == null || !FutureBrewingRecipeRegistry.recipes.equals(list)) {
             FutureBrewingRecipeRegistry.loadRecipes(list);
         }
     }
