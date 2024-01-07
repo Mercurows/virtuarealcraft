@@ -218,29 +218,17 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
         NonNullList<ItemStack> list = NonNullList.create();
         if (mode != 0) {
             items.stream().map(i -> {
-                if (i.getItem() != Items.GLASS_BOTTLE && i.getItem() != Items.POTION) {
-                    return i;
-                }
+                if (i.getItem() != Items.GLASS_BOTTLE && i.getItem() != Items.POTION) return i;
+
                 var potion = PotionUtils.getPotion(i);
                 // 空瓶 == Potions.EMPTY似乎存在问题，这里使用tag进行判断
 
                 // 自动注水
-                if (i.getTag() == null && mode == 1) {
-                    if (replace) {
-                        return PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER);
-                    } else {
-                        return PotionUtils.setPotion(i.copy(), Potions.WATER);
-                    }
-                }
-
+                if (i.getTag() == null && mode == 1)
+                    return PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER);
                 // 自动粗制
-                if ((i.getTag() == null || potion == Potions.WATER) && mode == 2) {
-                    if (replace) {
-                        return PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD);
-                    } else {
-                        return PotionUtils.setPotion(i.copy(), Potions.AWKWARD);
-                    }
-                }
+                if ((i.getTag() == null || potion == Potions.WATER) && mode == 2)
+                    return PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD);
 
                 return i;
             }).forEach(list::add);
@@ -259,7 +247,6 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
         ItemStack ingredient = pItems.get(INGREDIENT_SLOT);
 
         if (!ingredient.isEmpty()) {
-            // TODO 修复自定义配方在自动注水/粗制模式下意外消耗原料的bug
             return getProcessedBottles(pItems, blockEntity.mode).stream().anyMatch(item ->
                     getCurrentRecipe(blockEntity, item).isPresent()
             ) || BrewingRecipeRegistry.canBrew(getProcessedBottles(pItems, blockEntity.mode), ingredient, SLOTS_FOR_SIDES);
