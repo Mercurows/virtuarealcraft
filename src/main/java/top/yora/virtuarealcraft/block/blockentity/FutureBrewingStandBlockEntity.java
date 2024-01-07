@@ -224,10 +224,10 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
                 // 空瓶 == Potions.EMPTY似乎存在问题，这里使用tag进行判断
 
                 // 自动注水
-                if (i.getTag() == null && mode == 1)
+                if ((i.getItem() == Items.GLASS_BOTTLE || potion == Potions.EMPTY) && mode == 1)
                     return PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER);
                 // 自动粗制
-                if ((i.getTag() == null || potion == Potions.WATER) && mode == 2)
+                if ((i.getItem() == Items.GLASS_BOTTLE || potion == Potions.EMPTY || potion == Potions.WATER) && mode == 2)
                     return PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD);
 
                 return i;
