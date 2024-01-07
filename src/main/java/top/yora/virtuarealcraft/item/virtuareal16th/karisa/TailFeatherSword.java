@@ -41,14 +41,6 @@ public class TailFeatherSword extends SwordItem {
         TooltipTool.addLiverInfo(tooltip, Livers.KARISA);
     }
 
-    public static float getBackStabDamage(float damage, LivingEntity entity) {
-        if (entity.getItemBySlot(EquipmentSlot.HEAD).getItem() == ItemRegistry.TACTICAL_HEADSET_MK1.get()) {
-            return damage * 16f;
-        } else {
-            return damage * 3f;
-        }
-    }
-
     /**
      * From Farmers Delight
      */
@@ -69,10 +61,18 @@ public class TailFeatherSword extends SwordItem {
         if (attacker instanceof Player player) {
             ItemStack weapon = player.getMainHandItem();
 
-            if (!weapon.isEmpty() && weapon.getItem() == ItemRegistry.TAIL_FEATHER_SWORD.get()
-                    && isLookingBehindTarget(event.getEntity(), event.getSource().getSourcePosition())) {
+            if (!weapon.isEmpty() && weapon.getItem() == ItemRegistry.TAIL_FEATHER_SWORD.get()) {
                 if (!player.level().isClientSide) {
-                    event.setAmount(getBackStabDamage(event.getAmount(), target));
+                    float amp = 1.0f;
+                    if (target.getItemBySlot(EquipmentSlot.HEAD).getItem() == ItemRegistry.TACTICAL_HEADSET_MK1.get()) {
+                        amp *= 16f;
+                    }
+
+                    if (isLookingBehindTarget(event.getEntity(), event.getSource().getSourcePosition())) {
+                        amp *= 3f;
+                    }
+
+                    event.setAmount(amp * event.getAmount());
                     player.level().playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 1.0F, 1.0F);
                 }
             }

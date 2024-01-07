@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "virtuarealcraft:item/tail_feather_sword"
+  }
+}

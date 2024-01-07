@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " ##",
+    " B#",
+    "I  "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:feather"
+    },
+    "B": {
+      "item": "minecraft:black_dye"
+    },
+    "I": {
+      "item": "minecraft:iron_sword"
+    }
+  },
+  "result": {
+    "item": "virtuarealcraft:tail_feather_sword",
+    "count": 1
+  }
+}
