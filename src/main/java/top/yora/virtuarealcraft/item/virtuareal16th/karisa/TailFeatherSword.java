@@ -4,14 +4,15 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.Tiers;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
@@ -39,6 +40,24 @@ public class TailFeatherSword extends SwordItem {
         tooltip.add(Component.translatable("des.virtuarealcraft.tail_feather_sword").withStyle(ChatFormatting.GRAY));
 
         TooltipTool.addLiverInfo(tooltip, Livers.KARISA);
+    }
+
+    @Override
+    public boolean isValidRepairItem(ItemStack pToRepair, ItemStack pRepair) {
+        return pRepair.getItem() == Items.FEATHER;
+    }
+
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
+        if (!pLevel.isClientSide) {
+            pPlayer.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 160, 0, false, false));
+            pPlayer.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 160, 2, false, false));
+
+            pPlayer.hurt(pLevel.damageSources().magic(), pPlayer.getHealth() * 0.2f);
+            pPlayer.getCooldowns().addCooldown(this, 320);
+        }
+
+        return super.use(pLevel, pPlayer, pUsedHand);
     }
 
     /**
@@ -70,10 +89,11 @@ public class TailFeatherSword extends SwordItem {
 
                     if (isLookingBehindTarget(event.getEntity(), event.getSource().getSourcePosition())) {
                         amp *= 3f;
+                        player.heal(1.6f);
+                        player.level().playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 1.0F, 1.0F);
                     }
 
                     event.setAmount(amp * event.getAmount());
-                    player.level().playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 1.0F, 1.0F);
                 }
             }
         }
