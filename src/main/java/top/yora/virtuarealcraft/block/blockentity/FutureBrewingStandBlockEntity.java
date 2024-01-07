@@ -77,20 +77,20 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
     protected final ContainerData dataAccess = new ContainerData() {
         public int get(int type) {
             return switch (type) {
-                case 0 -> FutureBrewingStandBlockEntity.this.brewTime;
-                case 1 -> FutureBrewingStandBlockEntity.this.fuel;
-                case 2 -> FutureBrewingStandBlockEntity.this.mode;
-                case 3 -> FutureBrewingStandBlockEntity.this.fuelTick;
+                case 0 -> brewTime;
+                case 1 -> fuel;
+                case 2 -> mode;
+                case 3 -> fuelTick;
                 default -> 0;
             };
         }
 
         public void set(int type, int value) {
             switch (type) {
-                case 0 -> FutureBrewingStandBlockEntity.this.brewTime = value;
-                case 1 -> FutureBrewingStandBlockEntity.this.fuel = value;
-                case 2 -> FutureBrewingStandBlockEntity.this.mode = value;
-                case 3 -> FutureBrewingStandBlockEntity.this.fuelTick = value;
+                case 0 -> brewTime = value;
+                case 1 -> fuel = value;
+                case 2 -> mode = value;
+                case 3 -> fuelTick = value;
             }
         }
 
@@ -105,20 +105,17 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
 
     @Override
     public int[] getSlotsForFace(Direction pSide) {
-        if (pSide == Direction.UP) {
-            return SLOTS_FOR_UP;
-        } else if (pSide == Direction.DOWN) {
-            return SLOTS_FOR_DOWN;
-        } else if (pSide == Direction.SOUTH) {
-            return SLOTS_FOR_BEHIND;
-        } else {
-            return SLOTS_FOR_SIDES;
-        }
+        return switch (pSide) {
+            case UP -> SLOTS_FOR_UP;
+            case DOWN -> SLOTS_FOR_DOWN;
+            case SOUTH -> SLOTS_FOR_BEHIND;
+            default -> SLOTS_FOR_SIDES;
+        };
     }
 
     @Override
     public boolean canPlaceItemThroughFace(int pIndex, ItemStack pItemStack, @Nullable Direction pDirection) {
-        return this.canPlaceItem(pIndex, pItemStack);
+        return canPlaceItem(pIndex, pItemStack);
     }
 
     @Override
@@ -133,12 +130,12 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
 
     @Override
     protected AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
-        return new FutureBrewingStandMenu(pContainerId, pInventory, this, this.dataAccess);
+        return new FutureBrewingStandMenu(pContainerId, pInventory, this, dataAccess);
     }
 
     @Override
     public int getContainerSize() {
-        return this.items.size();
+        return items.size();
     }
 
     @Override
@@ -150,7 +147,7 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
         boolean[] bool = new boolean[6];
 
         for (int i = 0; i < 6; ++i) {
-            if (!this.items.get(i).isEmpty()) {
+            if (!items.get(i).isEmpty()) {
                 bool[i] = true;
             }
         }
@@ -161,22 +158,22 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
     @Override
     public void load(CompoundTag pTag) {
         super.load(pTag);
-        this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(pTag, this.items);
-        this.brewTime = pTag.getShort("BrewTime");
-        this.fuel = pTag.getShort("Fuel");
-        this.mode = pTag.getShort("Mode");
-        this.fuelTick = pTag.getShort("FuelTick");
+        items = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
+        ContainerHelper.loadAllItems(pTag, items);
+        brewTime = pTag.getShort("BrewTime");
+        fuel = pTag.getShort("Fuel");
+        mode = pTag.getShort("Mode");
+        fuelTick = pTag.getShort("FuelTick");
     }
 
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         super.saveAdditional(pTag);
-        pTag.putShort("BrewTime", (short) this.brewTime);
-        ContainerHelper.saveAllItems(pTag, this.items);
-        pTag.putShort("Fuel", (short) this.fuel);
-        pTag.putShort("Mode", (short) this.mode);
-        pTag.putShort("FuelTick", (short) this.fuelTick);
+        pTag.putShort("BrewTime", (short) brewTime);
+        ContainerHelper.saveAllItems(pTag, items);
+        pTag.putShort("Fuel", (short) fuel);
+        pTag.putShort("Mode", (short) mode);
+        pTag.putShort("FuelTick", (short) fuelTick);
     }
 
     @Override
@@ -189,7 +186,7 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
             return pStack.is(ModTags.Items.BREWING_POWDER);
         } else {
             return (net.minecraftforge.common.brewing.BrewingRecipeRegistry.isValidInput(pStack) || FutureBrewingRecipeRegistry.isValidInput(pStack))
-                    && this.getItem(pIndex).isEmpty();
+                    && getItem(pIndex).isEmpty();
         }
     }
 
@@ -466,23 +463,23 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
 
     @Override
     public ItemStack getItem(int pIndex) {
-        return pIndex >= 0 && pIndex < this.items.size() ? this.items.get(pIndex) : ItemStack.EMPTY;
+        return pIndex >= 0 && pIndex < items.size() ? items.get(pIndex) : ItemStack.EMPTY;
     }
 
     @Override
     public ItemStack removeItem(int pSlot, int pAmount) {
-        return ContainerHelper.removeItem(this.items, pSlot, pAmount);
+        return ContainerHelper.removeItem(items, pSlot, pAmount);
     }
 
     @Override
     public ItemStack removeItemNoUpdate(int pSlot) {
-        return ContainerHelper.takeItem(this.items, pSlot);
+        return ContainerHelper.takeItem(items, pSlot);
     }
 
     @Override
     public void setItem(int pSlot, ItemStack pStack) {
-        if (pSlot >= 0 && pSlot < this.items.size()) {
-            this.items.set(pSlot, pStack);
+        if (pSlot >= 0 && pSlot < items.size()) {
+            items.set(pSlot, pStack);
         }
     }
 
@@ -493,6 +490,6 @@ public class FutureBrewingStandBlockEntity extends BaseContainerBlockEntity impl
 
     @Override
     public void clearContent() {
-        this.items.clear();
+        items.clear();
     }
 }
