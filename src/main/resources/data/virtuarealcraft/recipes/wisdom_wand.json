@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " #I",
+    "VCB",
+    "/V "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:enchanting_table"
+    },
+    "I": {
+      "item": "minecraft:iron_sword"
+    },
+    "V": {
+      "item": "virtuarealcraft:tokimori_seisand"
+    },
+    "C": {
+      "item": "minecraft:clock"
+    },
+    "B": {
+      "item": "minecraft:bookshelf"
+    },
+    "/": {
+      "item": "minecraft:end_rod"
+    }
+  },
+  "result": {
+    "item": "virtuarealcraft:wisdom_wand",
+    "count": 1
+  }
+}

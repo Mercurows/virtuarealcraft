@@ -49,7 +49,7 @@ import java.util.stream.Collectors;
 
 public class WisdomWand extends SwordItem {
     public WisdomWand() {
-        super(Tiers.IRON, 7, -3.2f, new Properties().rarity(Rarity.EPIC).durability(1487));
+        super(Tiers.IRON, 7, -3.0f, new Properties().rarity(Rarity.EPIC).durability(1487));
     }
 
     @OnlyIn(Dist.CLIENT)
