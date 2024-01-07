@@ -6,6 +6,8 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -77,10 +79,11 @@ public class TailFeatherSword extends SwordItem {
     public static void onBackStab(LivingHurtEvent event) {
         Entity attacker = event.getSource().getEntity();
         LivingEntity target = event.getEntity();
+        DamageSource source = event.getSource();
         if (attacker instanceof Player player) {
             ItemStack weapon = player.getMainHandItem();
 
-            if (!weapon.isEmpty() && weapon.getItem() == ItemRegistry.TAIL_FEATHER_SWORD.get()) {
+            if (!weapon.isEmpty() && weapon.getItem() == ItemRegistry.TAIL_FEATHER_SWORD.get() && source.is(DamageTypes.PLAYER_ATTACK)) {
                 if (!player.level().isClientSide) {
                     float amp = 1.0f;
                     if (target.getItemBySlot(EquipmentSlot.HEAD).getItem() == ItemRegistry.TACTICAL_HEADSET_MK1.get()) {

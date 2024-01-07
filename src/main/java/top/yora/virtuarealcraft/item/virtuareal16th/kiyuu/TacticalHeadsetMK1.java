@@ -77,6 +77,10 @@ public class TacticalHeadsetMK1 extends ArmorItem {
                     @SubscribeEvent
                     public void tick(TickEvent.ServerTickEvent event) {
                         if (event.phase == TickEvent.Phase.END) {
+                            if (!player.isAlive()) {
+                                stop();
+                            }
+
                             this.ticks++;
                             if (this.ticks >= this.waitTicks) {
                                 run();
@@ -87,6 +91,10 @@ public class TacticalHeadsetMK1 extends ArmorItem {
                     private void run() {
                         player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 80, 0, false, false));
 
+                        MinecraftForge.EVENT_BUS.unregister(this);
+                    }
+
+                    private void stop() {
                         MinecraftForge.EVENT_BUS.unregister(this);
                     }
                 }.start(100);
