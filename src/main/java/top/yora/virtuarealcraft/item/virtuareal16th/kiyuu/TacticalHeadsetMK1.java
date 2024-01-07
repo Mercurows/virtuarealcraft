@@ -79,6 +79,7 @@ public class TacticalHeadsetMK1 extends ArmorItem {
                         if (event.phase == TickEvent.Phase.END) {
                             if (!player.isAlive()) {
                                 stop();
+                                return;
                             }
 
                             this.ticks++;

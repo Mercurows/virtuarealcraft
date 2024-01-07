@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#D#",
+    "BNB",
+    "WCW"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:pink_concrete"
+    },
+    "D": {
+      "item": "minecraft:daylight_detector"
+    },
+    "B": {
+      "item": "minecraft:brewing_stand"
+    },
+    "N": {
+      "item": "minecraft:nether_star"
+    },
+    "W": {
+      "item": "minecraft:white_concrete_powder"
+    },
+    "C": {
+      "item": "minecraft:cauldron"
+    }
+  },
+  "result": {
+    "item": "virtuarealcraft:future_brewing_stand",
+    "count": 1
+  }
+}

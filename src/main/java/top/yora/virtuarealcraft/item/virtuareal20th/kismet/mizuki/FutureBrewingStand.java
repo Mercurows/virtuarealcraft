@@ -24,8 +24,6 @@ public class FutureBrewingStand extends BlockItem {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        TooltipTool.addDevelopingText(tooltip);
-
         tooltip.add(Component.translatable("des.virtuarealcraft.future_brewing_stand_1").withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.translatable("des.virtuarealcraft.future_brewing_stand_2").withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
 
