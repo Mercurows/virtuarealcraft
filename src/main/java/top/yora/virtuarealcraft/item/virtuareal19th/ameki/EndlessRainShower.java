@@ -23,7 +23,7 @@ import java.util.Random;
 //TODO 添加模型
 public class EndlessRainShower extends SwordItem {
     public EndlessRainShower() {
-        super(Tiers.NETHERITE, -4, -2.1f, new Properties().rarity(RarityTool.LEGENDARY).durability(197).fireResistant().setNoRepair());
+        super(Tiers.NETHERITE, 2, -2.1f, new Properties().rarity(RarityTool.LEGENDARY).durability(197).fireResistant().setNoRepair());
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -46,7 +46,7 @@ public class EndlessRainShower extends SwordItem {
 
     @Override
     public int getUseDuration(ItemStack pStack) {
-        return 60;
+        return 30;
     }
 
     @Override
@@ -65,8 +65,8 @@ public class EndlessRainShower extends SwordItem {
                     spawnButterfly(pLevel, player, 1);
                 }
 
-                player.getCooldowns().addCooldown(this, 180);
-            } else if (pRemainingUseDuration % 5 == 0) {
+                player.getCooldowns().addCooldown(this, 150);
+            } else if (pRemainingUseDuration % 2 == 0) {
                 spawnButterfly(pLevel, player, Mth.clamp(useProgress, 0.2f, 1.0f));
                 if (useProgress > .4f) {
                     spawnButterfly(pLevel, player, Mth.clamp(useProgress, 0.2f, 1.0f));
@@ -81,7 +81,7 @@ public class EndlessRainShower extends SwordItem {
     @Override
     public void onStopUsing(ItemStack stack, LivingEntity entity, int count) {
         if (!entity.level().isClientSide && entity instanceof Player player) {
-            player.getCooldowns().addCooldown(stack.getItem(), (getUseDuration(stack) - count) * 3);
+            player.getCooldowns().addCooldown(stack.getItem(), (getUseDuration(stack) - count) * 5);
         }
     }
 
