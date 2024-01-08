@@ -9,10 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -35,11 +32,15 @@ public class FoxMirror extends Item {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        TooltipTool.addDevelopingText(tooltip);
         tooltip.add(Component.translatable("des.virtuarealcraft.fox_mirror_1").withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.translatable("des.virtuarealcraft.fox_mirror_2").withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
 
         TooltipTool.addLiverInfo(tooltip, Livers.RICHI);
+    }
+
+    @Override
+    public boolean isValidRepairItem(ItemStack pStack, ItemStack pRepairCandidate) {
+        return pRepairCandidate.getItem() == Items.COPPER_INGOT;
     }
 
     @Override
