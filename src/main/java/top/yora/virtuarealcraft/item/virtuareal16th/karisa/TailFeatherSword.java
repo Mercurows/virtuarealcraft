@@ -97,7 +97,7 @@ public class TailFeatherSword extends SwordItem {
 
                     if (isLookingBehindTarget(event.getEntity(), event.getSource().getSourcePosition())) {
                         amp *= 3;
-                        player.heal(1.6f);
+                        player.heal(4.8f * player.getMaxHealth());
                         player.level().playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 1.0F, 1.0F);
                     }
 
