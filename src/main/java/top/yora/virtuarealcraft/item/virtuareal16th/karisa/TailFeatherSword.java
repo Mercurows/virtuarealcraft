@@ -13,6 +13,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.Ocelot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
@@ -87,11 +88,15 @@ public class TailFeatherSword extends SwordItem {
                 if (!player.level().isClientSide) {
                     float amp = 1.0f;
                     if (target.getItemBySlot(EquipmentSlot.HEAD).getItem() == ItemRegistry.TACTICAL_HEADSET_MK1.get()) {
-                        amp *= 16f;
+                        amp *= 16;
+                    }
+
+                    if (target instanceof Ocelot || target.getClass().getName().toLowerCase().contains("cat")) {
+                        amp *= 8;
                     }
 
                     if (isLookingBehindTarget(event.getEntity(), event.getSource().getSourcePosition())) {
-                        amp *= 3f;
+                        amp *= 3;
                         player.heal(1.6f);
                         player.level().playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 1.0F, 1.0F);
                     }
