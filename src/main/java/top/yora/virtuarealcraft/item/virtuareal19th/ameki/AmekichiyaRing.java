@@ -35,7 +35,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class AmekichiyaRing extends Item implements ICurioItem {
     public AmekichiyaRing() {
-        super(new Properties().stacksTo(1).rarity(Rarity.RARE));
+        super(new Properties().stacksTo(1).rarity(Rarity.UNCOMMON));
     }
 
     @OnlyIn(Dist.CLIENT)

@@ -26,7 +26,7 @@ import java.util.List;
 
 public class FoxMirror extends Item {
     public FoxMirror() {
-        super(new Properties().stacksTo(1).rarity(Rarity.RARE).durability(20));
+        super(new Properties().stacksTo(1).durability(20));
     }
 
     @OnlyIn(Dist.CLIENT)

@@ -3,6 +3,7 @@
   "values": [
     "virtuarealcraft:tokimori_seisand",
     "minecraft:glowstone_dust",
-    "minecraft:redstone"
+    "minecraft:redstone",
+    "minecraft:gunpowder"
   ]
 }
