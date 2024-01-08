@@ -2,8 +2,11 @@ package top.yora.virtuarealcraft.item.virtuareal20th.kismet.richi;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -46,7 +49,7 @@ public class FoxMirror extends Item {
         Player player = context.getPlayer();
         ItemStack stack = context.getItemInHand();
 
-        if (!level.isClientSide && player != null && level.getServer() != null) {
+        if (player != null && level.getServer() != null) {
             BlockState state = level.getBlockState(pos);
 
             ResourceLocation resourceLocation = LootTableTool.getRandomLootTable(level, "archaeology");
@@ -62,6 +65,10 @@ public class FoxMirror extends Item {
                     player.getCooldowns().addCooldown(stack.getItem(), 1200);
                     stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(context.getHand()));
 
+                    if (!level.isClientSide) {
+                        spawnParticleEffect((ServerLevel) level, pos);
+                    }
+
                     return InteractionResult.SUCCESS;
                 }
                 if (state.is(Blocks.GRAVEL)) {
@@ -75,11 +82,32 @@ public class FoxMirror extends Item {
                     player.getCooldowns().addCooldown(stack.getItem(), 1200);
                     stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(context.getHand()));
 
+                    if (!level.isClientSide) {
+                        spawnParticleEffect((ServerLevel) level, pos);
+                    }
+
                     return InteractionResult.SUCCESS;
                 }
             }
         }
 
         return InteractionResult.FAIL;
+    }
+
+    private static void spawnParticleEffect(ServerLevel level, BlockPos pos) {
+        ParticleOptions particleType = ParticleTypes.HAPPY_VILLAGER;
+
+        double d0 = pos.getX() + 0.5;
+        double d1 = pos.getY() + 1;
+        double d2 = pos.getZ() + 0.5;
+
+        for (int i = 0; i < 6; ++i) {
+            double d3 = d0 + (i == 0 ? 0.5 : (i == 1 ? -0.5 : 0));
+            double d5 = d2 + (i == 2 ? 0.5 : (i == 3 ? -0.5 : 0));
+            double v = i == 4 ? 0.5 : (i == 5 ? -0.5 : 0);
+            double d7 = ((i == 4 || i == 5) ? 0.5 : 0.0);
+
+            level.sendParticles(particleType, d3, d1, d5, 1, v, d7, v, 0.0);
+        }
     }
 }
