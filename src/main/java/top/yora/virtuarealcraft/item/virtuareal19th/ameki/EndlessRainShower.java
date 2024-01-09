@@ -20,7 +20,6 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-//TODO 添加模型
 public class EndlessRainShower extends SwordItem {
     public EndlessRainShower() {
         super(Tiers.NETHERITE, 2, -2.1f, new Properties().rarity(RarityTool.LEGENDARY).durability(197).fireResistant().setNoRepair());
