@@ -12,6 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import top.yora.virtuarealcraft.entity.RainShowerButterflyEntity;
+import top.yora.virtuarealcraft.entity.SparkleButterflyEntity;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.RarityTool;
 import top.yora.virtuarealcraft.tool.TooltipTool;
@@ -61,17 +62,17 @@ public class EndlessRainShower extends SwordItem {
             if (pRemainingUseDuration == 1) {
                 int butterfliesToSpawn = 8;
                 for (int i = 0; i < butterfliesToSpawn; i++) {
-                    spawnButterfly(pLevel, player, 1);
+                    spawnButterfly(pLevel, player, 1, player.isSteppingCarefully());
                 }
 
                 player.getCooldowns().addCooldown(this, 150);
             } else if (pRemainingUseDuration % 2 == 0) {
-                spawnButterfly(pLevel, player, Mth.clamp(useProgress, 0.2f, 1.0f));
+                spawnButterfly(pLevel, player, Mth.clamp(useProgress, 0.2f, 1.0f), player.isSteppingCarefully());
                 if (useProgress > .4f) {
-                    spawnButterfly(pLevel, player, Mth.clamp(useProgress, 0.2f, 1.0f));
+                    spawnButterfly(pLevel, player, Mth.clamp(useProgress, 0.2f, 1.0f), player.isSteppingCarefully());
                 }
                 if (useProgress > .8f) {
-                    spawnButterfly(pLevel, player, Mth.clamp(useProgress, 0.2f, 1.0f));
+                    spawnButterfly(pLevel, player, Mth.clamp(useProgress, 0.2f, 1.0f), player.isSteppingCarefully());
                 }
             }
         }
@@ -84,13 +85,22 @@ public class EndlessRainShower extends SwordItem {
         }
     }
 
-    private void spawnButterfly(Level pLevel, Player player, float inaccuracy) {
-        RainShowerButterflyEntity entity = new RainShowerButterflyEntity(pLevel, player, null);
-        entity.shootFromRotation(player, player.getXRot() + new Random().nextFloat(-1, 1) * inaccuracy * 2,
-                player.getYRot() + new Random().nextFloat(-1, 1) * inaccuracy * 10, 0.0F, 1.6F, inaccuracy);
-        entity.setPos(player.getPosition(0).add(0, 1.3, 0));
-        entity.setNoGravity(true);
-        pLevel.addFreshEntity(entity);
+    private void spawnButterfly(Level pLevel, Player player, float inaccuracy, boolean isSparkle) {
+        if (isSparkle) {
+            SparkleButterflyEntity entity = new SparkleButterflyEntity(pLevel, player);
+            entity.shootFromRotation(player, player.getXRot() + new Random().nextFloat(-1, 1) * inaccuracy * 2,
+                    player.getYRot() + new Random().nextFloat(-1, 1) * inaccuracy * 10, 0.0F, 3.0F, inaccuracy / 2);
+            entity.setPos(player.getPosition(0).add(0, 1.3, 0));
+            entity.setNoGravity(true);
+            pLevel.addFreshEntity(entity);
+        } else {
+            RainShowerButterflyEntity entity = new RainShowerButterflyEntity(pLevel, player, null);
+            entity.shootFromRotation(player, player.getXRot() + new Random().nextFloat(-1, 1) * inaccuracy * 2,
+                    player.getYRot() + new Random().nextFloat(-1, 1) * inaccuracy * 10, 0.0F, 1.6F, inaccuracy);
+            entity.setPos(player.getPosition(0).add(0, 1.3, 0));
+            entity.setNoGravity(true);
+            pLevel.addFreshEntity(entity);
+        }
     }
 
     @Override

@@ -36,7 +36,10 @@ public class SparkleButterflyEntity extends ThrowableItemProjectile {
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
         if (pResult.getEntity() instanceof LivingEntity livingEntity) {
-            livingEntity.hurt(DamageSourceRegistry.causeSparkleButterflyDamage(level().registryAccess(), getOwner()), 6.0F);
+            livingEntity.hurt(DamageSourceRegistry.causeSparkleButterflyDamage(level().registryAccess(), getOwner()), 4.0F);
+            livingEntity.hurt(livingEntity.level().damageSources().inFire(), 2.0f);
+            livingEntity.setSecondsOnFire(2);
+            livingEntity.invulnerableTime = 0;
 
             if (this.getOwner() != null && this.getOwner() instanceof LivingEntity entity) {
                 entity.heal(3f);
