@@ -50,7 +50,7 @@ public class EndlessRainShower extends SwordItem {
 
     @Override
     public UseAnim getUseAnimation(ItemStack pStack) {
-        return UseAnim.SPEAR;
+        return UseAnim.BOW;
     }
 
     @Override
