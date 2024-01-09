@@ -30,5 +30,6 @@ public class ModelRegistry {
         event.registerLayerDefinition(OrangeAhogeModel.LAYER_LOCATION, OrangeAhogeModel::createBodyLayer);
         event.registerLayerDefinition(RainShowerButterflyModel.LAYER_LOCATION, RainShowerButterflyModel::createBodyLayer);
         event.registerLayerDefinition(JokerMaskModel.LAYER_LOCATION, JokerMaskModel::createBodyLayer);
+        event.registerLayerDefinition(SparkleButterflyModel.LAYER_LOCATION, SparkleButterflyModel::createBodyLayer);
     }
 }

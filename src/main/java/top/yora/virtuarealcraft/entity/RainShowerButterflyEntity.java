@@ -313,6 +313,6 @@ public class RainShowerButterflyEntity extends Projectile {
 
     @Override
     protected void defineSynchedData() {
-        this.entityData.define(LIFE, 200);
+        this.entityData.define(LIFE, 0);
     }
 }

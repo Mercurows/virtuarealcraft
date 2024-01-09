@@ -26,4 +26,7 @@ public class EntityRegistry {
     public static final RegistryObject<EntityType<RainShowerButterflyEntity>> RAIN_SHOWER_BUTTERFLY_ENTITY =
             ENTITY_TYPES.register("rain_shower_butterfly",
                     () -> EntityType.Builder.<RainShowerButterflyEntity>of(RainShowerButterflyEntity::new, MobCategory.MISC).sized(0.4f, 0.19f).build("rain_shower_butterfly"));
+    public static final RegistryObject<EntityType<SparkleButterflyEntity>> SPARKLE_BUTTERFLY_ENTITY =
+            ENTITY_TYPES.register("sparkle_butterfly",
+                    () -> EntityType.Builder.<SparkleButterflyEntity>of(SparkleButterflyEntity::new, MobCategory.MISC).sized(0.4f, 0.19f).build("sparkle_butterfly"));
 }
