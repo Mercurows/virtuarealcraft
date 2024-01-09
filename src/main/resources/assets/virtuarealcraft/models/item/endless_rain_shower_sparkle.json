@@ -2,13 +2,13 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "virtuarealcraft:item/butterfly_anim1",
-		"1": "virtuarealcraft:item/butterfly_anim2",
-		"2": "virtuarealcraft:item/butterfly_anim3",
-		"3": "virtuarealcraft:item/butterfly_anim4",
-		"4": "virtuarealcraft:item/butterfly_anim5",
+		"0": "virtuarealcraft:item/sparkle_butterfly_anim1",
+		"1": "virtuarealcraft:item/sparkle_butterfly_anim2",
+		"2": "virtuarealcraft:item/sparkle_butterfly_anim3",
+		"3": "virtuarealcraft:item/sparkle_butterfly_anim4",
+		"4": "virtuarealcraft:item/sparkle_butterfly_anim5",
 		"5": "virtuarealcraft:item/endless_rain_shower_wand",
-		"particle": "virtuarealcraft:item/butterfly_anim1"
+		"particle": "virtuarealcraft:item/sparkle_butterfly_anim1"
 	},
 	"elements": [
 		{
@@ -2305,14 +2305,6 @@
 					]
 				}
 			]
-		}
-	],
-	"overrides": [
-		{
-			"predicate": {
-				"sparkle": 1
-			},
-			"model": "virtuarealcraft:item/endless_rain_shower_sparkle"
 		}
 	]
 }
