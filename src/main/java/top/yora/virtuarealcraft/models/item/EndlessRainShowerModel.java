@@ -55,6 +55,9 @@ public record EndlessRainShowerModel(BakedModel model) implements BakedModel {
                 || transformType == ItemDisplayContext.FIRST_PERSON_LEFT_HAND
                 || transformType == ItemDisplayContext.THIRD_PERSON_LEFT_HAND
                 || transformType == ItemDisplayContext.THIRD_PERSON_RIGHT_HAND
+                || transformType == ItemDisplayContext.GROUND
+                || transformType == ItemDisplayContext.GUI
+                || transformType == ItemDisplayContext.FIXED
         ) {
             return this;
         }
