@@ -4,6 +4,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
@@ -36,13 +38,19 @@ public class SparkleButterflyEntity extends ThrowableItemProjectile {
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
         if (pResult.getEntity() instanceof LivingEntity livingEntity) {
-            livingEntity.hurt(DamageSourceRegistry.causeSparkleButterflyDamage(level().registryAccess(), getOwner()), 4.0F);
+            boolean glow = livingEntity.hasEffect(MobEffects.GLOWING);
+            livingEntity.hurt(DamageSourceRegistry.causeSparkleButterflyDamage(level().registryAccess(), getOwner()), glow ? 8.0F : 4.0F);
             livingEntity.hurt(livingEntity.level().damageSources().inFire(), 2.0f);
             livingEntity.setSecondsOnFire(2);
             livingEntity.invulnerableTime = 0;
 
+            livingEntity.addEffect(new MobEffectInstance(MobEffects.GLOWING, 60, 0));
+
             if (this.getOwner() != null && this.getOwner() instanceof LivingEntity entity) {
                 entity.heal(3f);
+                if (glow) {
+                    entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 60, 1));
+                }
             }
 
         }
