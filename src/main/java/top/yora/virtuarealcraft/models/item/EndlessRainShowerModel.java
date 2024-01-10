@@ -53,7 +53,6 @@ public record EndlessRainShowerModel(BakedModel model) implements BakedModel {
     public BakedModel applyTransform(ItemDisplayContext transformType, PoseStack poseStack, boolean applyLeftHandTransform) {
         if (transformType == ItemDisplayContext.FIRST_PERSON_RIGHT_HAND
                 || transformType == ItemDisplayContext.FIRST_PERSON_LEFT_HAND
-                || transformType == ItemDisplayContext.GUI
                 || transformType == ItemDisplayContext.THIRD_PERSON_LEFT_HAND
                 || transformType == ItemDisplayContext.THIRD_PERSON_RIGHT_HAND
         ) {

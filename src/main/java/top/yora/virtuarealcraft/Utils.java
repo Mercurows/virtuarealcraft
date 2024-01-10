@@ -1,6 +1,5 @@
 package top.yora.virtuarealcraft;
 
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionUtils;
@@ -8,13 +7,9 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -26,13 +21,6 @@ public class Utils {
     public static final String MOD_ID = "virtuarealcraft";
 
     public static final String ATTRIBUTE_MODIFIER = "vrc_modifier";
-
-    @SubscribeEvent
-    @OnlyIn(Dist.CLIENT)
-    public void onModelBake(ModelEvent.RegisterAdditional event) {
-        // 创建模型资源位置
-        event.register(new ModelResourceLocation(Utils.MOD_ID, "item/endless_rain_shower_butterfly", "inventory"));
-    }
 
     public Utils() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -58,7 +46,6 @@ public class Utils {
         VrcNetwork.init();
 
         eventBus.addListener(this::commonSetup);
-        eventBus.addListener(this::onModelBake);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
