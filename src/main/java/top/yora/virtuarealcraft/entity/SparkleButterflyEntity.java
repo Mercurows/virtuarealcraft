@@ -8,20 +8,21 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import top.yora.virtuarealcraft.init.DamageSourceRegistry;
 import top.yora.virtuarealcraft.init.EntityRegistry;
-import top.yora.virtuarealcraft.init.ItemRegistry;
 
-public class SparkleButterflyEntity extends ThrowableItemProjectile {
+public class SparkleButterflyEntity extends Projectile {
     private static final EntityDataAccessor<Integer> LIFE = SynchedEntityData.defineId(SparkleButterflyEntity.class, EntityDataSerializers.INT);
     private int life = 600;
 
-    public SparkleButterflyEntity(EntityType<? extends ThrowableItemProjectile> pEntityType, Level pLevel) {
+    public SparkleButterflyEntity(EntityType<? extends SparkleButterflyEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
@@ -65,18 +66,26 @@ public class SparkleButterflyEntity extends ThrowableItemProjectile {
         --this.life;
         if (this.life <= 0) {
             this.discard();
+            return;
+        }
+
+        Vec3 vec = this.getDeltaMovement();
+
+        if (!this.level().isClientSide) {
+            HitResult hitresult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
+            if (hitresult.getType() != HitResult.Type.MISS && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, hitresult)) {
+                this.onHit(hitresult);
+            }
+
+            this.setPos(this.getX() + vec.x, this.getY() + vec.y, this.getZ() + vec.z);
+        } else {
+            this.setPosRaw(this.getX() + vec.x, this.getY() + vec.y, this.getZ() + vec.z);
         }
     }
 
     @Override
     protected void defineSynchedData() {
-        super.defineSynchedData();
         this.entityData.define(LIFE, 600);
-    }
-
-    @Override
-    protected Item getDefaultItem() {
-        return ItemRegistry.ENDLESS_RAIN_SHOWER.get();
     }
 
     public int getLife() {
