@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#GS",
+    "nVG",
+    "Xn#"
+  ],
+  "key": {
+    "#": {
+      "item": "virtuarealcraft:rainy_butterfly"
+    },
+    "G": {
+      "item": "minecraft:gold_block"
+    },
+    "S": {
+      "item": "minecraft:silence_armor_trim_smithing_template"
+    },
+    "n": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "V": {
+      "item": "virtuarealcraft:tokimori_seisand"
+    },
+    "X": {
+      "item": "virtuarealcraft:butterfly_staff"
+    }
+  },
+  "result": {
+    "item": "virtuarealcraft:endless_rain_shower",
+    "count": 1
+  }
+}
