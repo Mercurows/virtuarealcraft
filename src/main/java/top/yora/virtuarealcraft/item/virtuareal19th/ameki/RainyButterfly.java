@@ -3,9 +3,7 @@ package top.yora.virtuarealcraft.item.virtuareal19th.ameki;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -26,9 +24,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.init.ItemRegistry;
 import top.yora.virtuarealcraft.tool.ItemNBTTool;
@@ -39,7 +34,6 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class RainyButterfly extends SwordItem {
     public static final String TAG_RAINY_BUTTERFLY_COUNT = "rainy_butterfly_count";
     public static final String TAG_RAINY_BUTTERFLY_TIME = "rainy_butterfly_time";
@@ -175,14 +169,6 @@ public class RainyButterfly extends SwordItem {
             playerIn.playSound(SoundEvents.ARMOR_EQUIP_LEATHER, 1.0f, 1.0f);
         }
         return new InteractionResultHolder<>(InteractionResult.FAIL, stack);
-    }
-
-    @SubscribeEvent
-    public static void propertyOverrideRegistry(FMLClientSetupEvent event) {
-        event.enqueueWork(() ->
-                ItemProperties.register(ItemRegistry.RAINY_BUTTERFLY.get(), new ResourceLocation("open"),
-                        (stack, level, entity, seed) -> ItemNBTTool.getBoolean(stack, TAG_RAINY_BUTTERFLY_OPEN, false) ? 1.0F : 0.0F)
-        );
     }
 
     @Override
