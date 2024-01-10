@@ -1,8 +1,9 @@
-package top.yora.virtuarealcraft.render;
+package top.yora.virtuarealcraft.render.item;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ItemRenderer;
@@ -10,13 +11,17 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import top.yora.virtuarealcraft.Utils;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+@OnlyIn(Dist.CLIENT)
 public class EndlessRainShowerRenderer extends BlockEntityWithoutLevelRenderer {
     private static final BakedModel mainModel = Minecraft.getInstance().getModelManager().getModel(new ModelResourceLocation(Utils.MOD_ID, "endless_rain_shower", "inventory"));
     private static final BakedModel butterflyModel = Minecraft.getInstance().getModelManager().getModel(new ModelResourceLocation(Utils.MOD_ID, "endless_rain_shower_butterfly", "inventory"));
+    private static final BakedModel sparkleModel = Minecraft.getInstance().getModelManager().getModel(new ModelResourceLocation(Utils.MOD_ID, "endless_rain_shower_sparkle", "inventory"));
 
     public EndlessRainShowerRenderer() {
         super(Minecraft.getInstance().getBlockEntityRenderDispatcher(), Minecraft.getInstance().getEntityModels());
@@ -66,6 +71,11 @@ public class EndlessRainShowerRenderer extends BlockEntityWithoutLevelRenderer {
         itemRenderer.render(item, ItemDisplayContext.NONE, false, stack, pBuffer, pPackedLight, pPackedOverlay, mainModel);
         stack.popPose();
 
+        LocalPlayer player = Minecraft.getInstance().player;
+        boolean flag = player != null && player.isSteppingCarefully();
+        boolean flagView = pDisplayContext == ItemDisplayContext.FIRST_PERSON_LEFT_HAND || pDisplayContext == ItemDisplayContext.FIRST_PERSON_RIGHT_HAND
+                || pDisplayContext == ItemDisplayContext.THIRD_PERSON_LEFT_HAND || pDisplayContext == ItemDisplayContext.THIRD_PERSON_RIGHT_HAND;
+
         // Butterfly part
         stack.pushPose();
 
@@ -75,12 +85,20 @@ public class EndlessRainShowerRenderer extends BlockEntityWithoutLevelRenderer {
         // right
         stack.mulPose(Axis.YP.rotationDegrees(deg));
         stack.translate(-0.005, 0, 0);
-        itemRenderer.render(item, ItemDisplayContext.NONE, false, stack, pBuffer, pPackedLight, pPackedOverlay, butterflyModel);
+        if (flag && flagView) {
+            itemRenderer.render(item, ItemDisplayContext.NONE, false, stack, pBuffer, pPackedLight, pPackedOverlay, sparkleModel);
+        } else {
+            itemRenderer.render(item, ItemDisplayContext.NONE, false, stack, pBuffer, pPackedLight, pPackedOverlay, butterflyModel);
+        }
 
         // left
         stack.mulPose(Axis.YP.rotationDegrees(180 - 2 * deg));
         stack.translate(0.005, 0, 0);
-        itemRenderer.render(item, ItemDisplayContext.NONE, false, stack, pBuffer, pPackedLight, pPackedOverlay, butterflyModel);
+        if (flag && flagView) {
+            itemRenderer.render(item, ItemDisplayContext.NONE, false, stack, pBuffer, pPackedLight, pPackedOverlay, sparkleModel);
+        } else {
+            itemRenderer.render(item, ItemDisplayContext.NONE, false, stack, pBuffer, pPackedLight, pPackedOverlay, butterflyModel);
+        }
 
         stack.popPose();
 

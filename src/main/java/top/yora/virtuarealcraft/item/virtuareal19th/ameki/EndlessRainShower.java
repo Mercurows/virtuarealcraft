@@ -23,7 +23,7 @@ import top.yora.virtuarealcraft.entity.RainShowerButterflyEntity;
 import top.yora.virtuarealcraft.entity.SparkleButterflyEntity;
 import top.yora.virtuarealcraft.init.ItemRegistry;
 import top.yora.virtuarealcraft.models.item.EndlessRainShowerModel;
-import top.yora.virtuarealcraft.render.EndlessRainShowerRenderer;
+import top.yora.virtuarealcraft.render.item.EndlessRainShowerRenderer;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.RarityTool;
 import top.yora.virtuarealcraft.tool.TooltipTool;

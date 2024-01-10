@@ -12,5 +12,6 @@ public class SpecialModels {
     @SubscribeEvent
     public static void onModelBake(ModelEvent.RegisterAdditional event) {
         event.register(new ModelResourceLocation(Utils.MOD_ID, "endless_rain_shower_butterfly", "inventory"));
+        event.register(new ModelResourceLocation(Utils.MOD_ID, "endless_rain_shower_sparkle", "inventory"));
     }
 }
