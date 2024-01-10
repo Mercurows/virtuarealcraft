@@ -2,80 +2,10 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "virtuarealcraft:item/butterfly_anim1",
-		"1": "virtuarealcraft:item/butterfly_anim2",
-		"2": "virtuarealcraft:item/butterfly_anim3",
-		"3": "virtuarealcraft:item/butterfly_anim4",
-		"4": "virtuarealcraft:item/butterfly_anim5",
 		"5": "virtuarealcraft:item/endless_rain_shower_wand",
 		"particle": "virtuarealcraft:item/butterfly_anim1"
 	},
 	"elements": [
-		{
-			"from": [5.19581, 16.11857, 7.99471],
-			"to": [10.81181, 21.73457, 7.99471],
-			"rotation": {"angle": -45, "axis": "y", "origin": [8.00381, 18.92657, 7.99471]},
-			"faces": {
-				"north": {"uv": [0, 0, 16, 16], "texture": "#0"},
-				"east": {"uv": [0, 0, 16, 16], "rotation": 270, "texture": "#0"},
-				"south": {"uv": [0, 16, 16, 0], "rotation": 180, "texture": "#0"},
-				"west": {"uv": [0, 0, 16, 16], "rotation": 90, "texture": "#0"},
-				"up": {"uv": [0, 0, 16, 16], "rotation": 180, "texture": "#0"},
-				"down": {"uv": [0, 0, 16, 16], "texture": "#0"}
-			}
-		},
-		{
-			"from": [5.19581, 16.11857, 7.99471],
-			"to": [10.81181, 21.73457, 7.99471],
-			"rotation": {"angle": -22.5, "axis": "y", "origin": [8.00381, 18.92657, 7.99471]},
-			"faces": {
-				"north": {"uv": [0, 0, 16, 16], "texture": "#1"},
-				"east": {"uv": [0, 0, 16, 16], "rotation": 270, "texture": "#1"},
-				"south": {"uv": [0, 16, 16, 0], "rotation": 180, "texture": "#1"},
-				"west": {"uv": [0, 0, 16, 16], "rotation": 90, "texture": "#1"},
-				"up": {"uv": [0, 0, 16, 16], "rotation": 180, "texture": "#1"},
-				"down": {"uv": [0, 0, 16, 16], "texture": "#1"}
-			}
-		},
-		{
-			"from": [5.19581, 16.11857, 7.99471],
-			"to": [10.81181, 21.73457, 7.99471],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8.00381, 18.92657, 7.99471]},
-			"faces": {
-				"north": {"uv": [0, 0, 16, 16], "texture": "#2"},
-				"east": {"uv": [0, 0, 16, 16], "rotation": 270, "texture": "#2"},
-				"south": {"uv": [0, 16, 16, 0], "rotation": 180, "texture": "#2"},
-				"west": {"uv": [0, 0, 16, 16], "rotation": 90, "texture": "#2"},
-				"up": {"uv": [0, 0, 16, 16], "rotation": 180, "texture": "#2"},
-				"down": {"uv": [0, 0, 16, 16], "texture": "#2"}
-			}
-		},
-		{
-			"from": [5.19581, 16.11857, 7.99471],
-			"to": [10.81181, 21.73457, 7.99471],
-			"rotation": {"angle": 22.5, "axis": "y", "origin": [8.00381, 18.92657, 7.99471]},
-			"faces": {
-				"north": {"uv": [0, 0, 16, 16], "texture": "#3"},
-				"east": {"uv": [0, 0, 16, 16], "rotation": 270, "texture": "#3"},
-				"south": {"uv": [0, 16, 16, 0], "rotation": 180, "texture": "#3"},
-				"west": {"uv": [0, 0, 16, 16], "rotation": 90, "texture": "#3"},
-				"up": {"uv": [0, 0, 16, 16], "rotation": 180, "texture": "#3"},
-				"down": {"uv": [0, 0, 16, 16], "texture": "#3"}
-			}
-		},
-		{
-			"from": [5.19581, 16.11857, 7.99471],
-			"to": [10.81181, 21.73457, 7.99471],
-			"rotation": {"angle": 45, "axis": "y", "origin": [8.00381, 18.92657, 7.99471]},
-			"faces": {
-				"north": {"uv": [0, 0, 16, 16], "texture": "#4"},
-				"east": {"uv": [0, 0, 16, 16], "rotation": 270, "texture": "#4"},
-				"south": {"uv": [0, 16, 16, 0], "rotation": 180, "texture": "#4"},
-				"west": {"uv": [0, 0, 16, 16], "rotation": 90, "texture": "#4"},
-				"up": {"uv": [0, 0, 16, 16], "rotation": 180, "texture": "#4"},
-				"down": {"uv": [0, 0, 16, 16], "texture": "#4"}
-			}
-		},
 		{
 			"from": [7.9865, 9.67841, 5.8506],
 			"to": [8.02184, 16.10241, 5.8858],
@@ -2056,10 +1986,28 @@
 	"gui_light": "front",
 	"display": {
 		"thirdperson_righthand": {
-			"translation": [0, 12.25, 1.25]
+			"translation": [
+				0,
+				9.75,
+				1.25
+			],
+			"scale": [
+				0.7,
+				0.7,
+				0.7
+			]
 		},
 		"thirdperson_lefthand": {
-			"translation": [0, 12.25, 1.25]
+			"translation": [
+				0,
+				9.75,
+				1.25
+			],
+			"scale": [
+				0.7,
+				0.7,
+				0.7
+			]
 		},
 		"firstperson_righthand": {
 			"rotation": [161.5, 0, -180],
@@ -2073,9 +2021,21 @@
 			"translation": [0, 20.5, 0]
 		},
 		"gui": {
-			"rotation": [90, 45, -90],
-			"translation": [1.5, 1, 0],
-			"scale": [0.5, 0.5, 0.5]
+			"rotation": [
+				-90,
+				45,
+				90
+			],
+			"translation": [
+				-1.25,
+				1.5,
+				0
+			],
+			"scale": [
+				0.55,
+				0.55,
+				0.55
+			]
 		},
 		"head": {
 			"translation": [0, 3.5, 0]
@@ -2088,57 +2048,64 @@
 	},
 	"groups": [
 		{
-			"name": "butterfly",
-			"origin": [7.9995, 12.5, 7.99991],
-			"color": 0,
-			"nbt": "{}",
-			"children": [0, 1, 2, 3, 4]
-		},
-		{
 			"name": "wand",
 			"origin": [7.9995, 12.5, 7.99991],
 			"color": 0,
-			"nbt": "{}",
 			"children": [
 				{
 					"name": "tou",
 					"origin": [7.9995, 12.5, 7.99991],
 					"color": 1,
-					"nbt": "{}",
 					"children": [
 						{
 							"name": "rain",
 							"origin": [8, 14.271, 6.22172],
 							"color": 0,
-							"nbt": "{}",
-							"children": [5, 6, 7, 8, 9]
+							"children": [
+								0,
+								1,
+								2,
+								3,
+								4
+							]
 						},
 						{
 							"name": "kuang",
 							"origin": [7.9995, 9.24531, 7.99991],
 							"color": 0,
-							"nbt": "{}",
 							"children": [
 								{
 									"name": "kuang1",
 									"origin": [7.9995, 9.24531, 7.99991],
 									"color": 0,
-									"nbt": "{}",
-									"children": [10, 11, 12, 13]
+									"children": [
+										5,
+										6,
+										7,
+										8
+									]
 								},
 								{
 									"name": "kuang2",
 									"origin": [7.9995, 9.24531, 7.99991],
 									"color": 0,
-									"nbt": "{}",
-									"children": [14, 15, 16, 17]
+									"children": [
+										9,
+										10,
+										11,
+										12
+									]
 								},
 								{
 									"name": "kuang3",
 									"origin": [7.9995, 9.24531, 7.99991],
 									"color": 0,
-									"nbt": "{}",
-									"children": [18, 19, 20, 21]
+									"children": [
+										13,
+										14,
+										15,
+										16
+									]
 								}
 							]
 						},
@@ -2146,33 +2113,60 @@
 							"name": "lun",
 							"origin": [8, 14.98829, 5.02786],
 							"color": 0,
-							"nbt": "{}",
-							"children": [22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45]
+							"children": [
+								17,
+								18,
+								19,
+								20,
+								21,
+								22,
+								23,
+								24,
+								25,
+								26,
+								27,
+								28,
+								29,
+								30,
+								31,
+								32,
+								33,
+								34,
+								35,
+								36,
+								37,
+								38,
+								39,
+								40
+							]
 						},
 						{
 							"name": "zuo",
 							"origin": [7.9995, 12.5, 7.99991],
 							"color": 1,
-							"nbt": "{}",
 							"children": [
-								46,
-								47,
-								48,
-								49,
-								50,
+								41,
+								42,
+								43,
+								44,
+								45,
 								{
 									"name": "group",
 									"origin": [8, 9.19468, 7.51191],
 									"color": 0,
-									"nbt": "{}",
-									"children": [51, 52]
+									"children": [
+										46,
+										47
+									]
 								},
 								{
 									"name": "group",
 									"origin": [8, 9.19468, 7.51191],
 									"color": 0,
-									"nbt": "{}",
-									"children": [53, 54]
+									"children": [
+										48,
+										49
+									]
 								}
 							]
 						}
@@ -2182,14 +2176,17 @@
 					"name": "bing",
 					"origin": [0, 0, 0],
 					"color": 0,
-					"nbt": "{}",
 					"children": [
 						{
 							"name": "gun",
 							"origin": [8, 12.5, 7.6],
 							"color": 0,
-							"nbt": "{}",
 							"children": [
+								50,
+								51,
+								52,
+								53,
+								54,
 								55,
 								56,
 								57,
@@ -2236,20 +2233,19 @@
 								98,
 								99,
 								100,
-								101,
-								102,
-								103,
-								104,
-								105,
-								106
+								101
 							]
 						},
 						{
 							"name": "wei",
 							"origin": [8, -1.5, 8],
 							"color": 3,
-							"nbt": "{}",
 							"children": [
+								102,
+								103,
+								104,
+								105,
+								106,
 								107,
 								108,
 								109,
@@ -2294,25 +2290,12 @@
 								148,
 								149,
 								150,
-								151,
-								152,
-								153,
-								154,
-								155,
-								156
+								151
 							]
 						}
 					]
 				}
 			]
-		}
-	],
-	"overrides": [
-		{
-			"predicate": {
-				"sparkle": 1
-			},
-			"model": "virtuarealcraft:item/endless_rain_shower_sparkle"
 		}
 	]
 }
