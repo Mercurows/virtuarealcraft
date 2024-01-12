@@ -56,5 +56,15 @@
         "stream": true
       }
     ]
+  },
+  "canned_laughter": {
+    "subtitle": "subtitle.virtuarealcraft.canned_laughter",
+    "sounds": [
+      "virtuarealcraft:canned_laughter_1",
+      "virtuarealcraft:canned_laughter_2",
+      "virtuarealcraft:canned_laughter_3",
+      "virtuarealcraft:canned_laughter_4",
+      "virtuarealcraft:canned_laughter_5"
+    ]
   }
 }
