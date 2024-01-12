@@ -1,4 +1,4 @@
-[Beyond VirtuaRealCraft](docs/image/beyond_vrc.png)
+![Beyond VirtuaRealCraft](docs/image/beyond_vrc.png)
 
 # VirtuaRealCraft
 
