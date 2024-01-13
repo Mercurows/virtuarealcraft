@@ -20,8 +20,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @OnlyIn(Dist.CLIENT)
 public class EndlessRainShowerRenderer extends BlockEntityWithoutLevelRenderer {
     private static final BakedModel mainModel = Minecraft.getInstance().getModelManager().getModel(new ModelResourceLocation(Utils.MOD_ID, "endless_rain_shower", "inventory"));
-    private static final BakedModel butterflyModel = Minecraft.getInstance().getModelManager().getModel(new ModelResourceLocation(Utils.MOD_ID, "endless_rain_shower_butterfly", "inventory"));
-    private static final BakedModel sparkleModel = Minecraft.getInstance().getModelManager().getModel(new ModelResourceLocation(Utils.MOD_ID, "endless_rain_shower_sparkle", "inventory"));
+    private static final BakedModel butterflyModel = Minecraft.getInstance().getModelManager().getModel(new ModelResourceLocation(Utils.MOD_ID, "special/endless_rain_shower_butterfly", "inventory"));
+    private static final BakedModel sparkleModel = Minecraft.getInstance().getModelManager().getModel(new ModelResourceLocation(Utils.MOD_ID, "special/endless_rain_shower_sparkle", "inventory"));
 
     public EndlessRainShowerRenderer() {
         super(Minecraft.getInstance().getBlockEntityRenderDispatcher(), Minecraft.getInstance().getEntityModels());

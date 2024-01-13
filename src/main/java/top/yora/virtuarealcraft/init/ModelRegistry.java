@@ -1,16 +1,19 @@
 package top.yora.virtuarealcraft.init;
 
 
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.models.armor.*;
 import top.yora.virtuarealcraft.models.curios.JokerMaskModel;
 import top.yora.virtuarealcraft.models.curios.OrangeAhogeModel;
 import top.yora.virtuarealcraft.models.projectile.*;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = Utils.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModelRegistry {
     @SubscribeEvent
     public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event) {
@@ -31,5 +34,11 @@ public class ModelRegistry {
         event.registerLayerDefinition(RainShowerButterflyModel.LAYER_LOCATION, RainShowerButterflyModel::createBodyLayer);
         event.registerLayerDefinition(JokerMaskModel.LAYER_LOCATION, JokerMaskModel::createBodyLayer);
         event.registerLayerDefinition(SparkleButterflyModel.LAYER_LOCATION, SparkleButterflyModel::createBodyLayer);
+    }
+
+    @SubscribeEvent
+    public static void onModelBake(ModelEvent.RegisterAdditional event) {
+        event.register(new ModelResourceLocation(Utils.MOD_ID, "special/endless_rain_shower_butterfly", "inventory"));
+        event.register(new ModelResourceLocation(Utils.MOD_ID, "special/endless_rain_shower_sparkle", "inventory"));
     }
 }
