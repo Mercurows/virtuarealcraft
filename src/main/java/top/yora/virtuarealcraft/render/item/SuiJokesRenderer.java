@@ -31,22 +31,31 @@ public class SuiJokesRenderer extends BlockEntityWithoutLevelRenderer {
         ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
 
         stack.pushPose();
-        stack.scale(0.6F, 0.6F, 0.6F);
 
-        stack.mulPose(Axis.XP.rotationDegrees(60.0F));
-        stack.mulPose(Axis.ZP.rotationDegrees(30.0F));
+        if (pDisplayContext == ItemDisplayContext.FIRST_PERSON_LEFT_HAND) {
+            stack.translate(-0.2f, 0.35f, -0.5f);
+            stack.mulPose(Axis.XP.rotationDegrees(-120.0F));
+            stack.mulPose(Axis.ZP.rotationDegrees(-150.0F));
+            stack.mulPose(Axis.YP.rotationDegrees(180.0F));
+        }
+        if (pDisplayContext == ItemDisplayContext.FIRST_PERSON_RIGHT_HAND) {
+            stack.translate(1.2f, 0.35f, -0.5f);
+            stack.mulPose(Axis.XP.rotationDegrees(60.0F));
+            stack.mulPose(Axis.ZP.rotationDegrees(30.0F));
+        }
+
         stack.translate(0, 5.0 / 16, 0);
 
         // Main part
         stack.pushPose();
-//        stack.mulPose(Axis.YP.rotationDegrees(180.0F));
+
         itemRenderer.render(item, ItemDisplayContext.NONE, false, stack, pBuffer, pPackedLight, pPackedOverlay, mainModel);
+        stack.scale(0.6F, 0.6F, 0.6F);
         stack.popPose();
 
         LocalPlayer player = Minecraft.getInstance().player;
 
         stack.pushPose();
-
 
         stack.popPose();
 

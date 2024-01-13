@@ -21,6 +21,7 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.yora.virtuarealcraft.Utils;
+import top.yora.virtuarealcraft.init.ItemRegistry;
 import top.yora.virtuarealcraft.init.SoundRegistry;
 import top.yora.virtuarealcraft.models.item.SuiJokesModel;
 import top.yora.virtuarealcraft.render.item.SuiJokesRenderer;
@@ -69,7 +70,7 @@ public class SuiJokes extends Item {
     @SubscribeEvent
     public static void onModelBaked(ModelEvent.ModifyBakingResult event) {
         Map<ResourceLocation, BakedModel> modelRegistry = event.getModels();
-        ModelResourceLocation location = new ModelResourceLocation(Utils.MOD_ID, "special/sui_jokes_3d", "inventory");
+        ModelResourceLocation location = new ModelResourceLocation(ItemRegistry.SUI_JOKES.getId(), "inventory");
         BakedModel existingModel = modelRegistry.get(location);
         if (existingModel == null) {
             throw new RuntimeException();
