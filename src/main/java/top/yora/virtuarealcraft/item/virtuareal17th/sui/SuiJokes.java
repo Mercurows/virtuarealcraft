@@ -27,6 +27,8 @@ public class SuiJokes extends Item {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
+        TooltipTool.addDevelopingText(tooltip);
+
         tooltip.add((Component.translatable("des.virtuarealcraft.sui_jokes_1")).withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
         tooltip.add((Component.translatable("des.virtuarealcraft.sui_jokes_2")).withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
 
