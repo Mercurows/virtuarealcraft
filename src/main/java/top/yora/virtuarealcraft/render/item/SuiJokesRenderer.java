@@ -58,10 +58,11 @@ public class SuiJokesRenderer extends BlockEntityWithoutLevelRenderer {
         Font font = Minecraft.getInstance().font;
         stack.mulPose(Axis.XN.rotationDegrees(-120.0F));
 
+        //TODO 完成翻译字段的文本适配，完成随机腰封评语适配
+        // 标题
         stack.pushPose();
         stack.scale(.0035f, .0035f, .0035f);
         stack.translate(-45, -85, -5);
-
         if (pDisplayContext == ItemDisplayContext.FIRST_PERSON_LEFT_HAND) {
             stack.translate(10, 0, 0);
         }
@@ -70,9 +71,7 @@ public class SuiJokesRenderer extends BlockEntityWithoutLevelRenderer {
 
         stack.pushPose();
         stack.scale(.01f, .01f, .01f);
-
         stack.translate(-22, -25, -5);
-
         if (pDisplayContext == ItemDisplayContext.FIRST_PERSON_LEFT_HAND) {
             stack.translate(4.5, 0, 0);
         }
@@ -81,9 +80,7 @@ public class SuiJokesRenderer extends BlockEntityWithoutLevelRenderer {
 
         stack.pushPose();
         stack.scale(.02f, .02f, .02f);
-
         stack.translate(-11, -8, -5);
-
         if (pDisplayContext == ItemDisplayContext.FIRST_PERSON_LEFT_HAND) {
             stack.translate(2.5, 0, 0);
         }
@@ -93,16 +90,29 @@ public class SuiJokesRenderer extends BlockEntityWithoutLevelRenderer {
         stack.pushPose();
         stack.scale(.0045f, .0045f, .0045f);
         stack.translate(-30, 20, -5);
-
         if (pDisplayContext == ItemDisplayContext.FIRST_PERSON_LEFT_HAND) {
             stack.translate(8, 0, 0);
         }
         font.drawInBatch("小黑饼 著", 0, 0, 0x000000, false, stack.last().pose(), pBuffer, Font.DisplayMode.NORMAL, 0, pPackedLight);
         stack.popPose();
 
+        // 腰封
+        stack.pushPose();
+        stack.scale(.004f, .004f, .004f);
+        stack.translate(-80, 43, -40);
+        if (pDisplayContext == ItemDisplayContext.FIRST_PERSON_LEFT_HAND) {
+            stack.translate(6, 0, 0);
+        }
+        font.drawInBatch("主播这辈子，谁没闹出过几吨笑话", 0, 0, 0xdcb77f, false, stack.last().pose(), pBuffer, Font.DisplayMode.NORMAL, 0, pPackedLight);
 
+        stack.translate(0, 11, 0);
+        font.drawInBatch("观众这辈子，谁没睡黄过几张床单", 0, 0, 0xdcb77f, false, stack.last().pose(), pBuffer, Font.DisplayMode.NORMAL, 0, pPackedLight);
+
+        stack.translate(0, 11, 0);
+        font.drawInBatch("第三条放这里", 0, 0, 0xdcb77f, false, stack.last().pose(), pBuffer, Font.DisplayMode.NORMAL, 0, pPackedLight);
         stack.popPose();
 
+        stack.popPose();
 
         stack.popPose();
     }
