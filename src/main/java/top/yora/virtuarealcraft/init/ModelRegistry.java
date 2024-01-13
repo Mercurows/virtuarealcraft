@@ -40,5 +40,6 @@ public class ModelRegistry {
     public static void onModelBake(ModelEvent.RegisterAdditional event) {
         event.register(new ModelResourceLocation(Utils.MOD_ID, "special/endless_rain_shower_butterfly", "inventory"));
         event.register(new ModelResourceLocation(Utils.MOD_ID, "special/endless_rain_shower_sparkle", "inventory"));
+        event.register(new ModelResourceLocation(Utils.MOD_ID, "special/sui_jokes_3d", "inventory"));
     }
 }
