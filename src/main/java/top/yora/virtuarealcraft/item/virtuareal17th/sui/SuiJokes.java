@@ -88,4 +88,9 @@ public class SuiJokes extends Item {
             event.getModels().put(location, model);
         }
     }
+
+    @Override
+    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+        return slotChanged;
+    }
 }
