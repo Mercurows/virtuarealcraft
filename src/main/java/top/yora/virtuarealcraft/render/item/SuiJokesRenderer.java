@@ -62,9 +62,9 @@ public class SuiJokesRenderer extends BlockEntityWithoutLevelRenderer {
         //TODO 完成翻译字段的文本适配，完成随机腰封评语适配
 
         // 标题
+        String subtitle = Component.translatable("des.virtuarealcraft.sui_jokes.subtitle").getString();
         String title_1 = Component.translatable("des.virtuarealcraft.sui_jokes.title_1").getString();
         String title_2 = Component.translatable("des.virtuarealcraft.sui_jokes.title_2").getString();
-        String subtitle = Component.translatable("des.virtuarealcraft.sui_jokes.subtitle").getString();
         String author = Component.translatable("des.virtuarealcraft.sui_jokes.author").getString();
 
         stack.pushPose();
@@ -73,7 +73,7 @@ public class SuiJokesRenderer extends BlockEntityWithoutLevelRenderer {
         if (pDisplayContext == ItemDisplayContext.FIRST_PERSON_LEFT_HAND) {
             stack.translate(10, 0, 0);
         }
-        font.drawInBatch(subtitle, 0, 0, 0xdcb77f, false, stack.last().pose(), pBuffer, Font.DisplayMode.NORMAL, 0, pPackedLight);
+        font.drawInBatch(subtitle, 35 - font.width(subtitle) / 2f, 0, 0xdcb77f, false, stack.last().pose(), pBuffer, Font.DisplayMode.NORMAL, 0, pPackedLight);
         stack.popPose();
 
         stack.pushPose();
@@ -82,7 +82,7 @@ public class SuiJokesRenderer extends BlockEntityWithoutLevelRenderer {
         if (pDisplayContext == ItemDisplayContext.FIRST_PERSON_LEFT_HAND) {
             stack.translate(4.5, 0, 0);
         }
-        font.drawInBatch(title_1, 0, 0, 0xfacddf, false, stack.last().pose(), pBuffer, Font.DisplayMode.NORMAL, 0, pPackedLight);
+        font.drawInBatch(title_1, 18 - font.width(title_1) / 2f, 0, 0xfacddf, false, stack.last().pose(), pBuffer, Font.DisplayMode.NORMAL, 0, pPackedLight);
         stack.popPose();
 
         stack.pushPose();
@@ -91,7 +91,7 @@ public class SuiJokesRenderer extends BlockEntityWithoutLevelRenderer {
         if (pDisplayContext == ItemDisplayContext.FIRST_PERSON_LEFT_HAND) {
             stack.translate(2.5, 0, 0);
         }
-        font.drawInBatch(title_2, 0, 0, 0xf3c0d4, false, stack.last().pose(), pBuffer, Font.DisplayMode.NORMAL, 0, pPackedLight);
+        font.drawInBatch(title_2, 10 - font.width(title_2) / 2f, 0, 0xf3c0d4, false, stack.last().pose(), pBuffer, Font.DisplayMode.NORMAL, 0, pPackedLight);
         stack.popPose();
 
         stack.pushPose();
@@ -100,7 +100,7 @@ public class SuiJokesRenderer extends BlockEntityWithoutLevelRenderer {
         if (pDisplayContext == ItemDisplayContext.FIRST_PERSON_LEFT_HAND) {
             stack.translate(9, 0, 0);
         }
-        font.drawInBatch(author, 0, 0, 0x000000, false, stack.last().pose(), pBuffer, Font.DisplayMode.NORMAL, 0, pPackedLight);
+        font.drawInBatch(author, 24 - font.width(author) / 2f, 0, 0x000000, false, stack.last().pose(), pBuffer, Font.DisplayMode.NORMAL, 0, pPackedLight);
         stack.popPose();
 
         // 腰封
