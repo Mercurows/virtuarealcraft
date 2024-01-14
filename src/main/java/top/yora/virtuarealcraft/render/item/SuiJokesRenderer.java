@@ -87,7 +87,7 @@ public class SuiJokesRenderer extends BlockEntityWithoutLevelRenderer {
 
         stack.pushPose();
         stack.scale(.02f, .02f, .02f);
-        stack.translate(-11, -8, -5);
+        stack.translate(-11.5, -8, -6.5);
         if (pDisplayContext == ItemDisplayContext.FIRST_PERSON_LEFT_HAND) {
             stack.translate(2.5, 0, 0);
         }
@@ -96,27 +96,33 @@ public class SuiJokesRenderer extends BlockEntityWithoutLevelRenderer {
 
         stack.pushPose();
         stack.scale(.0045f, .0045f, .0045f);
-        stack.translate(-30, 20, -5);
+        stack.translate(-30, 20, -8);
         if (pDisplayContext == ItemDisplayContext.FIRST_PERSON_LEFT_HAND) {
             stack.translate(9, 0, 0);
         }
         font.drawInBatch(author, 24 - font.width(author) / 2f, 0, 0x000000, false, stack.last().pose(), pBuffer, Font.DisplayMode.NORMAL, 0, pPackedLight);
         stack.popPose();
 
+        String comment = Component.translatable("des.virtuarealcraft.sui_jokes.comment_2").getString();
+        String[] comments = comment.split("/");
+        String comment_1 = comments.length > 0 ? comments[0] : "";
+        String comment_2 = comments.length > 1 ? comments[1] : "";
+        String comment_3 = comments.length > 2 ? comments[2] : "";
+
         // 腰封
         stack.pushPose();
         stack.scale(.004f, .004f, .004f);
-        stack.translate(-80, 43, -40);
+        stack.translate(-90, 43, -40);
         if (pDisplayContext == ItemDisplayContext.FIRST_PERSON_LEFT_HAND) {
             stack.translate(6, 0, 0);
         }
-        font.drawInBatch("主播这辈子，谁没闹出过几吨笑话", 0, 0, 0xdcb77f, false, stack.last().pose(), pBuffer, Font.DisplayMode.NORMAL, 0, pPackedLight);
+        font.drawInBatch(comment_1, 0, 0, 0xdcb77f, false, stack.last().pose(), pBuffer, Font.DisplayMode.NORMAL, 0, pPackedLight);
 
         stack.translate(0, 11, 0);
-        font.drawInBatch("观众这辈子，谁没睡黄过几张床单", 0, 0, 0xdcb77f, false, stack.last().pose(), pBuffer, Font.DisplayMode.NORMAL, 0, pPackedLight);
+        font.drawInBatch(comment_2, 0, 0, 0xdcb77f, false, stack.last().pose(), pBuffer, Font.DisplayMode.NORMAL, 0, pPackedLight);
 
         stack.translate(0, 11, 0);
-        font.drawInBatch("第三条放这里", 0, 0, 0xdcb77f, false, stack.last().pose(), pBuffer, Font.DisplayMode.NORMAL, 0, pPackedLight);
+        font.drawInBatch(comment_3, 0, 0, 0xdcb77f, false, stack.last().pose(), pBuffer, Font.DisplayMode.NORMAL, 0, pPackedLight);
         stack.popPose();
 
         stack.popPose();
