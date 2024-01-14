@@ -24,6 +24,7 @@ import top.yora.virtuarealcraft.init.ItemRegistry;
 import top.yora.virtuarealcraft.init.SoundRegistry;
 import top.yora.virtuarealcraft.models.item.SuiJokesModel;
 import top.yora.virtuarealcraft.render.item.SuiJokesRenderer;
+import top.yora.virtuarealcraft.tool.ItemNBTTool;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
 
@@ -34,6 +35,8 @@ import java.util.function.Consumer;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class SuiJokes extends Item {
+    public static final String TAG_COMMENT = "comment";
+
     public SuiJokes() {
         super(new Properties().stacksTo(1));
     }
@@ -41,8 +44,6 @@ public class SuiJokes extends Item {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
-        TooltipTool.addDevelopingText(tooltip);
-
         tooltip.add((Component.translatable("des.virtuarealcraft.sui_jokes_1")).withStyle(ChatFormatting.GRAY));
         tooltip.add((Component.translatable("des.virtuarealcraft.sui_jokes_2")).withStyle(ChatFormatting.GRAY));
         tooltip.add((Component.translatable("des.virtuarealcraft.sui_jokes_3")).withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
@@ -52,7 +53,13 @@ public class SuiJokes extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
+        ItemStack stack = pPlayer.getItemInHand(pUsedHand);
         pLevel.playSound(null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), SoundRegistry.CANNED_LAUGHTER.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
+
+        if (!pLevel.isClientSide) {
+            ItemNBTTool.setInt(stack, TAG_COMMENT, pLevel.random.nextIntBetweenInclusive(1, 15));
+        }
+        pPlayer.getCooldowns().addCooldown(stack.getItem(), 60);
         return super.use(pLevel, pPlayer, pUsedHand);
     }
 

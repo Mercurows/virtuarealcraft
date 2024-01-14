@@ -15,6 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import top.yora.virtuarealcraft.Utils;
+import top.yora.virtuarealcraft.tool.ItemNBTTool;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -59,8 +60,6 @@ public class SuiJokesRenderer extends BlockEntityWithoutLevelRenderer {
         Font font = Minecraft.getInstance().font;
         stack.mulPose(Axis.XN.rotationDegrees(-120.0F));
 
-        //TODO 完成翻译字段的文本适配，完成随机腰封评语适配
-
         // 标题
         String subtitle = Component.translatable("des.virtuarealcraft.sui_jokes.subtitle").getString();
         String title_1 = Component.translatable("des.virtuarealcraft.sui_jokes.title_1").getString();
@@ -103,7 +102,7 @@ public class SuiJokesRenderer extends BlockEntityWithoutLevelRenderer {
         font.drawInBatch(author, 24 - font.width(author) / 2f, 0, 0x000000, false, stack.last().pose(), pBuffer, Font.DisplayMode.NORMAL, 0, pPackedLight);
         stack.popPose();
 
-        String comment = Component.translatable("des.virtuarealcraft.sui_jokes.comment_2").getString();
+        String comment = Component.translatable("des.virtuarealcraft.sui_jokes.comment_" + ItemNBTTool.getInt(item, "comment", 1)).getString();
         String[] comments = comment.split("/");
         String comment_1 = comments.length > 0 ? comments[0] : "";
         String comment_2 = comments.length > 1 ? comments[1] : "";
