@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
@@ -59,14 +60,20 @@ public class SuiJokesRenderer extends BlockEntityWithoutLevelRenderer {
         stack.mulPose(Axis.XN.rotationDegrees(-120.0F));
 
         //TODO 完成翻译字段的文本适配，完成随机腰封评语适配
+
         // 标题
+        String title_1 = Component.translatable("des.virtuarealcraft.sui_jokes.title_1").getString();
+        String title_2 = Component.translatable("des.virtuarealcraft.sui_jokes.title_2").getString();
+        String subtitle = Component.translatable("des.virtuarealcraft.sui_jokes.subtitle").getString();
+        String author = Component.translatable("des.virtuarealcraft.sui_jokes.author").getString();
+
         stack.pushPose();
         stack.scale(.0035f, .0035f, .0035f);
         stack.translate(-45, -85, -5);
         if (pDisplayContext == ItemDisplayContext.FIRST_PERSON_LEFT_HAND) {
             stack.translate(10, 0, 0);
         }
-        font.drawInBatch("令人忍俊不禁的", 0, 0, 0xdcb77f, false, stack.last().pose(), pBuffer, Font.DisplayMode.NORMAL, 0, pPackedLight);
+        font.drawInBatch(subtitle, 0, 0, 0xdcb77f, false, stack.last().pose(), pBuffer, Font.DisplayMode.NORMAL, 0, pPackedLight);
         stack.popPose();
 
         stack.pushPose();
@@ -75,7 +82,7 @@ public class SuiJokesRenderer extends BlockEntityWithoutLevelRenderer {
         if (pDisplayContext == ItemDisplayContext.FIRST_PERSON_LEFT_HAND) {
             stack.translate(4.5, 0, 0);
         }
-        font.drawInBatch("岁己笑话", 0, 0, 0xfacddf, false, stack.last().pose(), pBuffer, Font.DisplayMode.NORMAL, 0, pPackedLight);
+        font.drawInBatch(title_1, 0, 0, 0xfacddf, false, stack.last().pose(), pBuffer, Font.DisplayMode.NORMAL, 0, pPackedLight);
         stack.popPose();
 
         stack.pushPose();
@@ -84,16 +91,16 @@ public class SuiJokesRenderer extends BlockEntityWithoutLevelRenderer {
         if (pDisplayContext == ItemDisplayContext.FIRST_PERSON_LEFT_HAND) {
             stack.translate(2.5, 0, 0);
         }
-        font.drawInBatch("大全", 0, 0, 0xf3c0d4, false, stack.last().pose(), pBuffer, Font.DisplayMode.NORMAL, 0, pPackedLight);
+        font.drawInBatch(title_2, 0, 0, 0xf3c0d4, false, stack.last().pose(), pBuffer, Font.DisplayMode.NORMAL, 0, pPackedLight);
         stack.popPose();
 
         stack.pushPose();
         stack.scale(.0045f, .0045f, .0045f);
         stack.translate(-30, 20, -5);
         if (pDisplayContext == ItemDisplayContext.FIRST_PERSON_LEFT_HAND) {
-            stack.translate(8, 0, 0);
+            stack.translate(9, 0, 0);
         }
-        font.drawInBatch("小黑饼 著", 0, 0, 0x000000, false, stack.last().pose(), pBuffer, Font.DisplayMode.NORMAL, 0, pPackedLight);
+        font.drawInBatch(author, 0, 0, 0x000000, false, stack.last().pose(), pBuffer, Font.DisplayMode.NORMAL, 0, pPackedLight);
         stack.popPose();
 
         // 腰封
