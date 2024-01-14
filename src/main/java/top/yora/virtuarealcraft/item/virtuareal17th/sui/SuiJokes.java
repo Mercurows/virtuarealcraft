@@ -57,7 +57,13 @@ public class SuiJokes extends Item {
         pLevel.playSound(null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), SoundRegistry.CANNED_LAUGHTER.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
 
         if (!pLevel.isClientSide) {
-            ItemNBTTool.setInt(stack, TAG_COMMENT, pLevel.random.nextIntBetweenInclusive(1, 15));
+            int num = ItemNBTTool.getInt(stack, TAG_COMMENT, 0);
+            int rand = pLevel.random.nextIntBetweenInclusive(1, 15);
+            while (num == rand) {
+                rand = pLevel.random.nextIntBetweenInclusive(1, 15);
+            }
+
+            ItemNBTTool.setInt(stack, TAG_COMMENT, rand);
         }
         pPlayer.getCooldowns().addCooldown(stack.getItem(), 60);
         return super.use(pLevel, pPlayer, pUsedHand);
