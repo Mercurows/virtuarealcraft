@@ -22,8 +22,6 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.init.ItemRegistry;
 import top.yora.virtuarealcraft.tool.ItemNBTTool;
@@ -44,7 +42,6 @@ public class RainyButterfly extends SwordItem {
         super(Tiers.IRON, -2, -2.1f, new Properties().durability(1206).rarity(Rarity.EPIC));
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
         tooltip.add((Component.translatable("des.virtuarealcraft.rainy_butterfly_1")).withStyle(ChatFormatting.GRAY));

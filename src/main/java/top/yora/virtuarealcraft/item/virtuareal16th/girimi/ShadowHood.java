@@ -36,7 +36,6 @@ public class ShadowHood extends ArmorItem {
         super(ArmorMaterials.LEATHER, Type.HELMET, new Properties().durability(147));
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
         tooltip.add(Component.translatable("des.virtuarealcraft.shadow_hood").withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));

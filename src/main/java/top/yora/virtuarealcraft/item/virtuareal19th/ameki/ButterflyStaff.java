@@ -9,8 +9,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import top.yora.virtuarealcraft.entity.RainCrystalEntity;
 import top.yora.virtuarealcraft.init.ItemRegistry;
 import top.yora.virtuarealcraft.tool.ItemNBTTool;
@@ -25,7 +23,6 @@ public class ButterflyStaff extends SwordItem {
         super(Tiers.IRON, 1, -2.0f, new Properties().durability(261));
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
         tooltip.add(Component.translatable("des.virtuarealcraft.butterfly_staff").withStyle(ChatFormatting.GRAY));
@@ -47,10 +44,10 @@ public class ButterflyStaff extends SwordItem {
 
         if (pLivingEntity instanceof Player player) {
             ItemStack stack = player.getOffhandItem();
-            if(stack.getItem() == ItemRegistry.RAINY_BUTTERFLY.get() &&
-                ItemNBTTool.getBoolean(stack, "rainy_butterfly_open", false)) {
+            if (stack.getItem() == ItemRegistry.RAINY_BUTTERFLY.get() &&
+                    ItemNBTTool.getBoolean(stack, "rainy_butterfly_open", false)) {
 
-                if(tick % 10 == 0) {
+                if (tick % 10 == 0) {
                     for (int i = 0; i < 8; i++) {
                         if (!pLevel.isClientSide) {
                             RainCrystalEntity rainCrystal = new RainCrystalEntity(pLevel, player);
@@ -63,8 +60,8 @@ public class ButterflyStaff extends SwordItem {
 
                     pStack.hurtAndBreak(5, player, p -> p.broadcastBreakEvent(p.getUsedItemHand()));
                 }
-            }else {
-                if(tick % 5 == 0) {
+            } else {
+                if (tick % 5 == 0) {
                     if (!pLevel.isClientSide) {
                         RainCrystalEntity rainCrystal = new RainCrystalEntity(pLevel, player);
                         rainCrystal.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, 3.0f, 0);
@@ -96,8 +93,8 @@ public class ButterflyStaff extends SwordItem {
 
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-        if(pEntity instanceof Player player) {
-            if(player.tickCount % 20 == 0) {
+        if (pEntity instanceof Player player) {
+            if (player.tickCount % 20 == 0) {
                 pStack.hurtAndBreak(-1, player, p -> p.broadcastBreakEvent(p.getUsedItemHand()));
             }
         }

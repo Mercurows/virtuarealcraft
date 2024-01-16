@@ -40,7 +40,6 @@ public class EndlessRainShower extends SwordItem {
         super(Tiers.NETHERITE, 2, -2.1f, new Properties().rarity(RarityTool.LEGENDARY).durability(197).fireResistant().setNoRepair());
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
         tooltip.add(Component.translatable("des.virtuarealcraft.endless_rain_shower_1").withStyle(ChatFormatting.GRAY));

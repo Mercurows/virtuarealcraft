@@ -131,7 +131,6 @@ public class TacticalHeadsetMK1 extends ArmorItem {
         return Utils.MOD_ID + ":textures/models/armor/tactical_headset_mk1.png";
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
         tooltip.add(Component.translatable("des.virtuarealcraft.tactical_headset_mk1_1").withStyle(ChatFormatting.GRAY));

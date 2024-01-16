@@ -17,8 +17,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
@@ -38,7 +36,6 @@ public class AmekichiyaRing extends Item implements ICurioItem {
         super(new Properties().stacksTo(1).rarity(Rarity.UNCOMMON));
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
         tooltip.add((Component.translatable("des.virtuarealcraft.amekichiya_ring")).withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
