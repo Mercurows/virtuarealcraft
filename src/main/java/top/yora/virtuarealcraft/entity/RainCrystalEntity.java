@@ -14,6 +14,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import top.yora.virtuarealcraft.init.DamageSourceRegistry;
 import top.yora.virtuarealcraft.init.EntityRegistry;
 import top.yora.virtuarealcraft.init.ItemRegistry;
+import top.yora.virtuarealcraft.tool.ProjectileTool;
 
 public class RainCrystalEntity extends ThrowableItemProjectile {
     private static final EntityDataAccessor<Integer> LIFE = SynchedEntityData.defineId(RainCrystalEntity.class, EntityDataSerializers.INT);
@@ -55,7 +56,7 @@ public class RainCrystalEntity extends ThrowableItemProjectile {
 
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
-        if (pResult.getEntity() instanceof LivingEntity livingEntity) {
+        if (pResult.getEntity() instanceof LivingEntity livingEntity && ProjectileTool.canHurtLivingEntity(livingEntity, getOwner())) {
             livingEntity.hurt(DamageSourceRegistry.causeRainCrystalDamage(level().registryAccess(), getOwner()), 4.0F);
         }
         if (!this.level().isClientSide) {

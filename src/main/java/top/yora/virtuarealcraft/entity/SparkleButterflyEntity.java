@@ -17,6 +17,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import top.yora.virtuarealcraft.init.DamageSourceRegistry;
 import top.yora.virtuarealcraft.init.EntityRegistry;
+import top.yora.virtuarealcraft.tool.ProjectileTool;
 
 public class SparkleButterflyEntity extends Projectile {
     private static final EntityDataAccessor<Integer> LIFE = SynchedEntityData.defineId(SparkleButterflyEntity.class, EntityDataSerializers.INT);
@@ -39,21 +40,22 @@ public class SparkleButterflyEntity extends Projectile {
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
         if (pResult.getEntity() instanceof LivingEntity livingEntity) {
-            boolean glow = livingEntity.hasEffect(MobEffects.GLOWING);
-            livingEntity.hurt(DamageSourceRegistry.causeSparkleButterflyDamage(level().registryAccess(), getOwner()), glow ? 8.0F : 4.0F);
-            livingEntity.hurt(livingEntity.level().damageSources().inFire(), 2.0f);
-            livingEntity.setSecondsOnFire(2);
-            livingEntity.invulnerableTime = 0;
+            if (ProjectileTool.canHurtLivingEntity(livingEntity, getOwner())) {
+                boolean glow = livingEntity.hasEffect(MobEffects.GLOWING);
+                livingEntity.hurt(DamageSourceRegistry.causeSparkleButterflyDamage(level().registryAccess(), getOwner()), glow ? 8.0F : 4.0F);
+                livingEntity.hurt(livingEntity.level().damageSources().inFire(), 2.0f);
+                livingEntity.setSecondsOnFire(2);
+                livingEntity.invulnerableTime = 0;
 
-            livingEntity.addEffect(new MobEffectInstance(MobEffects.GLOWING, 60, 0));
+                livingEntity.addEffect(new MobEffectInstance(MobEffects.GLOWING, 60, 0));
 
-            if (this.getOwner() != null && this.getOwner() instanceof LivingEntity entity) {
-                entity.heal(3f);
-                if (glow) {
-                    entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 60, 1));
+                if (this.getOwner() != null && this.getOwner() instanceof LivingEntity entity) {
+                    entity.heal(3f);
+                    if (glow) {
+                        entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 60, 1));
+                    }
                 }
             }
-
         }
         if (!this.level().isClientSide) {
             this.discard();

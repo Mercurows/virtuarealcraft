@@ -26,6 +26,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import top.yora.virtuarealcraft.init.DamageSourceRegistry;
 import top.yora.virtuarealcraft.init.EntityRegistry;
+import top.yora.virtuarealcraft.tool.ProjectileTool;
 
 import javax.annotation.Nullable;
 import java.util.Comparator;
@@ -229,7 +230,7 @@ public class RainShowerButterflyEntity extends Projectile {
     @Override
     public boolean hurt(DamageSource pSource, float pAmount) {
         if (!this.level().isClientSide) {
-            ((ServerLevel)this.level()).sendParticles(ParticleTypes.CRIT, this.getX(), this.getY(), this.getZ(), 3, 0.2D, 0.2D, 0.2D, 0.0D);
+            ((ServerLevel) this.level()).sendParticles(ParticleTypes.CRIT, this.getX(), this.getY(), this.getZ(), 3, 0.2D, 0.2D, 0.2D, 0.0D);
             this.destroy();
         }
 
@@ -241,6 +242,11 @@ public class RainShowerButterflyEntity extends Projectile {
         if (this.target != null) {
             return p_37341_ == this.target && super.canHitEntity(p_37341_) && !p_37341_.noPhysics;
         }
+
+        if (p_37341_ instanceof LivingEntity living) {
+            return ProjectileTool.canHurtLivingEntity(living, getOwner()) && super.canHitEntity(p_37341_) && !p_37341_.noPhysics;
+        }
+
         return super.canHitEntity(p_37341_) && !p_37341_.noPhysics;
     }
 
