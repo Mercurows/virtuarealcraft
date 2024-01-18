@@ -44,6 +44,7 @@ import top.yora.virtuarealcraft.item.virtuareal20th.kismet.ayumi.BaseballBat;
 import top.yora.virtuarealcraft.item.virtuareal20th.kismet.mizuki.FutureBrewingStand;
 import top.yora.virtuarealcraft.item.virtuareal20th.kismet.richi.FoxMirror;
 import top.yora.virtuarealcraft.item.virtuareal21st.hihi.SunnyDoll;
+import top.yora.virtuarealcraft.item.virtuareal21st.nagisa.PocketWatch;
 import top.yora.virtuarealcraft.item.virtuareal21st.pako.KindnessBottle;
 import top.yora.virtuarealcraft.item.virtuareal21st.yukisyo.BurningMirror;
 import top.yora.virtuarealcraft.item.virtuareal2nd.ichigo.OrangeAhoge;
@@ -290,6 +291,8 @@ public class ItemRegistry {
     //pako
     public static final RegistryObject<Item> KINDNESS_BOTTLE = ITEMS.register("kindness_bottle", KindnessBottle::new);
 
+    //nagisa
+    public static final RegistryObject<Item> POCKET_WATCH = ITEMS.register("pocket_watch", PocketWatch::new);
 
 
     /**
