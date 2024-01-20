@@ -16,6 +16,7 @@ public class ModGroup {
     static {
         HIDDEN.add(ItemRegistry.VRC_LOGO);
         HIDDEN.add(ItemRegistry.GORGEOUS_BLOOM);
+        HIDDEN.add(ItemRegistry.ORANGE_AHOGE);
     }
 
     public static CreativeModeTab VRC_TAB = CreativeModeTab.builder()
