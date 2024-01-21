@@ -31,12 +31,12 @@ import top.yora.virtuarealcraft.item.virtuareal16th.kiyuu.TacticalHeadsetMK1;
 import top.yora.virtuarealcraft.item.virtuareal17th.sui.DebtReliefTicket;
 import top.yora.virtuarealcraft.item.virtuareal17th.sui.SuiJokes;
 import top.yora.virtuarealcraft.item.virtuareal17th.sui.SuimashedCookie;
-import top.yora.virtuarealcraft.item.virtuareal19th.ameki.AmekichiyaRing;
-import top.yora.virtuarealcraft.item.virtuareal19th.ameki.ButterflyStaff;
-import top.yora.virtuarealcraft.item.virtuareal19th.ameki.EndlessRainShower;
-import top.yora.virtuarealcraft.item.virtuareal19th.ameki.RainyButterfly;
+import top.yora.virtuarealcraft.item.virtuareal19th.ameki.*;
+import top.yora.virtuarealcraft.item.virtuareal19th.awu.AncientEssence;
 import top.yora.virtuarealcraft.item.virtuareal19th.awu.ChengHuangCrystal;
 import top.yora.virtuarealcraft.item.virtuareal19th.hatsuse.Nemumaru;
+import top.yora.virtuarealcraft.item.virtuareal19th.hatsuse.PurityShard;
+import top.yora.virtuarealcraft.item.virtuareal19th.michiya.CursedArtifact;
 import top.yora.virtuarealcraft.item.virtuareal19th.michiya.EternalCandelabra;
 import top.yora.virtuarealcraft.item.virtuareal19th.michiya.MichiyamekiRing;
 import top.yora.virtuarealcraft.item.virtuareal1st.eine.BarrierHat;
@@ -250,19 +250,23 @@ public class ItemRegistry {
      * 19th
      */
     //ameki
+    public static final RegistryObject<Item> RAIN_BUTTERFLY_DUST = ITEMS.register("rain_butterfly_dust", RainButterflyDust::new);
     public static final RegistryObject<Item> BUTTERFLY_STAFF = ITEMS.register("butterfly_staff", ButterflyStaff::new);
     public static final RegistryObject<Item> RAINY_BUTTERFLY = ITEMS.register("rainy_butterfly", RainyButterfly::new);
     public static final RegistryObject<Item> AMEKICHIYA_RING = ITEMS.register("amekichiya_ring", AmekichiyaRing::new);
     public static final RegistryObject<Item> ENDLESS_RAIN_SHOWER = ITEMS.register("endless_rain_shower", EndlessRainShower::new);
 
     //michiya
+    public static final RegistryObject<Item> CURSED_ARTIFACT = ITEMS.register("cursed_artifact", CursedArtifact::new);
     public static final RegistryObject<Item> ETERNAL_CANDELABRA = ITEMS.register("eternal_candelabra", EternalCandelabra::new);
     public static final RegistryObject<Item> MICHIYAMEKI_RING = ITEMS.register("michiyameki_ring", MichiyamekiRing::new);
 
     //awu
+    public static final RegistryObject<Item> ANCIENT_ESSENCE = ITEMS.register("ancient_essence", AncientEssence::new);
     public static final RegistryObject<Item> CHENG_HUANG_CRYSTAL = ITEMS.register("cheng_huang_crystal", ChengHuangCrystal::new);
 
     //hatsuse
+    public static final RegistryObject<Item> PURITY_SHARD = ITEMS.register("purity_shard", PurityShard::new);
     public static final RegistryObject<Item> NEMUMARU = ITEMS.register("nemumaru", Nemumaru::new);
 
 
