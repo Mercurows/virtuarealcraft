@@ -29,8 +29,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
@@ -52,7 +50,6 @@ public class WisdomWand extends SwordItem {
         super(Tiers.IRON, 7, -3.0f, new Properties().rarity(Rarity.EPIC).durability(1487));
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
         tooltip.add((Component.translatable("des.virtuarealcraft.wisdom_wand")).withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
