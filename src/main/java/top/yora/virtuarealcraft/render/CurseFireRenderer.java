@@ -16,7 +16,7 @@ import org.joml.Quaternionf;
 import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.init.EffectRegistry;
 
-@Mod.EventBusSubscriber(modid = Utils.MOD_ID, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = Utils.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class CurseFireRenderer {
 
     //TODO 修复火焰渲染对其他生物无效的问题
