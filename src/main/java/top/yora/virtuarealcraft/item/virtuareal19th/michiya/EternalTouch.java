@@ -73,7 +73,7 @@ public class EternalTouch extends Item implements ICurioItem {
     public static void eternalTouchEffect(AttackEntityEvent event) {
         Player player = event.getEntity();
 
-        if (!player.level().isClientSide && event.getTarget() instanceof LivingEntity living) {
+        if (event.getTarget() instanceof LivingEntity living) {
             CuriosApi.getCuriosInventory(player).ifPresent(s -> s.findFirstCurio(ItemRegistry.ETERNAL_TOUCH.get()).ifPresent(
                     r -> living.addEffect(new MobEffectInstance(EffectRegistry.CURSE_FLAME.get(), 100, 0))
             ));
