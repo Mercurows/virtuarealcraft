@@ -38,6 +38,7 @@ import top.yora.virtuarealcraft.item.virtuareal19th.hatsuse.Nemumaru;
 import top.yora.virtuarealcraft.item.virtuareal19th.hatsuse.PurityShard;
 import top.yora.virtuarealcraft.item.virtuareal19th.michiya.CursedArtifact;
 import top.yora.virtuarealcraft.item.virtuareal19th.michiya.EternalCandelabra;
+import top.yora.virtuarealcraft.item.virtuareal19th.michiya.EternalTouch;
 import top.yora.virtuarealcraft.item.virtuareal19th.michiya.MichiyamekiRing;
 import top.yora.virtuarealcraft.item.virtuareal1st.eine.BarrierHat;
 import top.yora.virtuarealcraft.item.virtuareal20th.kismet.ayumi.BaseballBat;
@@ -260,6 +261,7 @@ public class ItemRegistry {
     public static final RegistryObject<Item> CURSED_ARTIFACT = ITEMS.register("cursed_artifact", CursedArtifact::new);
     public static final RegistryObject<Item> ETERNAL_CANDELABRA = ITEMS.register("eternal_candelabra", EternalCandelabra::new);
     public static final RegistryObject<Item> MICHIYAMEKI_RING = ITEMS.register("michiyameki_ring", MichiyamekiRing::new);
+    public static final RegistryObject<Item> ETERNAL_TOUCH = ITEMS.register("eternal_touch", EternalTouch::new);
 
     //awu
     public static final RegistryObject<Item> ANCIENT_ESSENCE = ITEMS.register("ancient_essence", AncientEssence::new);
