@@ -1,0 +1,54 @@
+{
+  "type": "virtuarealcraft:add_item",
+  "conditions": [
+    {
+      "condition": "any_of",
+      "terms": [
+        {
+          "condition": "all_of",
+          "terms": [
+            {
+              "condition": "forge:loot_table_id",
+              "loot_table_id": "minecraft:entities/evoker"
+            },
+            {
+              "chance": 0.33,
+              "condition": "minecraft:random_chance"
+            }
+          ]
+        },
+        {
+          "condition": "all_of",
+          "terms": [
+            {
+              "condition": "forge:loot_table_id",
+              "loot_table_id": "minecraft:entities/pillager"
+            },
+            {
+              "chance": 0.05,
+              "condition": "minecraft:random_chance"
+            }
+          ]
+        },
+        {
+          "condition": "forge:loot_table_id",
+          "loot_table_id": "minecraft:entities/ravager"
+        },
+        {
+          "condition": "all_of",
+          "terms": [
+            {
+              "condition": "forge:loot_table_id",
+              "loot_table_id": "minecraft:entities/vindicator"
+            },
+            {
+              "chance": 0.08,
+              "condition": "minecraft:random_chance"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "item": "virtuarealcraft:debt_relief_ticket"
+}
