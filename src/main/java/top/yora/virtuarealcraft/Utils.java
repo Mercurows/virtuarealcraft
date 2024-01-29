@@ -26,7 +26,7 @@ public class Utils {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ItemRegistry.ITEMS.register(eventBus);
-//        EffectRegistry.EFFECTS.register(eventBus);
+        EffectRegistry.EFFECTS.register(eventBus);
         PotionRegistry.POTIONS.register(eventBus);
 //        EnchantRegistry.ENCHANTMENTS.register(eventBus);
         GroupRegistry.TABS.register(eventBus);
