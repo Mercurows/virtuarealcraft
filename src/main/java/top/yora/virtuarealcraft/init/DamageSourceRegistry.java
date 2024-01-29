@@ -20,6 +20,7 @@ public class DamageSourceRegistry {
     public static final ResourceKey<DamageType> JUSTICE_BAN = key("justice_ban");
     public static final ResourceKey<DamageType> RAIN_SHOWER_BUTTERFLY = key("rain_shower_butterfly");
     public static final ResourceKey<DamageType> SPARKLE_BUTTERFLY = key("sparkle_butterfly");
+    public static final ResourceKey<DamageType> CURSE_FLAME = key("curse_flame");
 
     public static DamageSource causeRainCrystalDamage(RegistryAccess registryAccess, @Nullable Entity entity) {
         return new DamageMessages(registryAccess.registry(Registries.DAMAGE_TYPE).get().getHolderOrThrow(RAIN_CRYSTAL), entity);
@@ -35,6 +36,10 @@ public class DamageSourceRegistry {
 
     public static DamageSource causeSparkleButterflyDamage(RegistryAccess registryAccess, @Nullable Entity entity) {
         return new DamageMessages(registryAccess.registry(Registries.DAMAGE_TYPE).get().getHolderOrThrow(SPARKLE_BUTTERFLY), entity);
+    }
+
+    public static DamageSource causeCurseFlameDamage(RegistryAccess registryAccess, @Nullable Entity entity) {
+        return new DamageMessages(registryAccess.registry(Registries.DAMAGE_TYPE).get().getHolderOrThrow(CURSE_FLAME), entity);
     }
 
     private static ResourceKey<DamageType> key(String name) {
