@@ -27,7 +27,7 @@ public enum Livers {
     CHIYUU("chiyuu", "11th", "#CC225F", true),
     IMI("imi", "11th", "#CC777C", false),
     MAYUMI("mayumi", "12th", "#D6E568", true),
-    TSUKUMO("tsukumo", "12th", "#C6B6EC", true),
+    TSUKUMO("tsukumo", "12th", "#C6B6EC", false),
     REMI("remi", "12th", "#77CFD4", true),
     TOCCI("tocci","13th","#EABAE1",true),
     JOI("joi", "13th", "#FFCE65", true),
