@@ -35,6 +35,7 @@ public class CurseFlame extends MobEffect {
             float damage = 1.0f + Math.min(5.0f * level, ((float) flameTime / rate));
 
             pLivingEntity.hurt(DamageSourceRegistry.causeCurseFlameDamage(pLivingEntity.level().registryAccess(), null), damage);
+            pLivingEntity.invulnerableTime = 0;
         }
     }
 
