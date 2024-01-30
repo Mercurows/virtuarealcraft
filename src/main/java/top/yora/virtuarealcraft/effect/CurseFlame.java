@@ -11,9 +11,12 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.network.PacketDistributor;
 import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.init.DamageSourceRegistry;
 import top.yora.virtuarealcraft.init.EffectRegistry;
+import top.yora.virtuarealcraft.network.VrcNetwork;
+import top.yora.virtuarealcraft.network.packet.CurseFlamePacket;
 import top.yora.virtuarealcraft.tool.Livers;
 
 import java.util.UUID;
@@ -65,6 +68,8 @@ public class CurseFlame extends MobEffect {
                     } else {
                         living.getPersistentData().putInt("CurseFlame", ++flameTime);
                     }
+
+                    VrcNetwork.CHANNEL.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> entity), new CurseFlamePacket(entity.getId(), flameTime));
                 }
             });
         }

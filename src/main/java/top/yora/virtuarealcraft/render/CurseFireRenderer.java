@@ -14,7 +14,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.joml.Quaternionf;
 import top.yora.virtuarealcraft.Utils;
-import top.yora.virtuarealcraft.init.EffectRegistry;
 
 @Mod.EventBusSubscriber(modid = Utils.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class CurseFireRenderer {
@@ -22,7 +21,7 @@ public class CurseFireRenderer {
     @SubscribeEvent
     public static void onRenderCurseFlame(RenderLivingEvent<LivingEntity, ? extends EntityModel<? extends LivingEntity>> event) {
         LivingEntity entity = event.getEntity();
-        if (entity.hasEffect(EffectRegistry.CURSE_FLAME.get())) {
+        if (entity.getPersistentData().getInt("CurseFlame") > 0) {
             PoseStack stack = event.getPoseStack();
 
             TextureAtlasSprite sprite1 = ModelBakery.FIRE_0.sprite();
