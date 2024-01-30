@@ -1,12 +1,10 @@
 package top.yora.virtuarealcraft.network.packet;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.fml.loading.FMLLoader;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkEvent;
+import top.yora.virtuarealcraft.network.ClientPacketHandler;
 
 import java.util.function.Supplier;
 
@@ -14,6 +12,14 @@ import java.util.function.Supplier;
 public class CurseFlamePacket {
     private final int entityId;
     private final int flameTime;
+
+    public int getEntityId() {
+        return entityId;
+    }
+
+    public int getFlameTime() {
+        return flameTime;
+    }
 
     public CurseFlamePacket(int entityId, int flameTime) {
         this.entityId = entityId;
@@ -30,17 +36,7 @@ public class CurseFlamePacket {
     }
 
     public static void handle(CurseFlamePacket packet, Supplier<NetworkEvent.Context> ctx) {
-        ctx.get().enqueueWork(() -> {
-            if (FMLLoader.getDist().isClient()) {
-                Level level = Minecraft.getInstance().level;
-                if (level != null) {
-                    Entity entity = level.getEntity(packet.entityId);
-                    if (entity instanceof LivingEntity living) {
-                        living.getPersistentData().putInt("CurseFlame", packet.flameTime);
-                    }
-                }
-            }
-        });
+        ctx.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientPacketHandler.handleCurseFlamePacket(packet, ctx)));
         ctx.get().setPacketHandled(true);
     }
 }
