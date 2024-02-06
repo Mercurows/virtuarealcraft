@@ -42,7 +42,7 @@ public class EternalTouch extends Item implements ICurioItem {
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
         TooltipTool.addDevelopingText(tooltip);
         tooltip.add(Component.translatable("des.virtuarealcraft.eternal_touch_1").withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("des.virtuarealcraft.eternal_touch_2").withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("des.virtuarealcraft.eternal_touch_2").withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.STRIKETHROUGH));
 
         TooltipTool.addLiverInfo(tooltip, Livers.MICHIYA);
     }

@@ -10,6 +10,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.yora.virtuarealcraft.init.ItemRegistry;
@@ -33,7 +34,7 @@ public class RebelPeriod extends Item {
         TooltipTool.addLiverInfo(tooltip, Livers.KIYORA);
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void rebelEffect(ItemTooltipEvent event) {
         Player player = event.getEntity();
 
