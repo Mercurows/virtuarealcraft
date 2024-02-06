@@ -256,6 +256,7 @@ public class ItemRegistry {
     public static final RegistryObject<Item> RAINY_BUTTERFLY = ITEMS.register("rainy_butterfly", RainyButterfly::new);
     public static final RegistryObject<Item> AMEKICHIYA_RING = ITEMS.register("amekichiya_ring", AmekichiyaRing::new);
     public static final RegistryObject<Item> ENDLESS_RAIN_SHOWER = ITEMS.register("endless_rain_shower", EndlessRainShower::new);
+    public static final RegistryObject<Item> BUTTERFLY_CANVAS = ITEMS.register("butterfly_canvas", () -> new BlockItem(BlockRegistry.BUTTERFLY_CANVAS.get(), new Item.Properties()));
 
     //michiya
     public static final RegistryObject<Item> CURSED_ARTIFACT = ITEMS.register("cursed_artifact", CursedArtifact::new);

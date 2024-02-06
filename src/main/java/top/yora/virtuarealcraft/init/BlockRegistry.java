@@ -28,4 +28,5 @@ public class BlockRegistry {
                     BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM).noOcclusion()));
 
     public static final RegistryObject<Block> FUTURE_BREWING_STAND = BLOCKS.register("future_brewing_stand", FutureBrewingStandBlock::new);
+    public static final RegistryObject<Block> BUTTERFLY_CANVAS = BLOCKS.register("butterfly_canvas", ButterflyCanvas::new);
 }
