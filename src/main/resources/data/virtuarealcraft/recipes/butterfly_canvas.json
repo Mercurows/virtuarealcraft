@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#V#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:painting"
+    },
+    "V": {
+      "item": "virtuarealcraft:rain_butterfly_dust"
+    }
+  },
+  "result": {
+    "item": "virtuarealcraft:butterfly_canvas",
+    "count": 1
+  }
+}
