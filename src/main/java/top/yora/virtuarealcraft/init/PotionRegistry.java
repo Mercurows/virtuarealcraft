@@ -11,8 +11,11 @@ import top.yora.virtuarealcraft.Utils;
 public class PotionRegistry {
     public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(ForgeRegistries.POTIONS, Utils.MOD_ID);
 
-    public static final RegistryObject<Potion> SUPER_REGENERATION = POTIONS.register("super_regeneration",
+    public static final RegistryObject<Potion> SUPER_REGENERATION = POTIONS.register("vrc_super_regeneration",
             () -> new Potion(new MobEffectInstance(MobEffects.REGENERATION, 320, 3)));
-    public static final RegistryObject<Potion> FURY = POTIONS.register("fury",
-            () -> new Potion(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 1600, 3), new MobEffectInstance(MobEffects.WITHER, 200, 1)));
+    public static final RegistryObject<Potion> CURSE_FLAME = POTIONS.register("vrc_curse_flame",
+            () -> new Potion(new MobEffectInstance(EffectRegistry.CURSE_FLAME.get(), 1200, 0)));
+    public static final RegistryObject<Potion> FURY = POTIONS.register("vrc_fury",
+            () -> new Potion(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 1600, 3),
+                    new MobEffectInstance(EffectRegistry.CURSE_FLAME.get(), 200, 1)));
 }

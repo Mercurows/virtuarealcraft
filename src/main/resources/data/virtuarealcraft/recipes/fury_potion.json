@@ -2,7 +2,7 @@
   "type": "virtuarealcraft:future_brewing",
   "input": {
     "potion": {
-      "potion": "minecraft:water"
+      "potion": "virtuarealcraft:vrc_curse_flame"
     }
   },
   "ingredient": {
@@ -13,7 +13,7 @@
   },
   "output": {
     "potion": {
-      "potion": "virtuarealcraft:fury"
+      "potion": "virtuarealcraft:vrc_fury"
     }
   }
 }

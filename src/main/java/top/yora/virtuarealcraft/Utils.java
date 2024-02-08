@@ -52,7 +52,12 @@ public class Utils {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(BlockRegistry.GORGEOUS_BLOOM.getId(), BlockRegistry.POTTED_GORGEOUS_BLOOM));
-        event.enqueueWork(() -> BrewingRecipeRegistry.addRecipe(Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.REGENERATION)), Ingredient.of(Items.GOLDEN_APPLE), new ItemStack(ItemRegistry.KINDNESS_BOTTLE.get())));
+        event.enqueueWork(() -> BrewingRecipeRegistry.addRecipe(Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.REGENERATION)),
+                Ingredient.of(Items.GOLDEN_APPLE), new ItemStack(ItemRegistry.KINDNESS_BOTTLE.get())));
+        event.enqueueWork(() -> BrewingRecipeRegistry.addRecipe(Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.STRONG_REGENERATION)),
+                Ingredient.of(ItemRegistry.TOKIMORI_SEISAND.get()), PotionUtils.setPotion(new ItemStack(Items.POTION), PotionRegistry.SUPER_REGENERATION.get())));
+        event.enqueueWork(() -> BrewingRecipeRegistry.addRecipe(Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD)),
+                Ingredient.of(Items.CHARCOAL), PotionUtils.setPotion(new ItemStack(Items.POTION), PotionRegistry.CURSE_FLAME.get())));
     }
 
 }
