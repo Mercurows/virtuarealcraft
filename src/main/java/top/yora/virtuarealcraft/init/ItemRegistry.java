@@ -35,6 +35,7 @@ import top.yora.virtuarealcraft.item.virtuareal19th.ameki.*;
 import top.yora.virtuarealcraft.item.virtuareal19th.awu.AncientEssence;
 import top.yora.virtuarealcraft.item.virtuareal19th.awu.ChengHuangCrystal;
 import top.yora.virtuarealcraft.item.virtuareal19th.hatsuse.Nemumaru;
+import top.yora.virtuarealcraft.item.virtuareal19th.hatsuse.PureChickenLeg;
 import top.yora.virtuarealcraft.item.virtuareal19th.hatsuse.PurityShard;
 import top.yora.virtuarealcraft.item.virtuareal19th.michiya.CursedArtifact;
 import top.yora.virtuarealcraft.item.virtuareal19th.michiya.EternalCandelabra;
@@ -271,6 +272,7 @@ public class ItemRegistry {
     //hatsuse
     public static final RegistryObject<Item> PURITY_SHARD = ITEMS.register("purity_shard", PurityShard::new);
     public static final RegistryObject<Item> NEMUMARU = ITEMS.register("nemumaru", Nemumaru::new);
+    public static final RegistryObject<Item> PURE_CHICKEN_LEG = ITEMS.register("pure_chicken_leg", PureChickenLeg::new);
 
 
     /**
