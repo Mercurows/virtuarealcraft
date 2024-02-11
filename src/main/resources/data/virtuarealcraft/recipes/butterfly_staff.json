@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "gGg",
-    " D ",
+    "gDg",
     " / "
   ],
   "key": {
@@ -13,10 +13,10 @@
       "item": "minecraft:gold_block"
     },
     "D": {
-      "item": "minecraft:diamond"
+      "item": "virtuarealcraft:rain_butterfly_dust"
     },
     "/": {
-      "item": "minecraft:end_rod"
+      "item": "minecraft:stick"
     }
   },
   "result": {
