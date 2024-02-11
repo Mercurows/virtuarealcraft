@@ -9,6 +9,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.yora.virtuarealcraft.Utils;
 import top.yora.virtuarealcraft.models.armor.*;
+import top.yora.virtuarealcraft.models.curios.EternalTouchModel;
 import top.yora.virtuarealcraft.models.curios.JokerMaskModel;
 import top.yora.virtuarealcraft.models.curios.OrangeAhogeModel;
 import top.yora.virtuarealcraft.models.projectile.*;
@@ -34,6 +35,7 @@ public class ModelRegistry {
         event.registerLayerDefinition(RainShowerButterflyModel.LAYER_LOCATION, RainShowerButterflyModel::createBodyLayer);
         event.registerLayerDefinition(JokerMaskModel.LAYER_LOCATION, JokerMaskModel::createBodyLayer);
         event.registerLayerDefinition(SparkleButterflyModel.LAYER_LOCATION, SparkleButterflyModel::createBodyLayer);
+        event.registerLayerDefinition(EternalTouchModel.LAYER_LOCATION, EternalTouchModel::createBodyLayer);
     }
 
     @SubscribeEvent

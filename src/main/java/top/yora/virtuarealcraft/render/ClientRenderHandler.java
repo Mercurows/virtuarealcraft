@@ -8,6 +8,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 import top.yora.virtuarealcraft.init.EntityRegistry;
 import top.yora.virtuarealcraft.init.ItemRegistry;
+import top.yora.virtuarealcraft.render.curios.EternalTouchRenderer;
 import top.yora.virtuarealcraft.render.curios.JokerMaskRenderer;
 import top.yora.virtuarealcraft.render.curios.OrangeAhogeRenderer;
 
@@ -24,5 +25,6 @@ public class ClientRenderHandler {
 
         CuriosRendererRegistry.register(ItemRegistry.ORANGE_AHOGE.get(), OrangeAhogeRenderer::new);
         CuriosRendererRegistry.register(ItemRegistry.JOKER_MASK.get(), JokerMaskRenderer::new);
+        CuriosRendererRegistry.register(ItemRegistry.ETERNAL_TOUCH.get(), EternalTouchRenderer::new);
     }
 }
