@@ -1,4 +1,4 @@
-package top.yora.virtuarealcraft.render.curios;
+package top.yora.virtuarealcraft.client.render.curios;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -17,16 +17,16 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
 import top.yora.virtuarealcraft.Utils;
-import top.yora.virtuarealcraft.models.curios.OrangeAhogeModel;
+import top.yora.virtuarealcraft.models.curios.JokerMaskModel;
 
 @OnlyIn(Dist.CLIENT)
-public class OrangeAhogeRenderer implements ICurioRenderer {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Utils.MOD_ID, "textures/models/curios/orange_ahoge.png");
+public class JokerMaskRenderer implements ICurioRenderer {
+    private static final ResourceLocation TEXTURE = new ResourceLocation(Utils.MOD_ID, "textures/models/curios/joker_mask.png");
 
-    private final OrangeAhogeModel model;
+    private final JokerMaskModel model;
 
-    public OrangeAhogeRenderer() {
-        this.model = new OrangeAhogeModel(Minecraft.getInstance().getEntityModels().bakeLayer(OrangeAhogeModel.LAYER_LOCATION));
+    public JokerMaskRenderer() {
+        this.model = new JokerMaskModel(Minecraft.getInstance().getEntityModels().bakeLayer(JokerMaskModel.LAYER_LOCATION));
     }
 
     @Override
@@ -37,7 +37,7 @@ public class OrangeAhogeRenderer implements ICurioRenderer {
         this.model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
         this.model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 
-        ICurioRenderer.followHeadRotations(entity, this.model.main);
+        ICurioRenderer.followHeadRotations(entity, this.model.bone);
 
         VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(TEXTURE), false, stack.hasFoil());
 

@@ -1,4 +1,4 @@
-package top.yora.virtuarealcraft.render;
+package top.yora.virtuarealcraft.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

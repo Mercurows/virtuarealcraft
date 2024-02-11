@@ -23,7 +23,7 @@ import net.minecraftforge.fml.common.Mod;
 import top.yora.virtuarealcraft.init.ItemRegistry;
 import top.yora.virtuarealcraft.init.SoundRegistry;
 import top.yora.virtuarealcraft.models.item.SuiJokesModel;
-import top.yora.virtuarealcraft.render.item.SuiJokesRenderer;
+import top.yora.virtuarealcraft.client.render.item.SuiJokesRenderer;
 import top.yora.virtuarealcraft.tool.ItemNBTTool;
 import top.yora.virtuarealcraft.tool.Livers;
 import top.yora.virtuarealcraft.tool.TooltipTool;
