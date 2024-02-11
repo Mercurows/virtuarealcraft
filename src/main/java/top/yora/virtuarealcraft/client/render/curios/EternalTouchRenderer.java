@@ -67,5 +67,19 @@ public class EternalTouchRenderer implements ICurioRenderer {
         matrixStack.popPose();
     }
 
+    public final void renderFirstPersonArm(PoseStack matrixStack, MultiBufferSource buffer, int light, AbstractClientPlayer player, HumanoidArm side, boolean hasFoil) {
+        matrixStack.pushPose();
+        if (!player.isSpectator() && side == HumanoidArm.RIGHT) {
+            matrixStack.translate(-0.1f, -0.1f, 0f);
+            matrixStack.scale(1.1f, 1.1f, 1.1f);
 
+            model.crouching = false;
+            model.attackTime = model.swimAmount = 0;
+            model.setupAnim(player, 0, 0, 0, 0, 0);
+
+            VertexConsumer builder = ItemRenderer.getFoilBuffer(buffer, RenderType.armorCutoutNoCull(TEXTURE), false, hasFoil);
+            model.main.render(matrixStack, builder, light, OverlayTexture.NO_OVERLAY);
+        }
+        matrixStack.popPose();
+    }
 }
