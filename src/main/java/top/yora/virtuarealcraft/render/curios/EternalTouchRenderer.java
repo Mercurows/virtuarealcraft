@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ItemRenderer;
@@ -14,7 +15,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import org.joml.Vector3f;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
 import top.yora.virtuarealcraft.Utils;
@@ -37,10 +37,18 @@ public class EternalTouchRenderer implements ICurioRenderer {
         LivingEntity entity = slotContext.entity();
         this.model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
         this.model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+
+//      ItemStack handItem = entity.getItemInHand(entity.getMainArm() == HumanoidArm.RIGHT ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND);
+
+        if (entity instanceof AbstractClientPlayer player && player.getModelName().equals("slim")) {
+            matrixStack.translate(-0.1f, 0f, 0f);
+            matrixStack.scale(0.8f, 1f, 1f);
+        }
+
         this.model.main.copyFrom(model.rightArm);
 
-        ICurioRenderer.translateIfSneaking(matrixStack, entity);
-        ICurioRenderer.rotateIfSneaking(matrixStack, entity);
+//        ICurioRenderer.translateIfSneaking(matrixStack, entity);
+//        ICurioRenderer.rotateIfSneaking(matrixStack, entity);
 
         VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(TEXTURE), false, stack.hasFoil());
 
