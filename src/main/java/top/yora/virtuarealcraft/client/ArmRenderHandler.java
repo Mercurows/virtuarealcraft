@@ -22,7 +22,9 @@ public class ArmRenderHandler {
                 handler -> handler.findFirstCurio(ItemRegistry.ETERNAL_TOUCH.get()).ifPresent(
                         slotResult -> {
                             EternalTouchRenderer renderer = new EternalTouchRenderer();
-                            renderer.renderFirstPersonArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), event.getPlayer(), event.getArm(), false);
+                            if (slotResult.slotContext().visible()) {
+                                renderer.renderFirstPersonArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), event.getPlayer(), event.getArm(), false);
+                            }
                         }
                 )
         );

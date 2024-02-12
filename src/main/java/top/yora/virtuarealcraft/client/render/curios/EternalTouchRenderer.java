@@ -59,6 +59,9 @@ public class EternalTouchRenderer implements ICurioRenderer {
             if (entity.isCrouching()) {
                 matrixStack.translate(0, 0, -0.2);
             }
+            if (entity.isVisuallySwimming()) {
+                matrixStack.translate(-0.1, -0.0, 0);
+            }
         }
 
         VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(TEXTURE), false, stack.hasFoil());

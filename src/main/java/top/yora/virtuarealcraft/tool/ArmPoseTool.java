@@ -47,7 +47,9 @@ public class ArmPoseTool {
             }
 
             HumanoidModel.ArmPose forgeArmPose = net.minecraftforge.client.extensions.common.IClientItemExtensions.of(itemstack).getArmPose(pPlayer, pHand, itemstack);
-            if (forgeArmPose != null) return forgeArmPose;
+            if (forgeArmPose != null) {
+                return forgeArmPose;
+            }
 
             return HumanoidModel.ArmPose.ITEM;
         }
