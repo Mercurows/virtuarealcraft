@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " /B",
+    "CV/",
+    "FC "
+  ],
+  "key": {
+    "/": {
+      "item": "minecraft:blaze_rod"
+    },
+    "B": {
+      "item": "minecraft:blaze_powder"
+    },
+    "C": {
+      "item": "minecraft:crying_obsidian"
+    },
+    "V": {
+      "item": "virtuarealcraft:cursed_artifact"
+    },
+    "F": {
+      "item": "minecraft:flint_and_steel"
+    }
+  },
+  "result": {
+    "item": "virtuarealcraft:eternal_touch",
+    "count": 1
+  }
+}
